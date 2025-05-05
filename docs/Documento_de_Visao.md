@@ -69,8 +69,10 @@ Esse projeto consiste em um site voltado para vendas de produtos que pretende fu
 ## 9.	Requisitos não-funcionais
 | Código | Nome | Descrição | Categoria | Classificação |
 |:---  |:--- |:--- |:--- |:--- |
-| NF01	| Design responsivo	| O site apresentará responsividade, deixando-o mais confortável para o usuário | Usabilidade	| obrigatório
-| NF02	| Acesso somente com internet	| É necessário um acesso contínuo à Internet para poder acessar os dados do site e suas funcionalidades, como comprar produtos.	| Disponibilidade	| Obrigatório
-| NF03	| Criptografia das informações sensíveis aos usuários	| Senhas do usuário devem ser gravadas de forma criptografada no banco de dados	| Segurança	| Obrigatório
-| NF04	| Organização do conteúdo de forma objetiva	| O site apresentará o conteúdo de forma objetiva, de modo que o usuário encontre o desejado com facilidade.	| Usabilidade	| Obrigatório
+| NF01	| Design responsivo	| O site apresentará responsividade, deixando-o mais confortável para o usuário. | Usabilidade	| Obrigatório
+| NF02	| Organização do conteúdo de forma objetiva	| O site apresentará o conteúdo de forma objetiva, de modo que o usuário encontre o desejado com facilidade.	| Usabilidade	| Obrigatório
+| NF03	| Facilidade de uso	| A interface da plataforma deve ser amigável a todos os usuários, não exigindo, por exemplo, treinamento para empresas ou ser muito necessário o uso de manuais.	| Usabilidade	| Obrigatório
+| NF04	| Acesso somente com internet	| É necessário um acesso contínuo à Internet para poder acessar os dados do site e suas funcionalidades, como comprar produtos.	| Disponibilidade	| Obrigatório
+| NF05	| Criptografia das informações sensíveis aos usuários	| Senhas do usuário devem ser gravadas de forma criptografada no banco de dados.	| Segurança	| Obrigatório
+| NF06	| Tecnologias	| O projeto deve ser desenvolvido fazendo uso de HTML, CSS e JavaScript para o front-end e Python com o framework de Django para o back-end.	| Desempenho	| Obrigatório
 | | | | 
