@@ -5,7 +5,7 @@
 ### Histórico da Revisão 
 | Data | Versão | Descrição | 
 |:----|:------|:----------|
-| 28/04/2025 | **1.0** | Versão Inicial |
+| 05/05/2025 | **1.1** | Versão Inicial |
 
 ## 1. Objetivo do Projeto 
 O projeto visa desenvolver uma plataforma que, por meio de descontos, fornece aos usuários oportunidade de economia de tempo e dinheiro, e às empresas locais parceiras, permite evitar desperdício de produtos e aumentar a rotatividade de clientes em horários de baixa demanda.
