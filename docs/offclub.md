@@ -40,16 +40,16 @@ O Visitante utilizará a plataforma para consultar informações básicas sobre 
 
 ## 6. Alternativas concorrentes
 ### [<u>1. Prime Gourmet Club</u>](https://primegourmetclub.com.br/)
-- Semelhanças: Oferece descontos por meio de assinatura, em parceria com diversos estabelecimentos.
-- Diferencial: As ofertas são destinadas a turistas, tendo seus planos baseados em viagens.
+- Semelhanças: Oferece descontos por meio de assinatura, em parceria com diversos estabelecimentos de segmentos variados, igual ao OffClub.
+- Diferencial: As ofertas são destinadas a turistas, tendo seus planos baseados em viagens. Além disso, é uma plataforma de âmbito nacional, que atende a empresas de diversos estados de diferentes regiões do nosso país, enquanto que o OffClub visa alcançar o comércio potiguar, principalmente na Região Metropolitana de Natal. O Prime Gourmet oferece uma assinatura anual, porém o OffClub funciona à base de uma assinatura mensal.
 
-### [<u>2. Clube Certo</u>](https://primegourmetclub.com.br/)
-- Semelhanças: Tem como objetivo oferecer vantagem à base de clientes das empresas.
-- Diferencial: Empresas são seus principais clientes, tendo a plataforma contratada por elas para depois repassar aos clientes finais.
+### [<u>2. Clube Certo</u>](https://clubecerto.com.br/)
+- Semelhanças: Tem como objetivo oferecer vantagem à base de clientes das empresas, sendo essas de variados segmentos, assim como nossa plataforma. O Clube Certo também é uma aplicação que trabalha com a assinatura mensal, tal qual o nosso software.
+- Diferencial: Empresas são seus principais clientes, tendo a plataforma contratada por elas para depois repassar aos clientes finais. Alcança todo o Brasil, que nem o Prime Gourmet. Entretanto, nosso site será realizado com o intuito de atingir as empresas locais.
 
 
 ## 7. Visão geral do produto
-Clube do Sol será um sistema digital de adesão a descontos, focado em estabelecer uma rede de benefícios entre consumidores e empresas locais. A interface será simples e acessível, permitindo fácil navegação para todos os perfis de usuários. Para os consumidores, a plataforma oferecerá acesso a serviços e produtos com preços reduzidos. Para as empresas, será uma ferramenta de marketing e aumento de vendas em períodos de baixa demanda, além de um meio para evitar desperdício de produtos.
+OffClub será um sistema digital de adesão a descontos, focado em estabelecer uma rede de benefícios entre consumidores e empresas locais. A interface será simples e acessível, permitindo fácil navegação para todos os perfis de usuários. Para os consumidores, a plataforma oferecerá acesso a serviços e produtos com preços reduzidos. Para as empresas, será uma ferramenta de marketing e aumento de vendas em períodos de baixa demanda, além de um meio para evitar desperdício de produtos.
 
 ## 8. Requisitos funcionais
 | Código | Nome | Descrição |
