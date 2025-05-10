@@ -40,11 +40,11 @@ O Visitante utilizará a plataforma para consultar informações básicas sobre 
 
 ## 6. Alternativas concorrentes
 ### [<u>1. Prime Gourmet Club</u>](https://primegourmetclub.com.br/)
-- Semelhanças: Oferece descontos por meio de assinatura, em parceria com diversos estabelecimentos de segmentos variados, igual ao OffClub.
-- Diferencial: As ofertas são destinadas a turistas, tendo seus planos baseados em viagens. Além disso, é uma plataforma de âmbito nacional, que atende a empresas de diversos estados de diferentes regiões do nosso país, enquanto que o OffClub visa alcançar o comércio potiguar, principalmente na Região Metropolitana de Natal. O Prime Gourmet oferece uma assinatura anual, porém o OffClub funciona à base de uma assinatura mensal.
+- Semelhanças: Oferece descontos por meio de assinatura, em parceria com diversos estabelecimentos de segmentos variados, como o OffClub.
+- Diferencial: As ofertas são destinadas a turistas, tendo seus planos baseados em viagens. Além disso, é uma plataforma de âmbito nacional, que atende a empresas de diversos estados de diferentes regiões do nosso país, enquanto que o OffClub visa alcançar o comércio potiguar, principalmente na Região Metropolitana de Natal. O Prime Gourmet oferece uma assinatura anual, porém o OffClub funciona à base de uma assinatura tanto anual quanto mensal.
 
 ### [<u>2. Clube Certo</u>](https://clubecerto.com.br/)
-- Semelhanças: Tem como objetivo oferecer vantagem à base de clientes das empresas, sendo essas de variados segmentos, assim como nossa plataforma. O Clube Certo também é uma aplicação que trabalha com a assinatura mensal, tal qual o nosso software.
+- Semelhanças: Tem como objetivo oferecer vantagem à base de clientes das empresas, sendo essas de variados segmentos, assim como nossa plataforma.
 - Diferencial: Empresas são seus principais clientes, tendo a plataforma contratada por elas para depois repassar aos clientes finais. Já a nossa empresa busca obter receita por meio das assinaturas dos usuários clientes de tais empresas. Alcança todo o Brasil, que nem o Prime Gourmet. Entretanto, nosso site será realizado com o intuito de atingir o comércio local.
 
 ### [<u>3. Food To Save</u>](https://foodtosave.com.br/)
@@ -53,10 +53,10 @@ O Visitante utilizará a plataforma para consultar informações básicas sobre 
 
 ### [<u>4. Méliuz</u>](https://www.meliuz.com.br/)
 - Semelhanças: É uma empresa que fornece cupons/vouchers de descontos para serem utilizados em diversas lojas de variados segmentos. Sua versão Méliuz Prime funciona com assinatura mensal, assim como o OffClub.
-- Diferencial: A Méliuz é uma empresa de alcance nacional. Também se destaca porque há dois modos de utilização da plataforma: o Méliuz regular e o Méliuz Prime. No Méliuz regular, os usuários conseguem acessar os cupons de desconto de forma gratuita. Já no Méliuz Prime, os usuários pagam pela assinatura mensal.
+- Diferencial: A Méliuz é uma empresa de alcance nacional. Também se destaca porque há dois modos de utilização da plataforma: o Méliuz regular e o Méliuz Prime. No Méliuz regular, os usuários conseguem acessar os cupons de desconto de forma gratuita. Já no Méliuz Prime, os usuários pagam pela assinatura mensal. No OffClub, os clientes terão que obrigatoriamente assinar algum plano para ter acesso às promoções propostas.
 
 ## 7. Visão geral do produto
-OffClub será um sistema digital de adesão a descontos, focado em estabelecer uma rede de benefícios entre consumidores e empresas locais para fortalecer a economia regional. A interface será simples e acessível, permitindo fácil e intuitiva navegação para todos os perfis de usuários. Para os consumidores, a plataforma oferecerá acesso a serviços e produtos com preços reduzidos ou promoções do tipo "Pague um e leve dois". Para as empresas, será uma ferramenta de marketing e aumento de vendas em períodos de baixa demanda, sendo essencial para manter o fluxo financeiro ativo e consistente, além de um meio para evitar desperdício de produtos.
+OffClub será um sistema digital de adesão a descontos, focado em estabelecer uma rede de benefícios entre consumidores e empresas locais para fortalecer a economia regional. Esse fornecimento de descontos ocorrerá por meio da assinatura de algum plano pelos nossos clientes que, por sua vez, terão as ofertas do nosso sistema desbloqueadas de acordo com o tipo de assinatura escolhida por eles. A interface será simples e acessível, permitindo fácil e intuitiva navegação para todos os perfis de usuários. Para os consumidores, a plataforma oferecerá acesso a serviços e produtos com preços reduzidos ou promoções do tipo "Pague um e leve dois" propostas por empresas parceiras, e ao acessar uma oferta, os assinantes poderão ver as informações gerais dela, tendo a possibilidade de emitir um cupom para utilizar no empreendimento fornecedor dessa campanha promocional. Para as empresas, será uma ferramenta de marketing e aumento de vendas em períodos de baixa demanda, sendo essencial para manter o fluxo financeiro ativo e consistente, além de um meio para evitar desperdício de produtos.
 
 ## 8. Requisitos funcionais
 | Código | Nome | Descrição |
