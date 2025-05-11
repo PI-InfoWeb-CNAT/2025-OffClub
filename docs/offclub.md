@@ -22,20 +22,26 @@ O projeto visa desenvolver uma plataforma que, por meio de descontos, fornece ao
 ## 3. Descrição dos usuários
 | Nome | Descrição | Ações |
 |:-|:-|:-|
-| Visitante | Usuário sem cadastro, que acessa a plataforma apenas para visualizar informações sobre seu funcionamento. | Visualizar a descrição do serviço, acessar informações básicas sobre a plataforma, registrar-se ou entrar em conta existente. |
-| Assinante | Cliente com cadastro e assinatura ativa, que pode aproveitar os descontos oferecidos. | Consultar ofertas, reservar serviços e produtos com desconto, gerenciar assinatura. |
-| Empresa | Parceiro comercial com CNPJ registrado, que publica ofertas de seus produtos e serviços. | Criar, editar e gerenciar ofertas; acompanhar dados de vendas e reservas. |
-| Administrador | Responsável pela manutenção e gestão da plataforma, incluindo controle de usuários e parceiros. | Aprovar cadastros de empresas, supervisionar atividades na plataforma, gerenciar conteúdos e resolver inconsistências. |
+| Visitante | Usuário sem cadastro; O usuário pode acessar a plataforma apenas para visualizar as informações sobre seu funcionamento. | Visualizar a descrição do serviço, acessar informações básicas sobre a plataforma, registrar-se ou entrar em conta existente. |
+| Assinante | Usuário cadastrado e com assinatura ativa;  O usuário, após realizar seu cadastro no site e a assinatura, poderá aproveitar os descontos oferecidos. | Após a realização da inclusão de dados cadastrais tais como login, senha e endereço e a realização do pagamento da assinatura, o usuário passa a ser visto como assinante poderá consultar as ofertas e reservar os serviços e os produtos com desconto. O cliente deve ter acesso às seguintes funcionalidades no site: Alterar seus dados cadastrais; Visualizar seu histórico de reservas; Cancelar reserva; Avaliar os produtos adquiridos; Gerenciar assinatura. |
+| Empresa | Gestor de empresa parceira comercial, com CNPJ registrado; Usuário responsável por publicar e gerenciar as ofertas de seus produtos e serviços. | Criar, editar e gerenciar ofertas e serviços; Acompanhar dados de vendas intermediadas pelo site (cupom) e reservas; Disponibilizar ou bloquear a apresentação de ofertas e serviços. |
+| Administrador | Usuário responsável pela gestão da plataforma; será aquele que irá controlar o cadastro das empresas e dos clientes, bem como cuidar da manutenção do site. | Aprovar cadastros de empresas; supervisionar atividades na plataforma; gerenciar conteúdos; criar os "ramos das empresas" (categorias como: vestuário, alimentação, etc.) e as categorias para as ofertas (ex: alimentícia, esportivo, mercado, vestuário, etc.) e resolver inconsistências. |
 
 ## 4. Descrição do ambiente dos usuários
-A plataforma será acessada através de ambiente web responsivo, disponível para computadores e dispositivos móveis, permitindo o uso em qualquer local com acesso à internet. Não haverá restrições quanto ao ambiente físico para Visitantes, Usuários, Empresas ou Administradores, desde que a conexão esteja estável.
+A plataforma será acessada através de ambiente web responsivo, disponível para computadores e dispositivos móveis, permitindo o uso em qualquer local com acesso à internet. Não haverá restrições quanto ao ambiente físico para Visitantes, Assinantes, Empresas ou Administradores, desde que a conexão esteja estável.
 
-O Visitante utilizará a plataforma para consultar informações básicas sobre o funcionamento do serviço, conhecer as ofertas disponíveis e, se desejar, realizar o cadastro para se tornar um Usuário. O Usuário, já cadastrado e com assinatura ativa, navegará pela plataforma para buscar, visualizar e reservar serviços ou produtos com desconto. As Empresas acessarão o sistema para cadastrar, editar e gerenciar suas ofertas, além de acompanhar dados de vendas e reservas. O Administrador poderá acessar o sistema a partir de uma autenticação restrita, realizando a gestão de cadastros, supervisão de atividades, resolução de inconsistências e manutenção do conteúdo da plataforma.
+O usuário do tipo Visitante utilizará a plataforma para consultar informações básicas sobre o funcionamento do serviço, conhecer as ofertas disponíveis e, se desejar, realizar o cadastro para se tornar um assinante ou solicitar o cadastro da sua empresa. 
+
+O Assinante, já cadastrado e com assinatura ativa, navegará pela plataforma para buscar, visualizar e reservar serviços ou produtos com desconto, os quais serão desbloqueadas dependendo do tipo de plano do assinante, bem como gerenciar seu perfil e sua assinatura. Além disso, após a reserva da oferta, será gerado um cupom com um código específico, criado pelo próprio sistema, e com um período de validade definido pela empresa, e também poderá avalia-la colocando uma descrição e classficando com estrelas. Esse tipo de usuário receberá ofertas personalizadas de acordo com seu histórico de consumo. 
+
+As Empresas, após terem seu cadastro confirmado pelo administrador, acessarão o sistema para criar, editar e gerenciar suas ofertas, além de acompanhar dados de vendas e reservas. No comento do cadastro das ofertas, a empresa irá definir para qual tipo de plano de assinate ela poderá ser exibida, além do seu nome, descrição, imagem, categoria, valor, data de início e fim (após essa data, mesmo não tendo atingido o número máximo de cupons, a oferta deixará de ser exibida), quantidade máxima de cupons gerados (após essa quantidade ser atingida, a oferta deixará de ser exibida) e tempo de duração do cupom.
+
+O Administrador poderá acessar o sistema a partir de uma autenticação restrita, realizando a gestão de cadastros, supervisão de atividades, criação das categoras das ofertas e ramos das empresas, resolução de inconsistências e manutenção do conteúdo da plataforma.
 
 ## 5. Principais necessidades dos usuários
-- **Visitante**: Entendimento claro sobre o funcionamento da plataforma para estimular o cadastro.
-- **Assinante**: Facilidade na busca, visualização e aquisição de descontos; simplicidade no gerenciamento da assinatura.
-- **Empresa**: Ferramentas para cadastro e gestão eficiente de suas ofertas; análise de desempenho das campanhas promocionais.
+- **Visitante**: Entendimento claro sobre o funcionamento da plataforma e interface atrativa para estimular o cadastro.
+- **Assinante**: Interface amigável que permita obter informações sobre as ofertas; facilidade na busca, visualização e aquisição de descontos; simplicidade no gerenciamento da assinatura.  
+- **Empresa**: Ferramentas para cadastro e gestão eficiente de suas ofertas, para o auxílio no aumento das venda nos períodos de baixa demanda; análise de desempenho das campanhas promocionais.
 - **Administrador**: Acesso a um painel de gestão robusto que permita a administração eficaz dos usuários, parceiros e ofertas.
 
 ## 6. Alternativas concorrentes
