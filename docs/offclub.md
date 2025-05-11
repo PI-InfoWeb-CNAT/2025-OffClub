@@ -64,18 +64,63 @@ O Administrador poderá acessar o sistema a partir de uma autenticação restrit
 ## 7. Visão geral do produto
 OffClub será um sistema digital de adesão a descontos, focado em estabelecer uma rede de benefícios entre consumidores e empresas locais para fortalecer a economia regional. Esse fornecimento de descontos ocorrerá por meio da assinatura de algum plano pelos nossos clientes que, por sua vez, terão as ofertas do nosso sistema desbloqueadas de acordo com o tipo de assinatura escolhida por eles. A interface será simples e acessível, permitindo fácil e intuitiva navegação para todos os perfis de usuários. Para os consumidores, a plataforma oferecerá acesso a serviços e produtos com preços reduzidos ou promoções do tipo "Pague um e leve dois" propostas por empresas parceiras, e ao acessar uma oferta, os assinantes poderão ver as informações gerais dela, tendo a possibilidade de emitir um cupom para utilizar no empreendimento fornecedor dessa campanha promocional. Para as empresas, será uma ferramenta de marketing e aumento de vendas em períodos de baixa demanda, sendo essencial para manter o fluxo financeiro ativo e consistente, além de um meio para evitar desperdício de produtos.
 
-## 8. Requisitos funcionais
-| Código | Nome | Descrição |
-|:---|:---|:---|
-| F01 | Cadastro e autenticação de usuários | Permitir o registro de visitantes como usuários assinantes e que suas credenciais fiquem salvas para acessar o sistema posteriormente, além de possibilitar a recuperação de dados. |
-| F02 | Cadastro de empresas | Permitir que empresas realizem cadastro e tenha seus dados armazenados. |
-| F03 | Publicação de ofertas | Empresas cadastradas poderão publicar ofertas a respeito de seus serviços e produtos, informando o desconto, data e horário. |
-| F04 | Visualização de ofertas | Assinantes visualizarão as ofertas publicadas por meio de uma interface. |
-| F05 | Assinatura do serviço | Gerenciar planos de assinatura dos usuários, incluindo pagamento e renovação e cancelamento de assinatura. |
-| F06 | Aprovação de cadastros | Permitir que administradores validem o cadastro de novas empresas. |
-| F07 | Painel do administrador | Disponibilizar funcionalidades administrativas para gestão do sistema. |  
-| F08 | Notificações | Enviar alertas sobre novas ofertas, promoções relâmpago ou status de reservas através do E-mail ou outra forma de contato disponibilizada. |
-| F08 | Avaliações e comentários | Permitir que assinantes avaliem e comentem sobre as ofertas e estabelecimentos. |
+## 8. Requisitos Funcionais
+
+### 8.1. Gestão de Usuários e Autenticação
+
+| Código | Nome                         | Descrição                                                                                         |
+|--------|------------------------------|---------------------------------------------------------------------------------------------------|
+| RF001  | Cadastro de Assinante        | Permite que visitantes criem uma conta com nome completo, e-mail, CPF, senha e telefone, com verificação por e-mail ou através de login social (Google). |
+| RF002  | Login/Logout                 | Disponibiliza autenticação segura para todos os perfis, com expiração de sessão e bloqueio após múltiplas tentativas falhas. |
+| RF003  | Recuperação de Senha         | Possibilita redefinir a senha via e-mail, utilizando token temporário com validade limitada. |
+| RF004  | Cadastro de Empresa          | Executa o registro de empresas mediante CNPJ válido, envio de documentos e submissão à aprovação administrativa. |
+| RF005  | Edição de Perfil             | Permite a atualização de dados pessoais, exigindo reautenticação para alterações sensíveis. |
+
+### 8.2. Gestão de Ofertas e Cupons
+
+| Código | Nome                         | Descrição                                                                                         |
+|--------|------------------------------|---------------------------------------------------------------------------------------------------|
+| RF006  | Criação de Ofertas           | Permite que empresas publiquem promoções com nome, descrição, imagens, categoria, desconto, validade e número máximo de cupons disponibilizados. |
+| RF007  | Edição de Ofertas            | Autoriza alterações em ofertas ainda não resgatadas, mantendo controle de versões. |
+| RF008  | Geração de Cupons            | Gera códigos únicos no momento da reserva, com validade, rastreável e que permitirá o resgate da oferta. |
+| RF009  | Filtros de Busca             | Disponibiliza mecanismos de filtragem por localização, categoria, preço, avaliação e ordenação. |
+| RF010  | Ofertas Personalizadas       | Exibe recomendações com base no perfil de consumo, tipo de assinatura e histórico de resgates. |
+
+### 8.3. Assinaturas e Pagamentos
+
+| Código | Nome                         | Descrição                                                                                         |
+|--------|------------------------------|---------------------------------------------------------------------------------------------------|
+| RF011  | Planos de Assinatura         | Apresenta diferentes opções de planos com variação nos percentuais de desconto e limites mensais. |
+| RF012  | Gerenciamento de Pagamentos  | Permite cadastrar, atualizar e remover formas de pagamento, com suporte a cartão e Pix. |
+| RF013  | Cancelamento de Assinatura   | Oferece cancelamento autônomo com proposta de retenção e manutenção dos benefícios até o fim do ciclo. |
+
+### 8.4. Módulo Administrativo
+
+| Código | Nome                         | Descrição                                                                                         |
+|--------|------------------------------|---------------------------------------------------------------------------------------------------|
+| RF014  | Validação de Empresas        | Permite que administradores aprovem ou rejeitem cadastros mediante análise documental. |
+| RF015  | Moderação de Conteúdo        | Fornece ferramentas para edição, remoção e auditoria de conteúdos inadequados ou denunciados. |
+| RF016  | Painel de Acompanhamento     | Apresenta visualmente informações essenciais como número de usuários cadastrados, quantidade de ofertas ativas, cupons gerados e empresas parceiras aprovadas. |
+
+### 8.5. Engajamento e Relacionamento
+
+| Código | Nome                         | Descrição                                                                                         |
+|--------|------------------------------|---------------------------------------------------------------------------------------------------|
+| RF017  | Sistema de Avaliações        | Permite que assinantes atribuam notas de 1 a 5 estrelas e escrevam comentários sobre empresas, com moderação posterior. |
+| RF018  | Notificações Inteligentes    | Envia alertas sobre ofertas personalizadas, cupons próximos do vencimento e novidades, com preferências configuráveis. |
+| RF019  | Histórico de Consumo         | Exibe todas as ofertas resgatadas, status de uso, empresas favoritas e permite filtragens avançadas. |
+
+### 8.6. Funcionalidades Adicionais
+
+| Código | Nome                         | Descrição                                                                                         |
+|--------|------------------------------|---------------------------------------------------------------------------------------------------|
+| RF020  | Integração com Mapa          | Apresenta localização geográfica das empresas parceiras com visualização em mapa interativo e rotas. |
+| RF021  | Programa de Indicação        | Permite envio de convites por link ou código exclusivo, com concessão de benefícios após conversão do indicado. |
+| RF022  | Limites e Alertas de Uso     | Informa o assinante sobre a proximidade ou atingimento do limite de cupons mensais conforme o plano vigente. |
+| RF023  | Favoritos e Lista de Desejos | Permite que assinantes salvem ofertas de interesse para acesso rápido posterior, mesmo antes do resgate. |
+| RF024  | Estatísticas para empresas | Oferece visualização simples de desempenho: número de cupons gerados, resgatados, média de avaliação e favoritos. |
+| RF025  | Chat com empresa | Habilita um canal de mensagem entre assinante e empresa a respeito do resgate ou uso da oferta. |
+| RF026  | Agendamento de ofertas | Permite que o assinante, ao resgatar uma oferta de serviço (ex: salão, clínica, oficina), selecione data e horário conforme disponibilidade da empresa. |
 
 ## 9. Requisitos não-funcionais
 | Código | Nome | Descrição | Categoria | Classificação |
