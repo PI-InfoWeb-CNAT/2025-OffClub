@@ -44,4 +44,6 @@ Para o desenvolvimento do projeto a equipe se comunicará através do **Discord*
 * [Documento de visão](./docs/Visao_OffClub.md)
 * [Modelo de Casos de Uso](./docs/casos_de_uso/modelo_de_cdu.md)
 * [Modelo de Entidades e Relacionamento](./docs/er/modelo_er.md)
+* [Mapa do site](https://www.figma.com/board/vEwdHDyp7MIktbrJIxaFMm/Mapa-do-site-Offclub?node-id=0-1&t=ewSuifi2DYR5T6vo-1)
+* [Protótipo](https://www.figma.com/design/gKuAlxfR0AhlUVnhSf7Dfr/OffClub---Prot%C3%B3tipo---Designs?node-id=12-2&t=CWYd28mcVz5GG3T8-1)
 
