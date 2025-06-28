@@ -1,0 +1,22 @@
+# Ambiente
+.venv/
+venv/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.env
+*.sqlite3
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+staticfiles/
+
+# Editores de código / IDE's
+.vscode/
+.idea/
