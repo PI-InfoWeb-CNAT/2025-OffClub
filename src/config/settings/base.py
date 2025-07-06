@@ -7,7 +7,7 @@ SECRET_KEY = 'not_secret_key'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1',]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,6 +16,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.auth_user',
+    'apps.coupon',
+    'apps.enterprise',
+    'apps.offer',
+    'apps.core',
+    'apps.review',
+    'apps.subscriber',
+    'apps.subscription_plan',
 ]
 
 MIDDLEWARE = [
