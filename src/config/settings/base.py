@@ -16,14 +16,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.auth_user',
-    'apps.coupon',
-    'apps.enterprise',
-    'apps.offer',
-    'apps.core',
-    'apps.review',
-    'apps.subscriber',
-    'apps.subscription_plan',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +53,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTH_USER_MODEL = "users.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -1,15 +1,19 @@
 from django.contrib import admin
-from .models import *
+from .models import Enterprise, LineOfBusiness
 
-# Register your models here.
+@admin.register(Enterprise)
 class EnterpriseAdmin(admin.ModelAdmin):
-    list_display = ('trade_name', 'corporate_reason',)
-    empty_value_display = ' - '
+    list_display = ('trade_name', 'corporate_reason', 'cnpj', 'user_email')
+    search_fields = ('trade_name', 'cnpj', 'corporate_reason')
+    list_filter = ('line_of_business',) 
 
-admin.site.register(Enterprise, EnterpriseAdmin)
+    @admin.display(description='E-mail do Usuário', ordering='user__email')
+    def user_email(self, obj):
+        return obj.user.email
+    
 
-class OperationAreaAdmin(admin.ModelAdmin):
+@admin.register(LineOfBusiness)
+class LineOfBusinessAdmin(admin.ModelAdmin):
     list_display = ('name',)
-    empty_value_display = ' - '
-
-admin.site.register(OperationArea, OperationAreaAdmin)
+    search_fields = ('name',)
+    ordering = ('name',)
