@@ -11,7 +11,15 @@ ALLOWED_HOSTS += [
 
 MIDDLEWARE += []
 
-INSTALLED_APPS += []
+INSTALLED_APPS += [
+    'apps.coupon',
+    'apps.enterprise',
+    'apps.offer',
+    'apps.core',
+    'apps.subscriber',
+    'apps.subscription',
+    'apps.users',
+]
 
 DATABASES = {
     'default': {
