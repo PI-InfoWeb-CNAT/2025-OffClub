@@ -39,7 +39,7 @@ class OfferAdmin(admin.ModelAdmin):
     @admin.display(description='Preço Final')
     def final_price(self, obj):
         if obj.discount > 0:
-            final_price = obj.price * (1 - obj.discount / 100)
+            final_price = float(obj.price) * (1 - float(obj.discount) / 100)
             return f"R$ {final_price:.2f}"
         return f"R$ {obj.price:.2f}"
     
