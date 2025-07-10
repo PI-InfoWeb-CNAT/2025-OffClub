@@ -1,6 +1,8 @@
 :root {
     /* >>> Cores <<< */
     --white: #ffffff;
+    --offwhite: rgba(255, 255, 255, 0.75);
+    --almost-transparent-white: rgba(255, 255, 255, 0.1);
     --black: #000000;
     --yellow-lighter: #FFEFCC;
     --brand-yellow: #FFC547;

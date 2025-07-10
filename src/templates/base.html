@@ -10,9 +10,11 @@
     {% block head %} {% endblock head %}
 </head>
 <body>
+    {% include 'header.html' %}
     <h1>Testando</h1>
     <p>Vendo se o texto funciona</p>
-    {% block body %} {% endblock body %}
+    {% block main %} {% endblock main %}
     {% block scripts %} {% endblock scripts %}
+    {% include 'footer.html' %}
 </body>
 </html>

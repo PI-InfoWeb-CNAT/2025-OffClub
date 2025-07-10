@@ -1,0 +1,88 @@
+footer {
+    padding: 60px 0;
+    background-color: var(--black);
+    border-top: 1px solid var(--almost-transparent-white);
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--almost-transparent-white);
+}
+
+.logo-footer {
+    max-width: 280px;
+}
+
+.logo-footer img {
+    width: 120px;
+    margin-bottom: 16px;
+}
+
+.logo-footer p {
+    color: var(--offwhite);
+}
+
+.nav-lists-wrapper {
+    display: flex;
+    gap: 80px;
+}
+
+.nav-list h3 {
+    margin-bottom: 12px;
+    white-space: nowrap;
+}
+
+.nav-list ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-list a {
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    color: var(--offwhite);
+    transition: color 0.3s ease;
+}
+
+.nav-list a:hover {
+    color: var(--white);
+}
+
+.bottom-links-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.bottom-links a {
+    font-size: var(--minor-text-font-size);
+    color: var(--offwhite);
+    transition: color 0.3s ease;
+}
+
+.bottom-links a:hover {
+    color: var(--white);
+}
+
+.bottom-links img {
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+}
+
+.bottom-links a:hover img {
+    opacity: 1;
+}

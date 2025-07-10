@@ -1,5 +1,7 @@
 @import url('_variables.css');
 @import url('_layouts.css');
+@import url('header.css');
+@import url('footer.css');
 
 * {
     margin: 0;
