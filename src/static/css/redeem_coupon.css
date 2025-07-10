@@ -1,0 +1,13 @@
+body {
+  background-color: #111;
+  font-family: Arial, sans-serif;
+  color: #eee;
+  margin: 0;
+}
+
+.coupon-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
