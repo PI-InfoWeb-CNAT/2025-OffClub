@@ -1,0 +1,24 @@
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.divider .line {
+  width: 493px;
+  height: 1px;
+  border: none;
+  opacity: 0.7;
+}
+.divider .before{
+    background: linear-gradient(to left, #FEB342, #986B27);
+}
+.divider .after{
+    background: linear-gradient(to right, #FEB342, #986B27);
+}
+.divider p {
+  color: #FEB342;
+  font-weight: bold;
+}
