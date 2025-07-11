@@ -12,6 +12,9 @@
     --light-grey: #9D9D9D;
     --medium-grey: #595959;
 
+    /* >>> Gradientes <<< */
+    --gradient-yellow-dark-orange: linear-gradient(var(--brand-yellow), var(--brand-orange-darker))
+
     /* >>> Fontes <<< */
     --main-font-family: 'Poppins', sans-serif;
     --text-font-size: 14px;

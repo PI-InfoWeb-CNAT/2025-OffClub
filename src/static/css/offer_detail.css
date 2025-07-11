@@ -4,7 +4,7 @@
   margin: auto;
   background-color: var(--grey);
   border-radius: var(--border-radius);
-  border: 1px solid var(--brand-yello);
+  border: 1px solid var(--brand-yellow);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,14 +24,62 @@
   margin-top: 15px;
 }
 
+/* Botões */
+button {
+  border: none;
+  border-radius: var(--border-radius);
+}
+
 /* Colunas dentro do modal */
 .offer-card, .offer-content {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
 }
 
-/*  */
+/* Valor após desconto */
+#final-value {
+  font-size: 16px;
+  font-weight: 600px;
+  color: var(--brand-yellow);
+}
+
+/* Botão - resgatar */
+#redeem-button {
+  background-color: var(--gradient-yellow-dark-orange);
+  color: var(--black);
+  padding: 10px 65px;
+}
+
+/* Informações da empresa */
 .shop-info, .shop-info div{
+  display: flex; 
+}
+.shop-info .yellow-border {
+  gap: 5px;
+}
+.shop-info .yellow-border p{
+  font-size: 12px;
+}
+
+/* Classe para borda amarela */
+.yellow-border {
+  border: 1px solid var(--brand-yellow);
+  border-radius: 20px;
+  padding: 5px 10px
+}
+
+/* Status */
+.status p {
+  color: var(--brand-yellow);
+}
+
+/* Unidades restantes */
+.units p {
+  font-size: 13px;
+  font-weight: 600px;
+}
+
+/* Datas sobre oferta */
+.offer-info {
   display: flex;
 }
