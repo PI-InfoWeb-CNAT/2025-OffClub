@@ -5,11 +5,10 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/offer_detail.css' %}">
-    <link rel="stylesheet" href="../static/css/offer_detail.css">
 {% endblock head %}
 
 
-{%block main%}
+{% block main %}
     <section id="offer-modal">
         <div class="offer-card">           
             <div class="offer-image">
@@ -27,8 +26,8 @@
                 <p id="final-value">R$ 20,00</p>
             </div>
 
-            <a id="redeem-button" href="#">
-                <button>
+            <a href="#">
+                <button id="redeem-button">
                     RESGATAR
                 </button>
             </a>
@@ -79,4 +78,8 @@
         </button>
     </section>
 
-{%endblock main%}
+{% endblock main %}
+
+{% block scripts %}
+    <script src="{% static 'js/offer_detail.js' %}"></script>
+{% endblock scripts %}
