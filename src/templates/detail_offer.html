@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resgatar cupom</title>
-</head>
+{% extends "base.html" %}
+{% load static %}
 
-<body>
-    
+{% block title %}Detalhar oferta{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'static/css/detail_offer.css' %}">
+{% endblock head %}
+
+
+{%block main%}
+
     <section class="coupon-modal">
         <div class="coupon-card">
             <button class="close-button-modal"><img src="" alt=""></button>
@@ -73,5 +75,4 @@
         </div>
     </section>
 
-</body>
-</html>
+{%endblock main%}
