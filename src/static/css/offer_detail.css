@@ -1,0 +1,37 @@
+/* Configurações gerais do modal */
+#offer-modal {
+  width: 60%;
+  margin: auto;
+  background-color: var(--grey);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--brand-yello);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  padding: 45px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* Subtítulos */
+#offer-modal h3 {
+  font-size: 13px;
+  color: var(--light-grey);
+  font-weight: 400;
+  margin-top: 15px;
+}
+
+/* Colunas dentro do modal */
+.offer-card, .offer-content {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+
+/*  */
+.shop-info, .shop-info div{
+  display: flex;
+}
