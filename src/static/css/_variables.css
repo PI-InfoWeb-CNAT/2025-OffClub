@@ -1,0 +1,52 @@
+:root {
+    /* >>> Cores <<< */
+    --white: #ffffff;
+    --offwhite: rgba(255, 255, 255, 0.75);
+    --almost-transparent-white: rgba(255, 255, 255, 0.1);
+    --black: #000000;
+    --yellow-lighter: #FFEFCC;
+    --brand-yellow: #FFC547;
+    --brand-orange: #FF9E3D;
+    --brand-orange-darker: #E28C36;
+
+    /* >>> Fontes <<< */
+    --main-font-family: 'Poppins', sans-serif;
+    --text-font-size: 14px;
+    --text-font-weight: 400;
+    --text-line-height: 1.5;
+    --text-color: var(--white);
+
+    --minor-text-font-size: 12px;
+    --minor-text-font-weight: 400;
+    --minor-text-line-height: 1.5;
+    --minor-text-color: var(--white);
+
+    --larger-text-font-size: 16px;
+    --larger-text-font-weight: 400;
+    --larger-text-line-height: 1.5;
+    --larger-text-color: var(--white);
+
+    --h1-font-size: 24px;
+    --h1-font-weight: 600;
+    --h1-line-height: 1.2;
+    --h1-color: var(--white);
+    --h2-font-size: 20px;
+    --h2-font-weight: 600;
+    --h2-line-height: 1.2;
+    --h2-color: var(--white);
+
+    --h3-font-size: 18px;
+    --h3-font-weight: 600;
+    --h3-line-height: 1.2;
+    --h3-color: var(--white);
+
+    /* >>> Tamanho de Telas <<< */
+    --screen-xs: 576px;
+    --screen-sm: 768px;
+    --screen-md: 992px;
+    --screen-lg: 1200px;
+    --screen-xl: 1400px;
+
+    /* >>> Outros <<< */
+    --border-radius: 10px;
+}

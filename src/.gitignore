@@ -16,7 +16,9 @@ __pycache__/
 db.sqlite3
 media/
 staticfiles/
+uploads/
 
 # Editores de código / IDE's
 .vscode/
 .idea/
+

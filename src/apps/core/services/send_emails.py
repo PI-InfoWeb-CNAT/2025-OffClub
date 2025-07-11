@@ -1,0 +1,2 @@
+class SendEmailService:
+    pass
