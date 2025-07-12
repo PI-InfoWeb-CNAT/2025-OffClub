@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
 :root {
     /* >>> Cores <<< */
     --white: #ffffff;
@@ -27,11 +29,12 @@
     --gradient-gold: linear-gradient(180deg, var(--brand-yellow) 0%, var(--golden) 100%);
 
     /* >>> Fontes <<< */
-    --main-font-family: 'Poppins', sans-serif;
+    --main-font-family: "Poppins", sans-serif;
     --text-font-size: 14px;
     --text-font-weight: 400;
     --text-line-height: 1.5;
     --text-color: var(--white);
+    --special-font-family: "Madimi One", sans-serif;
 
     --minor-text-font-size: 12px;
     --minor-text-font-weight: 400;
