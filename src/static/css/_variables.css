@@ -4,10 +4,27 @@
     --offwhite: rgba(255, 255, 255, 0.75);
     --almost-transparent-white: rgba(255, 255, 255, 0.1);
     --black: #000000;
+    --background-color: #1C1C1C;
+    --footer-background-color: #080808;
     --yellow-lighter: #FFEFCC;
     --brand-yellow: #FFC547;
     --brand-orange: #FF9E3D;
     --brand-orange-darker: #E28C36;
+    --purple: #6F01FF;
+    --brown: #844200;
+    --brown-darker: #1E0F00;
+    --cyan: #25A7AB;
+    --darker-cyan: #004560;
+    --golden: #8F6200;
+
+    /* >>> Gradientes <<< */
+    --gradient-yellow: linear-gradient(180deg, var(--brand-yellow) 0%, var(--yellow-lighter) 100%);
+    --gradient-orange: linear-gradient(180deg, var(--brand-orange) 0%, var(--brand-orange-darker) 100%);
+    --gradient-yellow-orange: linear-gradient(180deg, var(--brand-yellow) 0%, var(--brand-orange-darker) 100%);
+    --gradient-orange-brown: linear-gradient(180deg, var(--brand-orange) 0%, var(--brown) 100%);
+    --gradient-copper: linear-gradient(180deg, var(--brown) 0%, var(--brown-darker) 100%);
+    --gradient-silver: linear-gradient(180deg, var(--cyan) 0%, var(--darker-cyan) 100%);
+    --gradient-gold: linear-gradient(180deg, var(--brand-yellow) 0%, var(--golden) 100%);
 
     /* >>> Fontes <<< */
     --main-font-family: 'Poppins', sans-serif;
@@ -48,5 +65,6 @@
     --screen-xl: 1400px;
 
     /* >>> Outros <<< */
-    --border-radius: 10px;
+    --border-radius-small: 10px;
+    --border-radius: 20px;
 }

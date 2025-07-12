@@ -14,8 +14,14 @@ html {
 }
 
 body {
-    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--background-color);
+    background-image: url('../imgs/noise.png');
+    background-repeat: repeat;
     font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
 }
 
 p {
