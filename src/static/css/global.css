@@ -20,8 +20,12 @@ body {
     background-color: var(--background-color);
     background-image: url('../imgs/noise.png');
     background-repeat: repeat;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--main-font-family);
     min-height: 100vh;
+}
+
+main {
+    width: 100%;
 }
 
 p {
