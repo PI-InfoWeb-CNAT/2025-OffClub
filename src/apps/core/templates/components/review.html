@@ -1,0 +1,33 @@
+{% comment %}
+Componente para um card de depoimento.
+Ele espera as seguintes variáveis de contexto:
+- rating: Um número de 1 a 5 para as estrelas.
+- text: O texto do depoimento.
+- author_name: O nome de quem deu o depoimento.
+- author_role: A função/cargo (ex: "Cliente", "Parceiro").
+{% endcomment %}
+
+<div class="testimonial-card">
+    <div class="testimonial-rating">
+        {# Este laço cria as estrelas dinamicamente com base na variável 'rating' #}
+        {% for i in "12345" %}
+            {% if forloop.counter <= rating %}
+                <i class="fas fa-star"></i> {# Estrela cheia #}
+            {% else %}
+                <i class="far fa-star"></i> {# Estrela vazia (opcional) #}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <p class="testimonial-text">"{{ text }}"</p>
+
+    <div class="testimonial-author">
+        <div class="author-icon">
+            <i class="fas fa-user-circle"></i> {# Ícone do autor #}
+        </div>
+        <div class="author-details">
+            <span class="author-name">{{ author_name }}</span>
+            <span class="author-role">{{ author_role }}</span>
+        </div>
+    </div>
+</div>

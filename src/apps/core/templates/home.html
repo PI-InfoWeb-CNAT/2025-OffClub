@@ -5,12 +5,124 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/plan_card.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/review.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 {% endblock head %}
 
 {% block main %}
-<main>
-    <div class="container flex-center">
-        <h1>OFFCLUB</h1>
-    </div>
+<main class="container flex-center flex-column">
+    <section class="hero-section">
+        <div class="hero-texts">
+            <h1>Economize e ajude a movimentar a economia local com nossas ofertas</h1>
+            <p>Acessso exclusivo a diversos cupons de desconto. Todo mundo ganha!</p>
+        </div>
+        <div class="hero-buttons">
+            <a href="#">
+                <button>Saiba mais</button>
+            </a>
+            <a href="#">
+                <button>Registrar-se</button>
+            </a>
+        </div>
+    </section>
+
+    <div class="tags-carousel"></div>
+
+    <section class="how-it-works flex-row flex-center">
+        <div class="how-it-works-content">
+            <h1>COMO FUNCIONA?</h1>
+
+            <div class="tabs">
+                <button class="tab-link">1</button>
+                <button class="tab-link">2</button>
+                <button class="tab-link">3</button>
+                <button class="tab-link">4</button>
+            </div>
+
+            <div class="tab-content" id="tab-1">
+                <h2>Título do Tópico</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+            <div class="tab-content" id="tab-2">
+                <h2>Título do Tópico</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+            <div class="tab-content" id="tab-3">
+                <h2>Título do Tópico</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+            <div class="tab-content" id="tab-4">
+                <h2>Título do Tópico</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+
+            <div class="sliders">
+                <div class="slider-line" id="slider-1"></div>
+                <div class="slider-line" id="slider-2"></div>
+                <div class="slider-line" id="slider-3"></div>
+                <div class="slider-line" id="slider-4"></div>
+            </div>
+        </div>
+
+        <figure class="how-it-works-image-wrapper">
+            <img src="{% static 'imgs/3d-gift.png' %}" alt="Ilustração 3D de um presente">
+        </figure>
+    </section>
+
+    <section class="home-plans flex-column flex-center">
+        <h1>PLANOS</h1>
+        <div class="home-plans-wrapper flex-row">
+            {% include 'components/plan_card.html' with plan_class="bronze" plan_name="Bronze" price="9,90"
+            subscribe_url="#" features=features_bronze %}
+
+            {% include 'components/plan_card.html' with plan_class="prata" plan_name="Prata" price="19,90"
+            subscribe_url="#" features=features_prata %}
+
+            {% include 'components/plan_card.html' with plan_class="ouro" plan_name="Ouro" price="29,90"
+            subscribe_url="#" features=features_ouro %}
+        </div>
+
+        <a href="#">
+            <button>Ver planos detalhados</button>
+        </a>
+    </section>
+
+    <section class="access-everywhere flex-center flex-row">
+        <figure class="access-everywhere-image-wrapper">
+            <img src="{% static 'imgs/phone-mockup.png' %}"
+                alt="Renderização de um celular mostrando a exibição mobile do nosso site">
+        </figure>
+
+        <div class="access-everywhere-content">
+            <h1>ACESSSE DE QUALQUE LUGAR!</h1>
+            <p>Lorem ipsum <span class="highlight">dolor sit amet</span>, consectetur adipiscing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna <span class="highlight">aliqua</span>. Ut enim ad minim
+                veniam</p>
+            <p>Tempor incididunt ut labore et dolore magna aliqua. Ut enim <span class="highlight">ad minim</span>
+                veniam</p>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <h2>O que nossos clientes dizem</h2>
+
+        <div class="testimonials-wrapper flex-row">
+            {% for i in "1234" %}
+                {% include 'components/review.html' with rating=5 text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ipsum dolor' author_name='John Doe' author_role='Cliente' %}
+            {% endfor %}
+        </div>
+
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </section>
+
 </main>
 {% endblock main %}
