@@ -1,257 +1,259 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %} Histórico de Consumo {% endblock title %}
-{% block head %} <link rel="stylesheet" href="../static/css/subscriber.css" >{% endblock head %}
-{% block main %} 
-    <h1>HISTÓRICO DE CONSUMO</h1>
-    <section class="active-coupons">
-        <!-- Cupons ativos -->
-        <h2>ATIVOS</h2>
-        <!-- CUPOM 1 -->
-        <div class="active flex-center">
-            <div class="coupon">
-                <div class="enterprise-info">
-                    <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                </div>
-                <div class="coupon-image">
-                    <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                    <p><span class="discount-tag">-25%</span></p>
-                </div>
-                <div class="coupon-info">
-                    <h3>Cabelo, barba e sobrancelha</h3>
-                    <p>Resgatar até 31 de Jan., 2026</p>
-                </div>
-                <button>Conferir detalhes</button>
-            </div>
-
-            <!-- CUPOM 2 -->
-            <div class="coupon">
-                <div class="enterprise-info">
-                    <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                </div>
-                <div class="coupon-image">
-                    <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                    <p><span class="discount-tag">-25%</span></p>
-                </div>
-                <div class="coupon-info">
-                    <h3>Cabelo, barba e sobrancelha</h3>
-                    <p>Resgatar até 31 de Jan., 2026</p>
-                </div>
-                <button>Conferir detalhes</button>
-            </div>
-
-            <!-- CUPOM 3 -->
-            <div class="coupon">
-                <div class="enterprise-info">
-                    <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                </div>
-                <div class="coupon-image">
-                    <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                    <p><span class="discount-tag">-25%</span></p>
-                </div>
-                <div class="coupon-info">
-                    <h3>Cabelo, barba e sobrancelha</h3>
-                    <p>Resgatar até 31 de Jan., 2026</p>
-                </div>
-                <button>Conferir detalhes</button>
-            </div>
-
-            <!-- CUPOM 4 -->
-            <div class="coupon">
-                <div class="enterprise-info">
-                    <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                </div>
-                <div class="coupon-image">
-                    <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                    <p><span class="discount-tag">-25%</span></p>
-                </div>
-                <div class="coupon-info">
-                    <h3>Cabelo, barba e sobrancelha</h3>
-                    <p>Resgatar até 31 de Jan., 2026</p>
-                </div>
-                <button>Conferir detalhes</button>
-            </div>
-        </div>
-
-        <!-- Seção de "ver mais" -->
-        <div class="divider">
-            <hr class="line before">
-            <p>Ver mais</p>
-            <img src="../static/imgs/ver_mais.svg" alt="">
-            <hr class="line after">
-        </div>
-    </section>
-
-    <!-- Cupons Utilizados  -->
-    <section class="used-coupons">
-        <h2>UTILIZADOS</h2>
-        <select name="year" id="year">
-            <option value="2025">2025</option>
-            <option value="2025">2024</option>
-            <option value="2025">2023</option>
-            <option value="2025">2022</option>
-            <option value="2025">2021</option>
-        </select>
-
-        <!-- Janeiro -->
-        <div class="months">
-            <div class="month">
-                <h3>Janeiro</h3>
-                <div class="used">
-                    <!-- CUPOM 1 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
-                        </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
-                        </div>
-                        <button>Conferir detalhes</button>
+{% block head %} <link rel="stylesheet" href="{% static 'css/subscriber.css' %}"> {% endblock head %}
+{% block main %}
+    <div class="container">
+        <h1>HISTÓRICO DE CONSUMO</h1>
+        <section class="active-coupons">
+            <!-- Cupons ativos -->
+            <h2>ATIVOS</h2>
+            <!-- CUPOM 1 -->
+            <div class="coupons flex-center">
+                <div class="coupon">
+                    <div class="enterprise-info">
+                        <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                        <p class="enterprise-name">Barbearia do Mãozinha</p>
                     </div>
-
-                    <!-- CUPOM 2 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
-                        </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
-                        </div>
-                        <button>Conferir detalhes</button>
+                    <div class="coupon-image">
+                        <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                        <p><span class="discount-tag">-25%</span></p>
                     </div>
-
-                    <!-- CUPOM 3 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
-                        </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
-                        </div>
-                        <button>Conferir detalhes</button>
+                    <div class="coupon-info">
+                        <h3>Cabelo, barba e sobrancelha</h3>
+                        <p>Resgatar até 31 de Jan., 2026</p>
                     </div>
+                    <button>Conferir detalhes</button>
+                </div>
 
-                    <!-- CUPOM 4 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
-                        </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
-                        </div>
-                        <button>Conferir detalhes</button>
+                <!-- CUPOM 2 -->
+                <div class="coupon">
+                    <div class="enterprise-info">
+                        <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                        <p class="enterprise-name">Barbearia do Mãozinha</p>
                     </div>
+                    <div class="coupon-image">
+                        <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                        <p><span class="discount-tag">-25%</span></p>
+                    </div>
+                    <div class="coupon-info">
+                        <h3>Cabelo, barba e sobrancelha</h3>
+                        <p>Resgatar até 31 de Jan., 2026</p>
+                    </div>
+                    <button>Conferir detalhes</button>
+                </div>
+
+                <!-- CUPOM 3 -->
+                <div class="coupon">
+                    <div class="enterprise-info">
+                        <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                        <p class="enterprise-name">Barbearia do Mãozinha</p>
+                    </div>
+                    <div class="coupon-image">
+                        <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                        <p><span class="discount-tag">-25%</span></p>
+                    </div>
+                    <div class="coupon-info">
+                        <h3>Cabelo, barba e sobrancelha</h3>
+                        <p>Resgatar até 31 de Jan., 2026</p>
+                    </div>
+                    <button>Conferir detalhes</button>
+                </div>
+
+                <!-- CUPOM 4 -->
+                <div class="coupon">
+                    <div class="enterprise-info">
+                        <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                        <p class="enterprise-name">Barbearia do Mãozinha</p>
+                    </div>
+                    <div class="coupon-image">
+                        <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                        <p><span class="discount-tag">-25%</span></p>
+                    </div>
+                    <div class="coupon-info">
+                        <h3>Cabelo, barba e sobrancelha</h3>
+                        <p>Resgatar até 31 de Jan., 2026</p>
+                    </div>
+                    <button>Conferir detalhes</button>
                 </div>
             </div>
 
-            <!-- Fevereiro -->
-            <div class="month">
-                <h3>Fevereiro</h3>
-                <div class="used">
-                    <!-- CUPOM 1 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
-                        </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
-                        </div>
-                        <button>Conferir detalhes</button>
-                    </div>
+            <!-- Seção de "ver mais" -->
+            <div class="divider">
+                <hr class="line before">
+                <p>Ver mais</p>
+                <img src="../static/imgs/ver_mais.svg" alt="">
+                <hr class="line after">
+            </div>
+        </section>
 
-                    <!-- CUPOM 2 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
-                        </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
-                        </div>
-                        <button>Conferir detalhes</button>
-                    </div>
+        <!-- Cupons Utilizados  -->
+        <section class="used-coupons">
+            <h2>UTILIZADOS</h2>
+            <select name="year" id="year">
+                <option value="2025">2025</option>
+                <option value="2025">2024</option>
+                <option value="2025">2023</option>
+                <option value="2025">2022</option>
+                <option value="2025">2021</option>
+            </select>
 
-                    <!-- CUPOM 3 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
+            <!-- Janeiro -->
+            <div class="months">
+                <div class="month">
+                    <h3>Janeiro</h3>
+                    <div class="coupons flex-center">
+                        <!-- CUPOM 1 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
                         </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
-                        </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
-                        </div>
-                        <button>Conferir detalhes</button>
-                    </div>
 
-                    <!-- CUPOM 4 -->
-                    <div class="coupon">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
+                        <!-- CUPOM 2 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
                         </div>
-                        <div class="coupon-image">
-                            <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
-                            <p><span class="discount-tag">-25%</span></p>
+
+                        <!-- CUPOM 3 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
                         </div>
-                        <div class="coupon-info">
-                            <h3>Cabelo, barba e sobrancelha</h3>
-                            <p>Resgatar até 31 de Jan., 2026</p>
+
+                        <!-- CUPOM 4 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
                         </div>
-                        <button>Conferir detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Fevereiro -->
+                <div class="month">
+                    <h3>Fevereiro</h3>
+                    <div class="coupons flex-center">
+                        <!-- CUPOM 1 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
+                        </div>
+
+                        <!-- CUPOM 2 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
+                        </div>
+
+                        <!-- CUPOM 3 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
+                        </div>
+
+                        <!-- CUPOM 4 -->
+                        <div class="coupon">
+                            <div class="enterprise-info">
+                                <figure class="enterprise-logo"><img src="../static/imgs/logo-maozinha.png" alt="Logo da Barbearia do Mãozinha"></figure>
+                                <p class="enterprise-name">Barbearia do Mãozinha</p>
+                            </div>
+                            <div class="coupon-image">
+                                <figure><img src="../static/imgs/coupon1.png" alt="Imagem referente ao cupon"></figure>
+                                <p><span class="discount-tag">-25%</span></p>
+                            </div>
+                            <div class="coupon-info">
+                                <h3>Cabelo, barba e sobrancelha</h3>
+                                <p>Resgatar até 31 de Jan., 2026</p>
+                            </div>
+                            <button>Conferir detalhes</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Seção de "ver mais" -->
-        <div class="divider">
-            <hr class="line before">
-            <p>Ver mais</p>
-            <img src="../static/imgs/ver_mais.svg" alt="">
-            <hr class="line after">
-        </div>
-    </section>
+            <!-- Seção de "ver mais" -->
+            <div class="divider">
+                <hr class="line before">
+                <p>Ver mais</p>
+                <img src="../static/imgs/ver_mais.svg" alt="">
+                <hr class="line after">
+            </div>
+        </section>
+    </div>
 {% endblock main %}

@@ -1,3 +1,4 @@
+@import url('../../../../static/css/_variables.css');
 .divider {
   display: flex;
   align-items: center;
@@ -21,4 +22,51 @@
 .divider p {
   color: #FEB342;
   font-weight: bold;
+}
+.active-coupons,
+.used-coupons {
+  padding: 1rem;
+}
+
+.coupons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 1rem;
+  max-width: 100%; 
+}
+.coupons .coupon {
+  width: 270px;
+  background-color: #252525;
+  border-radius: 20px;
+  height: 350px; 
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.coupons .coupon .enterprise-info{
+  display: flex;
+  justify-content: left;
+}
+.coupon button{
+  color: white;
+  font-size: 16px;
+  background-color: #1C1C1C;
+  border: none;
+  border-radius: 10px;
+  width: 240px;
+  height: 36px;
+}
+.discount-tag{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6F01FF;
+  font-size: 20px;
+  font-weight: bolder;
+  width: 68px;
+  height: 40px;
+  border-radius: var(--border-radius);
 }
