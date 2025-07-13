@@ -1,12 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-
+from apps.core import urls as core_urls
 from django.shortcuts import render
 
-def index(request):
-    return render(request, 'base.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('', include(core_urls)),
 ]
