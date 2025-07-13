@@ -1,16 +1,31 @@
 /* Configurações gerais do modal */
+#transparent-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
 #offer-modal {
   width: 55%;
-  margin: auto;
+  margin: 0 auto;
   background-color: var(--dark-grey);
   border-radius: var(--border-radius);
   border: 1px solid var(--brand-yellow);
   position: absolute;
+  z-index: 5;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
   padding: 45px;
+}
+
+#offer-modal > div {
   display: flex;
   justify-content: space-between;
   gap: 30px;
@@ -27,6 +42,7 @@
 /* Botões */
 button {
   border: none;
+  background-color: transparent;
   border-radius: var(--border-radius);
 }
 
@@ -61,7 +77,7 @@ button {
 .shop-info {
   display: flex; 
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 15px;
 }
 .shop-info > p {
@@ -81,7 +97,7 @@ button {
 .yellow-border {
   border: 1px solid var(--brand-yellow);
   border-radius: 20px;
-  padding: 3px 15px;
+  padding: 2px 15px;
   display: inline-block;
 }
 
@@ -103,24 +119,29 @@ button {
 
 /* Tags cateogrias */
 .categories {
-  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.tag-category {
+  width: 135px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  padding: 8px 30px 8px 18px;
+  padding: 5px 27px 5px 15px;
   background-color: var(--dark-yellow);
   border-radius: var(--border-radius);
   margin-top: 20px;
   margin-bottom: 5px;
 }
-.categories img {
+.tag-category img {
   width: 15px;
   height: 15px;
 }
-.categories p{
+.tag-category p{
   font-size: 13px;
 }
-
 
 /* Datas sobre oferta */
 .offer-info {
@@ -132,7 +153,7 @@ button {
 }
 
 /* Botão de fechar modal */
-#close-button-modal {
+#close-button-modal, #close-toast {
   position: absolute;
   top: 5%;
   right: 3%;
@@ -142,4 +163,70 @@ button {
 }
 #close-button-modal svg {
   color: var(--medium-grey);
+}
+
+/* >> APÓS CLICAR EM "RESGATAR" << */
+
+/* Botão resgatar */
+#redeem-button:disabled {
+  background: linear-gradient(90deg, #4A3E25, #443322);
+  color: #171717;
+  cursor: default;
+}
+
+/* Botão acessar cupons */
+#ascess-coupons-button {
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 10px 25px 10px 35px;
+}
+#ascess-coupons-button img {
+  width: 25px;
+  height: 16px;
+}
+
+/* Notificação de sucesso */
+#success-toast {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 8;
+  right: 5%;
+  bottom: 6%;
+  background-color: var(--dark-green);
+  border-radius: var(--border-radius);
+  color: var(--medium-green);
+  padding: 20px 55px 20px 14px;
+  gap: 18px;
+  border-left: 10px solid var(--medium-green);
+}
+#success-toast > svg {
+  border-radius: 50px;
+  border: 1px solid var(--medium-green);
+  padding: 5px;
+}
+#success-toast p {
+  color: var(--light-green);
+}
+#success-toast p + p {
+  font-size: 13px;
+  font-weight: 300;
+}
+#success-toast #close-toast {
+  background-color: transparent;
+  right: 2%;
+}
+#success-toast #close-toast svg {
+  color:var(--green-details) ;
+}
+
+#ascess-coupons-button, #success-toast {
+  display: none;
 }

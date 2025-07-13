@@ -14,6 +14,12 @@
     --grey: #323232;
     --dark-grey: #1C1C1C;
 
+    /* >> Notificação de sucesso << */
+    --dark-green: #0F3820;      /* Fundo */
+    --medium-green: #5AC191;    /* Elementos */
+    --light-green: #C0EDD8;     /* Texto */
+    --green-details: #2A553D;   /* Detalhes -> botão excluir */
+
     /* >>> Gradientes <<< */
     --gradient-yellow-dark-orange: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
 
