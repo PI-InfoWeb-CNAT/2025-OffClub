@@ -4,6 +4,7 @@
 {% block title %}OFFCLUB{% endblock title %}
 
 {% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />   
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <link rel="stylesheet" href="{% static 'css/components/plan_card.css' %}">
 <link rel="stylesheet" href="{% static 'css/components/review.css' %}">
@@ -111,21 +112,19 @@
         </div>
     </section>
 
-    <section class="testimonials-section">
-        <h2>O que nossos clientes dizem</h2>
-
-        <div class="testimonials-wrapper flex-row">
-            {% for i in "1234" %}
+    <section class="container swiper">
+        <div class="flex-row swiper-wrapper">
+            {% for i in "12345" %}
                 {% include 'components/review.html' with rating=5 text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ipsum dolor' author_name='John Doe' author_role='Cliente' %}
             {% endfor %}
         </div>
 
-        <div class="slider-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
+        <div class="swiper-pagination"></div>
     </section>
-
 </main>
 {% endblock main %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/testimonials.js' %}"></script>
+{% endblock scripts %}

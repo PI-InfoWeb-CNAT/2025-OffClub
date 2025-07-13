@@ -7,27 +7,29 @@ Ele espera as seguintes variáveis de contexto:
 - author_role: A função/cargo (ex: "Cliente", "Parceiro").
 {% endcomment %}
 
-<div class="testimonial-card">
-    <div class="testimonial-rating">
-        {# Este laço cria as estrelas dinamicamente com base na variável 'rating' #}
-        {% for i in "12345" %}
-            {% if forloop.counter <= rating %}
-                <i class="fas fa-star"></i> {# Estrela cheia #}
-            {% else %}
-                <i class="far fa-star"></i> {# Estrela vazia (opcional) #}
-            {% endif %}
-        {% endfor %}
-    </div>
-
-    <p class="testimonial-text">"{{ text }}"</p>
-
-    <div class="testimonial-author">
-        <div class="author-icon">
-            <i class="fas fa-user-circle"></i> {# Ícone do autor #}
+<div class="testimonial-wrapper swiper-slide">
+    <div class="testimonial-card">
+        <div class="testimonial-rating">
+            {# Este laço cria as estrelas dinamicamente com base na variável 'rating' #}
+            {% for i in "12345" %}
+                {% if forloop.counter <= rating %}
+                    <i class="fas fa-star"></i> {# Estrela cheia #}
+                {% else %}
+                    <i class="far fa-star"></i> {# Estrela vazia (opcional) #}
+                {% endif %}
+            {% endfor %}
         </div>
-        <div class="author-details">
-            <span class="author-name">{{ author_name }}</span>
-            <span class="author-role">{{ author_role }}</span>
+    
+        <p class="testimonial-text">"{{ text }}"</p>
+    
+        <div class="testimonial-author flex-row">
+            <div class="author-icon">
+                <i class="fas fa-user-circle"></i> {# Ícone do autor #}
+            </div>
+            <div class="author-details flex-column">
+                <span class="author-name">{{ author_name }}</span>
+                <span class="author-role">{{ author_role }}</span>
+            </div>
         </div>
     </div>
 </div>

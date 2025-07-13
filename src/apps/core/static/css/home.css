@@ -173,3 +173,34 @@ figure.how-it-works-image-wrapper img:nth-of-type(2) {
     position: relative; 
     z-index: 2; 
 }
+
+/* Seção de REVIEWS */
+
+.swiper {
+    margin-bottom: 3em;
+}
+
+.swiper-wrapper {
+    padding: 1em 0;
+}
+
+.swiper-pagination {
+  position: relative; 
+  bottom: auto;       
+  margin-top: 2rem;   
+}
+
+.swiper-pagination-bullet {
+  width: 24px; 
+  height: 8px;
+  border-radius: var(--border-radius); 
+
+  background-color: var(--almost-transparent-white); 
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--brand-yellow); 
+  width: 80px; 
+}
