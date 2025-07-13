@@ -1,0 +1,21 @@
+{% load static %}
+
+<section class="enterprise_card">
+    <img src="{{ image }}" alt="">
+    <div class="enterprise_data">
+        <img src="" alt="">
+        <h3>{{ name }}</h3>
+        <p>{{ category }}</p>
+        <div class="complementary_info">
+            <div class="distance">
+                <i><img src="{% static 'imgs/icon-park-outline_local.svg' %}" alt=""></i>
+                <p>{{ dist }}</p>
+            </div>
+            <div class="star">
+                <i><img src="{% static 'imgs/material-symbols_star-outline-rounded.svg' %}" alt=""></i>
+                <p>{{ stars }}</p>
+            </div>
+        </div>
+        
+    </div>
+</section>

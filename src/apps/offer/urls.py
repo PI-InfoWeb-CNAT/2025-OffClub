@@ -1,3 +1,6 @@
 from django.urls import path, include
+from .views import OfferViews
 
-urlpatterns = []
+urlpatterns = [
+    path('', OfferViews.list_filter_offer)
+]
