@@ -1,6 +1,6 @@
 /* Configurações gerais do modal */
 #offer-modal {
-  width: 45%;
+  width: 55%;
   margin: auto;
   background-color: var(--dark-grey);
   border-radius: var(--border-radius);
@@ -42,7 +42,7 @@ button {
   font-weight: 500;
 }
 #final-value {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--brand-yellow);
 }
@@ -51,8 +51,9 @@ button {
 #redeem-button {
   background: var(--gradient-yellow-dark-orange);
   color: var(--black);
-  padding: 10px 65px;
-  font-weight: 700;
+  padding: 8px 65px;
+  font-size: 16px;
+  font-weight: 600;
   margin-top: 15px;
 }
 
@@ -68,10 +69,12 @@ button {
 }
 .shop-info .yellow-border {
   display: flex;
+  align-items: center;
   gap: 5px;
 }
 .shop-info .yellow-border p{
   font-size: 12px;
+  margin-top: 2px
 }
 
 /* Classe para borda amarela */
@@ -87,6 +90,9 @@ button {
   color: var(--brand-yellow);
   margin-top: 3px;
 }
+.yellow-border svg {
+  color: var(--brand-yellow);
+}
 
 /* Unidades restantes */
 .units p {
@@ -94,6 +100,27 @@ button {
   font-weight: 600;
   margin-top: 3px;
 }
+
+/* Tags cateogrias */
+.categories {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 30px 8px 18px;
+  background-color: var(--dark-yellow);
+  border-radius: var(--border-radius);
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.categories img {
+  width: 15px;
+  height: 15px;
+}
+.categories p{
+  font-size: 13px;
+}
+
 
 /* Datas sobre oferta */
 .offer-info {
@@ -105,9 +132,14 @@ button {
 }
 
 /* Botão de fechar modal */
-.close-button-modal {
+#close-button-modal {
   position: absolute;
   top: 5%;
   right: 3%;
   background-color: var(--grey);
+  width: 32px;
+  height: 32px;
+}
+#close-button-modal svg {
+  color: var(--medium-grey);
 }
