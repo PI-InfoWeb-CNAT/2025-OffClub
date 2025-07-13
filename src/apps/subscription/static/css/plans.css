@@ -60,10 +60,9 @@ main.container > h1 {
     font-size: var(--minor-text-font-size);
 }
 
-.plan-card h3:first-of-type {
-    font-size: var(--larger-text-font-size);
+.plan-titles h3 {
+    font-size: var(--text-font-size);
     font-weight: var(--text-font-weight);
-    color: var(--offwhite);
 }
 
 .plan-card h2 {
@@ -116,7 +115,7 @@ main.container > h1 {
 
 .plan-details h3 {
     font-size: var(--text-font-size);
-    font-weight: var(--text-font-weight);
+    font-weight: 800;   
     margin-bottom: 12px;
 }
 
