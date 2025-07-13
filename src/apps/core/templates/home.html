@@ -11,8 +11,8 @@
 {% endblock head %}
 
 {% block main %}
-<main class="container flex-center flex-column">
-    <section class="hero-section">
+<main class="flex-center flex-column">
+    <section class="container hero-section">
         <div class="hero-texts flex-column flex-center">
             <h1>Economize e ajude a movimentar a economia local com as nossas ofertas!</h1>
             <p>Acessso exclusivo a diversos cupons de desconto. Todo mundo ganha!</p>
@@ -29,50 +29,53 @@
 
     <div class="tags-carousel"></div>
 
-    <section class="how-it-works flex-row flex-center">
-        <div class="how-it-works-content">
-            <h1>COMO FUNCIONA?</h1>
-
-            <div class="tabs">
-                <button class="tab-link">1</button>
-                <button class="tab-link">2</button>
-                <button class="tab-link">3</button>
-                <button class="tab-link">4</button>
+    <div class="how-it-works-wrapper">
+        <section class="container how-it-works flex-row flex-center">
+            <div class="how-it-works-content">
+                <h1>COMO FUNCIONA?</h1>
+    
+                <div class="tabs flex-row">
+                    <button class="tab-link">1</button>
+                    <button class="tab-link active">2</button>
+                    <button class="tab-link">3</button>
+                    <button class="tab-link">4</button>
+                </div>
+    
+                <div class="tab-content" id="tab-1">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+                <div class="tab-content" id="tab-2">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+                <div class="tab-content" id="tab-3">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+                <div class="tab-content" id="tab-4">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+    
+                <div class="sliders flex-row">
+                    <div class="slider-line" id="slider-1"></div>
+                    <div class="slider-line" id="slider-2"></div>
+                    <div class="slider-line" id="slider-3"></div>
+                    <div class="slider-line" id="slider-4"></div>
+                </div>
             </div>
-
-            <div class="tab-content" id="tab-1">
-                <h2>Título do Tópico</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
-            <div class="tab-content" id="tab-2">
-                <h2>Título do Tópico</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
-            <div class="tab-content" id="tab-3">
-                <h2>Título do Tópico</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
-            <div class="tab-content" id="tab-4">
-                <h2>Título do Tópico</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
-
-            <div class="sliders">
-                <div class="slider-line" id="slider-1"></div>
-                <div class="slider-line" id="slider-2"></div>
-                <div class="slider-line" id="slider-3"></div>
-                <div class="slider-line" id="slider-4"></div>
-            </div>
-        </div>
-
-        <figure class="how-it-works-image-wrapper">
-            <img src="{% static 'imgs/3d-gift.png' %}" alt="Ilustração 3D de um presente">
-        </figure>
-    </section>
+    
+            <figure class="how-it-works-image-wrapper">
+                <img src="{% static 'imgs/hiw-figure.png' %}" alt="">
+                <img src="{% static 'imgs/3d-gift.png' %}" alt="Ilustração 3D de um presente">
+            </figure>
+        </section>
+    </div>
 
     <section class="home-plans flex-column flex-center">
         <h1>PLANOS</h1>
