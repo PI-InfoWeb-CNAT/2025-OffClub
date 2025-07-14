@@ -1,0 +1,180 @@
+@import url('../../../../static/css/_variables.css');
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* >>> Títulos <<< */
+.container h1, .container section h2{
+  font-family: "Madimi One", sans-serif
+}
+.container h1{
+  font-size: 32px;
+  margin-bottom: 21px;
+}
+.container h2{
+  font-family: sans-serif;
+  font-size: 30px;
+  vertical-align: middle;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;             /* para caber certinho no texto */
+  padding: 0.5rem 1rem;               /* opcional, só pra dar um “respiro” */
+  background: linear-gradient(to bottom, #f0b33e, #c68616);
+  isolation: isolate;                 /* cria um novo contexto de mesclagem */
+  font-family: sans-serif;
+  font-size: 2rem;
+  border-radius: 0.25rem;
+  margin-bottom: 19px;
+}
+.container h2 span{
+  color: black;
+  vertical-align: auto;                   /* a cor define a área de recorte */
+  mix-blend-mode: destination-out;    /* “apaga” essa área do gradiente */
+  -webkit-font-smoothing: antialiased;
+}
+.month > h3{
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+
+/* >>> Ver Mais <<< */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.divider .line {
+  width: 493px;
+  height: 1px;
+  border: none;
+  opacity: 0.7;
+}
+.divider .before{
+    background: linear-gradient(to left, #FEB342, #986B27);
+}
+.divider .after{
+    background: linear-gradient(to right, #FEB342, #986B27);
+}
+.divider button p {
+  color: #FEB342;
+  font-weight: 300;
+  font-size: 21px;
+}
+.divider button{
+  display: flex;
+  justify-content: center;
+  gap: 0.9em;
+  border: none;
+  background-color: transparent;
+}
+.more-coupons {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    display: flex;
+    justify-content: flex-start;
+}
+.more-coupons.show {
+    max-height: 1000px; /* ou um valor suficiente */
+}
+.read-more img {
+    transition: transform 0.7s ease;
+}
+.read-more.expanded img {
+    transform: rotate(180deg);
+}
+/* >>> Containers para englobar os cupons <<< */
+.coupons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  gap: 1rem;
+  max-width: 100%;
+  margin-bottom: 24px; 
+}
+
+/* >>> Cupom <<< */
+.coupons .coupon {
+  width: 270px;
+  background-color: #252525;
+  border-radius: 20px;
+  height: 350px;
+}
+.coupons .coupon .enterprise-info{
+  display: flex;
+  justify-content: left;
+}
+.coupon .content{
+  max-width: 240px;
+  height: 340px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.coupon .enterprise-logo{
+  height: 28px;
+  margin-right: 12px;
+}
+.coupon .enterprise-info{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.coupon .content .rest-of-content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.coupon button{
+  color: white;
+  font-size: 16px;
+  background-color: #1C1C1C;
+  border: none;
+  border-radius: 10px;
+  width: 240px;
+  height: 36px;
+}
+.discount-tag{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6F01FF;
+  font-size: 20px;
+  font-weight: bolder;
+  width: 68px;
+  height: 40px;
+  border-radius: var(--border-radius);
+  position: absolute;
+  top: 5em
+}
+
+
+/* >>> Filtro para cupons usados, por ano <<< */
+.used-coupons select{
+  background: none;
+  border: 2px solid #FEB342;
+  border-radius: 5px;
+  color: #FEB342;
+  width: 114px;
+  height: 40px;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+.used-coupons select option{
+  background-color: #1C1C1C;
+  font-weight: 600;
+}
+.coupon button, .used-coupons select, .used-coupons select option{
+  font-family: var(--main-font-family);
+}
