@@ -88,20 +88,21 @@
     </div>
 
     <section class="home-plans flex-column flex-center">
-        <h1>PLANOS</h1>
+        <figure class="home-plans-title-wrapper">
+            <img src="{% static 'imgs/home-plans-title.svg' %}" alt="Título da seção de planos">
+        </figure>
         <div class="home-plans-wrapper flex-row">
-            {% include 'components/plan_card.html' with plan_class="bronze" plan_name="Bronze" price="9,90"
-            subscribe_url="#" features=features_bronze %}
+            {% include 'components/plan_card.html' with plan_class="copper" plan_name="Bronze" price="9,90" %}
 
-            {% include 'components/plan_card.html' with plan_class="prata" plan_name="Prata" price="19,90"
-            subscribe_url="#" features=features_prata %}
+            {% include 'components/plan_card.html' with plan_class="silver" plan_name="Prata" price="19,90" %}
 
-            {% include 'components/plan_card.html' with plan_class="ouro" plan_name="Ouro" price="29,90"
-            subscribe_url="#" features=features_ouro %}
+            {% include 'components/plan_card.html' with plan_class="gold" plan_name="Ouro" price="29,90" %}
         </div>
-
         <a href="#">
-            <button>Ver planos detalhados</button>
+            <button class="view-detailed-plans-btn flex-row flex-center">
+                Ver planos detalhados
+                <img src="{% static 'imgs/icons/golden-btn-arrow.svg' %}" alt="">
+            </button>
         </a>
     </section>
 

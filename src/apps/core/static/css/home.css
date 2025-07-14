@@ -184,6 +184,39 @@ figure.how-it-works-image-wrapper img:nth-of-type(2) {
     z-index: 2; 
 }
 
+/* Seção de Planos */
+
+.home-plans {
+    padding-top: 120px;
+    position: relative;
+    box-sizing: content-box;
+    gap: 3em;
+}
+
+.home-plans-title-wrapper {
+    position: absolute;
+    top: 0;
+}
+
+.home-plans-wrapper {
+    gap: 3em;
+}
+
+.view-detailed-plans-btn {
+    color: var(--white);
+    font-size: var(--text-font-size-large);
+    padding: 0.5em 3em;
+    background-color: var(--background-color);
+    border: 1px solid var(--brand-yellow);
+    border-radius: var(--border-radius);
+    gap: 2em;
+}
+
+.view-detailed-plans-btn img {
+    width: 1.25em;
+    height: auto;
+}
+
 /* Seção de ACESSE EM QUALQUER LUGAR */
 
 div.access-everywhere-wrapper {
@@ -240,7 +273,7 @@ figure.access-everywhere-image-wrapper img:nth-of-type(2) {
 /* Seção de REVIEWS */
 
 .reviews.swiper {
-    margin-bottom: 3em;
+    margin-bottom: 6em;
 }
 
 .reviews .swiper-wrapper {

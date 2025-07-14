@@ -8,12 +8,12 @@ Ele espera as seguintes variáveis de contexto:
 - subscribe_url: O link para a página de assinatura.
 {% endcomment %}
 
-<div class="home-plan-card">
+<div class="home-plan-card flex-column {{ plan_class }}">
     <div class="home-plan-circle flex-row">
-        <div class="{{ plan_class }}-circle">
+        <div class="home-plan-external-circle {{ plan_class }}-circle">
             <div class="inner-circle"></div>
         </div>
-        <p>{{ plan_name }}</p>
+        <p class="home-plan-name">{{ plan_name }}</p>
     </div>
     <p class="home-price flex-row">
         <span>R$</span>
@@ -21,11 +21,10 @@ Ele espera as seguintes variáveis de contexto:
         <span>/MÊS</span>
     </p>
     <a href="{{ subscribe_url|default:'#' }}">
-        <button>Assinar</button>
+        <button class="choose-plan-button">Escolher plano</button>
     </a>
     <hr class="home-plan-divider">
     <ul class="home-plan-features">
-        {# Quando for dinâmico, você vai iterar sobre a lista de features #}
         <li>Nome da Vantagem</li>
         <li>Nome da Vantagem</li>
         <li>Nome da Vantagem</li>

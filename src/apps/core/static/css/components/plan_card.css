@@ -1,0 +1,131 @@
+.home-plan-card {
+    gap: 1em;
+    min-width: 320px;
+    padding: 2em;
+    backdrop-filter: blur(3px);
+    border-radius: var(--border-radius);
+}
+
+.home-plan-divider {
+    width: 100%;
+    margin: 1em 0;
+}
+
+.gold.home-plan-card {
+    border: 2px solid var(--brand-yellow);
+}
+
+.silver.home-plan-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--cyan);
+}
+
+.copper.home-plan-card {
+    border: 2px solid var(--brown);
+}
+
+.gold .home-plan-divider {
+    border-color: var(--brand-yellow);
+}
+
+.silver .home-plan-divider {
+    border-color: var(--cyan);
+}
+
+.copper .home-plan-divider {
+    border-color: var(--brown);
+}
+
+.choose-plan-button {
+    color: var(--white);
+    border: none;
+    padding: 1em 3em;
+    border-radius: var(--border-radius-small);
+    width: 100%;
+}
+
+.gold .choose-plan-button {
+    background: var(--gradient-gold);
+}
+
+.silver .choose-plan-button {
+    background: var(--gradient-silver);
+}
+
+.copper .choose-plan-button {
+    background: var(--gradient-copper);
+}
+
+ul.home-plan-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.home-plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--offwhite);
+    font-size: var(--text-font-size);
+}
+
+.home-plan-features li::before {
+    content: '✔';
+    color: var(--white);
+}
+
+.home-plan-circle {
+    gap: 10px;
+    align-items: center;
+    justify-content: start;
+}
+
+.home-plan-external-circle {
+    width: 1.5em;
+    height: 1.5em; 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-plan-circle .inner-circle {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.home-plan-circle .copper-circle {
+    background: var(--gradient-copper);
+}
+
+.home-plan-circle .silver-circle {
+    background: var(--gradient-silver);
+}
+
+.home-plan-circle .gold-circle {
+    background: var(--gradient-gold);
+}
+
+.home-price {
+    align-items: baseline;
+}
+
+.home-price span:nth-child(1) {
+    font-size: 12px;
+}
+
+.home-price span:nth-child(2) {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.home-price span:nth-child(3) {
+    font-weight: 400;
+    font-size: 18px;
+}
