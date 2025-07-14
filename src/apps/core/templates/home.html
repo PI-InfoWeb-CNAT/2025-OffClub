@@ -31,7 +31,7 @@
 
     <div class="categories-slider container swiper">
         <div class="container swiper-wrapper">
-            {% for i in "123456789" %}
+            {% for i in "1234567890" %}
                 <div class="swiper-slide">
                     {% include 'components/category_badge.html' with category_name='Categoria' %}
                 </div>
@@ -105,21 +105,24 @@
         </a>
     </section>
 
-    <section class="access-everywhere flex-center flex-row">
-        <figure class="access-everywhere-image-wrapper">
-            <img src="{% static 'imgs/phone-mockup.png' %}"
-                alt="Renderização de um celular mostrando a exibição mobile do nosso site">
-        </figure>
-
-        <div class="access-everywhere-content">
-            <h1>ACESSSE DE QUALQUE LUGAR!</h1>
-            <p>Lorem ipsum <span class="highlight">dolor sit amet</span>, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna <span class="highlight">aliqua</span>. Ut enim ad minim
-                veniam</p>
-            <p>Tempor incididunt ut labore et dolore magna aliqua. Ut enim <span class="highlight">ad minim</span>
-                veniam</p>
-        </div>
-    </section>
+    <div class="access-everywhere-wrapper">
+        <section class="access-everywhere container flex-center flex-row">
+            <figure class="access-everywhere-image-wrapper">
+                <img src="{% static 'imgs/phone-mockup.png' %}"
+                    alt="Renderização de um celular mostrando a exibição mobile do nosso site">
+                <img src="{% static 'imgs/access-everywhere-figure.png' %}">
+            </figure>
+    
+            <div class="access-everywhere-content flex-column">
+                <h1>ACESSSE DE QUALQUER LUGAR!</h1>
+                <p>Lorem ipsum <span class="highlight">dolor sit amet</span>, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna <span class="highlight">aliqua</span>. Ut enim ad minim
+                    veniam</p>
+                <p>Tempor incididunt ut labore et dolore magna aliqua. Ut enim <span class="highlight">ad minim</span>
+                    veniam</p>
+            </div>
+        </section>
+    </div>
 
     <section class="reviews container swiper">
         <div class="flex-row swiper-wrapper">
