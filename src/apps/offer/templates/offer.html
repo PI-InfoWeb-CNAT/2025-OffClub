@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Oferta{% endblock %}
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Madimi+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+<link rel="stylesheet" href="{% static 'css/offer.css' %}">
+{% endblock %}
+{% block main %}
+    <main> 
+        <div class="container">
+            <div id="offer_intro">
+                <div>
+                    <h2>EXPLORE AS MELHORES <span>OFERTAS</span>!</h2>
+                    <p>Navegue por tipos de <span>produtos</span>, <span>serviços</span> ou pelos seus <span>estabelecimentos</span> preferidos para descobrir onde você vai <span>economizar</span> hoje.</p>
+                </div>
+                <img src="../static/imgs/offer_home.png" alt="">
+            </div>
+
+            <section id="popular_offers">
+                <h2>Ofertas mais populares</h2>
+                <div id="popular_offers_container">
+                    <img src="../static/imgs/popular_offer_1.png" alt="">
+                    <img src="../static/imgs/popular_offer_2.png" alt="">
+                    <img src="../static/imgs/popular_offer_3.png" alt="">
+                </div>
+            </section>
+
+            <section id="popular_enterprises">
+                <h2>Empresas mais populares</h2>
+                <div id="popular_enterprises_container">
+                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                    {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
+                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                </div>
+            </section>
+            
+            <section id="cheap_offers">
+                <h2>Preço mais baixo</h2>
+                <div id="cheap_offers_container">
+                    <section class="swiper_session">
+                        <div class="swiper cheapSwiper container">
+                            <div class="swiper-wrapper content">
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                            </div>
+                        </div>
+                        <div class="swiper-button-next cheap-swiper-button-next"></div>
+                        <div class="swiper-button-prev cheap-swiper-button-prev"></div>
+                        <div class="swiper-pagination cheap-swiper-pagination"></div>
+                    </section>
+                </div>
+            </section>
+            
+            <section id="near_offers">
+                <h2>Mais perto de você</h2>
+                <div id="near_offers_container">
+                    <section class="swiper_session">
+                        <div class="swiper nearSwiper container">
+                            <div class="swiper-wrapper content">
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                            </div>
+                        </div>
+                        <div class="swiper-button-next near-swiper-button-next"></div>
+                        <div class="swiper-button-prev near-swiper-button-prev"></div>
+                        <div class="swiper-pagination near-swiper-pagination"></div>
+                    </section>
+                </div>
+            </section>
+
+            <section id="offer_search">
+                <h2>Buscar cupons</h2>
+                <div id="offer_search_container">
+                    <div id="filter_container">
+                        <h2>Filtros</h2>
+                        <form action="coupon/active" method="post">
+                            <div class="search">
+                                <input type="text" placeholder="Procurar cupom...">
+                                <button type="submit"><img src="../static/imgs/search.svg" alt=""></button>
+                            </div>
+                            <fieldset>
+                                <legend>Desconto mínimo</legend>
+                                <div class="slider-wrap">
+                                    <output class="slider_bubble"></output>
+                                    <input type="range" min="0" max="100" class="slider" value="50" id="myRange">
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Data limite</legend>
+                                <div>
+                                    <input type="date" id="start_date" placeholder="Data inicial"/>
+                                    <input type="date" id="end_date" placeholder="Data final"/>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Categorias</legend>
+                                <div>
+                                    <input type="checkbox" id="aesthetic"/>
+                                    <label for="aesthetic">Estética</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="restaurant"/>
+                                    <label for="restaurant">Restaurante</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="aesthetic2"/>
+                                    <label for="aesthetic2">Estética</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="restaurant2"/>
+                                    <label for="restaurant2">Restaurante</label>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="result">
+                        <p>Exibindo 1-8 de 8 resultados</p>
+                        <div id="offer_filter_container">
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/swiper.js' %}"></script>
+<script src="{% static 'js/offer.js' %}"></script>
+{% endblock %}
