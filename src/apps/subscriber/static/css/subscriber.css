@@ -1,4 +1,42 @@
 @import url('../../../../static/css/_variables.css');
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* >>> Títulos <<< */
+.container h1, .container section h2{
+  font-family: "Madimi One", sans-serif
+}
+.container h1{
+  font-size: 32px;
+}
+.container h2{
+  font-family: sans-serif;
+  font-size: 30px;
+  vertical-align: middle;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;             /* para caber certinho no texto */
+  padding: 0.5rem 1rem;               /* opcional, só pra dar um “respiro” */
+  background: linear-gradient(to bottom, #f0b33e, #c68616);
+  isolation: isolate;                 /* cria um novo contexto de mesclagem */
+  font-family: sans-serif;
+  font-size: 2rem;
+  border-radius: 0.25rem;
+}
+.container h2 span{
+  color: black;
+  vertical-align: auto;                   /* a cor define a área de recorte */
+  mix-blend-mode: destination-out;    /* “apaga” essa área do gradiente */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* >>> Ver Mais <<< */
 .divider {
   display: flex;
   align-items: center;
@@ -21,8 +59,10 @@
 }
 .divider p {
   color: #FEB342;
-  font-weight: bold;
+  font-weight: 300;
+  font-size: 21px;
 }
+/* >>> Containers para englobar os cupons <<< */
 .active-coupons,
 .used-coupons {
   padding: 1rem;
@@ -35,20 +75,35 @@
   gap: 1rem;
   max-width: 100%; 
 }
+
+/* >>> Cupom <<< */
 .coupons .coupon {
   width: 270px;
   background-color: #252525;
   border-radius: 20px;
-  height: 350px; 
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  height: 350px;
+  position: relative; 
 }
 .coupons .coupon .enterprise-info{
   display: flex;
   justify-content: left;
+}
+.coupon .content{
+  max-width: 240px;
+  height: 340px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.coupon .enterprise-logo{
+  height: 28px;
+  margin-right: 12px;
+}
+.coupon .enterprise-info{
+  justify-content: left;
+  align-items: center;
 }
 .coupon button{
   color: white;
@@ -69,4 +124,26 @@
   width: 68px;
   height: 40px;
   border-radius: var(--border-radius);
+  position: absolute;
+  top: 7.45em
+}
+
+/* >>> Filtro para cupons usados, por ano <<< */
+.used-coupons select{
+  background: none;
+  border: 2px solid #FEB342;
+  border-radius: 5px;
+  color: #FEB342;
+  width: 114px;
+  height: 40px;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+.used-coupons select option{
+  background-color: #1C1C1C;
+  font-weight: 600;
+}
+.coupon button, .used-coupons select, .used-coupons select option{
+  font-family: var(--main-font-family);
 }
