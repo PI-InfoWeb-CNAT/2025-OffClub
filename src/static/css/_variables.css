@@ -14,7 +14,6 @@
     --dark-yellow: #3B3018;
     --brand-orange: #FF9E3D;
     --brand-orange-darker: #E28C36;
-<<<<<<< HEAD
     --purple: #6F01FF;
     --brown: #844200;
     --brown-darker: #1E0F00;
@@ -30,7 +29,6 @@
     --gradient-copper: linear-gradient(90deg, var(--brown) 0%, var(--brown-darker) 100%);
     --gradient-silver: linear-gradient(90deg, var(--cyan) 0%, var(--darker-cyan) 100%);
     --gradient-gold: linear-gradient(90deg, var(--brand-yellow) 0%, var(--golden) 100%);
-=======
     --light-grey: #9D9D9D;
     --medium-grey: #595959;
     --grey: #323232;
@@ -44,7 +42,6 @@
 
     /* >>> Gradientes <<< */
     --gradient-yellow-dark-orange: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
->>>>>>> origin/29-offclub/resgatar_cupom
 
     /* >>> Fontes <<< */
     --main-font-family: "Poppins", sans-serif;
@@ -86,12 +83,8 @@
     --screen-xl: 1400px;
 
     /* >>> Outros <<< */
-<<<<<<< HEAD
     --border-radius-small: 10px;
     --border-radius: 20px;
-}
-=======
-    --border-radius: 10px;
 }
 
 /* 
@@ -105,4 +98,3 @@
     ExtraBold: 800
     Black: 900
 */
->>>>>>> origin/29-offclub/resgatar_cupom
