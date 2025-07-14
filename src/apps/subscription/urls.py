@@ -1,3 +1,6 @@
 from django.urls import path, include
+from .views import PlansViews
 
-urlpatterns = []
+urlpatterns = [
+    path('plans/', PlansViews.plans, name='plans'),
+]

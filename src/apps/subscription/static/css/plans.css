@@ -1,0 +1,191 @@
+main.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 20px;
+}
+
+main.container > h1 {
+    font-size: var(--text-font-size-large);
+    background: var(--gradient-gold);
+    color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+.copper h2 {
+    color: var(--brown);
+}
+
+.silver h2 {
+    color: var(--cyan);
+}
+
+.gold h2 {
+    color: var(--brand-yellow);
+}
+
+.plan-cards-container {
+    gap: 20px;
+    width: 100%;
+}
+
+.plan-card {
+    border-radius: var(--border-radius-small);
+    width: 60%;
+    padding: 2px;
+}
+
+.plan-card-content {
+    background-color: var(--background-color);
+    border-radius: var(--border-radius-small);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    position: relative;
+}
+
+.plan-card.recommended .badge {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    background-color: var(--cyan);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
+    font-weight: 600;
+    font-size: var(--minor-text-font-size);
+}
+
+.plan-titles h3 {
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+}
+
+.plan-card h2 {
+    font-size: 32px;
+    font-weight: var(--h1-font-weight);
+    font-family: var(--special-font-family);
+}
+
+.text-circle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.copper-circle, .silver-circle, .gold-circle {
+    width: 1.75em;
+    height: 1.75em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copper-circle {
+    background: var(--gradient-copper);
+}
+
+.silver-circle {
+    background: var(--gradient-silver);
+}
+
+.gold-circle {
+    background: var(--gradient-gold);
+}
+
+.inner-circle {
+    width: 1.25em;
+    height: 1.25em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.plan-card hr {
+    width: 100%;
+    border-color: var(--almost-transparent-white);
+}
+
+.plan-details h3 {
+    font-size: var(--text-font-size);
+    font-weight: 800;   
+    margin-bottom: 12px;
+}
+
+.plan-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--offwhite);
+    font-size: var(--text-font-size);
+}
+
+.plan-features li::before {
+    content: '✔';
+    color: var(--white);
+}
+
+.plan-price-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-price {
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+}
+
+.subscribe-button {
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: var(--text-font-size);
+    transition: transform 0.2s ease-in-out;
+}
+
+.copper .subscribe-button {
+    background: var(--gradient-copper);
+}
+
+.silver .subscribe-button {
+    background: var(--gradient-silver);
+}
+
+.gold .subscribe-button {
+    background: var(--gradient-gold);
+}
+
+.subscribe-button:hover {
+    transition: transform 0.2s ease-in-out;
+    filter: brightness(1.1);
+    transform: scale(1.005);
+}
+
+
+.plan-card.copper {
+    background: var(--gradient-copper);
+}
+
+.plan-card.silver {
+    background: var(--gradient-silver);
+}
+
+.plan-card.gold {
+    background: var(--gradient-gold);
+}

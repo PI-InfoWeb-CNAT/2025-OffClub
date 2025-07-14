@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+class PlansViews:
+    @staticmethod
+    def plans(request):
+        return render(request, 'plans.html')
+    
+    
