@@ -1,4 +1,8 @@
 
+.home-main {
+    gap: 5em;
+}
+
 section.hero-section {
     margin-top: 1em;
     border-radius: var(--border-radius);
@@ -77,7 +81,6 @@ section.hero-section {
 /* Carrossel de categorias */
 
 .categories-slider {
-    margin: 2em 0;
     width: 100%;
 }
 
