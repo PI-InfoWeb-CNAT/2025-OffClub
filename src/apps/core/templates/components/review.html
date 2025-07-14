@@ -13,9 +13,9 @@ Ele espera as seguintes variáveis de contexto:
             {# Este laço cria as estrelas dinamicamente com base na variável 'rating' #}
             {% for i in "12345" %}
                 {% if forloop.counter <= rating %}
-                    <i class="fas fa-star"></i> {# Estrela cheia #}
+                    <i class="fas fa-star"></i> 
                 {% else %}
-                    <i class="far fa-star"></i> {# Estrela vazia (opcional) #}
+                    <i class="far fa-star"></i>
                 {% endif %}
             {% endfor %}
         </div>
@@ -24,7 +24,7 @@ Ele espera as seguintes variáveis de contexto:
     
         <div class="testimonial-author flex-row">
             <div class="author-icon">
-                <i class="fas fa-user-circle"></i> {# Ícone do autor #}
+                <i class="fas fa-user-circle"></i>
             </div>
             <div class="author-details flex-column">
                 <span class="author-name">{{ author_name }}</span>

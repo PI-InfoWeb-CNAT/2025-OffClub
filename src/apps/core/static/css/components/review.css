@@ -1,4 +1,4 @@
-.swiper-slide {
+.review .swiper-slide {
     min-width: 360px;
     background: linear-gradient(90deg, var(--brand-orange) 0%, rgba( 255, 255, 255, 0) 70%);
     border-radius: 1em;

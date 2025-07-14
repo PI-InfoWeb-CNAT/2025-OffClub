@@ -1,4 +1,6 @@
-const swiper = new Swiper('.swiper', {
+
+
+const swiper = new Swiper('.reviews.swiper', {
   slidesPerView: 3.8,
   spaceBetween: 10,
   grabCursor: true,

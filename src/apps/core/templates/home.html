@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <link rel="stylesheet" href="{% static 'css/components/plan_card.css' %}">
 <link rel="stylesheet" href="{% static 'css/components/review.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/category_badge.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 {% endblock head %}
 
@@ -28,7 +29,15 @@
         </div>
     </section>
 
-    <div class="tags-carousel"></div>
+    <div class="categories-slider container swiper">
+        <div class="container swiper-wrapper">
+            {% for i in "123456789" %}
+                <div class="swiper-slide">
+                    {% include 'components/category_badge.html' with category_name='Categoria' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
     <div class="how-it-works-wrapper">
         <section class="container how-it-works flex-row flex-center">
@@ -112,14 +121,14 @@
         </div>
     </section>
 
-    <section class="container swiper">
+    <section class="reviews container swiper">
         <div class="flex-row swiper-wrapper">
             {% for i in "12345" %}
                 {% include 'components/review.html' with rating=5 text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ipsum dolor' author_name='John Doe' author_role='Cliente' %}
             {% endfor %}
         </div>
 
-        <div class="swiper-pagination"></div>
+        <div class="reviews-pagination swiper-pagination"></div>
     </section>
 </main>
 {% endblock main %}
@@ -127,4 +136,5 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{% static 'js/testimonials.js' %}"></script>
+<script src="{% static 'js/badges.js' %}"></script>
 {% endblock scripts %}
