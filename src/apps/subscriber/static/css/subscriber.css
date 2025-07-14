@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 .container {
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -14,6 +14,7 @@
 }
 .container h1{
   font-size: 32px;
+  margin-bottom: 21px;
 }
 .container h2{
   font-family: sans-serif;
@@ -28,6 +29,7 @@
   font-family: sans-serif;
   font-size: 2rem;
   border-radius: 0.25rem;
+  margin-bottom: 19px;
 }
 .container h2 span{
   color: black;
@@ -35,12 +37,16 @@
   mix-blend-mode: destination-out;    /* “apaga” essa área do gradiente */
   -webkit-font-smoothing: antialiased;
 }
+.month > h3{
+  font-size: 24px;
+  margin-bottom: 14px;
+}
 
 /* >>> Ver Mais <<< */
 .divider {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1rem;
   margin: 2rem 0;
 }
@@ -57,23 +63,42 @@
 .divider .after{
     background: linear-gradient(to right, #FEB342, #986B27);
 }
-.divider p {
+.divider button p {
   color: #FEB342;
   font-weight: 300;
   font-size: 21px;
 }
-/* >>> Containers para englobar os cupons <<< */
-.active-coupons,
-.used-coupons {
-  padding: 1rem;
+.divider button{
+  display: flex;
+  justify-content: center;
+  gap: 0.9em;
+  border: none;
+  background-color: transparent;
 }
-
+.more-coupons {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    display: flex;
+    justify-content: flex-start;
+}
+.more-coupons.show {
+    max-height: 1000px; /* ou um valor suficiente */
+}
+.read-more img {
+    transition: transform 0.7s ease;
+}
+.read-more.expanded img {
+    transform: rotate(180deg);
+}
+/* >>> Containers para englobar os cupons <<< */
 .coupons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: space-between; 
   gap: 1rem;
-  max-width: 100%; 
+  max-width: 100%;
+  margin-bottom: 24px; 
 }
 
 /* >>> Cupom <<< */
@@ -82,7 +107,6 @@
   background-color: #252525;
   border-radius: 20px;
   height: 350px;
-  position: relative; 
 }
 .coupons .coupon .enterprise-info{
   display: flex;
@@ -93,8 +117,6 @@
   height: 340px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   margin: 0 auto;
 }
 .coupon .enterprise-logo{
@@ -102,8 +124,16 @@
   margin-right: 12px;
 }
 .coupon .enterprise-info{
+  display: flex;
   justify-content: left;
   align-items: center;
+}
+.coupon .content .rest-of-content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .coupon button{
   color: white;
@@ -125,8 +155,9 @@
   height: 40px;
   border-radius: var(--border-radius);
   position: absolute;
-  top: 7.45em
+  top: 5em
 }
+
 
 /* >>> Filtro para cupons usados, por ano <<< */
 .used-coupons select{
