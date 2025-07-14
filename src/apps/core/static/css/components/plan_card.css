@@ -16,8 +16,10 @@
 }
 
 .silver.home-plan-card {
+    border-radius: 0 var(--border-radius-small) var(--border-radius-small) var(--border-radius-small);
     background-color: rgba(255, 255, 255, 0.05);
     border: 2px solid var(--cyan);
+    transform: scale(1.05);
 }
 
 .copper.home-plan-card {
@@ -128,4 +130,15 @@ ul.home-plan-features {
 .home-price span:nth-child(3) {
     font-weight: 400;
     font-size: 18px;
+}
+
+.recommended-plan {
+    background-color: var(--cyan);
+    padding: 0.25em 1em 0 1em;
+    position: absolute;
+    top: 0;
+    left: -2px;
+    transform: translateY(-100%);
+    color: var(--white);
+    border-radius: var(--border-radius-small) var(--border-radius-small) 0 0;
 }

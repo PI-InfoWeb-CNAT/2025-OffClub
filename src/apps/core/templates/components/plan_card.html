@@ -9,6 +9,10 @@ Ele espera as seguintes variáveis de contexto:
 {% endcomment %}
 
 <div class="home-plan-card flex-column {{ plan_class }}">
+    {% if plan_class == 'silver' %}
+    <span class="recommended-plan">Recomendado</span>
+    {% endif %}
+
     <div class="home-plan-circle flex-row">
         <div class="home-plan-external-circle {{ plan_class }}-circle">
             <div class="inner-circle"></div>
