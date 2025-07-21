@@ -1,0 +1,69 @@
+.enterprise_card > img {
+    width: 113px;
+    height: 113px;
+}
+.enterprise_card .complementary_info {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.enterprise_card .distance {
+    margin-top: 5%;
+    display: flex;
+    gap: 3%;
+    width: 100%;
+}
+.enterprise_card .star {
+    border-radius: 5em;
+    padding: 0.1em 1.5em 0.1em 1em;
+    border: 1px solid var(--brand-yellow);
+    margin-top: 5%;
+    display: flex;
+    gap: 3%;
+}
+.enterprise_card {
+    background-color: #252525;
+    display: inline-block;
+    padding: 1.8em;
+    box-sizing: border-box;
+    border-radius: 1.1em;
+    gap: 8%;
+    width: 26em;
+    margin: 2% 0 2% 0;
+    display: flex;
+}
+.star > p {
+    font-size: 0.8em;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.distance > p {
+    font-size: 0.8em;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.enterprise_data h3 {
+    font-size: 1em;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+    line-height: var(--h3-line-height);
+    color: var(--h3-color);
+}
+.enterprise_data > p {
+    font-size: 0.9em;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    line-height: var(--text-line-height);
+    color: var(--text-color);
+}
+.enterprise_data {
+    width: 100%;
+}

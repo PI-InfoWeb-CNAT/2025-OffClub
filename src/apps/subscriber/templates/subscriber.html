@@ -5,6 +5,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/subscriber.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/coupon_card.css' %}">
 {% endblock head %}
 
 {% block main %}
@@ -15,165 +16,22 @@
             <h2><span>ATIVOS</span></h2>
 
             <div class="coupons flex-center">
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
             </div>
             <div class="coupons more-coupons">
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="coupon">
-                    <div class="content">
-                        <div class="enterprise-info">
-                            <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                            <p class="enterprise-name">Barbearia do Mãozinha</p>
-                        </div>
-                        <div class="rest-of-content">
-                            <div class="coupon-image">
-                                <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                <p><span class="discount-tag">-25%</span></p>
-                            </div>
-                            <div class="coupon-info">
-                                <h3>Cabelo, barba e sobrancelha</h3>
-                                <p>Utilizar até 31 de Jan., 2026</p>
-                            </div>
-                            <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                        </div>
-                    </div>
-                </div>
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
             </div>
 
             <div class="divider">
@@ -193,252 +51,36 @@
                 <div class="month">
                     <h3>Julho</h3>
                     <div class="coupons flex-center">
-                        <div class="coupon" data-year="2025">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                        <div class="coupon" data-month="2025">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                        <div class="coupon">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                        <div class="coupon">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
                     </div>
                 </div>
 
                 <div class="month">
                     <h3>Junho</h3>
                     <div class="coupons flex-center">
-                        <div class="coupon">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                        <div class="coupon">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                        <div class="coupon">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                        <div class="coupon">
-                            <div class="content">
-                                <div class="enterprise-info">
-                                    <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                    <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                </div>
-                                <div class="rest-of-content">
-                                    <div class="coupon-image">
-                                        <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                        <p><span class="discount-tag">-25%</span></p>
-                                    </div>
-                                    <div class="coupon-info">
-                                        <h3>Cabelo, barba e sobrancelha</h3>
-                                        <p>Utilizado em 12 de Jul., 2025</p>
-                                    </div>
-                                    <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
                     </div>
                     <div class="month">
                         <div class="coupons more-coupons">
-                            <div class="coupon">
-                                <div class="content">
-                                    <div class="enterprise-info">
-                                        <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                        <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                    </div>
-                                    <div class="rest-of-content">
-                                        <div class="coupon-image">
-                                            <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                            <p><span class="discount-tag">-25%</span></p>
-                                        </div>
-                                        <div class="coupon-info">
-                                            <h3>Cabelo, barba e sobrancelha</h3>
-                                            <p>Utilizado em 12 de Jul., 2025</p>
-                                        </div>
-                                        <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                            <div class="coupon">
-                                <div class="content">
-                                    <div class="enterprise-info">
-                                        <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                        <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                    </div>
-                                    <div class="rest-of-content">
-                                        <div class="coupon-image">
-                                            <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                            <p><span class="discount-tag">-25%</span></p>
-                                        </div>
-                                        <div class="coupon-info">
-                                            <h3>Cabelo, barba e sobrancelha</h3>
-                                            <p>Utilizado em 12 de Jul., 2025</p>
-                                        </div>
-                                        <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                            <div class="coupon">
-                                <div class="content">
-                                    <div class="enterprise-info">
-                                        <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                        <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                    </div>
-                                    <div class="rest-of-content">
-                                        <div class="coupon-image">
-                                            <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                            <p><span class="discount-tag">-25%</span></p>
-                                        </div>
-                                        <div class="coupon-info">
-                                            <h3>Cabelo, barba e sobrancelha</h3>
-                                            <p>Utilizado em 12 de Jul., 2025</p>
-                                        </div>
-                                        <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
 
-                            <div class="coupon">
-                                <div class="content">
-                                    <div class="enterprise-info">
-                                        <figure class="enterprise-logo"><img src="{% static 'imgs/logo-maozinha.png' %}" alt="Logo da Barbearia do Mãozinha"></figure>
-                                        <p class="enterprise-name">Barbearia do Mãozinha</p>
-                                    </div>
-                                    <div class="rest-of-content">
-                                        <div class="coupon-image">
-                                            <figure><img src="{% static 'imgs/coupon1.png' %}" alt="Imagem referente ao cupon"></figure>
-                                            <p><span class="discount-tag">-25%</span></p>
-                                        </div>
-                                        <div class="coupon-info">
-                                            <h3>Cabelo, barba e sobrancelha</h3>
-                                            <p>Utilizado em 12 de Jul., 2025</p>
-                                        </div>
-                                        <a href="{% url 'offer_detail' %}"><button>Conferir detalhes</button></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
                         </div>
                     </div>
                 </div>
