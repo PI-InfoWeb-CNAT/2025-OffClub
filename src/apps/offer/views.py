@@ -11,6 +11,21 @@ class OfferViews(View):
     def offer(self, request, *args, **kwargs):
         if request.method == 'GET':
             offers = Offer.objects.filter(end_date < timezone.now())
-            context = {'offers': offers}
+            context = {'filterOffers': offers}
             return render(request, 'offer_detail.html', context)
-
+        if request.method == 'POST':
+            offers = Offer.objects.filter(end_date < timezone.now())
+            filter_min_discount = request.POST.get('min_discount', '')
+            filter_start_date = request.POST.get('start_date', '')
+            filter_end_date = request.POST.get('end_date', '')
+            if filter_min_discount:
+                offers = offers.filter(discount > filter_min_discount)
+            if filter_start_date:
+                if filter_end_date:
+                    offers = offers.filter(filter_start_date < end_date < filter_end_date)
+                else:
+                    offers = offers.filter(filter_start_date < end_date)
+            elif filter_end_date:
+                offers = offers.filter(end_date < filter_end_date)
+            context = {'filterOffers': offers}
+            return render(request, 'offer_detail.html', context)       
