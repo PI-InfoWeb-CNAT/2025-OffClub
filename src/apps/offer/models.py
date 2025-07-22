@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 from datetime import timedelta 
 import uuid
 
@@ -27,6 +28,8 @@ class Offer(models.Model):
     start_date = models.DateTimeField("Data de Início", default=timezone.now)
     end_date = models.DateTimeField("Data de Expiração")
     redemption_period = models.DurationField("Período de Resgate", default=timedelta(days=30))
+    max_coupons = models.IntegerField("Quantidade máxima", default=1, validators=[MinValueValidator(1)])
+    generated_coupons = models.IntegerField("Cupons gerados", default=0, validators=[MaxValueValidator(max_coupons)])
     
     @property
     def is_active(self):
@@ -40,3 +43,11 @@ class Offer(models.Model):
         verbose_name_plural = "Ofertas"
         ordering = ['-start_date']
         unique_together = ('title', 'enterprise')
+
+    # Caso tente ser resgatado algum cupom após o limite ser atingido, aparecerá uma mensagem de erro
+    def clean(self):
+        super().clean()
+        if self.generated_coupons > self.max_coupons:
+            raise ValidationError({
+                'generated_coupons': "A oferta está esgotada e todos os cupons foram resgatados"
+            })
