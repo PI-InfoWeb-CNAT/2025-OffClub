@@ -14,16 +14,16 @@
         <h1>HISTÓRICO DE CONSUMO</h1>
         <section class="active-coupons">
             <h2><span>ATIVOS</span></h2>
-            {% for coupon in coupons %}
-                {% if not coupon.used_date %}
-                    <div class="coupons flex-center">
-                        {% include 'components/coupon_card.html' with end_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+            <div class="coupons flex-center">
+                    {% for coupon in coupons %}
+                        {% if coupon.object.used_date is None %}
+                            {% include 'components/coupon_card.html' with end_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="coupons more-coupons">
                         {% include 'components/coupon_card.html' with end_date="coupon.expiration_date" title="coupon.offer.title" discount="coupon.offer.discount" offer_image="coupon.offer.image" enterprise_name="coupon.offer.enterprise" enterprise_image="coupon.enterprise.user.profile_picture"%}
                     </div>
-                {% endif %}
-            {% endfor %}
 
             <div class="divider">
                 <hr class="line before">
@@ -37,17 +37,18 @@
 
         <section class="used-coupons">
             <h2><span>UTILIZADOS</span></h2>
+            <div class="coupons flex-center">
+                {% for coupon in coupons %}
+                    {% if coupon.object.used_date %}
+                        {% include 'components/coupon_card.html' with used_date=coupon.object.used_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                    {% endif %}
+                {% endfor %}
+            </div>
 
             <div class="months">
                 <div class="month">
                     <h3>Julho</h3>
                     <div class="coupons flex-center">
-                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
                         {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
                     </div>
                 </div>
@@ -56,21 +57,9 @@
                     <h3>Junho</h3>
                     <div class="coupons flex-center">
                         {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
                     </div>
                     <div class="month">
                         <div class="coupons more-coupons">
-                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
                             {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
                         </div>
                     </div>

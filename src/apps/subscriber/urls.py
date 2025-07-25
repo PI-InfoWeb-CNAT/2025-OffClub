@@ -1,6 +1,6 @@
 from django.urls import path, include
-from .views import historico
+from .views import SubscriberViews
 
 urlpatterns = [
-    path('historico_consumo/', historico, name='historico')
+    path('historico_consumo/', SubscriberViews.historico, name='historico')
 ]
