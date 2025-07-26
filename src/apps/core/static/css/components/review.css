@@ -1,0 +1,42 @@
+.review .swiper-slide {
+    min-width: 360px;
+    background: linear-gradient(90deg, var(--brand-orange) 0%, rgba( 255, 255, 255, 0) 70%);
+    border-radius: 1em;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.testimonial-card {
+    background-color: var(--background-color);
+    border-radius: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.testimonial-rating {
+    font-size: 0.8em;
+    color: var(--brand-yellow);
+}
+
+.testimonial-author {
+    gap: 1em;
+    align-items: center;
+    justify-content: left;
+    color: var(--white);
+    font-size: var(--minor-text-font-size);
+}
+
+.author-name {
+    font-weight: bold;
+}
+
+.author-icon i {
+    font-size: 2em;
+    color: #142B4B;
+    border-radius: 50%;
+    background-color: white;
+}

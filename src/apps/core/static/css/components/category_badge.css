@@ -1,0 +1,19 @@
+.category-badge {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    gap: 20px;
+    min-height: 20px;
+    padding: 0.5em 1em;
+    border: 1px solid var(--brand-orange);
+    border-radius: var(--border-radius-small);
+}
+
+.category-icon {
+    width: 2em;
+    height: 2em;
+}
+
+.category-badge p {
+    color: white;
+}

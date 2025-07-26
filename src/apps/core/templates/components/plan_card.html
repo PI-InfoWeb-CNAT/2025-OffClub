@@ -1,0 +1,40 @@
+{% comment %}
+Este é o nosso componente de card de plano.
+Ele espera as seguintes variáveis de contexto:
+- plan_class: (ex: 'bronze', 'prata', 'ouro') para a estilização do círculo.
+- plan_name: O nome do plano a ser exibido (ex: 'Bronze').
+- price: O preço do plano (ex: '9,90').
+- features: Uma lista de strings com as vantagens do plano.
+- subscribe_url: O link para a página de assinatura.
+{% endcomment %}
+
+<div class="home-plan-card flex-column {{ plan_class }}">
+    {% if plan_class == 'silver' %}
+    <span class="recommended-plan">Recomendado</span>
+    {% endif %}
+
+    <div class="home-plan-circle flex-row">
+        <div class="home-plan-external-circle {{ plan_class }}-circle">
+            <div class="inner-circle"></div>
+        </div>
+        <p class="home-plan-name">{{ plan_name }}</p>
+    </div>
+    <p class="home-price flex-row">
+        <span>R$</span>
+        <span>{{ price }}</span>
+        <span>/MÊS</span>
+    </p>
+    <a href="{{ subscribe_url|default:'#' }}">
+        <button class="choose-plan-button">Escolher plano</button>
+    </a>
+    <hr class="home-plan-divider">
+    <ul class="home-plan-features">
+        <li>Nome da Vantagem</li>
+        <li>Nome da Vantagem</li>
+        <li>Nome da Vantagem</li>
+        <li>Nome da Vantagem</li>
+        <li>Nome da Vantagem</li>
+        <li>Nome da Vantagem</li>
+        <li>Nome da Vantagem</li>
+    </ul>
+</div>
