@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Planos de Assinatura{% endblock title %}
 
@@ -9,102 +10,62 @@
 
 {% block main %}
 <main class="container">
-    <h1>Planos  » Planos Disponíveis</h1>
+    <h1>Planos &raquo; Planos Disponíveis</h1>
 
-    <div class="plan-cards-container flex-column flex-center">
-        <section class="plan-card copper">
+    <div class="plan-cards-container flex-row flex-center">
+        {% for plan in plans %}
+        {% cycle 'bronze' 'silver' 'gold' as plan_style silent %}
+        <section class="plan-card {{ plan_style }} {% if plan_style == 'silver' %}recommended{% endif %}">
             <div class="plan-card-content">
-                <div class="plan-titles">
-                    <h3>Torne-se um assinante</h3>
-                    <div class="text-circle flex-row">
-                        <div class="copper-circle">
-                            <div class="inner-circle"></div>
-                        </div>
-                        <h2>BRONZE</h2>
-                    </div>
-                </div>
-                <hr>
-                <div class="plan-details">
-                    <h3>Com o plano BRONZE você aproveita:</h3>
-                    <ul class="plan-features">
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non tincidunt massa malesuada</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non tincidunt massa malesuada</li>
-                    </ul>
-                </div>
-                <hr>
-                <div class="plan-price-wrapper">
-                    <p>Valor mensal do plano:</p>
-                    <p class="plan-price">R$ 9,90</p>
-                </div>
-                <button class="subscribe-button">ASSINAR</button>
-            </div>
-        </section>
 
-        <section class="plan-card silver recommended">
-            <div class="plan-card-content">
+                {% if plan_style == 'silver' %}
                 <div class="badge">Recomendado</div>
-                <div class="plan-titles">
-                    <h3>Torne-se um assinante</h3>
-                    <div class="text-circle flex-row">
-                        <div class="silver-circle">
-                            <div class="inner-circle"></div>
-                        </div>
-                        <h2>PRATA</h2>
-                    </div>
-                </div>
-                <hr>
-                <div class="plan-details">
-                    <h3>Com o plano PRATA você aproveita:</h3>
-                    <ul class="plan-features">
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non tincidunt massa malesuada</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non</li>
-                        <li>Vantagem risus elit scelerisque varius adio Nunc quis amet, libero, volutpat ullamcorper nisi non tincidunt massa malesuada</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet</li>
-                    </ul>
-                </div>
-                <hr>
-                <div class="plan-price-wrapper">
-                    <p>Valor mensal do plano:</p>
-                    <p class="plan-price">R$ 16,45</p>
-                </div>
-                <button class="subscribe-button">ASSINAR</button>
-            </div>
-        </section>
+                {% endif %}
 
-        <section class="plan-card gold">
-            <div class="plan-card-content">
                 <div class="plan-titles">
                     <h3>Torne-se um assinante</h3>
                     <div class="text-circle flex-row">
-                        <div class="gold-circle">
+                        <div class="{{ plan_style }}-circle">
                             <div class="inner-circle"></div>
                         </div>
-                        <h2>OURO</h2>
+                        <h2>{{ plan.title|upper }}</h2>
                     </div>
                 </div>
                 <hr>
                 <div class="plan-details">
-                    <h3>Com o plano OURO você aproveita:</h3>
+                    <h3>Com o plano {{ plan.title|upper }} você aproveita:</h3>
                     <ul class="plan-features">
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non tincidunt massa malesuada</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non tincidunt massa malesuada</li>
-                        <li>Vantagem risus elit scelerisque varius odia Nunc quis amet</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet</li>
-                        <li>Vantagem risus elit scelerisque varius odio Nunc quis amet, libero, volutpat ullamcorper nisi non</li>
+                        {% for feature in all_features %}
+                            {% if feature in plan.features.all %}
+                            <li class="available">
+                                <div class="feature-content">
+                                    <span class="feature-name">
+                                        {{ feature.name }}
+                                    </span>
+                                    <span class="feature-description">
+                                        {{ feature.description }}
+                                    </span>
+                                </div>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for feature in all_features %}
+                            {% if feature not in plan.features.all %}
+                            <li class="unavailable">{{ feature.name }}</li>
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                 </div>
                 <hr>
                 <div class="plan-price-wrapper">
                     <p>Valor mensal do plano:</p>
-                    <p class="plan-price">R$ 20,90</p>
+                    <p class="plan-price">R$ {{ plan.price|floatformat:2 }}</p>
                 </div>
                 <button class="subscribe-button">ASSINAR</button>
             </div>
         </section>
+        {% endfor %}
     </div>
 </main>
 {% endblock main %}
