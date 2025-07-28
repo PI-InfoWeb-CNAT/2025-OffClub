@@ -138,9 +138,11 @@ input {
   position: relative;
   margin: 2em auto 0;
 }
+
 .slider {
   width: 100%;
 }
+
 .slider_bubble {
   top: -1.6em;
   background: black;
@@ -255,6 +257,7 @@ input#start_date, input#end_date {
 }
 .result{
     width: 80%;
+    min-height: 800px;
 }
 .result > p {
     margin-left: 1%;
@@ -262,4 +265,35 @@ input#start_date, input#end_date {
     font-weight: 400;
     font-style: normal;
     font-size: 1.1em;
+}
+.nothing_found {
+    justify-content: center;
+    height: 100%;
+    display: flex;
+}
+.nothing_found > img {
+    width: 50%;
+}
+.pagination_page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 100%;
+    border: 2px solid var(--white);
+}
+.pagination_page_active {
+    background-color: var(--brand-orange);
+    border: 2px solid var(--brand-orange);
+}
+a {
+    line-height: var(--text-line-height);
+    color: var(--text-color);
+}
+.pagination {
+    display: flex;
+    gap: 0.4em;
+    justify-content: flex-end;
+    width: 92%;
 }

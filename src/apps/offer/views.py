@@ -1,31 +1,37 @@
 from django.shortcuts import render, redirect
-from django.utils import timezone
 from django.views import View
+from ..offer.services.services import OfferService
+from django.core.paginator import Paginator
 from ..offer.models import *
 
 class OfferViews(View):
     @staticmethod
-    def list_filter_offer(self, request, *args, **kwargs):
-        return render(request, template_name='offer.html', status=200)
-    @staticmethod
-    def offer(self, request, *args, **kwargs):
+    def list_filter_offer(request, *args, **kwargs):
         if request.method == 'GET':
-            offers = Offer.objects.filter(end_date < timezone.now())
-            context = {'filterOffers': offers}
-            return render(request, 'offer_detail.html', context)
-        if request.method == 'POST':
-            offers = Offer.objects.filter(end_date < timezone.now())
-            filter_min_discount = request.POST.get('min_discount', '')
-            filter_start_date = request.POST.get('start_date', '')
-            filter_end_date = request.POST.get('end_date', '')
-            if filter_min_discount:
-                offers = offers.filter(discount > filter_min_discount)
-            if filter_start_date:
-                if filter_end_date:
-                    offers = offers.filter(filter_start_date < end_date < filter_end_date)
-                else:
-                    offers = offers.filter(filter_start_date < end_date)
-            elif filter_end_date:
-                offers = offers.filter(end_date < filter_end_date)
-            context = {'filterOffers': offers}
-            return render(request, 'offer_detail.html', context)       
+            name = request.GET.get('name', '')
+            filter_min_discount = request.GET.get('min_discount', '')
+            filter_start_date = request.GET.get('start_date', '')
+            filter_end_date = request.GET.get('end_date', '')   
+
+        offers = OfferService.list_filter_offer(name, filter_min_discount, filter_start_date, filter_end_date)
+        cheapOffers = OfferService.cheap_offers()
+        offersCount = offers.__len__()
+
+        offersPaginator = Paginator(offers, 8)
+        pageNum = request.GET.get('page')
+        if pageNum  == None:
+            pageNum = 1
+        
+        page = offersPaginator.get_page(pageNum)
+        startNum = (int(pageNum) - 1)*8 + 1
+        endNum = int(pageNum) * 8
+
+        pages = []
+        p = 1
+        while p <= offersPaginator.num_pages:
+            pages.append(str(p))
+            p = p + 1
+
+        context = {'page' : page, 'pageNum': str(pageNum), 'endNum': endNum, 'startNum': startNum, 'offersCount': offersCount, 'cheapOffers' : cheapOffers, 'pages': pages}
+
+        return render(request, 'offer.html', context)    
