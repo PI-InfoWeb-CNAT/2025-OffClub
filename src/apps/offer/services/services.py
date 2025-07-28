@@ -1,15 +1,41 @@
-from ..models import Offer
+from ..models import Offer, Category
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 class OfferService():
+    @staticmethod
+    def list_filter_offer(name, filter_min_discount, filter_start_date, filter_end_date, pageNum, filter_categories):
+        categories = Category.objects.all()
+        offers = OfferService.filter_offer(name, filter_min_discount, filter_start_date, filter_end_date, filter_categories)
+        cheapOffers = OfferService.cheap_offers()
+        offersCount = offers.__len__()
+
+        offersPaginator = Paginator(offers, 8)
+        if pageNum  == None:
+            pageNum = 1
+        
+        page = offersPaginator.get_page(pageNum)
+        startNum = (int(pageNum) - 1)*8 + 1
+        endNum = int(pageNum) * 8
+
+        pages = []
+        p = 1
+        while p <= offersPaginator.num_pages:
+            pages.append(str(p))
+            p = p + 1
+
+        context = {'page' : page, 'pageNum': str(pageNum), 'endNum': endNum, 'startNum': startNum, 'offersCount': offersCount, 'cheapOffers' : cheapOffers, 'pages': pages, 'categories': categories}
+        return context
+
     @staticmethod
     def final_price(price, discount_percentage):
         if discount_percentage > 0:
             final_price = float(price) - (float(price) * float(discount_percentage) /100)
             final_price = ("%.2f" % final_price)
         return price, final_price
+    
     @staticmethod
-    def list_filter_offer(name, filter_min_discount, filter_start_date, filter_end_date):
+    def filter_offer(name, filter_min_discount, filter_start_date, filter_end_date, filter_categories):
         allObjects = Offer.objects.filter(end_date__gte=timezone.now())
         filteredObjects = allObjects
 
@@ -24,6 +50,8 @@ class OfferService():
                 filteredObjects = filteredObjects.filter(end_date__gte=filter_start_date)
         elif filter_end_date:
             filteredObjects = filteredObjects.filter(end_date__lte=filter_end_date)
+        if filter_categories:
+            filteredObjects = filteredObjects.filter(category_id__in=filter_categories)
 
         offers = []
 

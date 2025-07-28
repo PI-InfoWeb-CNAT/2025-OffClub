@@ -92,22 +92,12 @@
                             </fieldset>
                             <fieldset>
                                 <legend>Categorias</legend>
-                                <div>
-                                    <input type="checkbox" id="aesthetic" name="category" value="aesthetic"/>
-                                    <label for="aesthetic">Estética</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" id="restaurant" name="category" value="restaurant"/>
-                                    <label for="restaurant">Restaurante</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" id="aesthetic2" name="category" value="aesthetic2"/>
-                                    <label for="aesthetic2">Estética</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" id="restaurant2" name="category" value="restaurant2"/>
-                                    <label for="restaurant2">Restaurante</label>
-                                </div>
+                                {% for category in categories %}
+                                    <div>
+                                        <input type="checkbox" id="{{category.name}}" name="categories" value="{{category.id}}"/>
+                                        <label for="{{category.name}}">{{category.name}}</label>
+                                    </div>
+                                {% endfor %}
                             </fieldset>
                         </form>
                     </div>
