@@ -40,7 +40,7 @@
   mix-blend-mode: destination-out;    /* “apaga” essa área do gradiente */
   -webkit-font-smoothing: antialiased;
 }
-.month > h3{
+.month-section > h3{
   font-size: 24px;
   margin-bottom: 14px;
 }

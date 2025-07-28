@@ -39,50 +39,15 @@
             <div class="coupons flex-center">
                 {% regroup used_coupons by object.used_date.month as monthly_coupons %}
                 {% for month_group in monthly_coupons %}
-        
-        <div class="month-section">
-            
-            <!-- {# 
-               Para pegar o nome do mês (ex: "Julho"), usamos o filtro 'date' no primeiro
-               item do grupo. A letra "F" formata para o nome completo do mês.
-               Isso só funciona porque ordenamos a lista na view!
-            #} -->
-            <h3 class="month-title">{{ month_group.list.0.object.used_date|date:"F" }}</h3>
-
-            <div class="coupons flex-center">
-                <!-- {# 3. Agora faça um loop sobre os cupons que estão na lista deste grupo ('month_group.list') #} -->
-                {% for coupon in month_group.list %}
-                    
-                    <!-- {# Aqui você acessa os dados como 'coupon_item.object' e 'coupon_item.data' #} -->
-                    {% include 'components/coupon_card.html' with end_date="coupon.expiration_date" title="coupon.offer.title" discount="coupon.offer.discount" offer_image="coupon.offer.image" enterprise_name="coupon.offer.enterprise" enterprise_image="coupon.enterprise.user.profile_picture"%}
-
-                {% endfor %}
-            </div>
-
-        </div>
-
-    {% endfor %}
-            </div>
-
-            <div class="months">
-                <div class="month">
-                    <h3>Julho</h3>
-                    <div class="coupons flex-center">
-                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-                    </div>
-                </div>
-
-                <div class="month">
-                    <h3>Junho</h3>
-                    <div class="coupons flex-center">
-                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-                    </div>
-                    <div class="month">
-                        <div class="coupons more-coupons">
-                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+                    <div class="month-section">
+                        <h3 class="month-title">{{ month_group.list.0.object.used_date|date:"F" }}</h3>
+                        <div class="coupons flex-center">
+                            {% for coupon in month_group.list %}
+                                {% include 'components/coupon_card.html' with end_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </section>
     </div>
