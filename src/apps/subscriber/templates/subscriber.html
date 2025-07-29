@@ -15,14 +15,18 @@
         <section class="active-coupons">
             <h2><span>ATIVOS</span></h2>
             <div class="coupons flex-center">
-                    {% for coupon in active_coupons %}
+                    {% for coupon in active_coupons|slice:":4" %}
                             {% include 'components/coupon_card.html' with end_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
                     {% endfor %}
-                    </div>
-                    <div class="coupons more-coupons">
-                        {% include 'components/coupon_card.html' with end_date="coupon.expiration_date" title="coupon.offer.title" discount="coupon.offer.discount" offer_image="coupon.offer.image" enterprise_name="coupon.offer.enterprise" enterprise_image="coupon.enterprise.user.profile_picture"%}
-                    </div>
+            </div>
             {% if active_coupons|length > 4 %}
+            <div class="extra-coupons-wrapper">
+                <div class="coupons flex-center">
+                    {% for coupon in active_coupons|slice:"4:" %}
+                        {% include 'components/coupon_card.html' with end_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                    {% endfor %}
+                </div>
+            </div>
             <div class="divider">
                 <hr class="line before">
                 <button class="read-more">

@@ -81,8 +81,10 @@
 }
 .offer_image {
     position: relative;
-    max-height: 126px;
+    border-radius: 0.3em;
+    height: 110px;
     width: 185px;
+    object-fit: cover;
 }
 .price {
     display: flex; 
