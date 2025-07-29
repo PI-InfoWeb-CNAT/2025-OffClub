@@ -127,3 +127,8 @@
 .coupon button, .used-coupons select, .used-coupons select option{
   font-family: var(--main-font-family);
 }
+
+/* >>> Ajustes no display dos cupons usados por mês <<< */
+.used-coupons > .coupons{
+  display: inline;
+}
