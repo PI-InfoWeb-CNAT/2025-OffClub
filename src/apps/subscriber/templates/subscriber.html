@@ -47,7 +47,7 @@
                         <h3 class="month-title">{{ month_group.list.0.object.used_date|date:"F" }}</h3>
                         <div class="coupons flex-center">
                             {% for coupon in month_group.list %}
-                                {% include 'components/coupon_card.html' with end_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                                {% include 'components/coupon_card.html' with used_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
                             {% endfor %}
                         </div>
                     </div>
