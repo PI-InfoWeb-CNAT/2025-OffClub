@@ -115,10 +115,11 @@
   border-radius: 5px;
   color: #FEB342;
   width: 114px;
-  height: 40px;
+  height: 44px;
   font-size: 28px;
   font-weight: 600;
   text-align: center;
+  margin-left: 10px;
 }
 .used-coupons select option{
   background-color: #1C1C1C;

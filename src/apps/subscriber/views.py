@@ -19,6 +19,7 @@ class SubscriberViews(View):
             active_filtered = Coupon.objects.filter(used_date__isnull=True)
             used_coupons = []
             active_coupons = []
+            years_group = []
             for coupon in used_filtered:
                 price = coupon.offer.price
                 discount = coupon.offer.discount
@@ -27,8 +28,11 @@ class SubscriberViews(View):
                         'old_price':     old_price,
                         'final_price':   final_price,
                         'used_month':    coupon.used_date.month,
+                        'used_year': coupon.used_date.year,
                     }
                 dic = {'object': coupon, 'data': coupon_data}
+                if coupon_data['used_year'] not in years_group:
+                    years_group.append(coupon_data['used_year'])
                 used_coupons.append(dic)
 
             for coupon in active_filtered:
@@ -42,5 +46,5 @@ class SubscriberViews(View):
                     }
                 dic = {'object': coupon, 'data': coupon_data}
                 active_coupons.append(dic)
-            context = {'used_coupons': used_coupons, 'active_coupons': active_coupons}
+            context = {'used_coupons': used_coupons, 'active_coupons': active_coupons, 'years_group': years_group}
             return render(request, 'subscriber.html', context=context, status=200)

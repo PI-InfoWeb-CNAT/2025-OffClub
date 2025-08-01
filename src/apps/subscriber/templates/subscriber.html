@@ -40,10 +40,15 @@
 
         <section class="used-coupons">
             <h2><span>UTILIZADOS</span></h2>
+            <select name="year" id="year">
+                {% for year in years_group %}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
             <div class="coupons flex-center">
                 {% regroup used_coupons by object.used_date.month as monthly_coupons %}
                 {% for month_group in monthly_coupons %}
-                    <div class="month-section">
+                    <div class="month-section" data-year="{{ month_group.list.0.object.used_date.year }}">
                         <h3 class="month-title">{{ month_group.list.0.object.used_date|date:"F" }}</h3>
                         <div class="coupons flex-center">
                             {% for coupon in month_group.list %}
