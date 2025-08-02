@@ -39,12 +39,14 @@
         </section>
 
         <section class="used-coupons">
-            <h2><span>UTILIZADOS</span></h2>
-            <select name="year" id="year">
-                {% for year in years_group %}
-                <option value="{{ year }}">{{ year }}</option>
-                {% endfor %}
-            </select>
+            <div class="adjust">
+                <h2><span>UTILIZADOS</span></h2>
+                <select name="year" id="year">
+                    {% for year in years_group %}
+                    <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
             <div class="coupons flex-center">
                 {% regroup used_coupons by object.used_date.month as monthly_coupons %}
                 {% for month_group in monthly_coupons %}

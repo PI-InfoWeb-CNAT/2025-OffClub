@@ -20,7 +20,6 @@
   margin-bottom: 21px;
 }
 .container h2{
-  font-family: sans-serif;
   font-size: 30px;
   vertical-align: middle;
   height: 44px;
@@ -29,7 +28,6 @@
   padding: 0.5rem 1rem;               
   background: linear-gradient(to bottom, #f0b33e, #c68616);
   isolation: isolate;                 
-  font-family: sans-serif;
   font-size: 2rem;
   border-radius: 0.25rem;
   margin-bottom: 19px;
@@ -42,7 +40,6 @@
 }
 .month-section > h3{
   font-size: 24px;
-  margin-bottom: 14px;
 }
 
 /* >>> Ver Mais <<< */
@@ -109,6 +106,15 @@
   transition: max-height 0.7s ease-in-out; 
 }
 /* >>> Filtro para cupons usados, por ano <<< */
+.adjust{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 19px
+}
+.adjust h2 {
+  margin: 0;
+}
 .used-coupons select{
   background: none;
   border: 2px solid #FEB342;

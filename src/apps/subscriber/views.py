@@ -9,7 +9,7 @@ from apps.subscriber.services.services import ServiceDiscount
 class SubscriberViews(View):
     @staticmethod
     # @login_required
-    def historico(request):
+    def consumption_history_list(request):
         if request.method == 'GET':
             # logged_user = request.user
             # user_id = logged_user.id
