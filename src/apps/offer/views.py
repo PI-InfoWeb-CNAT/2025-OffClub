@@ -1,7 +1,22 @@
 from django.shortcuts import render
 from django.utils import timezone
 from django.views import View
+from django.views.generic import ListView
 from ..offer.models import Offer
+
+
+class OfferViews(View):
+    @staticmethod
+    def offer(request, *args, **kwargs):
+        name = request.GET.get('name', '')
+        filter_min_discount = request.GET.get('min_discount', '')
+        filter_start_date = request.GET.get('start_date', '')
+        filter_end_date = request.GET.get('end_date', '')
+        pageNum = request.GET.get('page')
+        filter_categories = request.GET.getlist('categories')
+
+        context = OfferService.list_filter_offer(name, filter_min_discount, filter_start_date, filter_end_date, pageNum, filter_categories)
+        return render(request, 'offer.html', context)   
 
 class OfferViews(View):
     @staticmethod
