@@ -1,9 +1,7 @@
-from django.shortcuts import render
-from django.utils import timezone
+from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import ListView
-from ..offer.models import Offer
-
+from .services.offers_service import OfferService
+from ..offer.models import *
 
 class OfferViews(View):
     @staticmethod
@@ -18,11 +16,9 @@ class OfferViews(View):
         context = OfferService.list_filter_offer(name, filter_min_discount, filter_start_date, filter_end_date, pageNum, filter_categories)
         return render(request, 'offer.html', context)   
 
-class OfferViews(View):
-    @staticmethod
-    def list_filter_offer(request, *args, **kwargs):
-        return render(request, template_name='offer.html', status=200)
 
+class OfferDetailViews(View):
+    template_name = 'offer_detail.html'
     @staticmethod
     def offer(request, *args, **kwargs):
         """
@@ -59,3 +55,4 @@ class OfferViews(View):
             }
             
             return render(request, 'offer_detail.html', context)
+        return render(request, 'offer.html', context)    

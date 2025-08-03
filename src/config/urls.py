@@ -9,8 +9,16 @@ urlpatterns = [
     path('subscriber/', include('apps.subscriber.urls')),
 ]
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/31-implementação-das-telas-do-fluxo-principal-do-cdu-buscar-e-filtrar-ofertas
 from .settings import base as settings
 from django.conf.urls.static import static
 
 if settings.DEBUG:
+<<<<<<< HEAD
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> origin/31-implementação-das-telas-do-fluxo-principal-do-cdu-buscar-e-filtrar-ofertas

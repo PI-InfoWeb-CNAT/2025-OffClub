@@ -43,19 +43,19 @@
                 </div>
             </section>
             
-            <section id="cheap_offers">
+            <div id="cheap_offers">
                 <h2>Preço mais baixo</h2>
                 <div id="cheap_offers_container">
                     <section class="swiper_session">
                         <div class="swiper cheapSwiper container">
                             <div class="swiper-wrapper content">
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
+                                {% for offer in cheapOffers %}
+                                    {% if offer.object.enterprise.user.profile_picture %}
+                                        {% include 'components/offer_card.html' with end_date=offer.object.end_date title=offer.object.title discount=offer.object.discount offer_image=offer.object.image.url enterprise_name=offer.object.enterprise.trade_name enterprise_image=offer.object.enterprise.user.profile_picture.url old_price=offer.data.old_price final_price=offer.data.final_price class="swiper-slide" %}
+                                    {% else %}
+                                        {% include 'components/offer_card.html' with end_date=offer.object.end_date title=offer.object.title discount=offer.object.discount offer_image=offer.object.image.url enterprise_name=offer.object.enterprise.trade_name old_price=offer.data.old_price final_price=offer.data.final_price class="swiper-slide" %}
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="swiper-button-next cheap-swiper-button-next"></div>
@@ -63,87 +63,81 @@
                         <div class="swiper-pagination cheap-swiper-pagination"></div>
                     </section>
                 </div>
-            </section>
+            </div>
             
-            <section id="near_offers">
-                <h2>Mais perto de você</h2>
-                <div id="near_offers_container">
-                    <section class="swiper_session">
-                        <div class="swiper nearSwiper container">
-                            <div class="swiper-wrapper content">
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                                {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="69%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" class="swiper-slide"%}
-                            </div>
-                        </div>
-                        <div class="swiper-button-next near-swiper-button-next"></div>
-                        <div class="swiper-button-prev near-swiper-button-prev"></div>
-                        <div class="swiper-pagination near-swiper-pagination"></div>
-                    </section>
-                </div>
-            </section>
 
             <section id="offer_search">
-                <h2>Buscar cupons</h2>
+                <h2>Buscar ofertas</h2>
                 <div id="offer_search_container">
                     <div id="filter_container">
                         <h2>Filtros</h2>
-                        <form action="coupon/active" method="post">
+                        <form action="{% url 'offer_list' %}" method="get">
                             <div class="search">
-                                <input type="text" placeholder="Procurar cupom...">
+                                <input type="text" name="name" placeholder="Procurar cupom...">
                                 <button type="submit"><img src="../static/imgs/search.svg" alt=""></button>
                             </div>
                             <fieldset>
                                 <legend>Desconto mínimo</legend>
                                 <div class="slider-wrap">
                                     <output class="slider_bubble"></output>
-                                    <input type="range" min="0" max="100" class="slider" value="50" id="min_discount">
+                                    <input type="range" min="0" max="100" class="slider" value="50" id="min_discount" name="min_discount">
                                 </div>
                             </fieldset>
                             <fieldset>
                                 <legend>Data limite</legend>
                                 <div>
-                                    <input type="date" id="start_date" placeholder="Data inicial"/>
-                                    <input type="date" id="end_date" placeholder="Data final"/>
+                                    <input type="date" id="start_date" name="start_date" placeholder="Data inicial"/>
+                                    <input type="date" id="end_date" name="end_date" placeholder="Data final"/>
                                 </div>
                             </fieldset>
                             <fieldset>
                                 <legend>Categorias</legend>
-                                <div>
-                                    <input type="checkbox" id="aesthetic"/>
-                                    <label for="aesthetic">Estética</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" id="restaurant"/>
-                                    <label for="restaurant">Restaurante</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" id="aesthetic2"/>
-                                    <label for="aesthetic2">Estética</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" id="restaurant2"/>
-                                    <label for="restaurant2">Restaurante</label>
-                                </div>
+                                {% for category in categories %}
+                                    <div>
+                                        <input type="checkbox" id="{{category.name}}" name="categories" value="{{category.id}}"/>
+                                        <label for="{{category.name}}">{{category.name}}</label>
+                                    </div>
+                                {% endfor %}
                             </fieldset>
                         </form>
                     </div>
                     <div class="result">
-                        <p>Exibindo 1-8 de 8 resultados</p>
-                        <div id="offer_filter_container">
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                            {% include 'components/offer_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="35%" offer_image="../static/imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="../static/imgs/image.png" %}
-                        </div>
+                        {% if offersCount > 0 %}
+                            {% if page.has_next %}
+                                <p>Exibindo <span>{{ startNum }} - {{ endNum }}</span> de {{offersCount}} resultados</p>
+                                <div id="offer_filter_container">
+                                    {% for offer in page.object_list %}
+                                        {% if offer.object.enterprise.user.profile_picture %}
+                                            {% include 'components/offer_card.html' with end_date=offer.object.end_date title=offer.object.title discount=offer.object.discount offer_image=offer.object.image.url enterprise_name=offer.object.enterprise.trade_name enterprise_image=offer.object.enterprise.user.profile_picture.url old_price=offer.data.old_price final_price=offer.data.final_price %}
+                                        {% else %}
+                                            {% include 'components/offer_card.html' with end_date=offer.object.end_date title=offer.object.title discount=offer.object.discount offer_image=offer.object.image.url enterprise_name=offer.object.enterprise.trade_name old_price=offer.data.old_price final_price=offer.data.final_price %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p>Exibindo <span>{{ startNum }} - {{offersCount}}</span> de {{offersCount}} resultados</p>
+                                <div id="offer_filter_container">
+                                    {% for offer in page.object_list %}
+                                        {% if offer.object.enterprise.user.profile_picture %}
+                                            {% include 'components/offer_card.html' with end_date=offer.object.end_date title=offer.object.title discount=offer.object.discount offer_image=offer.object.image.url enterprise_name=offer.object.enterprise.trade_name enterprise_image=offer.object.enterprise.user.profile_picture.url old_price=offer.data.old_price final_price=offer.data.final_price %}
+                                        {% else %}
+                                            {% include 'components/offer_card.html' with end_date=offer.object.end_date title=offer.object.title discount=offer.object.discount offer_image=offer.object.image.url enterprise_name=offer.object.enterprise.trade_name old_price=offer.data.old_price final_price=offer.data.final_price %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>                                                            
+                            {% endif %}
+                            <div class="pagination">
+                                {% for p in pages %}
+                                    <div class="pagination_page {% if p == pageNum %} pagination_page_active {% endif %}">
+                                        <a href="?{% if request.GET.name %}name={{ request.GET.name }}&{% endif %}{% if request.GET.min_discount %}min_discount={{ request.GET.min_discount }}&{% endif %}{% if request.GET.start_date %}start_date={{ request.GET.start_date }}&{% endif %}{% if request.GET.end_date %}end_date={{ request.GET.end_date }}&{% endif %}page={{ p }}">{{p}}</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="nothing_found">
+                                <img src="{% static 'imgs/not_found.svg' %}" alt="">
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </section>
