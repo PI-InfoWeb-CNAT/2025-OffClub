@@ -12,6 +12,7 @@ class OfferAdmin(admin.ModelAdmin):
         'final_price',
         'display_is_active',
         'end_date',
+        'max_coupons',
     )
 
     search_fields = ('title', 'description', 'enterprise__trade_name')
@@ -23,7 +24,7 @@ class OfferAdmin(admin.ModelAdmin):
             'fields': ('title', 'enterprise', 'category', 'description', 'image')
         }),
         ('Valores', {
-            'fields': ('price', 'discount')
+            'fields': ('price', 'discount', 'max_coupons')
         }),
         ('Datas e Prazos', {
             'fields': ('start_date', 'end_date', 'redemption_period')

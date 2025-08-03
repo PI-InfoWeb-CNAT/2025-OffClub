@@ -11,6 +11,7 @@
   justify-content: center;
   z-index: 4;
 }
+
 #offer-modal {
   width: 55%;
   margin: 0 auto;
@@ -25,7 +26,7 @@
   padding: 45px;
 }
 
-#offer-modal > div {
+#offer-modal>div {
   display: flex;
   justify-content: space-between;
   gap: 30px;
@@ -46,17 +47,22 @@ button {
   border-radius: var(--border-radius);
 }
 
-/* Colunas dentro do modal */
-.offer-card, .offer-content {
+.offer-content {
+  flex: 1;
+}
+
+.offer-card,
+.offer-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 /* Valores */
-.price-info p{
+.price-info p {
   font-weight: 500;
 }
+
 #final-value {
   font-size: 20px;
   font-weight: 700;
@@ -75,22 +81,32 @@ button {
 
 /* Informações da empresa */
 .shop-info {
-  display: flex; 
+  display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin-top: 15px;
 }
-.shop-info > p {
+
+.shop-info>p {
   font-weight: 300;
 }
+
 .shop-info .yellow-border {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-.shop-info .yellow-border p{
+
+.shop-info .yellow-border p {
   font-size: 12px;
   margin-top: 2px
+}
+
+.enterprise-image {
+  object-fit: cover;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
 }
 
 /* Classe para borda amarela */
@@ -106,11 +122,48 @@ button {
   color: var(--brand-yellow);
   margin-top: 3px;
 }
+
 .yellow-border svg {
   color: var(--brand-yellow);
 }
 
 /* Unidades restantes */
+.coupons-quantity {
+  gap: 4px;
+}
+
+.units {
+  align-items: center;
+  gap: 1em;
+}
+
+.remaining-coupons-bar {
+  flex: 1;
+  width: 100%;
+  height: 1em;
+  border: 1px solid var(--black);
+  border-radius: 6px;
+  background-color: var(--dark-yellow);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.remaining-coupons-bar::-webkit-progress-bar {
+  background-color: var(--dark-yellow);
+  border-radius: 6px;
+}
+
+.remaining-coupons-bar::-webkit-progress-value {
+  background-color: var(--brand-yellow);
+  border-radius: 6px;
+}
+
+.remaining-coupons-bar::-moz-progress-bar {
+  background-color: var(--brand-yellow);
+  border-radius: 6px;
+}
+
+
 .units p {
   font-size: 13px;
   font-weight: 600;
@@ -123,6 +176,7 @@ button {
   flex-wrap: wrap;
   gap: 12px;
 }
+
 .tag-category {
   width: 135px;
   display: inline-flex;
@@ -135,11 +189,13 @@ button {
   margin-top: 20px;
   margin-bottom: 5px;
 }
+
 .tag-category img {
   width: 15px;
   height: 15px;
 }
-.tag-category p{
+
+.tag-category p {
   font-size: 13px;
 }
 
@@ -148,12 +204,14 @@ button {
   display: flex;
   justify-content: space-between;
 }
-.offer-info div + div {
+
+.offer-info div+div {
   text-align: end;
 }
 
 /* Botão de fechar modal */
-#close-button-modal, #close-toast {
+#close-button-modal,
+#close-toast {
   position: absolute;
   top: 5%;
   right: 3%;
@@ -161,6 +219,7 @@ button {
   width: 32px;
   height: 32px;
 }
+
 #close-button-modal svg {
   color: var(--medium-grey);
 }
@@ -187,6 +246,7 @@ button {
   margin-top: 40px;
   padding: 10px 25px 10px 35px;
 }
+
 #ascess-coupons-button img {
   width: 25px;
   height: 16px;
@@ -207,26 +267,32 @@ button {
   gap: 18px;
   border-left: 10px solid var(--medium-green);
 }
-#success-toast > svg {
+
+#success-toast>svg {
   border-radius: 50px;
   border: 1px solid var(--medium-green);
   padding: 5px;
 }
+
 #success-toast p {
   color: var(--light-green);
 }
-#success-toast p + p {
+
+#success-toast p+p {
   font-size: 13px;
   font-weight: 300;
 }
+
 #success-toast #close-toast {
   background-color: transparent;
   right: 2%;
 }
+
 #success-toast #close-toast svg {
-  color:var(--green-details) ;
+  color: var(--green-details);
 }
 
-#ascess-coupons-button, #success-toast {
+#ascess-coupons-button,
+#success-toast {
   display: none;
 }

@@ -1,58 +1,43 @@
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .services.offers_service import OfferService
-from ..offer.models import *
+from .models import Offer
 
-class OfferViews(View):
-    @staticmethod
-    def offer(request, *args, **kwargs):
+
+class OfferListView(View):
+    """
+    Renderiza a página principal com a lista de ofertas e aplica filtros via GET.
+    """
+    def get(self, request, *args, **kwargs):
         name = request.GET.get('name', '')
-        filter_min_discount = request.GET.get('min_discount', '')
-        filter_start_date = request.GET.get('start_date', '')
-        filter_end_date = request.GET.get('end_date', '')
-        pageNum = request.GET.get('page')
-        filter_categories = request.GET.getlist('categories')
+        min_discount = request.GET.get('min_discount', '')
+        start_date = request.GET.get('start_date', '')
+        end_date = request.GET.get('end_date', '')
+        page_num = request.GET.get('page')
+        categories = request.GET.getlist('categories')
 
-        context = OfferService.list_filter_offer(name, filter_min_discount, filter_start_date, filter_end_date, pageNum, filter_categories)
-        return render(request, 'offer.html', context)   
-
-
-class OfferDetailViews(View):
-    template_name = 'offer_detail.html'
-    @staticmethod
-    def offer(request, *args, **kwargs):
-        """
-        Este método agora funciona corretamente mantendo a estrutura original.
-        """
-        if request.method == 'GET':
-            offers = Offer.objects.filter(end_date__gte=timezone.now())
-            context = {'filterOffers': offers}
-            return render(request, 'offer_detail.html', context)
-
-        if request.method == 'POST':
-            queryset = Offer.objects.filter(end_date__gte=timezone.now())
-            
-            filter_min_discount = request.POST.get('min_discount')
-            filter_start_date = request.POST.get('start_date')
-            filter_end_date = request.POST.get('end_date')
-
-            if filter_min_discount:
-                try:
-                    min_discount_value = float(filter_min_discount)
-                    queryset = queryset.filter(discount__gt=min_discount_value)
-                except (ValueError, TypeError):
-                    pass
+        context = OfferService.list_filter_offer(
+            name, min_discount, start_date, end_date, page_num, categories
+        )
         
-            if filter_start_date:
-                queryset = queryset.filter(start_date__gte=filter_start_date)
+        return render(request, 'offer.html', context)
 
-            if filter_end_date:
-                queryset = queryset.filter(end_date__lte=filter_end_date)
 
-            context = {
-                'filterOffers': queryset,
-                'form_data': request.POST 
-            }
-            
-            return render(request, 'offer_detail.html', context)
-        return render(request, 'offer.html', context)    
+class OfferDetailView(View):
+    """
+    Funciona como uma API: retorna os dados de uma oferta específica em JSON.
+    """
+    def get(self, request, *args, **kwargs):
+        offer_id = kwargs.get('offer_id')
+
+        offer = get_object_or_404(Offer, pk=offer_id)
+
+        remaining_coupons = offer.max_coupons - offer.generated_coupons
+
+        data = {
+            'offer': offer,
+            'remaining_coupons': remaining_coupons,
+        }
+        
+        return render(request, 'offer_detail.html', context=data)

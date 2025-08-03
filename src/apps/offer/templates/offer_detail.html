@@ -11,7 +11,7 @@
 {% block main %}
     <article id="transparent-bg">
         <section id="offer-modal">
-            <div>
+            <div class="offer-modal-content">
                 <div class="offer-card">           
                     <div class="offer-image">
                         {% if offer.image %}
@@ -26,10 +26,10 @@
                         <p>R$ {{ offer.price }}</p>
         
                         <h3>Desconto</h3>
-                        <p>- {{ offer.discount }}% (R$ {{ calc_discount|floatformat:2 }})</p>
+                        <p>-{{ offer.discount }}% (R$ {{ offer.discount_value|floatformat:2 }})</p>
         
                         <h3>Valor após desconto</h3>
-                        <p id="final-value">R$ {{ final_price|floatformat:2 }}</p>
+                        <p id="final-value">R$ {{ offer.final_price|floatformat:2 }}</p>
 
                     </div>
         
@@ -42,13 +42,13 @@
                     <h2>{{ offer.title}}</h2>
                     
                     <div class="shop-info">
-                        {% if offer.enterprise.image %}
-                        <img src="{{ offer.enterprise.image.url }}" alt="Foto da loja">
+                        {% if offer.enterprise.user.profile_picture %}
+                        <img class="enterprise-image" src="{{ offer.enterprise.user.profile_picture.url }}" alt="Foto da loja">
                         {% else %}
-                        <img src="{% static 'imgs/offer_detail/default_store.png' %}" alt="Loja sem imagem">
+                        <img class="enterprise-image" src="{% static 'imgs/offer_detail/default_store.png' %}" alt="Loja sem imagem">
                         {% endif %}
 
-                        <p>{{ offer.enterprice }}</p>
+                        <p>{{ offer.enterprise.trade_name }}</p>
                         <div class="yellow-border">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
                                 <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
@@ -61,10 +61,21 @@
                         <h3>Status</h3>
                         <p class="yellow-border">Disponível para resgate</p>
                     </div>
-        
-                    <div class="units">
+                    
+                    <div class="coupons-quantity flex-column">
                         <h3>Unidades restantes</h3>
-                        <p class="yellow-border">{{ offer.total_generated }} / {{ offer.max_coupons }}</p>
+
+                        <div class="units flex-row">
+                            <p class="yellow-border">{{ remaining_coupons }} / {{ offer.max_coupons }}</p>                        
+                            <progress 
+                                class="remaining-coupons-bar"
+                                id="coupon-progress" 
+                                max="{{ offer.max_coupons }}" 
+                                value="{{ remaining_coupons }}">
+                                75%
+                            </progress>
+                        </div>
+
                     </div>
         
                     <div class="details">

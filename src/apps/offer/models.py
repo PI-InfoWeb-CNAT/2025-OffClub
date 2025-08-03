@@ -32,10 +32,25 @@ class Offer(models.Model):
     generated_coupons = models.IntegerField("Cupons gerados", default=0)
     
     @property
+    def final_price(self):
+        """Calcula e retorna o preço final com desconto."""
+        if not self.price:
+            return 0.00
+        final = self.price - (self.price * self.discount / 100)
+        return final
+    
+    @property
+    def discount_value(self):
+        """Retorna o valor do desconto em reais."""
+        return self.price * self.discount / 100
+
+        
+    
+    @property
     def is_active(self):
         return self.start_date <= timezone.now() <= self.end_date
     
-    # Caso tente ser resgatado algum cupom após o limite ser atingido, aparecerá uma mensagem de erro
+
     def clean(self):
         super().clean()
         if self.generated_coupons > self.max_coupons:

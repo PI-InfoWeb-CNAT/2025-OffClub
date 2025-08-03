@@ -1,25 +1,31 @@
 {% load static %}
 
-<div class="{{class}} offer_card">
+<div class="{{ class }} offer_card">
     <div class="offer_card_enterprise">
-        {% if enterprise_image %}
-            <img src="{{ enterprise_image }}" alt="">
+        {% if offer.enterprise.user.profile_picture %}
+            <img src="{{ offer.enterprise.user.profile_picture.url }}" alt="Logo {{ offer.enterprise.trade_name }}">
         {% else %}
             <img src="{% static 'imgs/empty_enterprise.svg' %}" alt="">
         {% endif %}
-        <p>{{ enterprise_name }}</p>
+        <p>{{ offer.enterprise.trade_name }}</p>
     </div>
     <div class="offer_card_offer">
-        <img src="{{ offer_image }}" alt="" class="offer_image">
-        <span>{{ discount }}%</span>
-        <h3><a href="{{link}}">{{ title }}</a></h3>
+        <img src="{{ offer.image.url }}" alt="Imagem de {{ offer.title }}" class="offer_image">
+        <span>{{ offer.discount }}%</span>
+        <h3><a href="{% url 'offer_detail' offer.id %}">{{ offer.title }}</a></h3>
     </div>
     <div class="price">
         <p class="currency">R$</p>
-        <p class="promotion_price">{{ final_price }}</p>
-        <p class="old_price">{{ old_price }}</p>
+        <p class="promotion_price">{{ offer.final_price|stringformat:".2f" }}</p>
+        <p class="old_price">{{ offer.price|stringformat:".2f" }}</p>
     </div>
     <div class="offer_card_coupon">
-        <p class="general">Até {{ end_date }}</p>
+        <p class="general">Até {{ offer.end_date|date:"d/m/Y" }}</p>
     </div>
+    
+    <a href="{% url 'offer_detail' offer.id %}">
+        <button>
+            RESGATAR
+        </button>
+    </a>
 </div>
