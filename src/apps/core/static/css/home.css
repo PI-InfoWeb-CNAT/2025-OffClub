@@ -1,4 +1,3 @@
-
 .home-main {
     gap: 5em;
 }
@@ -21,7 +20,7 @@ section.hero-section {
 
 .hero-texts {
     text-align: center;
-    
+
     h1 {
         max-width: 60%;
         font-size: 28px;
@@ -31,7 +30,7 @@ section.hero-section {
         color: var(--white);
         margin-bottom: 1em;
     }
-    
+
     p {
         max-width: 40%;
         font-size: 18px;
@@ -162,11 +161,11 @@ div.how-it-works-wrapper {
 }
 
 figure.how-it-works-image-wrapper {
-    position: relative; 
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 500px; 
+    min-height: 500px;
     padding-right: 3em;
 }
 
@@ -180,8 +179,8 @@ figure.how-it-works-image-wrapper img:nth-of-type(1) {
 }
 
 figure.how-it-works-image-wrapper img:nth-of-type(2) {
-    position: relative; 
-    z-index: 2; 
+    position: relative;
+    z-index: 2;
 }
 
 /* Seção de Planos */
@@ -242,19 +241,19 @@ section.access-everywhere h1 {
 }
 
 figure.access-everywhere-image-wrapper {
-    position: relative; 
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 500px; 
+    min-height: 500px;
     padding-right: 3em;
 }
 
 figure.access-everywhere-image-wrapper img:nth-of-type(1) {
-    position: relative; 
+    position: relative;
     transform: scale(1.2);
     transform: translateX(-20%);
-    z-index: 2; 
+    z-index: 2;
 }
 
 figure.access-everywhere-image-wrapper img:nth-of-type(2) {
@@ -294,22 +293,22 @@ figure.access-everywhere-image-wrapper img:nth-of-type(2) {
 }
 
 .reviews .swiper-pagination {
-  position: relative; 
-  bottom: auto;       
-  margin-top: 2rem;   
+    position: relative;
+    bottom: auto;
+    margin-top: 2rem;
 }
 
 .reviews .swiper-pagination-bullet {
-  width: 24px; 
-  height: 8px;
-  border-radius: var(--border-radius); 
+    width: 24px;
+    height: 8px;
+    border-radius: var(--border-radius);
 
-  background-color: var(--almost-transparent-white); 
-  opacity: 1;
-  transition: all 0.3s ease;
+    background-color: var(--almost-transparent-white);
+    opacity: 1;
+    transition: all 0.3s ease;
 }
 
 .reviews .swiper-pagination-bullet-active {
-  background-color: var(--brand-yellow); 
-  width: 80px; 
+    background-color: var(--brand-yellow);
+    width: 80px;
 }

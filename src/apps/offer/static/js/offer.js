@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     redeemButton.addEventListener('click', async (event) => {
+      console.log('clicado');
         const offerId = event.currentTarget.dataset.offerId;
         console.log(`Simulando resgate para a oferta ${offerId}`);
         successToast.style.display = 'flex';
