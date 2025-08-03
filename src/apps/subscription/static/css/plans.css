@@ -1,3 +1,6 @@
+/* ============================================= */
+/* Layout Principal                 */
+/* ============================================= */
 main.container {
     display: flex;
     flex-direction: column;
@@ -6,38 +9,24 @@ main.container {
     padding: 40px 20px;
 }
 
-main.container > h1 {
-    font-size: var(--text-font-size-large);
-    background: var(--gradient-gold);
-    color: transparent;
-    background-clip: text;
-    text-align: center;
-}
-
-.copper h2 {
-    color: var(--brown);
-}
-
-.silver h2 {
-    color: var(--cyan);
-}
-
-.gold h2 {
-    color: var(--brand-yellow);
-}
-
 .plan-cards-container {
+    margin-top: 2em;
     gap: 20px;
     width: 100%;
 }
 
+/* ============================================= */
+/* Estrutura Base dos Cards            */
+/* ============================================= */
 .plan-card {
     border-radius: var(--border-radius-small);
     width: 60%;
-    padding: 2px;
+    padding: 1px;
+    height: -webkit-fill-available;
 }
 
 .plan-card-content {
+    height: 100%;
     background-color: var(--background-color);
     border-radius: var(--border-radius-small);
     padding: 32px;
@@ -46,23 +35,18 @@ main.container > h1 {
     gap: 16px;
     width: 100%;
     position: relative;
+    backdrop-filter: blur(3px);
 }
 
-.plan-card.recommended .badge {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    background-color: var(--cyan);
-    color: var(--white);
-    padding: 8px 16px;
-    border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
-    font-weight: 600;
-    font-size: var(--minor-text-font-size);
-}
-
-.plan-titles h3 {
-    font-size: var(--text-font-size);
-    font-weight: var(--text-font-weight);
+/* ============================================= */
+/* Tipografia                   */
+/* ============================================= */
+main.container > h1 {
+    font-size: var(--text-font-size-large);
+    background: var(--gradient-gold);
+    color: transparent;
+    background-clip: text;
+    text-align: center;
 }
 
 .plan-card h2 {
@@ -71,31 +55,72 @@ main.container > h1 {
     font-family: var(--special-font-family);
 }
 
+.plan-titles h3 {
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+}
+
+.plan-details h3 {
+    font-size: var(--text-font-size);
+    font-weight: 800;   
+    margin-bottom: 12px;
+}
+
+.plan-price {
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+}
+
+/* ============================================= */
+/* Componentes dos Cards               */
+/* ============================================= */
+.plan-card hr {
+    width: 100%;
+    border-color: var(--almost-transparent-white);
+}
+
+.plan-card.recommended {
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: scale(1.05);
+}
+
+.plan-card.recommended .plan-card-content {
+    filter: brightness(1.2);
+}
+
+
+
+.plan-card.recommended, .plan-card.recommended .plan-card-content {
+    position: relative;
+    border-radius: 0 var(--border-radius-small) var(--border-radius-small) var(--border-radius-small);
+}
+
+.plan-card.recommended .badge {
+    position: absolute;
+    top: 0;
+    left: -1px;
+    transform: translateY(-100%);
+    background: var(--gradient-silver);
+    color: var(--white);
+    padding: 8px 24px;
+    border-radius: var(--border-radius-small) var(--border-radius-small) 0 0;
+    font-weight: 600;
+    font-size: var(--minor-text-font-size);
+}
+
 .text-circle {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.copper-circle, .silver-circle, .gold-circle {
+.bronze-circle, .silver-circle, .gold-circle {
     width: 1.75em;
     height: 1.75em;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.copper-circle {
-    background: var(--gradient-copper);
-}
-
-.silver-circle {
-    background: var(--gradient-silver);
-}
-
-.gold-circle {
-    background: var(--gradient-gold);
 }
 
 .inner-circle {
@@ -108,15 +133,8 @@ main.container > h1 {
     background-color: var(--background-color);
 }
 
-.plan-card hr {
-    width: 100%;
-    border-color: var(--almost-transparent-white);
-}
-
-.plan-details h3 {
-    font-size: var(--text-font-size);
-    font-weight: 800;   
-    margin-bottom: 12px;
+.plan-details {
+    flex: 1;
 }
 
 .plan-features {
@@ -129,7 +147,7 @@ main.container > h1 {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    color: var(--offwhite);
+    color: var(--white);
     font-size: var(--text-font-size);
 }
 
@@ -138,15 +156,37 @@ main.container > h1 {
     color: var(--white);
 }
 
+li.available .feature-content {
+    display: flex;
+    flex-direction: column;
+}
+
+li.available .feature-content .feature-name {
+    color: var(--white);
+}
+
+li.available .feature-content .feature-description {
+    color: var(--offwhite)
+}
+
+.plan-features li.unavailable {
+    align-items: center;
+    color: var(--gray);
+    text-decoration: line-through;
+}
+
+.plan-features li.unavailable::before {
+    text-align: center;
+    content: '❌';
+    font-size: 10px;
+    color: transparent;
+    text-shadow: 0 0 0 var(--gray);
+}
+
 .plan-price-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.plan-price {
-    font-size: var(--h2-font-size);
-    font-weight: var(--h2-font-weight);
 }
 
 .subscribe-button {
@@ -159,8 +199,41 @@ main.container > h1 {
     transition: transform 0.2s ease-in-out;
 }
 
-.copper .subscribe-button {
-    background: var(--gradient-copper);
+.subscribe-button:hover {
+    transition: transform 0.2s ease-in-out;
+    filter: brightness(1.1);
+    transform: scale(1.005);
+}
+
+/* ============================================= */
+/* Temas dos Planos                 */
+/* ============================================= */
+.bronze h2 {
+    color: var(--brown);
+}
+
+.silver h2 {
+    color: var(--cyan);
+}
+
+.gold h2 {
+    color: var(--brand-yellow);
+}
+
+.plan-card.bronze {
+    background: var(--gradient-bronze);
+}
+
+.plan-card.silver {
+    background: var(--gradient-silver);
+}
+
+.plan-card.gold {
+    background: var(--gradient-gold);
+}
+
+.bronze .subscribe-button {
+    background: var(--gradient-bronze);
 }
 
 .silver .subscribe-button {
@@ -171,21 +244,14 @@ main.container > h1 {
     background: var(--gradient-gold);
 }
 
-.subscribe-button:hover {
-    transition: transform 0.2s ease-in-out;
-    filter: brightness(1.1);
-    transform: scale(1.005);
+.bronze-circle {
+    background: var(--gradient-bronze);
 }
 
-
-.plan-card.copper {
-    background: var(--gradient-copper);
-}
-
-.plan-card.silver {
+.silver-circle {
     background: var(--gradient-silver);
 }
 
-.plan-card.gold {
+.gold-circle {
     background: var(--gradient-gold);
 }

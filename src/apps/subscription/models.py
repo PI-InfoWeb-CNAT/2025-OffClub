@@ -1,12 +1,26 @@
 from django.db import models
 import uuid
 
+class Feature(models.Model):
+    name = models.CharField('Nome', max_length=100, unique=True)
+    description = models.TextField('Descrição', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Feature'
+        verbose_name_plural = 'Features'
+        ordering = ['name']
+
+
 class SubscriptionPlan(models.Model):
     id = models.UUIDField("ID",primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField('Título', null=False, max_length=100)
     description = models.CharField('Descrição', null=False, max_length=400)
     price = models.DecimalField('Preço', max_digits=5, decimal_places=2)
-    duration = models.DurationField('Duração')
+    duration = models.DurationField('Duração em dias', null=False)
+    features = models.ManyToManyField(Feature, related_name='plans', blank=True)
 
     def __str__(self):
         return f'{self.title} - {self.duration} dias'
