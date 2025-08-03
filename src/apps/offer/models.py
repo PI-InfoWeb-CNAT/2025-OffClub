@@ -44,7 +44,32 @@ class Offer(models.Model):
         """Retorna o valor do desconto em reais."""
         return self.price * self.discount / 100
 
+    def to_dict(self):
+        """Retorna um dicionário com os dados da oferta para a API."""
+        remaining_coupons = self.max_coupons - self.generated_coupons
         
+        return {
+            'id': self.id,
+            'title': self.title,
+            'image_url': self.image.url if self.image else None,
+            'description': self.description,
+            'discount': self.discount,
+            'price': f'{self.price:.2f}'.replace('.', ','),
+            'final_price': f'{self.final_price:.2f}'.replace('.', ','),
+            'discount_value': f'{self.discount_value:.2f}'.replace('.', ','),
+            'start_date': self.start_date.strftime('%d/%m/%Y'),
+            'end_date': self.end_date.strftime('%d/%m/%Y'),
+            'redemption_period_days': self.redemption_period.days,
+            'remaining_coupons': remaining_coupons,
+            'max_coupons': self.max_coupons,
+            'enterprise': {
+                'trade_name': self.enterprise.trade_name,
+                'logo_url': self.enterprise.user.profile_picture.url if self.enterprise.user.profile_picture else None
+            },
+            'category': {
+                'name': self.category.name if self.category else 'Sem Categoria'
+            }
+        }        
     
     @property
     def is_active(self):

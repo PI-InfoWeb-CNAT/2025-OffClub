@@ -7,139 +7,154 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Madimi+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+<link rel="stylesheet" href="{% static 'css/offer_detail.css' %}">
 <link rel="stylesheet" href="{% static 'css/offer.css' %}">
 <link rel="stylesheet" href="{% static 'css/components/offer_card.css' %}">
 <link rel="stylesheet" href="{% static 'css/components/enterprise_card.css' %}">
 {% endblock %}
+
 {% block main %}
-    <main> 
-        <div class="container">
-            <div id="offer_intro">
-                <div>
-                    <h2>EXPLORE AS MELHORES <span>OFERTAS</span>!</h2>
-                    <p>Navegue por tipos de <span>produtos</span>, <span>serviços</span> ou pelos seus <span>estabelecimentos</span> preferidos para descobrir onde você vai <span>economizar</span> hoje.</p>
-                </div>
-                <img src="../static/imgs/offer_home.png" alt="">
+<main>
+    <div class="container">
+        <div id="offer_intro">
+            <div>
+                <h2>EXPLORE AS MELHORES <span>OFERTAS</span>!</h2>
+                <p>Navegue por tipos de <span>produtos</span>, <span>serviços</span> ou pelos seus <span>estabelecimentos</span> preferidos para descobrir onde você vai <span>economizar</span> hoje.</p>
             </div>
-
-            <section id="popular_offers">
-                <h2>Ofertas mais populares</h2>
-                <div id="popular_offers_container">
-                    <img src="../static/imgs/popular_offer_1.png" alt="">
-                    <img src="../static/imgs/popular_offer_2.png" alt="">
-                    <img src="../static/imgs/popular_offer_3.png" alt="">
-                </div>
-            </section>
-
-            <section id="popular_enterprises">
-                <h2>Empresas mais populares</h2>
-                <div id="popular_enterprises_container">
-                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                    {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
-                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                    {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                </div>
-            </section>
-            
-            <div id="cheap_offers">
-                <h2>Preço mais baixo</h2>
-                <div id="cheap_offers_container">
-                    <section class="swiper_session">
-                        <div class="swiper cheapSwiper container">
-                            <div class="swiper-wrapper content">
-                                {% for offer in cheapOffers %}
-                                    {% if offer.object.enterprise.user.profile_picture %}
-                                        {% include 'components/offer_card.html' with offer=offer class="swiper-slide" %}
-                                    {% else %}
-                                        {% include 'components/offer_card.html' with offer=offer class="swiper-slide" %}
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="swiper-button-next cheap-swiper-button-next"></div>
-                        <div class="swiper-button-prev cheap-swiper-button-prev"></div>
-                        <div class="swiper-pagination cheap-swiper-pagination"></div>
-                    </section>
-                </div>
-            </div>
-            
-
-            <section id="offer_search">
-                <h2>Buscar ofertas</h2>
-                <div id="offer_search_container">
-                    <div id="filter_container">
-                        <h2>Filtros</h2>
-                        <form action="{% url 'offer_list' %}" method="get">
-                            <div class="search">
-                                <input type="text" name="name" placeholder="Procurar cupom...">
-                                <button type="submit"><img src="../static/imgs/search.svg" alt=""></button>
-                            </div>
-                            <fieldset>
-                                <legend>Desconto mínimo</legend>
-                                <div class="slider-wrap">
-                                    <output class="slider_bubble"></output>
-                                    <input type="range" min="0" max="100" class="slider" value="50" id="min_discount" name="min_discount">
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Data limite</legend>
-                                <div>
-                                    <input type="date" id="start_date" name="start_date" placeholder="Data inicial"/>
-                                    <input type="date" id="end_date" name="end_date" placeholder="Data final"/>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Categorias</legend>
-                                {% for category in categories %}
-                                    <div>
-                                        <input type="checkbox" id="{{category.name}}" name="categories" value="{{category.id}}"/>
-                                        <label for="{{category.name}}">{{category.name}}</label>
-                                    </div>
-                                {% endfor %}
-                            </fieldset>
-                        </form>
-                    </div>
-                    <div class="result">
-                        {% if offersCount > 0 %}
-                            <p>
-                                Exibindo 
-                                <span>{{ page_obj.start_index }} - {{ page_obj.end_index }}</span> 
-                                de {{ offersCount }} resultados
-                            </p>
-                            
-                            <div id="offer_filter_container">
-                                {% for offer in page_obj.object_list %}
-                                    {% include 'components/offer_card.html' with offer=offer %}
-                                {% endfor %}
-                            </div>
-                            
-                            <div class="pagination">
-                                {% if page_obj.has_previous %}
-                                    <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&laquo;</a>
-                                {% endif %}
-                                
-                                <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
-                                
-                                {% if page_obj.has_next %}
-                                    <a href="?page={{ page_obj.next_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&raquo;</a>
-                                {% endif %}
-                            </div>
-
-                        {% else %}
-                            <div class="nothing_found">
-                                <img src="{% static 'imgs/not_found.svg' %}" alt="">
-                                <p>Nenhuma oferta encontrada.</p>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </section>
+            <img src="{% static 'imgs/offer_home.png' %}" alt="">
         </div>
-    </main>
+
+        <section id="popular_offers">
+            <h2>Ofertas mais populares</h2>
+            <div id="popular_offers_container">
+                <img src="{% static 'imgs/popular_offer_1.png' %}" alt="">
+                <img src="{% static 'imgs/popular_offer_2.png' %}" alt="">
+                <img src="{% static 'imgs/popular_offer_3.png' %}" alt="">
+            </div>
+        </section>
+
+        <section id="popular_enterprises">
+            <h2>Empresas mais populares</h2>
+            <div id="popular_enterprises_container">
+                {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
+                {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
+                {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+                {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
+            </div>
+        </section>
+
+        <div id="cheap_offers">
+            <h2>Preço mais baixo</h2>
+            <div id="cheap_offers_container">
+                <section class="swiper_session">
+                    <div class="swiper cheapSwiper container">
+                        <div class="swiper-wrapper content">
+                            {% for offer in cheapOffers %}
+                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
+                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
+                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
+                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
+                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
+                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
+                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="swiper-button-next cheap-swiper-button-next"></div>
+                    <div class="swiper-button-prev cheap-swiper-button-prev"></div>
+                    <div class="swiper-pagination cheap-swiper-pagination"></div>
+                </section>
+            </div>
+        </div>
+
+        <section id="offer_search">
+            <h2>Buscar ofertas</h2>
+            <div id="offer_search_container">
+                <div id="filter_container">
+                    <h2>Filtros</h2>
+                    <form action="{% url 'offer_list' %}" method="get">
+                        <div class="search">
+                            <input type="text" name="name" placeholder="Procurar cupom...">
+                            <button type="submit"><img src="{% static 'imgs/search.svg' %}" alt=""></button>
+                        </div>
+                        <fieldset>
+                            <legend>Desconto mínimo</legend>
+                            <div class="slider-wrap">
+                                <output class="slider_bubble"></output>
+                                <input type="range" min="0" max="100" class="slider" value="50" id="min_discount" name="min_discount">
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Data limite</legend>
+                            <div>
+                                <input type="date" id="start_date" name="start_date" placeholder="Data inicial"/>
+                                <input type="date" id="end_date" name="end_date" placeholder="Data final"/>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Categorias</legend>
+                            {% for category in categories %}
+                                <div>
+                                    <input type="checkbox" id="{{category.name}}" name="categories" value="{{category.id}}"/>
+                                    <label for="{{category.name}}">{{category.name}}</label>
+                                </div>
+                            {% endfor %}
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="result">
+                    {% if offersCount > 0 %}
+                        <p>
+                            Exibindo
+                            <span>{{ page_obj.start_index }} - {{ page_obj.end_index }}</span>
+                            de {{ offersCount }} resultados
+                        </p>
+                        <div id="offer_filter_container">
+                            {% for offer in page_obj.object_list %}
+                                {% include 'components/offer_card.html' with offer=offer data_id=offer.id %}
+                            {% endfor %}
+                        </div>
+                        <div class="pagination">
+                            {% if page_obj.has_previous %}
+                                <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&laquo;</a>
+                            {% endif %}
+                            <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&raquo;</a>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="nothing_found">
+                            <img src="{% static 'imgs/not_found.svg' %}" alt="">
+                            <p>Nenhuma oferta encontrada.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {% include 'components/offer_detail_modal.html' %}
+    <div id="success-toast" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+        </svg>
+        <div>
+            <p>Cupom resgatado com sucesso!</p>
+            <p>Acesse "Meus Cupons" para utilizá-lo</p>
+        </div>
+        <button id="close-toast">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" stroke="currentColor" stroke-width="0.7" class="bi bi-x" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+        </button>
+    </div>
+</main>
 {% endblock %}
 {% block scripts %}
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{% static 'js/swiper.js' %}"></script>
 <script src="{% static 'js/offer.js' %}"></script>
 {% endblock %}

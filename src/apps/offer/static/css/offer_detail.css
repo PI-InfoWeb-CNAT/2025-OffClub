@@ -1,4 +1,3 @@
-/* Configurações gerais do modal */
 #transparent-bg {
   position: fixed;
   top: 0;
@@ -19,7 +18,7 @@
   border-radius: var(--border-radius);
   border: 1px solid var(--brand-yellow);
   position: absolute;
-  z-index: 5;
+  z-index: 1000;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -32,7 +31,6 @@
   gap: 30px;
 }
 
-/* Subtítulos */
 #offer-modal h3 {
   font-size: 13px;
   color: var(--light-grey);
@@ -40,36 +38,58 @@
   margin-top: 15px;
 }
 
-/* Botões */
-button {
+#offer-modal button {
   border: none;
   background-color: transparent;
   border-radius: var(--border-radius);
 }
 
-.offer-content {
-  flex: 1;
-}
-
-.offer-card,
-.offer-content {
+#offer-modal .offer-card {
+  padding: 0;
+  background-color: transparent;
+  max-width: none;
+  filter: none;
+  cursor: default;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Valores */
-.price-info p {
+#offer-modal .offer-card:hover {
+    filter: none;
+}
+
+#offer-modal .offer-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+}
+
+#offer-modal .offer-image img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+#offer-modal .offer-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#offer-modal .price-info p {
   font-weight: 500;
 }
 
-#final-value {
+#offer-modal #final-value {
   font-size: 20px;
   font-weight: 700;
   color: var(--brand-yellow);
 }
 
-/* Botão - resgatar */
 #redeem-button {
   background: var(--gradient-yellow-dark-orange);
   color: var(--black);
@@ -79,37 +99,35 @@ button {
   margin-top: 15px;
 }
 
-/* Informações da empresa */
-.shop-info {
+#offer-modal .shop-info {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-top: 15px;
 }
 
-.shop-info>p {
+#offer-modal .shop-info>p {
   font-weight: 300;
 }
 
-.shop-info .yellow-border {
+#offer-modal .shop-info .yellow-border {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.shop-info .yellow-border p {
+#offer-modal .shop-info .yellow-border p {
   font-size: 12px;
   margin-top: 2px
 }
 
-.enterprise-image {
+#offer-modal .enterprise-image {
   object-fit: cover;
   width: 2.5em;
   height: 2.5em;
   border-radius: 50%;
 }
 
-/* Classe para borda amarela */
 .yellow-border {
   border: 1px solid var(--brand-yellow);
   border-radius: 20px;
@@ -117,27 +135,25 @@ button {
   display: inline-block;
 }
 
-/* Status */
-.status p {
+#offer-modal .status p {
   color: var(--brand-yellow);
   margin-top: 3px;
 }
 
-.yellow-border svg {
+#offer-modal .yellow-border svg {
   color: var(--brand-yellow);
 }
 
-/* Unidades restantes */
-.coupons-quantity {
+#offer-modal .coupons-quantity {
   gap: 4px;
 }
 
-.units {
+#offer-modal .units {
   align-items: center;
   gap: 1em;
 }
 
-.remaining-coupons-bar {
+#offer-modal .remaining-coupons-bar {
   flex: 1;
   width: 100%;
   height: 1em;
@@ -148,36 +164,34 @@ button {
   -webkit-appearance: none;
 }
 
-.remaining-coupons-bar::-webkit-progress-bar {
+#offer-modal .remaining-coupons-bar::-webkit-progress-bar {
   background-color: var(--dark-yellow);
   border-radius: 6px;
 }
 
-.remaining-coupons-bar::-webkit-progress-value {
+#offer-modal .remaining-coupons-bar::-webkit-progress-value {
   background-color: var(--brand-yellow);
   border-radius: 6px;
 }
 
-.remaining-coupons-bar::-moz-progress-bar {
+#offer-modal .remaining-coupons-bar::-moz-progress-bar {
   background-color: var(--brand-yellow);
   border-radius: 6px;
 }
 
-
-.units p {
+#offer-modal .units p {
   font-size: 13px;
   font-weight: 600;
   margin-top: 3px;
 }
 
-/* Tags cateogrias */
-.categories {
+#offer-modal .categories {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
-.tag-category {
+#offer-modal .tag-category {
   width: 135px;
   display: inline-flex;
   align-items: center;
@@ -190,26 +204,24 @@ button {
   margin-bottom: 5px;
 }
 
-.tag-category img {
+#offer-modal .tag-category img {
   width: 15px;
   height: 15px;
 }
 
-.tag-category p {
+#offer-modal .tag-category p {
   font-size: 13px;
 }
 
-/* Datas sobre oferta */
-.offer-info {
+#offer-modal .offer-info {
   display: flex;
   justify-content: space-between;
 }
 
-.offer-info div+div {
+#offer-modal .offer-info div+div {
   text-align: end;
 }
 
-/* Botão de fechar modal */
 #close-button-modal,
 #close-toast {
   position: absolute;
@@ -224,16 +236,12 @@ button {
   color: var(--medium-grey);
 }
 
-/* >> APÓS CLICAR EM "RESGATAR" << */
-
-/* Botão resgatar */
 #redeem-button:disabled {
   background: linear-gradient(90deg, #4A3E25, #443322);
   color: #171717;
   cursor: default;
 }
 
-/* Botão acessar cupons */
 #ascess-coupons-button {
   display: flex;
   align-items: center;
@@ -252,7 +260,6 @@ button {
   height: 16px;
 }
 
-/* Notificação de sucesso */
 #success-toast {
   display: flex;
   align-items: center;

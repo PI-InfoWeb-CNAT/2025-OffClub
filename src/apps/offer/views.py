@@ -24,20 +24,12 @@ class OfferListView(View):
         return render(request, 'offer.html', context)
 
 
-class OfferDetailView(View):
+class OfferDetailJsonView(View): 
     """
     Funciona como uma API: retorna os dados de uma oferta específica em JSON.
     """
     def get(self, request, *args, **kwargs):
         offer_id = kwargs.get('offer_id')
-
         offer = get_object_or_404(Offer, pk=offer_id)
-
-        remaining_coupons = offer.max_coupons - offer.generated_coupons
-
-        data = {
-            'offer': offer,
-            'remaining_coupons': remaining_coupons,
-        }
         
-        return render(request, 'offer_detail.html', context=data)
+        return JsonResponse(offer.to_dict())
