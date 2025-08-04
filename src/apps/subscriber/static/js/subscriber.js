@@ -1,32 +1,44 @@
-var button = document.querySelector('.read-more');
-var text = button.querySelector('p');
-var moreCoupons = document.querySelector('.more-coupons');
+document.addEventListener('DOMContentLoaded', function() {
+    const activeCouponsSection = document.querySelector('.active-coupons');
+    if (!activeCouponsSection) return;
 
-button.addEventListener('click', function () {
-    const isExpanded = moreCoupons.classList.toggle('show');
+    const readMoreButton = activeCouponsSection.querySelector('.read-more');
+    const extraCouponsWrapper = activeCouponsSection.querySelector('.extra-coupons-wrapper');
 
-    if (isExpanded) {
-        moreCoupons.style.maxHeight = moreCoupons.scrollHeight + 'px';
-        text.textContent = 'Ver menos';
-        button.classList.add('expanded');
-    } else {
-        moreCoupons.style.maxHeight = '0';
-        text.textContent = 'Ver mais';
-        button.classList.remove('expanded');
+    if (readMoreButton && extraCouponsWrapper) {
+        readMoreButton.addEventListener('click', function() {
+            this.classList.toggle('expanded');
+            const buttonText = this.querySelector('p');
+
+            if (this.classList.contains('expanded')) {
+                extraCouponsWrapper.style.maxHeight = extraCouponsWrapper.scrollHeight + 'px';
+                buttonText.textContent = 'Ver menos';
+            } else {
+                extraCouponsWrapper.style.maxHeight = '0px';
+                buttonText.textContent = 'Ver mais';
+            }
+        });
     }
-});
+    const usedCouponsSection = document.querySelector('.used-coupons');
+    if (usedCouponsSection) {
+        const yearSelect = document.getElementById('year');
+        const monthSections = document.querySelectorAll('.month-section');
 
-const select = document.getElementById('year');
-const coupons = document.querySelectorAll('.months .coupon');
-
-select.addEventListener('change', () => {
-  const selected = select.value;
-
-  coupons.forEach(coupon => {
-    if (selected === 'todos' || coupon.dataset.year === selected) {
-      coupon.style.display = '';
-    } else {
-      coupon.style.display = 'none';
+        if (yearSelect && monthSections.length > 0){
+            function filterCoupons(){
+                const selectedYear = yearSelect.value;
+                monthSections.forEach(section => {
+                    const sectionYear = section.dataset.year;
+                    if (sectionYear == selectedYear){
+                        section.style.display = 'block';
+                    }
+                    else{
+                        section.style.display = 'none';
+                    }
+                })        
+            }
+            yearSelect.addEventListener('change', filterCoupons);
+            filterCoupons();
+        }
     }
-  });
 });

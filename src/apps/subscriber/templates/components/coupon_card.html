@@ -12,8 +12,8 @@
     </div>
     <div class="price">
         <p class="currency">R$</p>
-        <p class="promotion_price">{{ final_price }}</p>
-        <p class="old_price">{{ old_price }}</p>
+        <p class="promotion_price">{{ final_price|floatformat:2 }}</p>
+        <p class="old_price">{{ old_price|floatformat:2 }}</p>
     </div>
     <div class="coupon_card_coupon">
         {% if used_date %}

@@ -1,29 +1,50 @@
 from urllib import request
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from apps.coupon.models import Coupon
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.views import View
+from apps.subscriber.services.services import ServiceDiscount
 
-def calculate_discount(price, discount_percentage):
-    final_price = price - (price * discount_percentage /100)
-    return price, final_price
+class SubscriberViews(View):
+    @staticmethod
+    # @login_required
+    def consumption_history_list(request):
+        if request.method == 'GET':
+            # logged_user = request.user
+            # user_id = logged_user.id
+            # user_coupons = Coupon.objects.filter(subscriber=user_id)
+            #context = {'coupons': user_coupons}
+            used_filtered = Coupon.objects.filter(used_date__isnull=False).order_by('-used_date')
+            active_filtered = Coupon.objects.filter(used_date__isnull=True)
+            used_coupons = []
+            active_coupons = []
+            years_group = []
+            for coupon in used_filtered:
+                price = coupon.offer.price
+                discount = coupon.offer.discount
+                old_price, final_price = ServiceDiscount.final_price(price, discount)
+                coupon_data = {
+                        'old_price':     old_price,
+                        'final_price':   final_price,
+                        'used_month':    coupon.used_date.month,
+                        'used_year': coupon.used_date.year,
+                    }
+                dic = {'object': coupon, 'data': coupon_data}
+                if coupon_data['used_year'] not in years_group:
+                    years_group.append(coupon_data['used_year'])
+                used_coupons.append(dic)
 
-@login_required
-def historico(request):
-    # logged_user = request.user
-    # user_id = logged_user.id
-    # user_coupons = Coupon.objects.filter(subscriber=user_id)
-    #context = {'coupons': user_coupons}
-    objects = Coupon.objects.all()
-    coupons = []
-    for coupon in objects:
-        price = coupon.offer.price
-        discount = coupon.offer.discount
-        old_price, final_price = calculate_discount(price, discount)
-        coupon_data = {
-                'old_price':     old_price,
-                'final_price':   final_price,
-            }
-        dic = {'object': coupon, 'data': coupon_data}
-        coupons.append(dic)
-    context = {'coupons': coupons}
-    return render(request, 'subscriber.html', context=context, status=200)
+            for coupon in active_filtered:
+                price = coupon.offer.price
+                discount = coupon.offer.discount
+                old_price, final_price = ServiceDiscount.final_price(price, discount)
+                coupon_data = {
+                        'old_price':     old_price,
+                        'final_price':   final_price,
+                        'used_month': None,
+                    }
+                dic = {'object': coupon, 'data': coupon_data}
+                active_coupons.append(dic)
+            context = {'used_coupons': used_coupons, 'active_coupons': active_coupons, 'years_group': years_group}
+            return render(request, 'subscriber.html', context=context, status=200)
