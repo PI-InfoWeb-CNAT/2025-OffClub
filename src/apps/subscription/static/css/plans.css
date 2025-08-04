@@ -12,7 +12,9 @@ main.container {
 .plan-cards-container {
     margin-top: 2em;
     gap: 20px;
+    min-height: 100%;
     width: 100%;
+    align-items: stretch;
 }
 
 /* ============================================= */
@@ -21,6 +23,7 @@ main.container {
 .plan-card {
     border-radius: var(--border-radius-small);
     width: 60%;
+    flex: 1;
     padding: 1px;
     height: -webkit-fill-available;
 }
