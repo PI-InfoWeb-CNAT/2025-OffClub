@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Histórico de Consumo {% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/subscriber.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/coupon_card.css' %}">
+{% endblock head %}
+
+{% block main %}
+<article id="historico">
+    <div class="container">
+        <h1>HISTÓRICO DE CONSUMO</h1>
+        <section class="active-coupons">
+            <h2><span>ATIVOS</span></h2>
+
+            <div class="coupons flex-center">
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+            </div>
+            <div class="coupons more-coupons">
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+            </div>
+
+            <div class="divider">
+                <hr class="line before">
+                <button class="read-more">
+                    <p>Ver mais</p>
+                    <img src="{% static 'imgs/ver_mais.svg' %}" alt="">
+                </button>
+                <hr class="line after">
+            </div>
+        </section>
+
+        <section class="used-coupons">
+            <h2><span>UTILIZADOS</span></h2>
+
+            <div class="months">
+                <div class="month">
+                    <h3>Julho</h3>
+                    <div class="coupons flex-center">
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                        {% include 'components/coupon_card.html' with used_date="10 de Jul., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+                    </div>
+                </div>
+
+                <div class="month">
+                    <h3>Junho</h3>
+                    <div class="coupons flex-center">
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                        {% include 'components/coupon_card.html' with used_date="10 de Jun., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+                    </div>
+                    <div class="month">
+                        <div class="coupons more-coupons">
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+
+                            {% include 'components/coupon_card.html' with used_date="10 de Mai., 2025" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</article>
+<script src="{% static 'js/subscriber.js' %}"></script>
+{% endblock main %}

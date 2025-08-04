@@ -1,0 +1,115 @@
+.coupon_card{
+    background-color: #252525;
+    display: inline-block;
+    padding: 1.8em 1.8em 0 1.8em;
+    box-sizing: border-box;
+    width: 15em;
+    height: 23em;
+    border-radius: 4%;
+    margin: 1%;
+}
+.coupon_card p.general {
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    line-height: var(--text-line-height);
+    color: var(--text-color);
+}
+.coupon_card_enterprise {
+    margin-bottom: 5%;
+}
+.coupon_card_enterprise > * {
+    display: inline-block;
+    color: var(--white);
+}
+.coupon_card_enterprise > img {
+    margin-right: 1%;
+    width: 23px;
+}
+.coupon_card_enterprise > p {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.8em;
+    margin: auto 0;
+    position: relative;
+    bottom: 0.5em;
+}
+.coupon_card_offer {
+    position: relative;
+}
+.coupon_card_offer > span {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    position: relative;
+    color: var(--white);
+    border-radius: 0.5em;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    background-color: var(--purple);
+    left: -0.4em;
+    top: -1.25em;
+}
+.coupon_card_offer a {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.1em;
+    color: var(--white);
+}
+.coupon_card_coupon > p {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    margin: 3% 0 12% 0;
+    color: var(--offwhite);
+}
+.coupon_card_coupon input {
+    width: 100%;
+    padding: 0.5em;
+    background-color: var(--background_color);
+    font-size: 1em;
+    border-radius: 5%;
+    color: var(--white);
+}
+.coupon_card_offer .enterprise_image{
+    position: relative;
+    top: -7.8em;
+    left: -4em;
+}
+.offer_image {
+    position: relative;
+    width: 185px;
+}
+.price {
+    display: flex; 
+    gap: 0.4em; 
+    align-items: baseline; 
+    margin: 1em 0;
+}
+.currency {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    color: var(--brand-yellow); 
+    font-size: 1em;
+}
+.promotion_price {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    color: var(--brand-yellow); 
+    font-size: 1.5em;
+}
+.old_price {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: var(--offwhite); 
+    font-size: 1em; 
+    text-decoration: line-through;
+}

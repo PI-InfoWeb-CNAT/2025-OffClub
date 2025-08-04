@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%  block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="shortcut icon" href="{% static 'imgs/icons/favicon.png' %}" type="image/x-icon">
+    {% block head %} {% endblock head %}
+</head>
+<body>
+    {% include 'header.html' %}
+    {% block main %} {% endblock main %}
+    {% block scripts %} {% endblock scripts %}
+    {% include 'footer.html' %}
+</body>
+</html>

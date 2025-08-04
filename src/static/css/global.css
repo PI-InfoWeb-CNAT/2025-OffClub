@@ -1,0 +1,73 @@
+@import url('_variables.css');
+@import url('_layouts.css');
+@import url('header.css');
+@import url('footer.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--background-color);
+    background-image: url('../imgs/noise.png');
+    background-repeat: repeat;
+    font-family: var(--main-font-family);
+    min-height: 100vh;
+}
+
+main {
+    width: 100%;
+}
+
+p {
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    line-height: var(--text-line-height);
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: var(--h1-font-size);
+    font-weight: var(--h1-font-weight);
+    line-height: var(--h1-line-height);
+    color: var(--h1-color);
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+    line-height: var(--h2-line-height);
+    color: var(--h2-color);
+}
+
+h3 {
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+    line-height: var(--h3-line-height);
+    color: var(--h3-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}

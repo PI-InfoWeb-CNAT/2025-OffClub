@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="{{class}} offer_card">
+    <div class="offer_card_enterprise">
+        <img src="{{ enterprise_image }}" alt="">
+        <p>{{ enterprise_name }}</p>
+    </div>
+    <div class="offer_card_offer">
+        <img src="{{ offer_image }}" alt="" class="offer_image">
+        <span>{{ discount }}</span>
+        <h3><a href="{{link}}">{{ title }}</a></h3>
+    </div>
+    <div class="price">
+        <p class="currency">R$</p>
+        <p class="promotion_price">20,00</p>
+        <p class="old_price">25,00</p>
+    </div>
+    <div class="offer_card_coupon">
+        <p class="general">Até {{ end_date }}</p>
+    </div>
+</div>

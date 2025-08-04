@@ -1,0 +1,315 @@
+
+.home-main {
+    gap: 5em;
+}
+
+section.hero-section {
+    margin-top: 1em;
+    border-radius: var(--border-radius);
+    background-image: url('../imgs/hero-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 648px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.hero-texts {
+    text-align: center;
+    
+    h1 {
+        max-width: 60%;
+        font-size: 28px;
+        letter-spacing: 0%;
+        font-weight: var(--h1-font-weight);
+        line-height: var(--h1-line-height);
+        color: var(--white);
+        margin-bottom: 1em;
+    }
+    
+    p {
+        max-width: 40%;
+        font-size: 18px;
+        letter-spacing: 0%;
+        font-weight: var(--minor-text-font-weight);
+        line-height: var(--minor-text-line-height);
+        color: var(--white);
+    }
+}
+
+.hero-buttons {
+    gap: 1em;
+}
+
+.hero-button {
+    width: 250px;
+    height: 52px;
+    font-size: var(--text-font-size);
+    font-weight: var(--minor-text-font-weight);
+    border-radius: var(--border-radius-small);
+    box-sizing: border-box;
+}
+
+.hero-know-more-button {
+    background-color: var(--background-color);
+    border: 1px solid var(--brand-yellow);
+    color: var(--brand-yellow);
+    transition-duration: 0.3s;
+    font-weight: bold;
+}
+
+.hero-register-button {
+    background: var(--gradient-yellow-orange);
+    border: none;
+    color: var(--background-color);
+    transition-duration: 0.3s;
+    font-weight: bold;
+
+}
+
+.hero-register-button:hover,
+.hero-know-more-button:hover {
+    filter: brightness(1.2);
+    transition-duration: 0.3s;
+}
+
+/* Carrossel de categorias */
+
+.categories-slider {
+    width: 100%;
+}
+
+/* Seção de COMO FUNCIONA */
+
+div.how-it-works-wrapper {
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+.how-it-works-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.how-it-works-content h1 {
+    font-size: 2em;
+}
+
+.tabs {
+    gap: 24px;
+}
+
+.tab-link {
+    background-color: var(--background-color);
+    color: var(--white);
+    font-family: var(--special-font-family);
+    font-size: 1.25em;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    transition-duration: 0.2s;
+
+    &:hover {
+        transition-duration: 0.2s;
+        background-color: var(--offwhite);
+        color: black;
+    }
+}
+
+.tab-link.active {
+    background-color: var(--offwhite);
+    border: 1px solid var(--white);
+    color: var(--background-color);
+}
+
+.tab-content {
+    display: none;
+    max-width: 50%;
+    flex-direction: column;
+    gap: 1em;
+
+    p {
+        font-weight: 300;
+    }
+}
+
+.tab-content:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.sliders {
+    gap: 1em;
+}
+
+.sliders .slider-line {
+    width: 1.5em;
+    height: 0.5em;
+    background-color: var(--almost-transparent-white);
+    border-radius: var(--border-radius);
+}
+
+.sliders .slider-line:nth-child(2) {
+    width: 4em;
+    background-color: var(--offwhite);
+}
+
+figure.how-it-works-image-wrapper {
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px; 
+    padding-right: 3em;
+}
+
+figure.how-it-works-image-wrapper img:nth-of-type(1) {
+    position: absolute;
+    top: 0;
+    right: 30%;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+figure.how-it-works-image-wrapper img:nth-of-type(2) {
+    position: relative; 
+    z-index: 2; 
+}
+
+/* Seção de Planos */
+
+.home-plans {
+    padding-top: 120px;
+    position: relative;
+    box-sizing: content-box;
+    gap: 3em;
+}
+
+.home-plans-title-wrapper {
+    position: absolute;
+    top: 0;
+}
+
+.home-plans-wrapper {
+    gap: 3em;
+}
+
+.view-detailed-plans-btn {
+    color: var(--white);
+    font-size: var(--text-font-size-large);
+    padding: 0.5em 3em;
+    background-color: var(--background-color);
+    border: 1px solid var(--brand-yellow);
+    border-radius: var(--border-radius);
+    gap: 2em;
+}
+
+
+.view-detailed-plans-btn img {
+    transition: ease-in-out;
+    transition-duration: 0.2s;
+    width: 1.25em;
+    height: auto;
+}
+
+.view-detailed-plans-btn:hover img {
+    transition-duration: 0.2s;
+    transform: translateX(50%) scale(1.1);
+}
+
+.view-detailed-plans-btn:hover {
+    transition-duration: 0.2s;
+    filter: brightness(1.2);
+}
+
+/* Seção de ACESSE EM QUALQUER LUGAR */
+
+div.access-everywhere-wrapper {
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+section.access-everywhere h1 {
+    font-size: 2em;
+}
+
+figure.access-everywhere-image-wrapper {
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px; 
+    padding-right: 3em;
+}
+
+figure.access-everywhere-image-wrapper img:nth-of-type(1) {
+    position: relative; 
+    transform: scale(1.2);
+    transform: translateX(-20%);
+    z-index: 2; 
+}
+
+figure.access-everywhere-image-wrapper img:nth-of-type(2) {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.access-everywhere-content {
+    gap: 1em;
+    text-align: center;
+    max-width: 35%;
+}
+
+.access-everywhere-content h1 {
+    margin-bottom: 1em;
+}
+
+.access-everywhere-content p {
+    font-size: var(--text-font-size-large);
+}
+
+.access-everywhere-content .highlight {
+    color: var(--brand-orange);
+}
+
+/* Seção de REVIEWS */
+
+.reviews.swiper {
+    margin-bottom: 6em;
+}
+
+.reviews .swiper-wrapper {
+    padding: 1em 0;
+}
+
+.reviews .swiper-pagination {
+  position: relative; 
+  bottom: auto;       
+  margin-top: 2rem;   
+}
+
+.reviews .swiper-pagination-bullet {
+  width: 24px; 
+  height: 8px;
+  border-radius: var(--border-radius); 
+
+  background-color: var(--almost-transparent-white); 
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.reviews .swiper-pagination-bullet-active {
+  background-color: var(--brand-yellow); 
+  width: 80px; 
+}

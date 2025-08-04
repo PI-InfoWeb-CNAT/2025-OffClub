@@ -1,0 +1,64 @@
+{% load static %}
+
+<header>
+    <div class="top-header container">
+        <div class="left-top-header">
+            <figure class="header-logo-wrapper">
+                <img src="{% static 'imgs/logo.svg' %}" alt="Logo do Offclub">
+            </figure>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar por..." class="search-input">
+                <img src="{% static 'imgs/icons/search.svg' %}" alt="Ícone de Lupa">
+            </div>
+        </div>
+        <div class="right-top-header flex-center">
+            <div class="location">
+                <img src="{% static 'imgs/icons/location.svg' %}" alt="Localização">
+                <p>Localização</p>
+            </div>
+            <figure class="profile-button-wrapper flex-center">
+                <a href="#">
+                    <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
+                </a>
+            </figure>
+            <div class="toggle-container">
+                <input type="checkbox" id="theme-toggle" class="toggle-checkbox">
+                <label for="theme-toggle" class="toggle-label">
+                    <img src="{% static 'imgs/icons/sun.svg' %}" class="sun" alt="Sol">
+                    <img src="{% static 'imgs/icons/moon.svg' %}" class="moon" alt="Lua">
+                    <span class="toggle-thumb"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <hr class="container header-divider">
+
+    <div class="bottom-header container">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#">Offclub</a>
+                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
+            </li>
+            <li class="nav-item">
+                <a href="#">Ofertas</a>
+                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
+            </li>
+            <li class="nav-item">
+                <a href="#">Parceiros</a>
+                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
+            </li>
+            <li class="nav-item">
+                <a href="#">Planos</a>
+                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
+            </li>
+            <li class="nav-item">
+                <a href="#">Cupons</a>
+                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
+            </li>
+            <li class="nav-item">
+                <a href="#">Contato</a>
+            </li>
+        </ul>
+    </div>
+</header>

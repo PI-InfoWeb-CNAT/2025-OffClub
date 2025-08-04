@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}OFFCLUB{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />   
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/plan_card.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/review.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/category_badge.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+{% endblock head %}
+
+{% block main %}
+<main class="home-main flex-center flex-column">
+    <section class="container hero-section">
+        <div class="hero-texts flex-column flex-center">
+            <h1>Economize e ajude a movimentar a economia local com as nossas ofertas!</h1>
+            <p>Acessso exclusivo a diversos cupons de desconto. Todo mundo ganha!</p>
+        </div>
+        <div class="hero-buttons flex-row">
+            <a href="#">
+                <button class="hero-button hero-know-more-button">Saiba mais</button>
+            </a>
+            <a href="#">
+                <button class="hero-button hero-register-button">Registrar-se</button>
+            </a>
+        </div>
+    </section>
+
+    <div class="categories-slider container swiper">
+        <div class="container swiper-wrapper">
+            {% for i in "1234567890" %}
+                <div class="swiper-slide">
+                    {% include 'components/category_badge.html' with category_name='Categoria' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="how-it-works-wrapper">
+        <section class="container how-it-works flex-row flex-center">
+            <div class="how-it-works-content">
+                <h1>COMO FUNCIONA?</h1>
+    
+                <div class="tabs flex-row">
+                    <button class="tab-link">1</button>
+                    <button class="tab-link active">2</button>
+                    <button class="tab-link">3</button>
+                    <button class="tab-link">4</button>
+                </div>
+    
+                <div class="tab-content" id="tab-1">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+                <div class="tab-content" id="tab-2">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+                <div class="tab-content" id="tab-3">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+                <div class="tab-content" id="tab-4">
+                    <h2>Título do Tópico</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+    
+                <div class="sliders flex-row">
+                    <div class="slider-line" id="slider-1"></div>
+                    <div class="slider-line" id="slider-2"></div>
+                    <div class="slider-line" id="slider-3"></div>
+                    <div class="slider-line" id="slider-4"></div>
+                </div>
+            </div>
+    
+            <figure class="how-it-works-image-wrapper">
+                <img src="{% static 'imgs/hiw-figure.png' %}" alt="">
+                <img src="{% static 'imgs/3d-gift.png' %}" alt="Ilustração 3D de um presente">
+            </figure>
+        </section>
+    </div>
+
+    <section class="home-plans flex-column flex-center">
+        <figure class="home-plans-title-wrapper">
+            <img src="{% static 'imgs/home-plans-title.svg' %}" alt="Título da seção de planos">
+        </figure>
+        <div class="home-plans-wrapper flex-row">
+            {% include 'components/plan_card.html' with plan_class="copper" plan_name="Bronze" price="9,90" %}
+
+            {% include 'components/plan_card.html' with plan_class="silver" plan_name="Prata" price="19,90" %}
+
+            {% include 'components/plan_card.html' with plan_class="gold" plan_name="Ouro" price="29,90" %}
+        </div>
+        <a href="#">
+            <button class="view-detailed-plans-btn flex-row flex-center">
+                Ver planos detalhados
+                <img src="{% static 'imgs/icons/golden-btn-arrow.svg' %}" alt="">
+            </button>
+        </a>
+    </section>
+
+    <div class="access-everywhere-wrapper">
+        <section class="access-everywhere container flex-center flex-row">
+            <figure class="access-everywhere-image-wrapper">
+                <img src="{% static 'imgs/phone-mockup.png' %}"
+                    alt="Renderização de um celular mostrando a exibição mobile do nosso site">
+                <img src="{% static 'imgs/access-everywhere-figure.png' %}">
+            </figure>
+    
+            <div class="access-everywhere-content flex-column">
+                <h1>ACESSSE DE QUALQUER LUGAR!</h1>
+                <p>Lorem ipsum <span class="highlight">dolor sit amet</span>, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna <span class="highlight">aliqua</span>. Ut enim ad minim
+                    veniam</p>
+                <p>Tempor incididunt ut labore et dolore magna aliqua. Ut enim <span class="highlight">ad minim</span>
+                    veniam</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="reviews container swiper">
+        <div class="flex-row swiper-wrapper">
+            {% for i in "12345" %}
+                {% include 'components/review.html' with rating=5 text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ipsum dolor' author_name='John Doe' author_role='Cliente' %}
+            {% endfor %}
+        </div>
+
+        <div class="reviews-pagination swiper-pagination"></div>
+    </section>
+</main>
+{% endblock main %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/testimonials.js' %}"></script>
+<script src="{% static 'js/badges.js' %}"></script>
+{% endblock scripts %}

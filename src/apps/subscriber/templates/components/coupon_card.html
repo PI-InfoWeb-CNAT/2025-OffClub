@@ -1,0 +1,25 @@
+{% load static %}
+
+<div class="{{class}} coupon_card">
+    <div class="coupon_card_enterprise">
+        <img src="{% static enterprise_image %}" alt="">
+        <p>{{ enterprise_name }}</p>
+    </div>
+    <div class="coupon_card_offer">
+        <img src="{% static offer_image %}" alt="" class="offer_image">
+        <span>{{ discount }}</span>
+        <h3><a href="{{link}}">{{ title }}</a></h3>
+    </div>
+    <div class="price">
+        <p class="currency">R$</p>
+        <p class="promotion_price">20,00</p>
+        <p class="old_price">25,00</p>
+    </div>
+    <div class="coupon_card_coupon">
+        {% if used_date %}
+            <p class="general">Usado em {{ used_date }}</p>
+        {% else %}
+            <p class="general">Regatar até {{ end_date }}</p>
+        {% endif %}
+    </div>
+</div>
