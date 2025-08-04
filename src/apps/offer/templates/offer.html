@@ -36,28 +36,18 @@
         <section id="popular_enterprises">
             <h2>Empresas mais populares</h2>
             <div id="popular_enterprises_container">
-                {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
-                {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
-                {% include 'components/enterprise_card.html' with dist="2.5 km" category="Barbearia" name="Barbearia do mãozinha" stars="5.0" image="../static/imgs/image.png" %}
-                {% include 'components/enterprise_card.html' with dist="27 km" category="Alimentação" name="Felicidadezinha" stars="1.2" image="../static/imgs/image.png" %}
-            </div>
+                {% include 'components/enterprise_card.html' with dist="2.5 km" category="Cafeteria" name="Starbucks" stars="5.0" image="../../../../uploads/uploads/profile_pics/Starbucks_Corporation_Logo_2011.svg-e1657703028844.avif" %}
+                {% include 'components/enterprise_card.html' with dist="1.2 km" category="Brinquedos" name="Lego Brinquedos" stars="5.0" image="../../../../uploads/uploads/profile_pics/images.png" %}
+                {% include 'components/enterprise_card.html' with dist="5.4 km" category="Tecnologia" name="Lorem Ipsum" stars="5.0" image="../../../../uploads/uploads/profile_pics/vector-de-gradiente-de-logotipo-colorido-de-passaro_343694-1365.avif" %}
         </section>
 
         <div id="cheap_offers">
-            <h2>Preço mais baixo</h2>
+            <h2>Ofertas em destaque</h2>
             <div id="cheap_offers_container">
                 <section class="swiper_session">
                     <div class="swiper cheapSwiper container">
                         <div class="swiper-wrapper content">
                             {% for offer in cheapOffers %}
-                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
-                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
-                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
-                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
-                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
-                                {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
                                 {% include 'components/offer_card.html' with offer=offer class="swiper-slide" data_id=offer.id %}
                             {% endfor %}
                         </div>

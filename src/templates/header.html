@@ -3,9 +3,11 @@
 <header>
     <div class="top-header container">
         <div class="left-top-header">
-            <figure class="header-logo-wrapper">
-                <img src="{% static 'imgs/logo.svg' %}" alt="Logo do Offclub">
-            </figure>
+            <a href="{% url 'home' %}">
+                <figure class="header-logo-wrapper">
+                    <img src="{% static 'imgs/logo.svg' %}" alt="Logo do Offclub">
+                </figure>
+            </a>
             <div class="search-bar">
                 <input type="text" placeholder="Buscar por..." class="search-input">
                 <img src="{% static 'imgs/icons/search.svg' %}" alt="Ícone de Lupa">
@@ -59,7 +61,7 @@
                 <div class="dropdown-nav nav-offclub">
                     <ul class="dropdown-nav-list">
                         <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Explorar ofertas</a>
+                            <a class="dropdown-nav-link" href="{% url 'offer_list' %}">Explorar ofertas</a>
                         </li>
                         <li class="dropdown-nav-item">
                             <a class="dropdown-nav-link" href="#">Explorar empresas</a>
@@ -87,7 +89,7 @@
                 <div class="dropdown-nav nav-offclub">
                     <ul class="dropdown-nav-list">
                         <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Nossos planos</a>
+                            <a class="dropdown-nav-link" href="{% url 'plans' %}">Nossos planos</a>
                         </li>
                         <li class="dropdown-nav-item">
                             <a class="dropdown-nav-link" href="#">Minhas assinaturas</a>
