@@ -1,21 +1,29 @@
 {% load static %}
+<div class="{{ class }} offer-card flex-column flex-center" data-offer-id="{{ data_id }}">
+    <div class="offer-card-enterprise">
+        {% if offer.enterprise.user.profile_picture %}
+        <img src="{{ offer.enterprise.user.profile_picture.url }}" alt="Logo {{ offer.enterprise.trade_name }}">
+        {% else %}
+        <img src="{% static 'imgs/empty_enterprise.svg' %}" alt="">
+        {% endif %}
+        <p>{{ offer.enterprise.trade_name }}</p>
+    </div>
 
-<div class="{{class}} offer_card">
-    <div class="offer_card_enterprise">
-        <img src="{{ enterprise_image }}" alt="">
-        <p>{{ enterprise_name }}</p>
+    <div class="offer-card-offer">
+        <div class="offer-image-wrapper">
+            <img src="{{ offer.image.url }}" alt="Imagem de {{ offer.title }}" class="offer-image">
+            <span class="offer-discount-badge">{{ offer.discount }}%</span>
+        </div>
+        <h3 class="offer-title">{{ offer.title }}</h3>
     </div>
-    <div class="offer_card_offer">
-        <img src="{{ offer_image }}" alt="" class="offer_image">
-        <span>{{ discount }}</span>
-        <h3><a href="{{link}}">{{ title }}</a></h3>
-    </div>
-    <div class="price">
+
+    <div class="price-wrapper">
         <p class="currency">R$</p>
-        <p class="promotion_price">20,00</p>
-        <p class="old_price">25,00</p>
+        <p class="promotion-price">{{ offer.final_price|stringformat:".2f" }}</p>
+        <p class="old-price">{{ offer.price|stringformat:".2f" }}</p>
     </div>
-    <div class="offer_card_coupon">
-        <p class="general">Até {{ end_date }}</p>
+
+    <div class="offer-card-footer">
+        <p class="offer-date">Até {{ offer.end_date|date:"d/m/Y" }}</p>
     </div>
 </div>

@@ -1,7 +1,11 @@
 {% load static %}
 
 <section class="enterprise_card">
-    <img src="{{ image }}" alt="">
+    {% if image %}
+        <img src="{{ image }}" alt="">
+    {% else %}
+        <img src="{% static 'imgs/empty_enterprise.svg' %}" alt="">
+    {% endif %}
     <div class="enterprise_data">
         <img src="" alt="">
         <h3>{{ name }}</h3>

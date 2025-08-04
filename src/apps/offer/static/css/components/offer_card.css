@@ -1,115 +1,116 @@
-.currency {
+.swiper-pagination {
+    z-index: auto;
+}
+
+.currency,
+.promotion-price,
+.offer-discount-badge,
+.offer-date {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 300;
     font-style: normal;
-    color: var(--brand-yellow); 
-    font-size: 1em;
 }
-.promotion_price {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 800;
-    font-style: normal;
-    color: var(--brand-yellow); 
-    font-size: 1.5em;
-}
-.old_price {
+
+.old-price,
+.offer-card-enterprise p,
+.offer-title a {
     font-family: "Poppins", sans-serif;
-    font-weight: 300;
     font-style: normal;
-    color: var(--offwhite); 
-    font-size: 1em; 
-    text-decoration: line-through;
 }
-.offer_card{
+
+.offer-card {
     background-color: #252525;
     display: inline-block;
-    padding: 1.8em 1.8em 0 1.8em;
+    padding: 0.5em 1em;
     box-sizing: border-box;
-    width: 15em;
-    height: 23em;
-    border-radius: 4%;
-    margin: 1%;
+    border-radius: var(--border-radius-small);
+    max-width: fit-content;
 }
-.offer_card p.general {
-    font-size: var(--text-font-size);
-    font-weight: var(--text-font-weight);
-    line-height: var(--text-line-height);
-    color: var(--text-color);
+
+.offer-card:hover {
+    cursor: pointer;
+    filter: brightness(1.15);
+    transition: all 0.1s ease-in-out;
 }
-.offer_card_enterprise {
-    margin-bottom: 5%;
+
+.offer-card-enterprise {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
-.offer_card_enterprise > * {
-    display: inline-block;
+
+.offer-card-enterprise img {
+    height: 1.8em;
+    width: 1.8em;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.offer-card-enterprise p {
     color: var(--white);
-}
-.offer_card_enterprise > img {
-    margin-right: 1%;
-    width: 23px;
-}
-.offer_card_enterprise > p {
-    font-family: "Poppins", sans-serif;
     font-weight: 400;
-    font-style: normal;
     font-size: 0.8em;
-    margin: auto 0;
-    position: relative;
-    bottom: 0.5em;
 }
-.offer_card_offer {
+
+.offer-image-wrapper {
     position: relative;
+    margin-bottom: 6px;
 }
-.offer_card_offer > span {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
+
+.offer-image {
+    border-radius: var(--border-radius-small);
+    height: 8em;
+    width: 12em;
+    object-fit: cover;
+}
+
+.offer-discount-badge {
+    position: absolute;
+    left: -5px;
+    bottom: 0;
     font-weight: 800;
-    font-style: normal;
-    position: relative;
     color: var(--white);
-    border-radius: 0.5em;
+    background-color: var(--purple);
     font-size: 1.1em;
     padding: 0.5em 1em;
-    background-color: var(--purple);
-    left: -0.4em;
-    top: -1.25em;
+    border-radius: 0.5em;
 }
-.offer_card_offer a {
-    font-family: "Poppins", sans-serif;
+
+.offer-title a {
     font-weight: 600;
-    font-style: normal;
     font-size: 1.1em;
     color: var(--white);
 }
-.offer_card_coupon > p {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
+
+.price-wrapper {
+    display: flex;
+    gap: 0.4em;
+    align-items: baseline;
+    margin: 1em 0;
+}
+
+.currency {
     font-weight: 300;
-    font-style: normal;
+    color: var(--brand-yellow);
+    font-size: 1em;
+}
+
+.promotion-price {
+    font-weight: 800;
+    color: var(--brand-yellow);
+    font-size: 1.5em;
+}
+
+.old-price {
+    font-weight: 300;
+    color: var(--offwhite);
+    font-size: 1em;
+    text-decoration: line-through;
+}
+
+.offer-date {
+    font-weight: 300;
     margin: 3% 0 12% 0;
     color: var(--offwhite);
-}
-.offer_card_coupon input {
-    width: 100%;
-    padding: 0.5em;
-    background-color: var(--background_color);
-    font-size: 1em;
-    border-radius: 5%;
-    color: var(--white);
-}
-.offer_card_offer .enterprise_image{
-    position: relative;
-    top: -7.8em;
-    left: -4em;
-}
-.offer_image {
-    position: relative;
-    width: 185px;
-}
-.price {
-    display: flex; 
-    gap: 0.4em; 
-    align-items: baseline; 
-    margin: 1em 0;
+    font-size: var(--text-font-size);
 }

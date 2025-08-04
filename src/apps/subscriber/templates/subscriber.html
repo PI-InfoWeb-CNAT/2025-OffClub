@@ -9,30 +9,21 @@
 {% endblock head %}
 
 {% block main %}
-<article id="historico">
+<main id="historico">
     <div class="container">
         <h1>HISTÓRICO DE CONSUMO</h1>
         <section class="active-coupons">
             <h2><span>ATIVOS</span></h2>
-
-            <div class="coupons flex-center">
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-            </div>
-            <div class="coupons more-coupons">
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-
-                {% include 'components/coupon_card.html' with end_date="31 de Jan., 2026" title="Cabelo, barba e sobrancelha" discount="25%" offer_image="imgs/84b5215ac9f28770c0e6bae3def448f4.png" enterprise_name="Barbearia do mãozinha" enterprise_image="imgs/logo-maozinha.png"%}
-            </div>
+            {% for coupon in coupons %}
+                {% if not coupon.used_date %}
+                    <div class="coupons flex-center">
+                        {% include 'components/coupon_card.html' with end_date=coupon.object.expiration_date title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                    </div>
+                    <div class="coupons more-coupons">
+                        {% include 'components/coupon_card.html' with end_date="coupon.expiration_date" title="coupon.offer.title" discount="coupon.offer.discount" offer_image="coupon.offer.image" enterprise_name="coupon.offer.enterprise" enterprise_image="coupon.enterprise.user.profile_picture"%}
+                    </div>
+                {% endif %}
+            {% endfor %}
 
             <div class="divider">
                 <hr class="line before">
@@ -87,6 +78,6 @@
             </div>
         </section>
     </div>
-</article>
+</main>
 <script src="{% static 'js/subscriber.js' %}"></script>
 {% endblock main %}

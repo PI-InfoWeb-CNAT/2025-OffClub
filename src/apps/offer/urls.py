@@ -1,8 +1,7 @@
 from django.urls import path, include
-from .views import OfferViews
-from . import views
+from .views import OfferListView, OfferDetailJsonView
 
 urlpatterns = [
-    path('detalhar_oferta/', views.offer, name='offer_detail'),
-    path('', OfferViews.list_filter_offer)
+    path('', OfferListView.as_view(), name='offer_list'),
+    path('json/<uuid:offer_id>/', OfferDetailJsonView.as_view(), name='offer_detail_json'),
 ]
