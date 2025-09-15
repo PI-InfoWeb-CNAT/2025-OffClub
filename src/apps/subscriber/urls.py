@@ -1,6 +1,6 @@
 from django.urls import path, include
-from .views import historico
+from .views import HistoryView
 
 urlpatterns = [
-    path('historico_consumo/', historico, name='historico')
+    path('history/', HistoryView.as_view(), name='history')
 ]
