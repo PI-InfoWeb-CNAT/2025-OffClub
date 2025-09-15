@@ -6,6 +6,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/plans.css' %}">
+<script src="https://js.stripe.com/v3/"></script>
 {% endblock head %}
 
 {% block main %}
@@ -62,7 +63,10 @@
                     <p>Valor mensal do plano:</p>
                     <p class="plan-price">R$ {{ plan.price|floatformat:2 }}</p>
                 </div>
-                <button class="subscribe-button">ASSINAR</button>
+                <form action="{% url 'create_checkout_session' plan.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="subscribe-button">ASSINAR</button>
+                </form>
             </div>
         </section>
         {% endfor %}

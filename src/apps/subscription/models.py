@@ -21,6 +21,8 @@ class SubscriptionPlan(models.Model):
     price = models.DecimalField('Preço', max_digits=5, decimal_places=2)
     duration = models.DurationField('Duração em dias', null=False)
     features = models.ManyToManyField(Feature, related_name='plans', blank=True)
+    stripe_price_id = models.CharField(max_length=100, blank=True, null=True)
+
 
     def __str__(self):
         return f'{self.title} - {self.duration} dias'
@@ -38,6 +40,9 @@ class Subscription(models.Model):
     start_date = models.DateTimeField('Data de Início', auto_now_add=True)
     end_date = models.DateTimeField('Data de Término', null=True, blank=True)
     active = models.BooleanField('Ativo', default=True)
+    stripe_customer_id = models.CharField(max_length=100, blank=True, null=True)
+    stripe_subscription_id = models.CharField(max_length=100, blank=True, null=True)
+
 
     def __str__(self):
         return f'{self.user} - {self.plan.title}'
@@ -46,5 +51,3 @@ class Subscription(models.Model):
         verbose_name = 'Assinatura'
         verbose_name_plural = 'Assinaturas'
         ordering = ['-start_date']
-        
-        
