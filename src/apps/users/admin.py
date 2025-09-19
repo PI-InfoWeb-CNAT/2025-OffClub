@@ -12,15 +12,15 @@ class UserAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Informações Pessoais', {'fields': ('user_role', 'profile_picture')}),
-        ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Informações pessoais e status', {'fields': ('profile_picture', 'user_role', 'is_approved')}),
+        ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
         ('Datas Importantes', {'fields': ('last_login', 'date_joined')}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'user_role', 'password', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+            'fields': ('email', 'first_name', 'user_role', 'password', 'password2'),
         }),
     )
 
@@ -28,3 +28,11 @@ class UserAdmin(admin.ModelAdmin):
         if 'password' in form.cleaned_data and form.cleaned_data['password']:
             obj.set_password(form.cleaned_data['password'])
         super().save_model(request, obj, form, change)
+        
+    @admin.action(description='Aprovar empresas selecionadas')
+    def approve_enterprise(self, request, queryset):
+        """
+        Ação que ativa e aprova as empresas com cadastro pendente.
+        """
+        queryset.filter(user_role=User.UserRole.ENTERPRISE, is_approved=False).update(is_active=True, is_approved=True)
+        self.message_user(request, "Empresas selecionadas foram aprovadas e ativadas.")

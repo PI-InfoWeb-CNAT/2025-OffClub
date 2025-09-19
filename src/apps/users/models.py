@@ -34,10 +34,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         ENTERPRISE = 'Enterprise', 'Empresa'
 
     _email_validator = ValidatorService.is_valid_email
+
+    username = None  
     
     # Telefone e Endereço estão relacionados no modelo Address e Phone,
     # então não é necessário ter campos separados aqui.
     
+
     id = models.UUIDField("ID", primary_key=True, default=uuid.uuid4, editable=False)
     profile_picture = models.ImageField("Foto de Perfil", upload_to='uploads/profile_pics/', blank=True, null=True)
     user_role = models.CharField("Papel do Usuário", max_length=20, choices=UserRole.choices, default=UserRole.SUBSCRIBER)
@@ -45,6 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField("Data de Registro", auto_now_add=True)
     
     is_active = models.BooleanField("Ativo", default=True)
+    is_approved = models.BooleanField('Aprovado', default=False)
     is_staff = models.BooleanField("Equipe", default=False)
 
     USERNAME_FIELD = 'email'
