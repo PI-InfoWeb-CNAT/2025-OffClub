@@ -20,29 +20,26 @@
   margin-bottom: 21px;
 }
 .container h2{
-  font-family: sans-serif;
   font-size: 30px;
   vertical-align: middle;
   height: 44px;
   display: inline-flex;
-  align-items: center;             /* para caber certinho no texto */
-  padding: 0.5rem 1rem;               /* opcional, só pra dar um “respiro” */
+  align-items: center;             
+  padding: 0.5rem 1rem;               
   background: linear-gradient(to bottom, #f0b33e, #c68616);
-  isolation: isolate;                 /* cria um novo contexto de mesclagem */
-  font-family: sans-serif;
+  isolation: isolate;                 
   font-size: 2rem;
   border-radius: 0.25rem;
   margin-bottom: 19px;
 }
 .container h2 span{
   color: black;
-  vertical-align: auto;                   /* a cor define a área de recorte */
-  mix-blend-mode: destination-out;    /* “apaga” essa área do gradiente */
+  vertical-align: auto;                   
+  mix-blend-mode: destination-out;   
   -webkit-font-smoothing: antialiased;
 }
-.month > h3{
+.month-section > h3{
   font-size: 24px;
-  margin-bottom: 14px;
 }
 
 /* >>> Ver Mais <<< */
@@ -78,15 +75,18 @@
   border: none;
   background-color: transparent;
 }
-.more-coupons {
+
+.coupons .coupon_card:nth-child(n+5) {
+    display: none;
+}
+
+.coupons.expanded .coupon_card {
+    display: inline-block; 
+}
+.extra-coupons-wrapper {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
-    display: flex;
-    justify-content: flex-start;
-}
-.more-coupons.show {
-    max-height: 1000px; /* ou um valor suficiente */
+    transition: max-height 0.7s ease-in-out;
 }
 .read-more img {
     transition: transform 0.7s ease;
@@ -98,81 +98,34 @@
 .coupons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; 
+  justify-content: flex-start; 
   gap: 1rem;
   max-width: 100%;
-  margin-bottom: 24px; 
+  margin-bottom: 24px;
+  overflow: hidden; 
+  transition: max-height 0.7s ease-in-out; 
 }
-
-/* >>> Cupom <<< */
-.coupons .coupon {
-  width: 270px;
-  background-color: #252525;
-  border-radius: 20px;
-  height: 350px;
-}
-.coupons .coupon .enterprise-info{
-  display: flex;
-  justify-content: left;
-}
-.coupon .content{
-  max-width: 240px;
-  height: 340px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-}
-.coupon .enterprise-logo{
-  height: 28px;
-  margin-right: 12px;
-}
-.coupon .enterprise-info{
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-.coupon .content .rest-of-content{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-.coupon button{
-  color: white;
-  font-size: 16px;
-  background-color: #1C1C1C;
-  border: none;
-  border-radius: 10px;
-  width: 240px;
-  height: 36px;
-}
-.discount-tag{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #6F01FF;
-  font-size: 20px;
-  font-weight: bolder;
-  width: 68px;
-  height: 40px;
-  border-radius: var(--border-radius);
-  position: absolute;
-  top: 5em
-}
-
-
 /* >>> Filtro para cupons usados, por ano <<< */
+.adjust{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 19px
+}
+.adjust h2 {
+  margin: 0;
+}
 .used-coupons select{
   background: none;
   border: 2px solid #FEB342;
   border-radius: 5px;
   color: #FEB342;
   width: 114px;
-  height: 40px;
+  height: 44px;
   font-size: 28px;
   font-weight: 600;
   text-align: center;
+  margin-left: 10px;
 }
 .used-coupons select option{
   background-color: #1C1C1C;
@@ -180,4 +133,9 @@
 }
 .coupon button, .used-coupons select, .used-coupons select option{
   font-family: var(--main-font-family);
+}
+
+/* >>> Ajustes no display dos cupons usados por mês <<< */
+.used-coupons > .coupons{
+  display: inline;
 }
