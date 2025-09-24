@@ -120,3 +120,22 @@ class Offer(models.Model):
         verbose_name_plural = "Ofertas"
         ordering = ["-start_date"]
         unique_together = ("title", "enterprise")
+
+class Evaluation(models.Model):
+    id = models.UUIDField("ID", primary_key=True, default=uuid.uuid4, editable=False)
+    stars = models.IntegerField("Estrelas", validators=[MaxValueValidator(5), MinValueValidator(0)])
+    message = models.CharField("Mensagem", max_length=500)
+    offer = models.ForeignKey(
+        Offer, 
+        related_name="evaluations",
+        verbose_name="Avaliação",
+        on_delete=models.CASCADE
+        )
+    
+    def __str__(self):
+        return f"{self.offer} - {self.stars}"
+
+    class Meta:
+        verbose_name = "Avaliação"
+        verbose_name_plural = "Avaliações"
+        ordering = ["offer", "start"]
