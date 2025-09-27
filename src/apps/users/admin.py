@@ -13,7 +13,7 @@ class UserAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Informações pessoais e status', {'fields': ('profile_picture', 'user_role', 'is_approved')}),
-        ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
+        ('Permissões', {'fields': ('is_active', 'is_superuser')}),
         ('Datas Importantes', {'fields': ('last_login', 'date_joined')}),
     )
 

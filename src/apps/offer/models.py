@@ -37,7 +37,7 @@ class Offer(models.Model):
         blank=True,
     )
     image = models.ImageField(
-        "Imagem", upload_to="uploads/offers/", null=True, blank=True
+        "Imagem", upload_to="offers/", null=True, blank=True
     )
     price = models.DecimalField("Preço", max_digits=10, decimal_places=2)
     discount = models.PositiveSmallIntegerField(

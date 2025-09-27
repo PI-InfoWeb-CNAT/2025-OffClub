@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
                 ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, verbose_name='ID')),
-                ('profile_picture', models.ImageField(blank=True, null=True, upload_to='uploads/profile_pics/', verbose_name='Foto de Perfil')),
+                ('profile_picture', models.ImageField(blank=True, null=True, upload_to='profile_pics/', verbose_name='Foto de Perfil')),
                 ('user_role', models.CharField(choices=[('Admin', 'Administrador'), ('Subscriber', 'Assinante'), ('Enterprise', 'Empresa')], default='Subscriber', max_length=20, verbose_name='Papel do Usuário')),
                 ('email', models.EmailField(max_length=254, unique=True, validators=[apps.core.services.validators.ValidatorService.is_valid_email], verbose_name='E-mail')),
                 ('date_joined', models.DateTimeField(auto_now_add=True, verbose_name='Data de Registro')),

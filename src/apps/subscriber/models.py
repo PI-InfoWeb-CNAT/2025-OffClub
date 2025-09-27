@@ -21,11 +21,15 @@ class Subscriber(models.Model):
         blank=False,
         null=False
     )
+    # Identificador do cliente no Stripe (gateway de pagamento)
+    stripe_customer_id = models.CharField(max_length=100, blank=True, null=True, unique=True)
     
-    subscription = models.ManyToManyField(
+    active_subscription = models.OneToOneField(
         "subscription.Subscription",
-        related_name="subscribers",
-        verbose_name="Assinaturas",
+        on_delete=models.SET_NULL, 
+        related_name="active_for_subscriber",
+        verbose_name="Assinatura Ativa",
+        null=True,
         blank=True
     )
     

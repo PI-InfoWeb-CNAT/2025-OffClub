@@ -21,9 +21,9 @@ class SubscriptionPlanAdmin(admin.ModelAdmin):
 
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'plan', 'start_date', 'end_date', 'active')
+    list_display = ('user', 'plan', 'start_date', 'end_date', 'is_active')
     search_fields = ('user__username', 'plan__title')
-    list_filter = ('active', 'start_date', 'end_date')
+    list_filter = ('start_date', 'end_date')
     ordering = ('-start_date',)
     
     def get_queryset(self, request):
