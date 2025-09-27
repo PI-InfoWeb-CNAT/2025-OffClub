@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Ofertas da empresa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/offer_list.css' %}">
+</head>
+<body>
+
+  <h1>Minhas ofertas</h1>
+  <p class="muted">Total: {{ offersCount }}</p>
+  <p>
+    <a href="{% url 'offer:manage_create' %}">Registrar nova oferta</a>
+  </p>
+
+  <!-- Filtros (GET) -->
+  <form method="get">
+    <div class="row">
+      <input type="text" name="q" placeholder="Buscar por nome/título"
+             value="{{ request.GET.q }}">
+      <input type="number" name="min_discount" step="1" min="0" max="100"
+             placeholder="Desconto mínimo (%)" value="{{ request.GET.min_discount }}">
+      <input type="date" name="start" value="{{ request.GET.start }}">
+      <input type="date" name="end" value="{{ request.GET.end }}">
+
+      <select name="category">
+        <option value="">Todas as categorias</option>
+        {% for c in categories %}
+          <option value="{{ c.id }}" {% if request.GET.category == c.id|stringformat:"s" %}selected{% endif %}>
+            {{ c.name }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <button type="submit">Filtrar</button>
+    </div>
+  </form>
+
+  <!-- Tabela -->
+  <table>
+    <thead>
+      <tr>
+        <th>Nome/Título</th>
+        <th>Categoria</th>
+        <th>Preço</th>
+        <th>Desconto (%)</th>
+        <th>Preço final</th>
+        <th>Início</th>
+        <th>Fim</th>
+        <th>Ativa?</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in page_obj %}
+        <tr>
+          <td>{{ o.title }}</td>
+          <td>{{ o.category.name|default:"-" }}</td>
+          <td>{{ o.price|floatformat:2 }}</td>
+          <td>{{ o.discount|default:"-" }}</td>
+          <td>
+            {% if o.final_price %}
+              {{ o.final_price|floatformat:2 }}
+            {% else %}-{% endif %}
+          </td>
+          <td>{{ o.start_date|date:"d/m/Y" }}</td>
+          <td>{{ o.end_date|date:"d/m/Y" }}</td>
+          <td>
+            {% if o.start_date and o.end_date %}
+              {% if o.start_date <= now <= o.end_date %}Sim{% else %}Não{% endif %}
+            {% else %}-{% endif %}
+          </td>
+          <td class="actions">
+            <a href="{% url 'offer:manage_edit' o.id %}">✏️ Editar</a>
+            <a href="{% url 'offer:manage_delete' o.id %}">🗑️ Excluir</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="9">Nenhuma oferta encontrada.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>
