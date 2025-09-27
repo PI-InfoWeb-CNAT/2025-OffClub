@@ -21,6 +21,7 @@ class Subscriber(models.Model):
         blank=False,
         null=False
     )
+    birth_date = models.DateField("Data de Nascimento", blank=True, null=True)
     # Identificador do cliente no Stripe (gateway de pagamento)
     stripe_customer_id = models.CharField(max_length=100, blank=True, null=True, unique=True)
     

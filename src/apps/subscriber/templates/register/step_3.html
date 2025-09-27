@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="cadastro-container">
+    <h1>Cadastro - Etapa {{ wizard.steps.step3 }} de {{ wizard.steps.count }}</h1>
+    <h2>Informações de Contato</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ wizard.management_form }}
+        
+        {% if wizard.form.errors %}
+            <div class="alert alert-danger">
+                Por favor, corrija os erros abaixo.
+            </div>
+        {% endif %}
+
+        {{ wizard.form.as_p }}
+
+        <button type="submit">Próximo</button>
+    </form>
+</div>
+{% endblock %}
