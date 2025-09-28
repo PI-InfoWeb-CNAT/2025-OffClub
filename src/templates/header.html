@@ -39,7 +39,7 @@
                 </a>
                 <div class="profile-options">
                     {% if request.user.is_authenticated %}
-                    <form method="post" action="{% url 'subscriber:logout' %}">
+                    <form method="post" action="{% url 'subscriber:logout' %}" id="logout-button">
                             {% csrf_token %}
                             <button type="submit" class="link-button">Sair</button>
                         </form>

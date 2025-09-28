@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from apps.coupon.models import Coupon
 from .services.discount import DiscountService
 from django.core.files.storage import FileSystemStorage
@@ -133,7 +133,7 @@ class RegisterWizardView(SessionWizardView):
             phone.save()
 
         subscriber.save()
-        return redirect('subscriber:login')
+        return redirect('subscriber:registration_done')
 
 
 class HistoryView(ListView):
@@ -168,3 +168,5 @@ class HistoryView(ListView):
         return context
 
 
+class RegistrationDone(TemplateView):
+    template_name = 'register/done.html'
