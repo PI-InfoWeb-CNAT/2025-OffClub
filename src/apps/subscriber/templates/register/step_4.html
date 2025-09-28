@@ -5,7 +5,7 @@
     <h1>Cadastro - Etapa {{ wizard.steps.step4 }} de {{ wizard.steps.count }}</h1>
     <h2>Foto de perfil</h2>
     
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ wizard.management_form }}
         

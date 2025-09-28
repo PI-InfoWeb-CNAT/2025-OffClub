@@ -16,13 +16,42 @@
         <div class="right-top-header flex-center">
             <div class="location">
                 <img src="{% static 'imgs/icons/location.svg' %}" alt="Localização">
-                <p>Localização</p>
+                {% if request.user.is_authenticated %}
+                    {% with addr=request.user.addresses.first %}
+                        <p>{{ addr.city }}</p>
+                    {% endwith %}
+                {% else %}
+                <p>Cidade não informada</p>
+                {% endif %}
             </div>
             <figure class="profile-button-wrapper flex-center">
                 <a href="#">
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.profile_picture %}
+                    <img class="profile-image" style="width: 38px; height: 38px; border-radius: 50%;" src="{{ request.user.profile_picture.url }}" alt="Usuário">
+                    {% else %}
+                    {# Se não tiver, mostra a imagem padrão #}
                     <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
+                    {% endif %}
+                    {% else %}
+                    <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
+                    {% endif %}
                 </a>
-            </figure>
+                <div class="profile-options">
+                    {% if request.user.is_authenticated %}
+                    <form method="post" action="{% url 'subscriber:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="link-button">Sair</button>
+                        </form>
+                        {% else %}
+                        <a class="link-button flex-center" href="{% url 'subscriber:login' %}">Entrar</a>
+                        <a class="link-button flex-center" href="{% url 'subscriber:register' %}">Registrar</a>
+                        {% endif %}
+                    </div>
+                </figure>
+                {% if request.user.is_authenticated %}
+                    <p>{{ request.user.subscriber.first_name }}</p>
+                {% endif %}
             <div class="toggle-container">
                 <input type="checkbox" id="theme-toggle" class="toggle-checkbox">
                 <label for="theme-toggle" class="toggle-label">

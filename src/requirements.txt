@@ -3,3 +3,4 @@ pillow==11.3.0
 validate_docbr==1.11.1
 stripe==9.10.0
 dotenv==0.9.9
+django-formtools==2.5.1

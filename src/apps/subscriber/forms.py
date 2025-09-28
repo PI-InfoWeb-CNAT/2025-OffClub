@@ -3,6 +3,7 @@ from .models import Subscriber
 from apps.core.models import Address, Phone 
 from apps.users.models import User  
 
+# Forms pra registro de assinante
 
 class PersonalInfoForm(forms.ModelForm):
     class Meta:
@@ -15,7 +16,7 @@ class PersonalInfoForm(forms.ModelForm):
             'birth_date': forms.DateInput(attrs={'placeholder': 'Data de Nascimento', 'type': 'date'}),
         }
         
-class LoginForm(forms.ModelForm):
+class CredentialsForm(forms.ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirme a Senha'}))
     
     class Meta:
@@ -52,3 +53,22 @@ class ProfilePicForm(forms.ModelForm):
     class Meta:
         model = User 
         fields = ['profile_picture']
+        
+        
+# Form de login 
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'E-mail'
+                }
+            )
+        )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Senha'
+            }
+        )
+    )

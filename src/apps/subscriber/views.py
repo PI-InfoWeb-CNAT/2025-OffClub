@@ -1,13 +1,17 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+from django.views import View
 from django.views.generic import ListView
 from apps.coupon.models import Coupon
 from .services.discount import DiscountService
 from django.core.files.storage import FileSystemStorage
 from .forms import (
     PersonalInfoForm,
-    LoginForm,
+    CredentialsForm,
     ContactForm,
-    ProfilePicForm
+    ProfilePicForm,
+    LoginForm
 )
 from formtools.wizard.views import SessionWizardView
 from apps.users.models import User
@@ -17,7 +21,7 @@ from apps.core.models import Address, Phone
 
 FORMS = [
     ("info", PersonalInfoForm),
-    ("login", LoginForm),
+    ("login", CredentialsForm),
     ("contact", ContactForm),
     ("pfp", ProfilePicForm),
 ]
@@ -28,6 +32,45 @@ TEMPLATES = {
     "contact": "register/step_3.html",
     "pfp": "register/step_4.html",
 }
+
+
+class LoginView(View):
+    """
+    View de login
+    """
+    def get(self, request):
+        form = LoginForm()
+        next_url = request.GET.get('next') or '/'
+        
+        ctx = {
+            'form': form,
+            'next': next_url
+        }
+        
+        return render(request, 'login.html', ctx)
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        next_url = request.POST.get('next') or '/'
+        
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(next_url)
+            else:
+                form.add_error(None, 'Credenciais inválidas')
+        
+        ctx = {
+            'form': form,
+            'next': next_url
+        }
+        
+        return render(request, 'login.html', ctx)
+    
 
 
 class RegisterWizardView(SessionWizardView):
@@ -90,7 +133,7 @@ class RegisterWizardView(SessionWizardView):
             phone.save()
 
         subscriber.save()
-        return redirect('login')
+        return redirect('subscriber:login')
 
 
 class HistoryView(ListView):
