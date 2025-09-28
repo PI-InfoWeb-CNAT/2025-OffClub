@@ -1,0 +1,45 @@
+
+.title-register {
+    font-weight: 900;
+    color: transparent;
+    padding: 2em 0;
+    background-image: var(--gradient-orange);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2em !important;
+}
+
+
+.steps {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #373737;
+    border-radius: var(--border-radius)
+}
+
+.steps img {
+    height: 4em;
+}
+
+.step {
+    gap: 1.25em;
+    align-items: center;
+    padding: 0.5em 0;
+    flex: 1;
+    padding-left: 2em;
+}
+
+.number-wrapper {
+    border: 1px solid #373737;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--white);
+}
+

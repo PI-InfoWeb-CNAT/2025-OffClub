@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const logoutButton = document.getElementById('logout-button');
+    const logoutForm = document.getElementById('logout-button');
 
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function(event) {
+    if (logoutForm) {
+        logoutForm.addEventListener('submit', function(event) {
             event.preventDefault(); 
+            
             const userConfirmed = confirm('Tem certeza que deseja sair?');
+
             if (userConfirmed) {
-                window.location.href = this.href; 
+                this.submit(); 
             }
         });
     }
