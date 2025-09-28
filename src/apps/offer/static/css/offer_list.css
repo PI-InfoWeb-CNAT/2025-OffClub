@@ -200,9 +200,33 @@ body.layout{
 .section__title--accent{
   color: var(--brand-yellow);
 }
-.section__actives{
-    color: var(--brand-yellow);
+.section__actives {
+  color: var(--brand-yellow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
+.section__actives::after {
+  content: "";
+  flex: 1; 
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2); 
+}
+.section__unactives {
+  color: var(--brand-yellow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section__unactives::after {
+  content: "";
+  flex: 1; 
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2); 
+}
+
 .section__unactives{
     color: var(--brand-yellow);
 }
