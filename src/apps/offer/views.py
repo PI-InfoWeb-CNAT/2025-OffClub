@@ -12,9 +12,7 @@ from .models import Offer, OfferForm
 
 
 class OfferListView(View):
-    """
-    Renderiza a página principal com a lista de ofertas e aplica filtros via GET.
-    """
+    
     def get(self, request, *args, **kwargs):
         name = request.GET.get('name', '')
         min_discount = request.GET.get('min_discount', '')
@@ -31,9 +29,6 @@ class OfferListView(View):
 
 
 class OfferDetailJsonView(View): 
-    """
-    Funciona como uma API: retorna os dados de uma oferta específica em JSON.
-    """
     def get(self, request, *args, **kwargs):
         offer_id = kwargs.get('offer_id')
         offer = get_object_or_404(Offer, pk=offer_id)
@@ -42,7 +37,6 @@ class OfferDetailJsonView(View):
     
 
 class ManageOfferListView(TemplateView):
-    """Lista + filtros do caso de uso MANAGE (manter oferta)."""
     template_name = "offer_list.html" 
 
     def get_context_data(self, **kwargs):
@@ -64,7 +58,6 @@ class ManageOfferListView(TemplateView):
 
 
 class ManageOfferDetailJsonView(View):
-    """API JSON do caso MANAGE (não conflita com outras APIs que você já tenha)."""
     def get(self, request, *args, **kwargs):
         offer = get_object_or_404(Offer, pk=kwargs.get("offer_id"))
         return JsonResponse(offer.to_dict())

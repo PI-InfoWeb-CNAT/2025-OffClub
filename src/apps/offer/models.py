@@ -112,7 +112,7 @@ class Offer(models.Model):
         ]
 
 
-# Formulário de criar ofertas pelas empresas
+# formulário de criar ofertas pelas empresas
 class OfferForm(forms.ModelForm):
     class Meta:
         model = Offer
