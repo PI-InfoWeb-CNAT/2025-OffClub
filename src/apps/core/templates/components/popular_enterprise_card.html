@@ -1,0 +1,21 @@
+{% load static %}
+
+<section class="enterprise_card">
+    {% if image %}
+        <img src="{{ image }}" alt="">
+    {% else %}
+        <img src="{% static 'imgs/empty_enterprise.svg' %}" alt="">
+    {% endif %}
+    <div class="enterprise_data">
+        <img src="" alt="">
+        <h3>{{ name }}</h3>
+        <p>{{ category }}</p>
+        <div class="complementary_info">
+            <div class="star">
+                <i><img src="{% static 'imgs/material-symbols_star-outline-rounded.svg' %}" alt=""></i>
+                <p>{{ stars }}</p>
+            </div>
+        </div>
+        
+    </div>
+</section>
