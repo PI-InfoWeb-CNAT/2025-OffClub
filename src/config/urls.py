@@ -7,6 +7,7 @@ urlpatterns = [
     path('subscription/', include('apps.subscription.urls')),
     path('offer/', include('apps.offer.urls')),
     path('subscriber/', include('apps.subscriber.urls')),
+    path('coupon/', include(('apps.coupon.urls'), namespace='coupon')),
 ]
 
 from .settings import base as settings
