@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const modal = document.getElementById("modal-avaliacao");
+    const modal = document.getElementById("evaluate-modal");
     const starsContainer = document.getElementById("stars-container");
     const hiddenStarsInput = document.getElementById("id_stars");
     const hiddenCouponInput = document.getElementById("id_coupon_id");
-    const cancelarBtn = document.getElementById("cancelar-btn");
+    const cancelarBtn = document.getElementById("cancell");
     const form = document.getElementById("evaluate-form");
     const formErrorsContainer = document.getElementById("form-errors");
 
@@ -76,8 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             if (data.success) {
                 closeModal();
-                // opcional: mostrar mensagem de sucesso na tela
-                alert("Avaliação registrada com sucesso!");
             } else if (data.errors) {
                 // mostra os erros no modal
                 formErrorsContainer.innerHTML = "";

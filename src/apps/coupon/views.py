@@ -19,26 +19,17 @@ class EvaluationCreateView(LoginRequiredMixin, CreateView):
     template_name = "components/evaluate_coupon.html"
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        coupon_id = self.request.POST.get("coupon_id")
-        self.coupon = get_object_or_404(Coupon, id=coupon_id)
-        form.instance.coupon = self.coupon
-
+        coupon_id = self.kwargs.get("coupon_id")
+        coupon = Coupon.objects.get(id=coupon_id)
         stars = form.cleaned_data.get("stars")
         message = form.cleaned_data.get("message", "")
 
-        if Evaluation.objects.filter(coupon=self.coupon, user=self.request.user).exists():
-            if self.request.headers.get("x-requested-with") == "XMLHttpRequest":
-                return JsonResponse({"success": False, "errors": {"__all__": ["Este cupom já foi avaliado."]}})
-            return redirect("subscriber:historico_consumo")
+        if Evaluation.objects.filter(coupon=coupon).exists():
+            return JsonResponse({"error": "Você já avaliou este cupom."}, status=400)
 
-        EvaluationService.create_evaluation(self.coupon, stars, message)
+        EvaluationService.create_evaluation(coupon, stars, message)
 
-        if self.request.headers.get("x-requested-with") == "XMLHttpRequest":
-            return JsonResponse({"success": True})
-
-        messages.success(self.request, "Avaliação registrada com sucesso!")
-        return redirect("subscriber:historico_consumo")
+        return JsonResponse({"success": "Avaliação registrada com sucesso!"}, status=200)
 
     def form_invalid(self, form):
         errors = {field: [str(err) for err in errs] for field, errs in form.errors.items()}
