@@ -1,0 +1,291 @@
+.home-main {
+    gap: 5em;
+}
+
+section.hero-section {
+    margin-top: 1em;
+    border-radius: var(--border-radius);
+    background-image: url('../imgs/hero-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.hero-texts {
+    text-align: center;
+
+    h1 {
+        font-size: 80px;
+        letter-spacing: 0%;
+        font-weight: var(--h1-font-weight);
+        line-height: var(--h1-line-height);
+        color: var(--white);
+        margin-bottom: 1em;
+    }
+
+    p {
+        max-width: 40%;
+        font-size: 18px;
+        letter-spacing: 0%;
+        font-weight: var(--minor-text-font-weight);
+        line-height: var(--minor-text-line-height);
+        color: var(--white);
+    }
+}
+
+.hero-buttons {
+    gap: 1em;
+}
+
+/* Carrossel de categorias */
+
+.categories-slider {
+    width: 100%;
+}
+
+/* Seção de COMO FUNCIONA */
+
+div.how-it-works-wrapper {
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+.how-it-works-content {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.how-it-works-content h1 {
+    font-size: 2em;
+}
+
+.sliders {
+    gap: 1em;
+}
+
+.sliders .slider-line {
+    width: 1.5em;
+    height: 0.5em;
+    background-color: var(--almost-transparent-white);
+    border-radius: var(--border-radius);
+}
+
+.sliders .slider-line:nth-child(2) {
+    width: 4em;
+    background-color: var(--offwhite);
+}
+
+figure.how-it-works-image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+}
+
+figure.how-it-works-image-wrapper img:nth-of-type(1) {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+figure.how-it-works-image-wrapper img:nth-of-type(2) {
+    position: relative;
+    z-index: 2;
+}
+
+/* Seção de vantagens */
+
+.user-types {
+    padding-top: 120px;
+    position: relative;
+    box-sizing: content-box;
+    gap: 3em;
+    max-width: 80%;
+}
+
+.user-types-title-wrapper {
+    position: absolute;
+    top: 0;
+}
+
+.user-types-wrapper {
+    gap: 3em;
+}
+
+.view-detailed-plans-btn {
+    background: var(--gradient-yellow-orange);
+    border: none;
+    color: var(--background-color);
+    transition-duration: 0.3s;
+    font-weight: bold;
+    width: 250px;
+    height: 52px;
+    font-size: var(--text-font-size);
+    border-radius: var(--border-radius-small);
+    box-sizing: border-box;
+}
+
+.view-detailed-plans-btn img {
+    transition: ease-in-out;
+    transition-duration: 0.2s;
+    width: 1.25em;
+    height: auto;
+}
+
+.view-detailed-plans-btn:hover img {
+    transition-duration: 0.2s;
+    transform: translateX(50%) scale(1.1);
+}
+
+.view-detailed-plans-btn:hover {
+    transition-duration: 0.2s;
+    filter: brightness(1.2);
+}
+
+/* Seção de REVIEWS */
+
+.reviews.swiper {
+    margin-bottom: 6em;
+}
+
+.reviews .swiper-wrapper {
+    padding: 1em 0;
+}
+
+.reviews .swiper-pagination {
+    position: relative;
+    bottom: auto;
+    margin-top: 2rem;
+}
+
+.reviews .swiper-pagination-bullet {
+    width: 24px;
+    height: 8px;
+    border-radius: var(--border-radius);
+
+    background-color: var(--almost-transparent-white);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.reviews .swiper-pagination-bullet-active {
+    background-color: var(--brand-yellow);
+    width: 80px;
+}
+
+/* Seção de cards de vantagens */
+
+.user-type-card {
+    gap: 1em;
+    max-width: 700px;
+    padding: 2em;
+    backdrop-filter: blur(3px);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--brand-yellow);
+}
+
+.user-type-name {
+    font-size: 28px;
+}
+
+.user-type-divider {
+    width: 100%;
+    margin: 1em 0;
+}
+
+.gold .user-type-divider {
+    border-color: var(--brand-yellow);
+}
+
+.gold .user-type-card {
+    border-color: var(--brand-yellow);
+}
+
+.choose-plan-button {
+    color: var(--white);
+    border: none;
+    padding: 1em 3em;
+    border-radius: var(--border-radius-small);
+    width: 100%;
+}
+
+ul.user-type-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-type-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--offwhite);
+    font-size: var(--text-font-size-large);
+}
+
+.user-type-features li::before {
+    content: '✔';
+    color: var(--white);
+}
+
+.user-type-circle {
+    gap: 10px;
+    align-items: center;
+    justify-content: start;
+}
+
+.user-type-external-circle {
+    width: 1.8em;
+    height: 1.8em; 
+    border-radius: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-type-circle .inner-circle {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.user-type-circle .gold-circle {
+    background: var(--gradient-gold);
+}
+
+.user-types-btn {
+    background: var(--gradient-yellow-orange);
+    border: none;
+    color: var(--background-color);
+    transition-duration: 0.3s;
+    font-weight: bold;
+    width: 100%;
+    height: 60px;
+    font-size: var(--text-font-size);
+    border-radius: var(--border-radius-small);
+    box-sizing: border-box;
+}
+
+#popular_enterprises_container {
+    gap: 1em;
+    display: flex;
+    flex-wrap: no-wrap;
+    justify-content: space-between;
+}

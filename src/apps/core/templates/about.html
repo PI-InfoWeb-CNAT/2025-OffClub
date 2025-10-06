@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}OFFCLUB{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />   
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/review.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/popular_enterprise_card.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/category_badge.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+{% endblock head %}
+
+{% block main %}
+<main class="home-main flex-center flex-column">
+    <section class="container hero-section">
+        <div class="hero-texts flex-column flex-center">
+            <h1>SOBRE NÓS</h1>
+        </div>
+    </section>
+
+    <div class="how-it-works-wrapper">
+        <section class="container how-it-works flex-row flex-center">
+            <div class="how-it-works-content">
+                <h1>O QUE É OFFCLUB?</h1>
+    
+                <div class="">
+                    <h2>Nossa missão</h2>
+                    <p>OffClub é mais que uma plataforma para garantir preços baixos. Somos uma iniciativa que busca a valorização do comércio local e benefícios mútuos a empresas e clientes, garantindo que todos ganhem nesta relação</p>
+                </div>
+                <div class="">
+                    <h2>Para empresas</h2>
+                    <p>Garantimos de forma eficiente e efetiva que a empresa mantenha fluxo de caixa e clientes constantes, permitindo rotatividade da clientela e acesso a um amplo mercado consumidor.</p>
+                </div>
+                <div class="">
+                    <h2>Para clientes</h2>
+                    <p>Permitimos que o consumidor desfrute de bens em um preço justo numa gama de empresas parceiras devidamente analisadas pela nossa equipe.</p>
+                </div>
+
+                <a onClick="document.getElementById('user-types-section').scrollIntoView();">
+                    <button class="view-detailed-plans-btn flex-row flex-center">
+                        Ver mais
+                    </button>
+                </a>
+            </div>
+    
+            <figure class="how-it-works-image-wrapper">
+                <img src="{% static 'imgs/hiw-figure.png' %}" alt="">
+                <img src="{% static 'imgs/3d-phone.png' %}" alt="Ilustração 3D de um celular exibindo a página de ofertas">
+            </figure>
+        </section>
+    </div>
+
+    <div class="categories-slider container swiper">
+        <div class="container swiper-wrapper">
+            {% for i in "1234567890" %}
+                <div class="swiper-slide">
+                    {% include 'components/category_badge.html' with category_name='Categoria' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <section id="user-types-section" class="user-types flex-column flex-center">
+        <figure class="user-types-title-wrapper">
+            <img src="{% static 'imgs/about-title.svg' %}" alt="Título da seção de planos">
+        </figure>
+        <div class="user-types-wrapper flex-row">
+            <div class="user-type-card gold flex-column">
+                <div class="user-type-circle flex-row">
+                    <div class="user-type-external-circle gold-circle">
+                        <div class="inner-circle"></div>
+                    </div>
+                    <p class="user-type-name">Clientes</p>
+                </div>
+                <hr class="user-type-divider">
+                <ul class="user-type-features">
+                    <li>Acesso a diversos descontos exclusivos em ofertas de {{count_enterprises}} empresas parceiras;</li>
+                    <li>Suporte gratuito e humanizado das hh:MM às hh:MM</li>
+                    <li>Planos de assinaturas acessíveis a partir de R$9,90/mês;</li>
+                    <li>Sem taxas adicionais cobradas sobre a emissão de cupons!</li>
+                </ul>
+                <hr class="user-type-divider">
+                <a href="#">
+                    <button class="user-types-btn flex-row flex-center">
+                        Conferir planos
+                    </button>
+                </a>
+            </div>
+            
+            <div class="user-type-card gold flex-column">
+                <div class="user-type-circle flex-row">
+                    <div class="user-type-external-circle gold-circle">
+                        <div class="inner-circle"></div>
+                    </div>
+                    <p class="user-type-name">Empresas</p>
+                </div>
+                <hr class="user-type-divider">
+                <ul class="user-type-features">
+                    <li>Divulgação gratuita a um mercado consumidor de {{count_subscribers}} assinantes ativos;</li>
+                    <li>Acesso a uma gama de métricas comerciais e publicitárias;</li>
+                    <li>Uso do sistema sem cobrança de taxas sobre o uso;</li>
+                    <li>Sem taxas cobradas sobre os cupons emitidos pelo cliente.</li>
+                </ul>
+                <hr class="user-type-divider">
+                <a href="#">
+                    <button class="user-types-btn flex-row flex-center">
+                        Submeter cadastro
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="popular_enterprises_container">
+        {% for i in "12345678" %}
+            {% include 'components/popular_enterprise_card.html' with category="Barbearia" name="Mãozinha" stars="5.0" image="../static/imgs/image.png" %}
+        {% endfor %}
+    </div>
+
+    <section class="reviews container swiper">
+        <div class="flex-row swiper-wrapper">
+            {% for i in "12345" %}
+                {% include 'components/review.html' with rating=5 text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ipsum dolor' author_name='John Doe' author_role='Cliente' %}
+            {% endfor %}
+        </div>
+
+        <div class="reviews-pagination swiper-pagination"></div>
+    </section>
+</main>
+{% endblock main %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/testimonials.js' %}"></script>
+<script src="{% static 'js/badges.js' %}"></script>
+{% endblock scripts %}
