@@ -1,0 +1,7 @@
+form{
+    background-color: var(--background-color);
+    border: 2px solid #373737;
+}
+label{
+    color: var(--white);
+}
