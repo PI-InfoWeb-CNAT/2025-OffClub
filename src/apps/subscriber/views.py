@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from apps.subscriber.services.services import ServiceDiscount
+from apps.coupon.forms.evaluation_form import EvaluationForm
 
 class SubscriberViews(View):
     @staticmethod
@@ -46,5 +47,5 @@ class SubscriberViews(View):
                     }
                 dic = {'object': coupon, 'data': coupon_data}
                 active_coupons.append(dic)
-            context = {'used_coupons': used_coupons, 'active_coupons': active_coupons, 'years_group': years_group}
+            context = {'used_coupons': used_coupons, 'active_coupons': active_coupons, 'years_group': years_group, 'form': EvaluationForm(),}
             return render(request, 'subscriber.html', context=context, status=200)
