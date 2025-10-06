@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <title>Ofertas das empresas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/offer_list.css' %}">
+</head>
+<body class="layout">
+
+  <!-- barra -->
+  <aside class="sidebar">
+    <nav class="sidebar__nav">
+      <a class="sidebar__link" href="#"><img src="{% static 'imgs/icons/profile_icon.png' %}"> Meu Perfil</a>
+      <a class="sidebar__link sidebar__link--active" href="{% url 'offer:manage_list' %}"><img src="{% static 'imgs/icons/oferts_icon.png' %}">Minhas ofertas</a>
+      <a class="sidebar__link" href="#"><img src="{% static 'imgs/icons/planos_icon.png' %}">Meus Planos</a>
+      <a class="sidebar__link" href="#"><img src="{% static 'imgs/icons/conf_icon.png' %}">Configurações</a>
+      <a class="sidebar__link sidebar__link--danger" href="#"><img src="{% static 'imgs/icons/sair_icon.png' %}">Sair</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="content__header">
+      <h1 class="content__title">MINHAS OFERTAS</h1>
+
+      <!-- filtros -->
+      <form class="filters" method="get" action="">
+        <div class="filters__row">
+          <label class="filters__field filters__field--grow">
+            <span class="filters__label">Buscar</span>
+            <input class="filters__input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Procurar cupom...">
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Categoria</span>
+            <select class="filters__select" name="category">
+              <option value="">Todos</option>
+              {% for c in categories %}
+                <option value="{{ c.id }}" {% if request.GET.category == c.id|stringformat:"s" %}selected{% endif %}>{{ c.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Desc. mín. (%)</span>
+            <input class="filters__input" type="number" min="0" max="100" step="1" name="min_discount" value="{{ request.GET.min_discount }}">
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Início</span>
+            <input class="filters__input" type="date" name="start" value="{{ request.GET.start }}">
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Fim</span>
+            <input class="filters__input" type="date" name="end" value="{{ request.GET.end }}">
+          </label>
+
+          <div class="filters__actions">
+            <button class="btn btn--primary" type="submit">Filtrar</button>
+            <a class="btn btn--ghost" href="{% url 'offer:manage_create' %}">Nova oferta</a>
+          </div>
+        </div>
+      </form>
+    </header>
+
+    <!-- ofertas ativas -->
+    <section class="section">
+      <h2 class="section__actives">Ativos</h2>
+      <div class="cards">
+        {% for o in page_obj %}
+          {% if o.start_date and o.end_date and o.start_date <= now and now <= o.end_date %}
+            <article class="card">
+              <div class="card__left">
+                <div class="card__merchant">
+                  {% if o.category %}<span class="card__merchant-photo">{{ o.category.name }}</span>{% endif %}
+                  <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
+                </div>
+                <h3 class="card__title">{{ o.title }}</h3>
+                <div class="card__price">
+                  <span class="card__price-value">R${{ o.price|floatformat:2 }}</span>
+                  {% if o.discount %}<span class="card__price-discount">-{{ o.discount }}%</span>{% endif %}
+                </div>
+              </div>
+              <div class="card__right">
+                <div class="card__expires">
+                  <span class="card__expires-label">Disponível até</span>
+                  <span class="card__expires-date">{{ o.end_date|date:"d/m/Y" }}</span>
+                </div>
+                <div class="card__actions">
+                  <a class="btn btn--secondary" href="{% url 'offer:manage_detail_json' o.id %}">Detalhes</a>
+                  <a class="btn btn--primary" href="{% url 'offer:manage_edit' o.id %}">Editar</a>
+                  <a class="btn btn--danger" href="{% url 'offer:manage_delete' o.id %}">Excluir</a>
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% empty %}
+          <p class="empty-state">Nenhuma oferta encontrada.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Ofertas inativas -->
+    <section class="section">
+      <h2 class="section__unactives">Inativos</h2>
+      <div class="cards">
+        {% for o in page_obj %}
+          {% if not o.start_date or not o.end_date %}
+            <!-- caso sem datas -->
+            <article class="card card--muted">
+              <div class="card__left">
+                <div class="card__merchant">
+                  {% if o.category %}<span class="card__merchant-badge">{{ o.category.name }}</span>{% endif %}
+                  <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
+                </div>
+                <h3 class="card__title">{{ o.title }}</h3>
+              </div>
+            </article>
+          {% else %}
+            {% if o.start_date > now or now > o.end_date %}
+              <article class="card card--muted">
+                <div class="card__left">
+                  <div class="card__merchant">
+                    {% if o.category %}<span class="card__merchant-photo">{{ o.category.name }}</span>{% endif %} <!--Não ta pegando a foto da empresa (ver se é problema no banco o no código)-->
+                    <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
+                  </div>
+                  <h3 class="card__title">{{ o.title }}</h3>
+                  <div class="card__price">
+                    <span class="card__price-value">R${{ o.price|floatformat:2 }}</span>
+                    {% if o.discount %}<span class="card__price-discount">-{{ o.discount }}%</span>{% endif %}
+                  </div>
+                </div>
+                <div class="card__right">
+                  <div class="card__expires">
+                    <span class="card__expires-label">Disponível até</span>
+                    <span class="card__expires-date">{{ o.end_date|date:"d/m/Y" }}</span>
+                  </div>
+                  <div class="card__actions">
+                    <a class="btn btn--secondary" href="{% url 'offer:manage_detail_json' o.id %}">Detalhes</a>
+                    <a class="btn btn--primary" href="{% url 'offer:manage_edit' o.id %}">Editar</a>
+                    <a class="btn btn--danger" href="{% url 'offer:manage_delete' o.id %}">Excluir</a>
+                  </div>
+                </div>
+              </article>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
