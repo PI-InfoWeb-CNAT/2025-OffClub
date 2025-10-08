@@ -78,5 +78,5 @@ class ManageOfferUpdateView(UpdateView):
 
 class ManageOfferDeleteView(DeleteView):
     model = Offer
-    template_name = "offer/offer_confirm_delete.html"
+    template_name = "offer_confirm_delete.html"
     success_url = reverse_lazy("offer:manage_list")
