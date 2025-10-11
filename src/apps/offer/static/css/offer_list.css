@@ -74,7 +74,7 @@ body.layout{
   grid-template-columns:260px 1fr;
   gap:22px;
   padding:24px;
-  font: var(--text-font-weight) var(--text-font-size)/var(--text-line-height) var(--main-font-family);
+  font: var(--text-font-weight) var(--text-font-size)/var(--text-line-height) ;
 }
 
 /* Sidebars*/
@@ -269,4 +269,6 @@ body.layout{
 }
 .card__expires-label{ color: var(--offwhite); font-size: var(--minor-text-font-size) }
 .card__expires-date{ color: var(--white); font-weight:800 }
+
+
 

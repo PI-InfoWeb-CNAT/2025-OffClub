@@ -21,8 +21,7 @@
   </aside>
 
   <main class="content">
-    <header class="content__header">
-      <h1 class="content__title">MINHAS OFERTAS</h1>
+      <h1 class="content__title">Minhas ofertas</h1>
 
       <!-- filtros -->
       <form class="filters" method="get" action="">
@@ -63,7 +62,6 @@
           </div>
         </div>
       </form>
-    </header>
 
     <!-- ofertas ativas -->
     <section class="section">
@@ -108,7 +106,6 @@
       <div class="cards">
         {% for o in page_obj %}
           {% if not o.start_date or not o.end_date %}
-            <!-- caso sem datas -->
             <article class="card card--muted">
               <div class="card__left">
                 <div class="card__merchant">
@@ -123,7 +120,7 @@
               <article class="card card--muted">
                 <div class="card__left">
                   <div class="card__merchant">
-                    {% if o.category %}<span class="card__merchant-photo">{{ o.category.name }}</span>{% endif %} <!--Não ta pegando a foto da empresa (ver se é problema no banco o no código)-->
+                    {% if o.category %}<span class="card__merchant-photo">{{ o.category.name }}</span>{% endif %}
                     <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
                   </div>
                   <h3 class="card__title">{{ o.title }}</h3>
