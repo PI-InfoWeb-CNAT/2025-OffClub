@@ -6,7 +6,9 @@
     --white: #ffffff;
     --offwhite: rgba(255, 255, 255, 0.75);
     --almost-transparent-white: rgba(255, 255, 255, 0.1);
+    --transparent: rgba(0, 0, 0, 0);
     --gray: #646464;
+    --medium-gray: #252525;
     --background-color: #1C1C1C;
     --footer-background-color: #080808;
     --yellow-lighter: #FFEFCC;
@@ -20,6 +22,7 @@
     --cyan: #25A7AB;
     --darker-cyan: #004560;
     --golden: #8F6200;
+    --dark-red: #310000;
 
     /* >>> Gradientes <<< */
     --gradient-yellow: linear-gradient(90deg, var(--brand-yellow) 0%, var(--yellow-lighter) 100%);
@@ -35,7 +38,7 @@
     --dark-grey: #1C1C1C;
 
     /* >> Notificação de sucesso << */
-    --dark-green: #0F3820;      /* Fundo */
+    --dark-green: #002815;      /* Fundo */
     --medium-green: #5AC191;    /* Elementos */
     --light-green: #C0EDD8;     /* Texto */
     --green-details: #2A553D;   /* Detalhes -> botão excluir */

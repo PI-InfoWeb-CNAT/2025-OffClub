@@ -8,7 +8,7 @@
     <div class="coupon_card_offer">
         <img src="{{ offer_image }}" alt="" class="offer_image">
         <span>{{ discount }}%</span>
-        <h3><a href="{{link}}">{{ title }}</a></h3>
+        <h3><a href="{{ link }}">{{ title }}</a></h3>
     </div>
     <div class="price">
         <p class="currency">R$</p>
@@ -22,4 +22,14 @@
             <p class="general">Regatar até {{ end_date }}</p>
         {% endif %}
     </div>
+
+    {% for dic in used_coupons %}
+        {% with coupon=dic.object %}
+            <div class="coupon-card">
+                <button class="evaluate_button open_modal" data-coupon-id="{{ coupon.object.id }}">Avaliar</button>
+                
+                {% include 'components/evaluate_coupon.html' with coupon=coupon %}
+            </div>
+        {% endwith %}
+    {% endfor %}
 </div>
