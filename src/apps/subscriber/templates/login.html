@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Entrar {% endblock title %}
+
+{% block head %}
+    
+{% endblock head %}
+
+{% block main %}
+<main id="login">
+    <div class="container">
+        <h1>ENTRAR</h1>
+        <form action="" method="post" class="login-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-primary">Entrar</button>
+        </form>
+        <p class="register-link">Não tem uma conta? <a href="{% url 'subscriber:register' %}">Registre-se</a></p>
+    </div>
+</main>
+<script src="{% static 'js/subscriber.js' %}"></script>
+{% endblock main %}

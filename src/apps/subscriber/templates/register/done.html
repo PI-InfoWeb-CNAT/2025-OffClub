@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Cadastro Concluído {% endblock title %}
+
+{% block main %}
+<main id="registration-complete" class="container" style="text-align: center; margin: 5em auto;">
+    <h1>Cadastro Concluído com Sucesso!</h1>
+    <p>Obrigado por se cadastrar. Agora você pode aproveitar todos os benefícios do nosso site.</p>
+    <a href="{% url 'subscriber:login' %}" class="btn btn-primary">Fazer Login</a>
+</main>
+{% endblock main %}

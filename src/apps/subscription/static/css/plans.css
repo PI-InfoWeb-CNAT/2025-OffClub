@@ -200,6 +200,7 @@ li.available .feature-content .feature-description {
     font-weight: 600;
     font-size: var(--text-font-size);
     transition: transform 0.2s ease-in-out;
+    width: 100%;
 }
 
 .subscribe-button:hover {

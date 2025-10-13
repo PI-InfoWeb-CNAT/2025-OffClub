@@ -60,6 +60,15 @@
     filter: none;
 }
 
+.offer-image img {
+  min-width: 20em;
+  max-width: 20em;
+  min-height: 20em;
+  max-height: 20em;
+  object-fit: cover;
+
+}
+
 #offer-modal .offer-image {
     width: 100%;
     height: auto;

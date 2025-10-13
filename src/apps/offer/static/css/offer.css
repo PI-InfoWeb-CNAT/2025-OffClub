@@ -72,8 +72,10 @@ main {
 }
 
 #offer_filter_container {
+    margin-top: 1em;
     display: flex;
     flex-wrap: wrap;
+    gap: 1em;
     width: 100%;
 }
 

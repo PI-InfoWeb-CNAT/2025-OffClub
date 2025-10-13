@@ -34,6 +34,7 @@ class OfferService():
             'cheapOffers': cheap_offers,
             'categories': categories,
         }
+        
         return context
 
     @staticmethod
