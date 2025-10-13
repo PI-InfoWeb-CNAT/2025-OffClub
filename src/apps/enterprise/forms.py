@@ -23,7 +23,9 @@ class EnterpriseInfoForm(forms.ModelForm):
         }
         
 class CredentialsForm(forms.ModelForm):
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirme a Senha'}))
+    password2 = forms.CharField(
+        label="Confirme a Senha",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirme a Senha'}))
     
     class Meta:
         model = User
@@ -40,20 +42,19 @@ class CredentialsForm(forms.ModelForm):
         return cd.get('password2')
     
 
-class ContactForm(forms.ModelForm):
-    phone_number = forms.CharField(label="Telefone 1", max_length=15)
-    phone_number2 = forms.CharField(label="Telefone 1", max_length=15)
+class ContactForm(forms.Form):
+    #Campos para o modelo Phone
+    phone_number = forms.CharField(label="Telefone Principal", max_length=15, help_text="(XX) XXXXX-XXXX")
+    phone_number2 = forms.CharField(label="Telefone Secundário (Opcional)", max_length=15, required=False)
+
+    # Campos para o modelo Address
     cep = forms.CharField(label="CEP", max_length=9)
-    city = forms.CharField(label="Cidade", max_length=75)
-    state = forms.CharField(label="UF", max_length=2)
     street_name = forms.CharField(label="Logradouro", max_length=75)
-    number = forms.CharField(label="Número", max_length=5)
+    number = forms.CharField(label="Número", max_length=10)
     complement = forms.CharField(label="Complemento", max_length=75, required=False)
     neighborhood = forms.CharField(label="Bairro", max_length=75)
-    
-    class Meta:
-        model = Enterprise 
-        fields = []
+    city = forms.CharField(label="Cidade", max_length=75)
+    state = forms.CharField(label="UF", max_length=2)
     
 
 class ProfilePicForm(forms.ModelForm):

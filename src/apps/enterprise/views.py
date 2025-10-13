@@ -13,7 +13,7 @@ from .forms import (
 )
 from formtools.wizard.views import SessionWizardView
 from apps.users.models import User
-from .models import Enterprise
+from .models import Enterprise, LineOfBusiness
 from apps.core.models import Address, Phone
 
 
@@ -28,26 +28,16 @@ TEMPLATE = {
     "general_form": "enterprise.html"
 }
 
-class EnterpriseViews(View):
-    @staticmethod
-    def enterprise_register(request):
-        if request.method == 'GET':
-            context = {
-                "hello": "world"
-            }
-            return render(request, "enterprise.html", context=context)
-
-
 class RegisterWizardView(SessionWizardView):
     # Serve pro wizard salvar os arquivos temporariamente
+    label_suffix = ""
     file_storage = FileSystemStorage()
     form_list = FORMS
 
     def get_template_names(self):
-        return [TEMPLATE[self.steps.current_step]]
+        return ['enterprise.html']
 
     def done(self, form_list, **kwargs):
-        # Junta os dados limpos de todos os forms em um único dict
         data = {}
         for form in form_list:
             if hasattr(form, 'cleaned_data'):
@@ -68,19 +58,20 @@ class RegisterWizardView(SessionWizardView):
         # Cria a empresa 
         enterprise = Enterprise.objects.create(
             user=user,
-            first_name=data.get('first_name', ''),
-            last_name=data.get('last_name', ''),
-            cpf=data.get('cpf', ''),
+            corporate_reason=data.get('corporate_reason', ''),
+            trade_name=data.get('trade_name', ''),
+            cnpj=data.get('cnpj', ''),
+            line_of_business=data.get('line_of_business', ''),
+            description=data.get('description', ''),
         )
 
-        # Cria o endereço se estiver presente 
-        # (Não tenho certeza se é obrigatório)
+        # Cria o endereço
         if data.get('cep') or data.get('street_name'):
             address = Address.objects.create(
                 user=user,
                 cep=data.get('cep', ''),
                 city=data.get('city', ''),
-                uf=data.get('uf', ''),
+                state=data.get('state', ''),
                 neighborhood=data.get('neighborhood', ''),
                 street_name=data.get('street_name', ''),
                 number=data.get('number', ''),
@@ -97,9 +88,17 @@ class RegisterWizardView(SessionWizardView):
             )
             phone.save()
 
+        if data.get('phone_number2'):
+            phone = Phone.objects.create(
+                phone_number=data.get('phone_number2'),
+                phone_type=Phone.PhoneType.OTHER,
+                user=user,
+            )
+            phone.save()
+
         enterprise.save()
-        return redirect('enterprise:registration_done')
+        return redirect('enterprise/enterprise_register/')
 
 
 class RegisterDone(TemplateView):
-    template_name = 'submmited.html'
+    template_name = 'submitted.html'

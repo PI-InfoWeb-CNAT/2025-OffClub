@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Submeter Proposta de Cadastro{% endblock title %}
+{% block title %}Cadastro de Empresa{% endblock title %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/enterprise.css' %}">
@@ -9,49 +9,39 @@
 
 {% block main %}
 <main id="enterprise-register-proposal">
-    <h1>Cadastro</h1>
+    <h1>Cadastro - Passo {{ wizard.steps.step1 }} de {{ wizard.steps.count }}</h1>
+    
     <div class="register-container">
-        {% include 'components/steps.html' %}
-
-        <form action="" class="enterprise-register">
-            <div class="form-step" data-step="1">
-                {% include 'components/form-field.html' with id='corporate-reason' name='corporate-reason' label_text='Razão Social' %}
-                {% include 'components/form-field.html' with id='trade-name' name='trade-name' label_text='Nome Fantasia' %}
-                {% include 'components/form-field.html' with id='cnpj' name='cnpj' label_text='CNPJ' %}
-                {% include 'components/form-field.html' with id='line-business' name='line-business' label_text='Ramos da Empresa' %}
-                {% include 'components/form-field.html' with id='description' name='description' label_text='Descrição' %}
-            </div>
-            <div class="form-step" data-step="2">
-                {% include 'components/form-field.html' with id='email' name='email' label_text='Email' %}
-                {% include 'components/form-field.html' with id='password' name='password' label_text='Senha' %}
-                {% include 'components/form-field.html' with id='confirm-password' name='confirm-password' label_text='Confirme a senha' %}
-            </div>
-            <div class="form-step" data-step="3">
-                {% include 'components/form-field.html' with id='phone1' name='phone1' label_text='Telefone 1' %}
-                {% include 'components/form-field.html' with id='phone2' name='phone2' label_text='Telefone 2' %}
-                {% include 'components/form-field.html' with id='cep' name='cep' label_text='CEP' %}
-                {% include 'components/form-field.html' with id='city' name='city' label_text='Cidade' %}
-                {% include 'components/form-field.html' with id='uf' name='uf' label_text='UF' %}
-                {% include 'components/form-field.html' with id='street' name='street' label_text='Logradouro' %}
-                {% include 'components/form-field.html' with id='number' name='number' label_text='Número' %}
-                {% include 'components/form-field.html' with id='complement' name='complement' label_text='Complemento' %}
-                {% include 'components/form-field.html' with id='neighborhood' name='neighborhood' label_text='Bairro' %}
-            </div>
-            <div class="form-step" data-step="4">
-                <label for="profile-picture" class="image-upload-box">
-                    <div class="upload-icon">
-                        <img src="" alt="">
+        {% include 'components/steps.html' with current_step=wizard.steps.step1 %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {{ wizard.management_form }}
+            
+            <div class="form-step">
+                {% for field in wizard.form %}
+                    <div class="field-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.label_text %}
+                            <small class="form-text text-muted">{{ field.label_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
                     </div>
-                    <p class="upload-text">Arraste e solte a foto aqui</p>
-                    <p class="upload-subtext">ou <span>faça upload</span></p>
-                </label>
+                {% endfor %}
             </div>
-            <button><a href="">Próximo</a></button>
-            <button><a href="">Concluir cadastro</a></button>
+
+            <div class="form-buttons">
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">Primeiro Passo</button>
+                    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Passo Anterior</button>
+                {% endif %}
+
+                <button type="submit" class="next">Próximo</button> 
+            </div>
         </form>
     </div>
 </main>
 {% endblock main %}
-
-{% block scripts %}
-{% endblock scripts %}
