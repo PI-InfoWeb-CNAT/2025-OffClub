@@ -20,6 +20,42 @@
             
             <div class="form-step">
                 {% for field in wizard.form %}
+                <!-- Caso encontre o campo de senha, criar uma div dos campos de senha para ajustar o display deles para flex -->
+                    {% if field.name == 'password' %} 
+                        <div class="password-fields-container">
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+        
+                    {% elif field.name == 'password2' %}
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+                        </div>
+
+                <!-- Caso encontre o campo de senha, criar uma div dos campos de senha para ajustar o display deles para flex -->
+                    {% elif field.name == 'phone_number' %} 
+                        <div class="phone-fields-container">
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+        
+                    {% elif field.name == 'phone_number2' %}
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+                        </div>
+                        
+                    <!-- Situação regular - não é necessário alocar uma div container -->
+                    {% else %}
                     <div class="field-group">
                         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                         {{ field }}
@@ -30,6 +66,7 @@
                             <p class="error">{{ error }}</p>
                         {% endfor %}
                     </div>
+                    {% endif %}
                 {% endfor %}
             </div>
 

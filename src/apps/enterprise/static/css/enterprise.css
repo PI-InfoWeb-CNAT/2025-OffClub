@@ -1,5 +1,5 @@
 form{
-    width: 86%;
+    width: 80%;
     margin: 0 auto;
     padding: 65px;
     color: var(--white);
@@ -10,10 +10,14 @@ form{
 label{
     color: var(--white);
 }
-.form-step > .field-group > label{
-    display: block;
+.field-group{
+    margin-bottom: 20px;
 }
-.form-step > .field-group > input{
+label{
+    display: block;
+    font-size: 14px;
+}
+input, textarea{
     width: 100%;
     height: 22px;
     padding: 20px;
@@ -21,6 +25,17 @@ label{
     background-color: #252525;
     color: var(--white);
     border: none;
+    font-family: var(--main-font-family);
+    resize: none;
+}
+textarea{
+    height: 120px;
+}
+input:focus, textarea:focus, select:focus {
+    outline: none;
+}
+input::placeholder{
+    font-size: 15px;
 }
 .steps-list, .steps-list li{
     display: flex;
@@ -39,4 +54,14 @@ button.next{
     width: 230px;
     padding: 0.5em;
     border: none;
+}
+
+/* ORGANIZAÇÃO DO DISPLAY DOS CAMPOS DE SENHA */
+.password-fields-container, .phone-fields-container{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.password-fields-container .field-group, .phone-fields-container .field-group{
+    width: 100%;
 }
