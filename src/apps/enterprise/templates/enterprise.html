@@ -22,7 +22,7 @@
                 {% for field in wizard.form %}
                 <!-- Caso encontre o campo de senha, criar uma div dos campos de senha para ajustar o display deles para flex -->
                     {% if field.name == 'password' %} 
-                        <div class="password-fields-container">
+                        <div class="content-fields-container">
                             <div class="field-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}
@@ -37,9 +37,9 @@
                             </div>
                         </div>
 
-                <!-- Caso encontre o campo de senha, criar uma div dos campos de senha para ajustar o display deles para flex -->
+                <!-- Caso encontre o campo de telefone, criar uma div dos campos de telefone para ajustar o display deles para flex -->
                     {% elif field.name == 'phone_number' %} 
-                        <div class="phone-fields-container">
+                        <div class="content-fields-container">
                             <div class="field-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}
@@ -47,6 +47,63 @@
                             </div>
         
                     {% elif field.name == 'phone_number2' %}
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+                        </div>
+                    
+                <!-- Caso encontre o campo de cep, criar uma div container para ajustar o display deles para flex -->
+                    {% elif field.name == 'cep' %} 
+                        <div class="content-fields-container">
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+        
+                    {% elif field.name == 'street' %}
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+
+                    {% elif field.name == 'number' %}
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+                        </div>
+                <!-- Caso encontre o campo de complemento, criar uma div dos campos de complemento para ajustar o display deles para flex -->
+                    {% elif field.name == 'complement' %} 
+                        <div class="content-fields-container">
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+        
+                    {% elif field.name == 'neighborhood' %}
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+                        </div>
+                
+                <!-- Caso encontre o campo de cidade, criar uma div dos campos de cidade para ajustar o display deles para flex -->
+                    {% elif field.name == 'city' %} 
+                        <div class="content-fields-container">
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+        
+                    {% elif field.name == 'state' %}
                             <div class="field-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}
