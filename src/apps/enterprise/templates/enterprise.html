@@ -9,7 +9,7 @@
 
 {% block main %}
 <main id="enterprise-register-proposal">
-    <h1>Cadastro - Passo {{ wizard.steps.step1 }} de {{ wizard.steps.count }}</h1>
+    <h1>Cadastro</h1>
     
     <div class="register-container">
         {% include 'components/steps.html' with current_step=wizard.steps.step1 %}
@@ -128,10 +128,10 @@
             </div>
 
             <div class="form-buttons">
-                {% if wizard.steps.prev %}
+                <!-- {% if wizard.steps.prev %}
                     <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">Primeiro Passo</button>
                     <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Passo Anterior</button>
-                {% endif %}
+                {% endif %} -->
 
                 <button type="submit" class="next">Próximo</button> 
             </div>
