@@ -111,6 +111,15 @@
                             </div>
                         </div>
                         
+                    {% elif field.name == 'profile_picture' %}
+                        <div class="field-group image-container flex-center">
+                            <div class="content">
+                                <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Escolha sua foto de perfil">
+                                <input type="file" id="file-upload" name="file-upload">
+                                <p>Arraste e solte a foto aqui</p>
+                                <p class="flex-center">ou<label for="file-upload">faça upload</label></p>
+                            </div>
+                        </div>
                     <!-- Situação regular - não é necessário alocar uma div container -->
                     {% else %}
                     <div class="field-group">

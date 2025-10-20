@@ -152,3 +152,73 @@ li.active .step-stage{
 li.active .step-name{
     color: var(--brand-orange-darker);
 }
+/* PASSO 4 DO FORM - IMAGEM */
+.image-container{
+    width: 100%;
+}
+.image-container > .content{
+    text-align: center;
+    background-color: #252525; 
+    position: relative; 
+    padding: 3em; 
+    border-radius: 10px;
+    width: 360px;
+    --dash-color: #595959;
+    --dash-size: 20px;      
+    --space-size: 20px;     
+    --pattern-size: calc(var(--dash-size) + var(--space-size));
+    background-image: 
+        repeating-linear-gradient(
+            to right,
+            var(--dash-color) 0, 
+            var(--dash-color) var(--dash-size),
+            transparent var(--dash-size), 
+            transparent var(--pattern-size)
+        ),
+        repeating-linear-gradient(
+            to bottom,
+            var(--dash-color) 0, 
+            var(--dash-color) var(--dash-size),
+            transparent var(--dash-size), 
+            transparent var(--pattern-size)
+        ),
+        repeating-linear-gradient(
+            to right,
+            var(--dash-color) 0, 
+            var(--dash-color) var(--dash-size),
+            transparent var(--dash-size), 
+            transparent var(--pattern-size)
+        ),
+        repeating-linear-gradient(
+            to bottom,
+            var(--dash-color) 0, 
+            var(--dash-color) var(--dash-size),
+            transparent var(--dash-size), 
+            transparent var(--pattern-size)
+        );
+    background-position: 
+        top left,    
+        top right,   
+        bottom left, 
+        top left;   
+    background-size: 
+        100% 1.4px, 
+        1.4px 100%, 
+        100% 1.4px, 
+        1.4px 100%; 
+    background-repeat: no-repeat;
+}
+.image-container > .content > .flex-center{
+    gap: 5px;
+}
+.image-container #file-upload{
+    display: none;
+}
+.image-container label{
+    color: var(--brand-yellow);
+    text-decoration: underline;
+    cursor: pointer;
+}
+.image-container label:hover{
+    opacity: 0.8;
+}
