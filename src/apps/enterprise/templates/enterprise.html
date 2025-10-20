@@ -5,6 +5,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/enterprise.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form-steps.css' %}">
 {% endblock head %}
 
 {% block main %}
@@ -117,7 +118,7 @@
                                 <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Escolha sua foto de perfil">
                                 <input type="file" id="file-upload" name="file-upload">
                                 <p>Arraste e solte a foto aqui</p>
-                                <p class="flex-center">ou<label for="file-upload">faça upload</label></p>
+                                <p class="flex-center">ou<label for="file-upload" id="upload">faça upload</label></p>
                             </div>
                         </div>
                     <!-- Situação regular - não é necessário alocar uma div container -->

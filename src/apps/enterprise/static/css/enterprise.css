@@ -24,15 +24,16 @@ main h1{
     border: 2px solid #373737;
     border-radius: 20px;
 }
-label{
-    color: var(--white);
-}
 .field-group{
     margin-bottom: 20px;
 }
 label{
+    color: var(--white);
     display: block;
     font-size: 14px;
+}
+label:not(#upload){
+    margin-bottom: 8px;
 }
 input, textarea{
     width: 100%;
@@ -80,145 +81,4 @@ button.next{
 }
 .content-fields-container .field-group{
     width: 100%;
-}
-
-/* ESTILIZAÇÃO DA LISTA DE PASSOS */
-.steps-counter{
-    width: 100%;
-    border: 2px solid #373737;
-    border-radius: 10px;
-    margin-bottom: 3em;
-}
-.circle-container{
-    width: 30px; 
-    height: 30px; 
-    border-radius: 50%;
-    background-color: transparent;
-    border: 1.4px solid var(--white);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.step-stage{
-    font-family: var(--special-font-family);
-    font-size: 20px;
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-.steps-list {
-    display: flex; 
-    width: 100%;
-    list-style: none;
-    padding: 1.6em;
-}
-.steps-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-    flex-grow: 1;
-    position: relative; 
-    padding-right: 40px;
-    min-width: 80px;
-}
-.steps-list li:last-child {
-    flex-grow: 0; 
-    padding-right: 6em; 
-}
-.steps-list li:not(:last-child)::after {
-    content: '';
-    display: block;
-    border-top: 1.5px solid #373737; 
-    border-right: 1.5px solid #373737; 
-    width: 58px;
-    height: 58px; 
-    position: absolute; 
-    top: 50%;
-    right: 20px; 
-    transform: translateY(-50%) rotate(45deg); 
-    user-select: none;
-}
-.steps-counter > .steps-list > li> p.step-stage{
-    font-family: var(--special-font-family);
-}
-li.active > .circle-container{
-    border: 1.4px solid transparent; 
-    background-color: transparent;
-    border-image: linear-gradient(180deg, var(--brand-orange), #A15D18) 1;
-}
-li.active .step-stage{
-    color: transparent;
-    background-image: linear-gradient(180deg, var(--brand-orange), #A15D18);;
-}
-li.active .step-name{
-    color: var(--brand-orange-darker);
-}
-/* PASSO 4 DO FORM - IMAGEM */
-.image-container{
-    width: 100%;
-}
-.image-container > .content{
-    text-align: center;
-    background-color: #252525; 
-    position: relative; 
-    padding: 3em; 
-    border-radius: 10px;
-    width: 360px;
-    --dash-color: #595959;
-    --dash-size: 20px;      
-    --space-size: 20px;     
-    --pattern-size: calc(var(--dash-size) + var(--space-size));
-    background-image: 
-        repeating-linear-gradient(
-            to right,
-            var(--dash-color) 0, 
-            var(--dash-color) var(--dash-size),
-            transparent var(--dash-size), 
-            transparent var(--pattern-size)
-        ),
-        repeating-linear-gradient(
-            to bottom,
-            var(--dash-color) 0, 
-            var(--dash-color) var(--dash-size),
-            transparent var(--dash-size), 
-            transparent var(--pattern-size)
-        ),
-        repeating-linear-gradient(
-            to right,
-            var(--dash-color) 0, 
-            var(--dash-color) var(--dash-size),
-            transparent var(--dash-size), 
-            transparent var(--pattern-size)
-        ),
-        repeating-linear-gradient(
-            to bottom,
-            var(--dash-color) 0, 
-            var(--dash-color) var(--dash-size),
-            transparent var(--dash-size), 
-            transparent var(--pattern-size)
-        );
-    background-position: 
-        top left,    
-        top right,   
-        bottom left, 
-        top left;   
-    background-size: 
-        100% 1.4px, 
-        1.4px 100%, 
-        100% 1.4px, 
-        1.4px 100%; 
-    background-repeat: no-repeat;
-}
-.image-container > .content > .flex-center{
-    gap: 5px;
-}
-.image-container #file-upload{
-    display: none;
-}
-.image-container label{
-    color: var(--brand-yellow);
-    text-decoration: underline;
-    cursor: pointer;
-}
-.image-container label:hover{
-    opacity: 0.8;
 }
