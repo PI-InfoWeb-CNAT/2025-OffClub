@@ -77,48 +77,6 @@ body.layout{
   font: var(--text-font-weight) var(--text-font-size)/var(--text-line-height) var(--main-font-family);
 }
 
-/* Sidebars*/
-.sidebar{
-  background: linear-gradient(180deg, var(--grey) 0%, var(--dark-grey) 100%);
-  border: 1px solid var(--brand-yellow);
-  font-weight: lighter;
-  border-radius: var(--border-radius);
-  padding: 18px 16px;
-  position: sticky;
-  top: 24px;
-}
-.sidebar__nav{ 
-    display:flex; 
-    flex-direction:column; 
-    gap:12px;
-}
-.sidebar__link{
-  color: var(--text-color);
-  text-decoration: none;
-  padding:10px 12px;
-  border-radius: var(--border-radius-small);
-  
-}
-.sidebar__link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sidebar__icon {
-  width: 20px;
-  height: 20px;
-}
-
-.sidebar__link:hover{ 
-    background: var(--almost-transparent-white);
-    color: var(--brand-yellow);
-
-}
-.sidebar__sidebar__link--danger{
-    color: var(--brand-orange-darker);
-} 
-
 /* Contents*/
 .content{
   background: linear-gradient(180deg, var(--grey) 0%, var(--dark-grey) 100%);

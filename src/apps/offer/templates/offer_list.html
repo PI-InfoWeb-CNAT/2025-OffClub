@@ -10,20 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/offer_list.css' %}">
 {% endblock %}
 
-{% block main %} 
-
-  <!-- barra -->
-  <div class="container">
-    <div class="sidebar">
-    <nav class="sidebar__nav">
-      <a class="sidebar__link" href="#"><img src="{% static 'imgs/icons/profile_icon.png' %}"> Meu Perfil</a>
-      <a class="sidebar__link sidebar__link--active" href="{% url 'offer:manage_list' %}"><img src="{% static 'imgs/icons/oferts_icon.png' %}">Minhas ofertas</a>
-      <a class="sidebar__link" href="#"><img src="{% static 'imgs/icons/planos_icon.png' %}">Meus Planos</a>
-      <a class="sidebar__link" href="#"><img src="{% static 'imgs/icons/conf_icon.png' %}">Configurações</a>
-      <a class="sidebar__link sidebar__link--danger" href="#"><img src="{% static 'imgs/icons/sair_icon.png' %}">Sair</a>
-    </nav>
-    </div>
-  
+{% block main %}
   <main class="content">
       <h1 class="content__title">Minhas ofertas</h1>
 
@@ -61,8 +48,8 @@
           </label>
 
           <div class="filters__actions">
-            <button class="btn btn--primary" type="submit">Filtrar</button>
-            <a class="btn btn--ghost" href="{% url 'offer:manage_create' %}">Nova oferta</a>
+            <button class="btn btn--filter" type="submit">Filtrar</button>
+            <a class="btn btn--create" href="{% url 'offer:manage_create' %}">Nova oferta</a>
           </div>
         </div>
       </form>
@@ -76,7 +63,6 @@
             <article class="card">
               <div class="card__left">
                 <div class="card__merchant">
-                  {% if o.category %}<span class="card__merchant-photo">{{ o.category.name }}</span>{% endif %}
                   <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
                 </div>
                 <h3 class="card__title">{{ o.title }}</h3>
@@ -92,9 +78,9 @@
                 </div>
                 <div class="card__actions">
                   <a class="btn btn--review" href="{% url 'offer:manage_detail_json' o.id %}">Ver avaliações</a> <!-- Ver a url que vai ficar aqui-->
-                  <a class="btn btn--secondary" href="{% url 'offer:manage_detail_json' o.id %}">Detalhes</a>
-                  <a class="btn btn--primary" href="{% url 'offer:manage_edit' o.id %}">Editar</a>
-                  <a class="btn btn--danger" href="{% url 'offer:manage_delete' o.id %}">Excluir</a>
+                  <a class="btn btn--detail" href="{% url 'offer:manage_detail_json' o.id %}">Detalhes</a>
+                  <a class="btn btn--edit" href="{% url 'offer:manage_edit' o.id %}">Editar</a>
+                  <a class="btn btn--delete" href="{% url 'offer:manage_delete' o.id %}">Excluir</a>
                 </div>
               </div>
             </article>
@@ -114,7 +100,6 @@
             <article class="card card--muted">
               <div class="card__left">
                 <div class="card__merchant">
-                  {% if o.category %}<span class="card__merchant-badge">{{ o.category.name }}</span>{% endif %}
                   <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
                 </div>
                 <h3 class="card__title">{{ o.title }}</h3>
@@ -125,8 +110,10 @@
               <article class="card card--muted">
                 <div class="card__left">
                   <div class="card__merchant">
-                    {% if o.category %}<span class="card__merchant-photo">{{ o.category.name }}</span>{% endif %}
-                    <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
+                    {% if object.enterprise.user.profile_picture %}
+                      <img class="card__merchant-photo" src="{{ object.enterprise.user.profile_picture.url }}" alt="{{ object.enterprise.trade_name }}">
+                    {% endif %}
+                    <span class="card__merchant-name">{{ object.enterprise.trade_name }}</span>
                   </div>
                   <h3 class="card__title">{{ o.title }}</h3>
                   <div class="card__price">

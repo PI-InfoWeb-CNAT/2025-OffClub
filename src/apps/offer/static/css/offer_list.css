@@ -23,55 +23,7 @@
   --border-radius:20px;
 }
 
-div.container{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-}
-/* ===== sidebar ===== */
-div.sidebar {
-  background: var(--background-color);
-  border: 1px solid rgba(255,197,71,0.4);
-  border-radius: var(--border-radius);
-  padding: 18px 16px;
-  top: 24px;
-  margin-right: 10px;
-  width: 270px;
 
-}
-
-.sidebar__nav {
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.sidebar__link {
-  color: var(--text-color);
-  text-decoration: none;
-  padding:10px 12px;
-  border-radius: var(--border-radius-small);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sidebar__link img,
-.sidebar__icon {
-  width: 20px;
-  height: 20px;
-}
-
-.sidebar__link:hover {
-  background: var(--almost-transparent-white);
-  color: var(--brand-yellow);
-}
-
-.sidebar__link--active {
-  background: rgba(255,197,71,0.12);
-  border: 1px solid rgba(255,197,71,0.4);
-  color: #f6c35a;
-}
 
 /* ===== conteúdo principal ===== */
 .content {
@@ -80,7 +32,11 @@ div.sidebar {
   box-shadow: 0 0 0 1px rgba(255,197,71,0.12) inset;
   border-radius: var(--border-radius);
   padding: 22px;
-  min-height: calc(100vh - 48px);
+  width: 1250px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  
 }
 
 .content__header {
@@ -128,7 +84,7 @@ div.sidebar {
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 12px;
   padding: 10px 12px;
-  min-width: 160px;
+  min-width: 130px;
   outline: none;
 }
 
@@ -145,35 +101,43 @@ div.sidebar {
   border-radius: var(--border-radius-small);
   text-decoration:none;
   cursor:pointer;
-  border:1px solid transparent;
-  font-weight:600;
+  border:2px solid transparent;
   transition: filter .2s ease, background .2s ease, color .2s ease;
 }
-.btn--primary {
+.btn--filter {
   background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
   color: #1a1a1a;
+  min-width: 130px;
+  font-family: "Montserrat", sans-serif;
 }
-.btn--primary:hover {
+.btn--filter:hover {
   background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange));
 }
-.btn--secondary {
+.btn--detail {
   background: #222;
-  color: #e5e5e5;
-  border: 1px solid rgba(255,255,255,0.12);
+  color: #9D9D9D ;
+  border: 2px solid rgba(255,255,255,0.12);
 }
 .btn--review {
   background: transparent;
-  color: var(--text-color);
+  color: #9D9D9D ;
   border-color: rgba(255,255,255,0.12);
 }
-.btn--ghost {
-  background: transparent;
-  color: var(--text-color);
-  border-color: rgba(255,255,255,0.12);
+.btn--edit {
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
+  color: #1a1a1a;
 }
-.btn--danger {
-  background: #7a2323;
-  border: 1px solid rgba(255,0,0,0.25);
+.btn--create {
+  font-family: "Montserrat", sans-serif;
+  color: #9D9D9D ;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 130px;
+}
+.btn--delete {
+  background: #310000; 
+  font-family: "Poppins",sans-serif;
   color: #fff;
 }
 
@@ -238,8 +202,7 @@ div.sidebar {
 
 .card__right {
   align-items: center;
-  gap: 10px;
-  font-size: 14px;
+  font-size: 15px;
   font-family: "Poppins",sans-serif;
 }
 
@@ -304,27 +267,27 @@ div.sidebar {
 }
 
 .card__expires-label {
-  font-size: 11px;
+  font-size: 14px;
   color: rgba(255,255,255,0.6);
   margin-bottom: 4px;
 }
 
 .card__expires-date {
   color: #ffffff;
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-weight: 800;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .card__actions {
   display: flex;
   gap: 8px;
+  padding-top: 15px;
 }
 
 .card__actions .btn {
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 12px;
+  padding: 9px 14px;
+  border-radius: var(--border-radius-small);
+  font-size: 15px;
   line-height: 1;
 }
 
@@ -355,17 +318,3 @@ div.sidebar {
   color: #f6c35a;
   border-color: rgba(255,197,71,0.45);
 }
-
-/* ===== empty state ===== */
-.empty-state,
-.nothing_found {
-  text-align: center;
-  padding: 24px 8px;
-}
-
-.nothing_found img {
-  width: 160px;
-  max-width: 60%;
-  margin-bottom: 8px;
-}
-
