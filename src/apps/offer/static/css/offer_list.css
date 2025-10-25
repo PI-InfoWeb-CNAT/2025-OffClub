@@ -92,7 +92,7 @@
   color: rgba(255,255,255,0.35);
 }
 
-/* ===== botões ===== */
+/*  botões  */
 .btn {
   display:inline-flex;
   align-items:center;
@@ -141,7 +141,7 @@
   color: #fff;
 }
 
-/* ===== seções ===== */
+/*  seções  */
 .section {
   margin-top: 16px;
 }
@@ -161,7 +161,7 @@
   background: rgba(255,255,255,0.15);
 }
 
-/* ===== cards (layout horizontal) ===== */
+/*  cards (layout horizontal)  */
 .cards {
   display: flex;
   flex-direction: column;
@@ -291,7 +291,7 @@
   line-height: 1;
 }
 
-/* ===== paginação (bolinhas) ===== */
+/*  paginação (bolinhas)  */
 .pagination {
   display: flex;
   justify-content: center;

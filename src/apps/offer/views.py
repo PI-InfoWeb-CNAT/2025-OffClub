@@ -40,28 +40,56 @@ class ManageOfferListView(TemplateView):
     template_name = "offer_list.html" 
 
     def get_context_data(self, **kwargs):
+        from django.utils import timezone
+from django.views.generic import TemplateView
+from .services.manage_offer import ManageOffer
+
+class ManageOfferListView(TemplateView):
+    template_name = "offer_list.html"
+
+    def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx.update(
             ManageOffer.list_filter_offer(
-                name=self.request.GET.get("q") or "",
-                filter_min_discount=self.request.GET.get("min_discount") or "",
-                filter_start_date=self.request.GET.get("start") or "",
-                filter_end_date=self.request.GET.get("end") or "",
+                name=self.request.GET.get("q"),
+                filter_min_discount=self.request.GET.get("min_discount"),
+                filter_start_date=self.request.GET.get("start"),
+                filter_end_date=self.request.GET.get("end"),
                 pageNum=self.request.GET.get("page"),
-                filter_categories=self.request.GET.getlist("category") or None,
+                filter_categories=self.request.GET.getlist("category"),
                 per_page=8,
                 only_active=True,
             )
         )
-        ctx["now"] = timezone.now()  
+        ctx["now"] = timezone.now()
         return ctx
+
+
+class ManageOfferDetailView(View):
+    def get(self, request, *args, **kwargs):
+        offer_id = kwargs.get('offer_id') or kwargs.get('pk')
+        try:
+            offer = ManageOffer.get(pk=offer_id)
+        except Offer.DoesNotExist:
+            offer = get_object_or_404(Offer, pk=offer_id)
+        remaining = (
+            getattr(offer, 'remaining_coupons', None)  # Acessa um atributo de um objeto pelo nome, como se o nome fosse uma string 
+            or (offer.to_dict().get('remaining_coupons') if hasattr(offer, 'to_dict') else None)  # verifica se tem atributo antes de acessar
+            or 0  # fallback
+        )
+        context = {
+            'offer': offer,
+            'remaining_coupons': remaining,
+        }
+        return render(request, 'offer_detail_enterprise.html', context)
 
 
 class ManageOfferDetailJsonView(View):
     def get(self, request, *args, **kwargs):
-        offer = get_object_or_404(Offer, pk=kwargs.get("offer_id"))
-        return JsonResponse(offer.to_dict())
-
+        offer_id = kwargs.get('offer_id') or kwargs.get('pk')
+        offer = get_object_or_404(Offer, pk=offer_id)
+        return JsonResponse(offer.to_dict(), safe=False, json_dumps_params={'ensure_ascii': False})
+    
 class ManageOfferCreateView(CreateView):
     model = Offer
     form_class = OfferForm

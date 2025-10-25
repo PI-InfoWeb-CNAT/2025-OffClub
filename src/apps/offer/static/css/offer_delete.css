@@ -2,8 +2,6 @@
 @import url("{% static 'css/global.css' %}");
 
 :root{
-  /* as variáveis abaixo já vêm do seu arquivo; estão aqui como referência
-     (se já estiverem definidas no global.css, pode manter só lá) */
   --white:#ffffff;
   --offwhite:rgba(255,255,255,0.75);
   --almost-transparent-white:rgba(255,255,255,0.1);
@@ -63,26 +61,31 @@
   --border-radius:20px;
 }
 
-/* ===== section ===== */
+/*  section  */
 .section {
-    margin: 0 auto;
-    width: 1110px;
-    margin-bottom: 70px;
-    padding: 18px 22px;
-    border-radius: var(--border-radius-small);
-    background: #252525;
-    border: 1px solid var(--brand-yellow);
-    transition: border-color 0.2s ease, transform 0.12s ease;
+  margin: 0 auto;
+  width: 1110px;
+  margin-bottom: 70px;
+  padding: 18px 22px;
+  border-radius: var(--border-radius-small);
+  background: #252525;
+  border: 1px solid var(--brand-yellow);
+  transition: border-color 0.2s ease, transform 0.12s ease;
 }
 
-h1{
-    padding-top: 50px;
-    padding-bottom: 20px;
-    padding-left: 205px;
+/* título principal*/
+h1 {
+  color: var(--white);
+  font-family: var(--main-font-family);
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);
+  margin: 50px auto 20px auto; 
+  width: 1110px;               
+  padding: 0 8px;             
+  box-sizing: border-box;     
 }
 
-
-/* ===== botões ===== */
+/* botões */
 .btn {
   display:inline-flex;
   align-items:center;
@@ -96,62 +99,58 @@ h1{
 }
 
 .btn--delete {
-    background: #310000; 
-    font-family: "Poppins",sans-serif;
-    border-radius: 12px;
-    font-size: 16px;
-    color: #fff;
-    min-width: 130px;
+  background: #310000; 
+  font-family: "Poppins",sans-serif;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #fff;
+  min-width: 130px;
 }
 
 .btn--cancel {
-    font-family: "Poppins",sans-serif;
-    color: var(--light-grey);
-    font-size: 16px;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 12px;
-    min-width: 130px;
+  font-family: "Poppins",sans-serif;
+  color: var(--light-grey);
+  font-size: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  min-width: 130px;
 }
 
 .form__actions {
-    display: flex;
-    gap: 8px;
-    margin-left: 650px;
-    padding-top: 50px;
+  display: flex;
+  gap: 8px;
+  margin-left: 650px;
+  padding-top: 50px;
 }
 
-/* ===== card ===== */
-
+/* card */
 .card__division {
-    display: flex;
+  display: flex;
 }
 
 .card__left{
-    padding-top: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }
 
 .card__merchant-name{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--offwhite);
-    font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--offwhite);
+  font-size: 12px;
 }
 
 .card__price{
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    color: #dcdcdc;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #dcdcdc;
 }
 
 .card__price-discount{
-    color: var(--medium-green);
+  color: var(--medium-green);
 }
-
-
-

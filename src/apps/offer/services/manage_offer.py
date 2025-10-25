@@ -7,12 +7,74 @@ from django.db import transaction
 from django.db.models import F, QuerySet, ExpressionWrapper, DecimalField, Value
 from django.db.models.functions import Coalesce
 from django.utils import timezone
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from ..models import Offer, Category
 
 
 class ManageOffer:
+    @staticmethod
+    def _to_float_or_none(value) -> Optional[float]:
+        if value is None:
+            return None
+        s = str(value).strip()
+        if s == "":
+            return None
+        try:
+            return float(s)
+        except (TypeError, ValueError):
+            return None
+
+    @staticmethod
+    def _to_int_list(values: Optional[Iterable[int | str]]) -> list[int]:
+        if not values:
+            return []
+        out: list[int] = []
+        for v in values:
+            sv = str(v).strip()
+            if sv.isdigit():
+                out.append(int(sv))
+        return out
+
+    @staticmethod
+    def _sanitize_filters(
+        name: Optional[str],
+        filter_min_discount,
+        filter_start_date,
+        filter_end_date,
+        pageNum,
+        filter_categories: Optional[Iterable[int | str]],
+    ) -> Dict[str, Any]:
+        name = (name or "").strip()
+
+        min_discount = ManageOffer._to_float_or_none(filter_min_discount)
+
+        # strings vazias -> None (evita filtros com '')
+        start_date = str(filter_start_date).strip() if filter_start_date not in (None, "") else None
+        end_date = str(filter_end_date).strip() if filter_end_date not in (None, "") else None
+
+        # categorias: remove vazios e não numéricos
+        cat_ids = ManageOffer._to_int_list(filter_categories)
+
+        # paginação: garante número válido
+        try:
+            page_num_clean = int(pageNum) if pageNum not in (None, "", 0) else 1
+            if page_num_clean <= 0:
+                page_num_clean = 1
+        except (TypeError, ValueError):
+            page_num_clean = 1
+
+        return {
+            "name": name,
+            "filter_min_discount": min_discount,
+            "filter_start_date": start_date,
+            "filter_end_date": end_date,
+            "pageNum": page_num_clean,
+            "filter_categories": cat_ids or None,
+        }
+
+    # filtros
+   
     @staticmethod
     def list_filter_offer(
         name: Optional[str] = None,
@@ -24,21 +86,33 @@ class ManageOffer:
         per_page: int = 8,
         only_active: bool = True,
     ) -> Dict[str, Any]:
-        now = timezone.now()
-        qs: QuerySet[Offer] = (
-            Offer.objects.select_related("category").order_by("-start_date")
+        clean = ManageOffer._sanitize_filters(
+            name=name,
+            filter_min_discount=filter_min_discount,
+            filter_start_date=filter_start_date,
+            filter_end_date=filter_end_date,
+            pageNum=pageNum,
+            filter_categories=filter_categories,
         )
+        name = clean["name"]
+        filter_min_discount = clean["filter_min_discount"]
+        filter_start_date = clean["filter_start_date"]
+        filter_end_date = clean["filter_end_date"]
+        pageNum = clean["pageNum"]
+        filter_categories = clean["filter_categories"]
+
+        now = timezone.now()
+        qs: QuerySet[Offer] = Offer.objects.select_related("category").order_by("-start_date")
 
         if only_active:
             qs = qs.filter(end_date__gte=now)
 
         if name:
-            qs = qs.filter(title__icontains=name)  # campo correto é 'title'
+            qs = qs.filter(title__icontains=name)
 
         if filter_min_discount not in (None, "", 0):
             qs = qs.filter(discount__gte=filter_min_discount)
 
-        # Filtrando por datas usando a parte de date para aceitar inputs "YYYY-MM-DD"
         if filter_start_date:
             qs = qs.filter(start_date__date__gte=str(filter_start_date))
 
@@ -48,7 +122,7 @@ class ManageOffer:
         if filter_categories:
             qs = qs.filter(category_id__in=list(filter_categories))
 
-        # Anotação com alias diferente para não colidir com a @property final_price
+        # Anotação (não colide com @property final_price)
         discount = Coalesce(F("discount"), Value(0))
         final_price_expr = ExpressionWrapper(
             F("price") * (Value(Decimal("1")) - discount / Value(Decimal("100"))),
@@ -56,8 +130,12 @@ class ManageOffer:
         )
         qs = qs.annotate(final_price_ann=final_price_expr)
 
-        paginator = Paginator(qs, per_page)
-        page_obj = paginator.get_page(pageNum)
+        # Paginação robusta
+        paginator = Paginator(qs, per_page if per_page and per_page > 0 else 8)
+        try:
+            page_obj = paginator.get_page(pageNum)
+        except (PageNotAnInteger, EmptyPage):
+            page_obj = paginator.get_page(1)
 
         categories = Category.objects.all()
 
@@ -74,6 +152,9 @@ class ManageOffer:
             "categories": categories,
         }
 
+    # ------------------------------
+    # Utilidades/CRUD
+    # ------------------------------
     @staticmethod
     def final_price(
         price: Decimal | float | int,
