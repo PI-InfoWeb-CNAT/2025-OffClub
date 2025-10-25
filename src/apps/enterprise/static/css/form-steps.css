@@ -6,14 +6,28 @@
     margin-bottom: 3em;
 }
 .circle-container{
-    width: 30px; 
-    height: 30px; 
+    width: 32px; 
+    height: 32px; 
     border-radius: 50%;
     background-color: transparent;
     border: 2px solid var(--white);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.circle-container > img{
+    display: none;
+}
+.past .circle-container{
+    border: none;
+    background: linear-gradient(to right, var(--brand-orange-darker), #A15D18);
+}
+.past > .circle-container > img{
+    display: block;
+    margin-top: 2px;
+}
+.past > .circle-container > p{
+    display: none;
 }
 .step-stage{
     font-family: var(--special-font-family);
@@ -33,13 +47,13 @@
     gap: 10px; 
     flex-grow: 1;
     position: relative; 
-    padding-right: 10px;
-    max-width: 380px;
+    padding-right: 6px;
+    max-width: 350px;
     margin-left: 20px;
 }
 .steps-list li:last-child {
     flex-grow: 0; 
-    padding-right: 8em; 
+    padding-right: 7em; 
 }
 .steps-list li:not(:last-child)::after {
     content: '';

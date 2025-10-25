@@ -97,7 +97,7 @@ class RegisterWizardView(SessionWizardView):
             phone.save()
 
         enterprise.save()
-        return redirect('enterprise/enterprise_register/')
+        return redirect('register/')
 
 
 class RegisterDone(TemplateView):

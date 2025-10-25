@@ -8,9 +8,9 @@ from apps.users.models import User
 class EnterpriseInfoForm(forms.ModelForm):
     line_of_business = forms.ModelChoiceField(
         queryset=LineOfBusiness.objects.all(),
-        empty_label="Selecione um Ramo de Atividade", # Este será o texto da primeira opção
-        label="Ramo de Atividade", # O rótulo que aparece ao lado do campo
-        widget=forms.Select(attrs={'class': 'form-control-custom'}) # Widget customizado
+        empty_label=None, 
+        label="Ramo de Atividade", 
+        widget=forms.RadioSelect 
     )
     class Meta:
         model = Enterprise
@@ -44,17 +44,17 @@ class CredentialsForm(forms.ModelForm):
 
 class ContactForm(forms.Form):
     #Campos para o modelo Phone
-    phone_number = forms.CharField(label="Telefone Principal", max_length=15, help_text="(XX) XXXXX-XXXX")
-    phone_number2 = forms.CharField(label="Telefone Secundário (Opcional)", max_length=15, required=False)
+    phone_number = forms.CharField(label="Telefone 1", max_length=15, help_text="(XX) XXXXX-XXXX")
+    phone_number2 = forms.CharField(label="Telefone 2", max_length=15, required=False)
 
     # Campos para o modelo Address
     cep = forms.CharField(label="CEP", max_length=9)
+    city = forms.CharField(label="Cidade", max_length=75)
+    state = forms.CharField(label="UF", max_length=2)
     street_name = forms.CharField(label="Logradouro", max_length=75)
     number = forms.CharField(label="Número", max_length=10)
     complement = forms.CharField(label="Complemento", max_length=75, required=False)
     neighborhood = forms.CharField(label="Bairro", max_length=75)
-    city = forms.CharField(label="Cidade", max_length=75)
-    state = forms.CharField(label="UF", max_length=2)
     
 
 class ProfilePicForm(forms.ModelForm):

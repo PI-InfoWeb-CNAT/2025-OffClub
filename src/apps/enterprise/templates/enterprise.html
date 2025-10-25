@@ -11,7 +11,6 @@
 {% block main %}
 <main id="enterprise-register-proposal">
     <h1>Cadastro</h1>
-    
     <div class="register-container">
         {% include 'components/steps.html' with current_step=wizard.steps.step1 %}
         <form method="post" enctype="multipart/form-data">
@@ -64,14 +63,14 @@
                                 {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
                             </div>
         
-                    {% elif field.name == 'street' %}
+                    {% elif field.name == 'city' %}
                             <div class="field-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}
                                 {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
                             </div>
 
-                    {% elif field.name == 'number' %}
+                    {% elif field.name == 'state' %}
                             <div class="field-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field }}
@@ -79,6 +78,23 @@
                             </div>
                         </div>
                 <!-- Caso encontre o campo de complemento, criar uma div dos campos de complemento para ajustar o display deles para flex -->
+                    {% elif field.name == 'street_name' %} 
+                        <div class="content-fields-container">
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+        
+                    {% elif field.name == 'number' %}
+                            <div class="field-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            </div>
+                        </div>
+                
+                <!-- Caso encontre o campo de cidade, criar uma div dos campos de cidade para ajustar o display deles para flex -->
                     {% elif field.name == 'complement' %} 
                         <div class="content-fields-container">
                             <div class="field-group">
@@ -94,23 +110,6 @@
                                 {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
                             </div>
                         </div>
-                
-                <!-- Caso encontre o campo de cidade, criar uma div dos campos de cidade para ajustar o display deles para flex -->
-                    {% elif field.name == 'city' %} 
-                        <div class="content-fields-container">
-                            <div class="field-group">
-                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                {{ field }}
-                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                            </div>
-        
-                    {% elif field.name == 'state' %}
-                            <div class="field-group">
-                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                {{ field }}
-                                {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
-                            </div>
-                        </div>
                         
                     {% elif field.name == 'profile_picture' %}
                         <div class="field-group image-container flex-center">
@@ -119,6 +118,23 @@
                                 <input type="file" id="file-upload" name="file-upload">
                                 <p>Arraste e solte a foto aqui</p>
                                 <p class="flex-center">ou<label for="file-upload" id="upload">faça upload</label></p>
+                            </div>
+                        </div>
+
+                    <!-- Caso seja o campo de Ramo da Empresa -->
+                     {% elif field.name == 'line_of_business' %}
+                        <div class="field-group">
+                            <label>{{ field.label }}</label>
+                            
+                            {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+                            
+                            <div class="radio-flex-container">
+                                {% for radio in field %}
+                                    {{ radio.tag }} 
+                                    <label for="{{ radio.id_for_label }}" class="radio-tag-label">
+                                        {{ radio.choice_label }}
+                                    </label>
+                                {% endfor %}
                             </div>
                         </div>
                     <!-- Situação regular - não é necessário alocar uma div container -->
@@ -142,8 +158,11 @@
                     <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">Primeiro Passo</button>
                     <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Passo Anterior</button>
                 {% endif %} -->
-
+                {% if wizard.steps.current != wizard.steps.last %}
                 <button type="submit" class="next">Próximo</button> 
+                {% else %}
+                <button type="submit" class="next">Solicitar cadastro</button> 
+                {% endif %}
             </div>
         </form>
     </div>
