@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone 
-from django.core.validators import MinValueValidator, MaxValueValidator
 import uuid
 
 class Coupon(models.Model):
@@ -32,24 +31,3 @@ class Coupon(models.Model):
         verbose_name_plural = "Cupons"
         ordering = ["-creation_date"]
         unique_together = ("subscriber", "offer")
-
-
-class Evaluation(models.Model):
-    id = models.UUIDField("ID", primary_key=True, default=uuid.uuid4, editable=False)
-    stars = models.IntegerField("Estrelas", null=False,validators=[MaxValueValidator(5), MinValueValidator(1)])
-    message = models.CharField("Mensagem", max_length=300)
-    coupon = models.ForeignKey(
-        Coupon, 
-        related_name="evaluations",
-        verbose_name="Cupom",
-        on_delete=models.CASCADE
-        )
-    
-    def __str__(self):
-        return f"{self.coupon} - {self.stars} estrelas"
-
-    class Meta:
-        verbose_name = "Avaliação"
-        verbose_name_plural = "Avaliações"
-        ordering = ["coupon", "-stars"]
-        unique_together = ("coupon",)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Coupon, Evaluation
+from .models import Coupon
 
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
@@ -28,16 +28,3 @@ class CouponAdmin(admin.ModelAdmin):
     @admin.display(boolean=True, description='Ativo?', ordering='expiration_date')
     def is_active(self, obj):
         return obj.is_active
-
-@admin.register(Evaluation)
-class EvaluationAdmin(admin.ModelAdmin):
-    list_display = (
-        'coupon',
-        'stars',
-        'message'
-    )
-    ordering = ('coupon', '-stars')
-
-    list_filter = ('coupon', 'stars')
-    
-    search_fields = ('coupon', 'stars')
