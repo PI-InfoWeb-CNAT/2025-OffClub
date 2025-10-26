@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.views import View
-<<<<<<< HEAD
 from django.views.generic import ListView, TemplateView
 from apps.coupon.models import Coupon
 from .services.discount import DiscountService
@@ -18,13 +17,8 @@ from formtools.wizard.views import SessionWizardView
 from apps.users.models import User
 from .models import Subscriber
 from apps.core.models import Address, Phone
-=======
-from apps.subscriber.services.services import ServiceDiscount
-from apps.coupon.forms.evaluation_form import EvaluationForm
->>>>>>> 86a4591e5e24851e3e6bcd92bd3d9595ad41d1b3
 
 
-<<<<<<< HEAD
 FORMS = [
     ("info", PersonalInfoForm),
     ("login", CredentialsForm),
@@ -176,18 +170,3 @@ class HistoryView(ListView):
 
 class RegistrationDone(TemplateView):
     template_name = 'register/done.html'
-=======
-            for coupon in active_filtered:
-                price = coupon.offer.price
-                discount = coupon.offer.discount
-                old_price, final_price = ServiceDiscount.final_price(price, discount)
-                coupon_data = {
-                        'old_price':     old_price,
-                        'final_price':   final_price,
-                        'used_month': None,
-                    }
-                dic = {'object': coupon, 'data': coupon_data}
-                active_coupons.append(dic)
-            context = {'used_coupons': used_coupons, 'active_coupons': active_coupons, 'years_group': years_group, 'form': EvaluationForm(),}
-            return render(request, 'subscriber.html', context=context, status=200)
->>>>>>> 86a4591e5e24851e3e6bcd92bd3d9595ad41d1b3

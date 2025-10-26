@@ -10,36 +10,35 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("subscription", "0001_initial"),
+        ("core", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="subscription",
+            model_name="address",
             name="user",
             field=models.ForeignKey(
+                blank=True,
+                null=True,
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="subscriptions",
+                related_name="addresses",
                 to=settings.AUTH_USER_MODEL,
             ),
         ),
         migrations.AddField(
-            model_name="subscriptionplan",
-            name="features",
-            field=models.ManyToManyField(
-                blank=True, related_name="plans", to="subscription.feature"
-            ),
-        ),
-        migrations.AddField(
-            model_name="subscription",
-            name="plan",
+            model_name="phone",
+            name="user",
             field=models.ForeignKey(
                 blank=True,
                 null=True,
-                on_delete=django.db.models.deletion.SET_NULL,
-                related_name="subscriptions",
-                to="subscription.subscriptionplan",
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="phones",
+                to=settings.AUTH_USER_MODEL,
             ),
+        ),
+        migrations.AlterUniqueTogether(
+            name="phone",
+            unique_together={("phone_number", "phone_type")},
         ),
     ]

@@ -9,23 +9,19 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("enterprise", "0001_initial"),
+        ("coupon", "0001_initial"),
         ("offer", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="offer",
-            name="enterprise",
+            model_name="coupon",
+            name="offer",
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="offers",
-                to="enterprise.enterprise",
-                verbose_name="Empresa",
+                related_name="coupons",
+                to="offer.offer",
+                verbose_name="Oferta",
             ),
-        ),
-        migrations.AlterUniqueTogether(
-            name="offer",
-            unique_together={("title", "enterprise")},
         ),
     ]
