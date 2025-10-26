@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let selectedStars = 0;
 
-    // Atualiza visualmente as estrelas
+    // Deixa as estrelas selecionadas coloridas
     function updateStars(value) {
         const stars = starsContainer.querySelectorAll("span");
         stars.forEach((star, index) => {

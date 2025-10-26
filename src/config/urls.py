@@ -8,6 +8,7 @@ urlpatterns = [
     path('subscription/', include('apps.subscription.urls')),
     path('subscriber/', include('apps.subscriber.urls')),
     path('offer/', include('apps.offer.urls', namespace='offer')),
+    path('coupon/', include('apps.coupon.urls', namespace='coupon')),
 
     # redireciona para offer:manage_list(Para não alterar o template na offer feito por clara)
     path(

@@ -21,7 +21,6 @@
     width: 500px;
     padding: 35px 40px;
     border-radius: var(--border-radius);
-    /* box-shadow: 0 4px 20px rgba(0,0,0,0.5); */
     color: var(--white);
     
     display: flex;
@@ -71,11 +70,9 @@
     transition: color 0.2s ease;
 }
 
-#stars-container span.active svg,
-#stars-container span:hover ~ span svg,
-#stars-container span:hover svg {
-    color: #ffc107;
-}
+#stars-container span.active svg{
+    color: var(--brand-yellow);
+} 
 
 #id_message{
     width: 100%;
@@ -83,11 +80,29 @@
     background-color: var(--medium-gray);
     border-radius: var(--border-radius-small);
     border: none;
+
+    resize: none;      /* impede o usuário de redimensionar */
+    overflow-y: auto;
     
     font-family: var(--main-font-family);
     font-size: var(--text-font-size);
     
     padding: 10px 18px;
+}
+
+/* Barra lateral do text area */
+#id_message::-webkit-scrollbar {
+    width: 8px; 
+}
+#id_message::-webkit-scrollbar-track{
+    background: none;
+}
+#id_message::-webkit-scrollbar-button{
+    display: none;                   /* esconder botões da barra */
+}
+#id_message::-webkit-scrollbar-thumb{
+    background-color: var(--gray);   /*parte que arrasta */
+    border-radius: 6px;
 }
 
 #id_message::placeholder{
@@ -127,9 +142,6 @@
     background: var(--dark-green);
 }
 
-#submithover {
-    background: #218838;
-}
 
 /* Animação */
 @keyframes fadeIn {
