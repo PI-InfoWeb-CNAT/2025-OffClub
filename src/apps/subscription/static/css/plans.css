@@ -27,6 +27,16 @@ main.container {
     padding: 1px;
     height: -webkit-fill-available;
 }
+    .plan-card {
+        border-radius: var(--border-radius-small);
+        width: 100%;
+        max-width: 400px;
+        flex: 1 1 300px;
+        padding: 1px;
+        min-height: 400px;
+        margin: 0 10px 30px 10px;
+        box-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
+    }
 
 .plan-card-content {
     height: 100%;
@@ -171,12 +181,24 @@ li.available .feature-content .feature-name {
 li.available .feature-content .feature-description {
     color: var(--offwhite)
 }
+    .plan-features li.available .feature-content .feature-description {
+        color: var(--offwhite);
+        font-size: 0.95em;
+        opacity: 0.8;
+    }
 
 .plan-features li.unavailable {
     align-items: center;
     color: var(--gray);
     text-decoration: line-through;
 }
+    .plan-features li.unavailable {
+        align-items: center;
+        color: var(--gray);
+        text-decoration: line-through;
+        opacity: 0.6;
+        font-size: 0.95em;
+    }
 
 .plan-features li.unavailable::before {
     text-align: center;
