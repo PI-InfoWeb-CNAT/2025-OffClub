@@ -1,15 +1,15 @@
 from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .services.offers_service import OfferService
-from .models import Offer
-from django.urls import reverse_lazy #O reverse_lazy() serve para atributos de classe ou variáveis globais que o Django ainda não terminou de carregar no projeto
+from django.views.generic import TemplateView, View, CreateView, UpdateView, DeleteView, DetailView
+from django.urls import reverse_lazy # O reverse_lazy() serve para atributos de classe ou variáveis 
+                                     # globais que o Django ainda não terminou de carregar no projeto
 from django.utils import timezone
-from django.views.generic import TemplateView, View, CreateView, UpdateView, DeleteView
-from django.utils import timezone
-from .services.manage_offer import ManageOffer
+from ..subscriber.models import Evaluation
 from .models import Offer, OfferForm 
-
+from .services.manage_offer import ManageOffer
+from .services.offers_service import OfferService
 
 class OfferListView(View):
     
@@ -108,3 +108,34 @@ class ManageOfferDeleteView(DeleteView):
     model = Offer
     template_name = "offer_confirm_delete.html"
     success_url = reverse_lazy("offer:manage_list")
+
+class SeeEvaluationView(LoginRequiredMixin, DetailView):
+    model = Evaluation
+    template_name = 'offer_see_evaluation.html'
+    context_object_name = 'evaluation'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Evaluation, coupon=self.request.offer)
+
+    def get_context_data(self, **kwargs):
+        evaluation = self.get_object()
+        context = super().get_context_data(**kwargs)  # pega todos os dados do context que existe
+        
+        context['stars'] = evaluation.stars
+        context['message'] = evaluation.message if evaluation.message else ""
+        context['subscriber'] = evaluation.coupon.subscriber
+        context['subscriber_pictute'] = evaluation.coupon.subscriber
+
+        # Detail coupon
+        coupon = getattr(evaluation, 'evaluations', None)
+        if coupon:
+            context['coupon'] = {
+                'title': coupon.offer.title,
+                'final_price': coupon.offer.final_price,
+                'description': coupon.offer.description,
+                'image': coupon.offer.image
+            }
+        else:
+            context['coupon'] = None
+
+        return context
