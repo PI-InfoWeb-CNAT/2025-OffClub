@@ -24,7 +24,7 @@ plans_data = [
         'description': 'Acesso limitado ao conteúdo.',
         'price': 29.90,
         'duration': timedelta(days=30),
-        'stripe_price_id': 'price_basic_001',
+        'stripe_price_id': 'price_1SMVZ0DsNernzDNXYLt1sBig',
         'features': [0], # índices dos features
     },
     {
@@ -32,7 +32,7 @@ plans_data = [
         'description': 'Acesso total ao conteúdo e suporte.',
         'price': 59.90,
         'duration': timedelta(days=30),
-        'stripe_price_id': 'price_premium_001',
+        'stripe_price_id': 'price_1SMVRTDsNernzDNX6uZMtcCn',    
         'features': [0, 1, 2, 3, 4],
     },
     {
@@ -40,17 +40,9 @@ plans_data = [
         'description': 'Acesso para até 5 membros da família.',
         'price': 89.90,
         'duration': timedelta(days=30),
-        'stripe_price_id': 'price_family_001',
+        'stripe_price_id': 'price_1SMVZVDsNernzDNXuUZiJBO2',
         'features': [0, 1, 2, 4],
     },
-    {
-        'title': 'Plano Empresarial',
-        'description': 'Soluções personalizadas para empresas.',
-        'price': 199.90,
-        'duration': timedelta(days=30),
-        'stripe_price_id': 'price_business_001',
-        'features': [0, 1, 2, 3, 4],
-    }
 ]
 
 # PROCESSO DE INSERÇÃO NO BANCO
