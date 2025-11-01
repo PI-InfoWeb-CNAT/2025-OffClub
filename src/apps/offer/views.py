@@ -1,13 +1,12 @@
 from django.http import JsonResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from django.views.generic import TemplateView, View, CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import TemplateView, View, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy # O reverse_lazy() serve para atributos de classe ou variáveis 
                                      # globais que o Django ainda não terminou de carregar no projeto
 from django.utils import timezone
-from ..subscriber.models import Evaluation
-from .models import Offer, OfferForm 
+from .models import Offer
+from .forms.offer_form import OfferForm
 from .services.manage_offer import ManageOffer
 from .services.offers_service import OfferService
 
@@ -108,12 +107,3 @@ class ManageOfferDeleteView(DeleteView):
     model = Offer
     template_name = "offer_confirm_delete.html"
     success_url = reverse_lazy("offer:manage_list")
-
-
-class SeeEvaluationView(LoginRequiredMixin, ListView):
-    model = Evaluation
-    template_name = 'offer_see_evaluation.html'
-    context_object_name = 'evaluation'
-
-    def get_queryset(self):
-        return Evaluation.objects.all()

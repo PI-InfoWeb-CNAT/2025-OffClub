@@ -66,4 +66,3 @@ class Evaluation(models.Model):
         verbose_name = "Avaliação de Cupom"
         verbose_name_plural = "Avaliações de Cupons"
         ordering = ["coupon", "-stars"]
-        unique_together = ("coupon",)

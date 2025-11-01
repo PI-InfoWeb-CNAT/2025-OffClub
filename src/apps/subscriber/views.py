@@ -68,9 +68,14 @@ class EvaluationCreateView(LoginRequiredMixin, CreateView):
         stars = form.cleaned_data.get("stars")
         message = form.cleaned_data.get("message", "")
 
-        if Evaluation.objects.filter(coupon=coupon).exists():
+        # usuário logado
+        subscriber = self.request.user.subscriber
+
+        # verifica se o assinante já fez uma avaliação
+        if Evaluation.objects.filter(coupon=coupon, coupon__subscriber=subscriber).exists():
             return JsonResponse({"error": "Você já avaliou este cupom."}, status=400)
 
+        # cria uma nova avaliação
         EvaluationService.create_evaluation(coupon, stars, message)
 
         return JsonResponse({"success": "Avaliação registrada com sucesso!"}, status=200)
