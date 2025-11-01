@@ -22,7 +22,7 @@
                     </div>
                     <p class="step-name">Contato</p>
                 </li>
-                <li class="{% if current_step == 4 %}active{% endif %}">
+                <li class="{% if current_step == 4 %}active{% elif current_step > 4 %}past{% endif %}">
                     <div class="circle-container">
                         <img src="{% static 'imgs/icons/check.svg' %}" alt="Símbolo de concluído (check)">
                         <p class="step-stage">4</p>

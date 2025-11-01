@@ -97,8 +97,8 @@ class RegisterWizardView(SessionWizardView):
             phone.save()
 
         enterprise.save()
-        return redirect('register/')
+        return redirect('register_done')
 
 
-class RegisterDone(TemplateView):
-    template_name = 'submitted.html'
+class RegisterDoneView(TemplateView):
+    template_name = 'done.html'

@@ -113,12 +113,24 @@
                         
                     {% elif field.name == 'profile_picture' %}
                         <div class="field-group image-container flex-center">
-                            <div class="content">
-                                <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Escolha sua foto de perfil">
-                                <input type="file" id="file-upload" name="file-upload">
-                                <p>Arraste e solte a foto aqui</p>
-                                <p class="flex-center">ou<label for="file-upload" id="upload">faça upload</label></p>
+                            <div class="content" id="drop-zone">
+                                <input type="file" 
+                               name="{{ field.name }}" 
+                               id="file-upload" 
+                               accept="image/*"> 
+
+                                <div id="placeholder-content">
+                                    <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Escolha sua foto de perfil">
+                                    <!-- <input type="file" id="file-upload" name="file-upload"> -->
+                                    <p>Arraste e solte a foto aqui</p>
+                                    <p class="flex-center">ou<label for="file-upload" id="upload-label">faça upload</label></p>
+                                </div>
+                                <div id="preview-content" class="hidden">
+                                    <img id="preview-image" src="#" alt="Preview da imagem">
+                                    <p id="file-name-display"></p>
+                                </div>
                             </div>
+                            {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
                         </div>
 
                     <!-- Caso seja o campo de Ramo da Empresa -->
@@ -167,4 +179,83 @@
         </form>
     </div>
 </main>
+{% block scripts %}
+{{ block.super }} <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- INÍCIO DO SCRIPT DE UPLOAD ---
+
+    // Seleção dos elementos
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-upload');
+    const uploadLabel = document.getElementById('upload-label');
+    const placeholder = document.getElementById('placeholder-content');
+    const previewContent = document.getElementById('preview-content');
+    const previewImage = document.getElementById('preview-image');
+    const fileNameDisplay = document.getElementById('file-name-display');
+
+    // Evento de Clique
+    dropZone.addEventListener('click', (e) => {
+        if (e.target !== uploadLabel) {
+            fileInput.click();
+        }
+    });
+
+    // Eventos de "Drag" 
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add('dragging');
+        });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove('dragging');
+        });
+    });
+
+    // Evento de "Drop"
+    dropZone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            fileInput.dispatchEvent(new Event('change'));
+        }
+    });
+
+    // Evento de Change
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            handleFile(file);
+        }
+    });
+
+    // Apresentação do preview e do nome do arquivo
+    function handleFile(file) {
+        if (file && file.type.startsWith('image/')) {
+            fileNameDisplay.textContent = file.name;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            placeholder.classList.add('hidden');
+            previewContent.classList.remove('hidden');
+
+        } else {
+            alert('Por favor, selecione um arquivo de imagem.');
+            fileInput.value = '';
+            placeholder.classList.remove('hidden');
+            previewContent.classList.add('hidden');
+            fileNameDisplay.textContent = '';
+            previewImage.src = '#';
+        }
+    }
+});
+</script>
+{% endblock scripts %}
 {% endblock main %}
