@@ -7,6 +7,7 @@ urlpatterns = [
     path('subscription/', include('apps.subscription.urls')),
     path('offer/', include('apps.offer.urls')),
     path('subscriber/', include('apps.subscriber.urls')),
+    path('enterprise/', include('apps.enterprise.urls')),
     path('coupon/', include(('apps.coupon.urls'), namespace='coupon')),
 ]
 
