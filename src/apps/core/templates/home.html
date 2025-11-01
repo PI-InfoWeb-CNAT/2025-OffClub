@@ -98,7 +98,7 @@
 
             {% include 'components/plan_card.html' with plan_class="gold" plan_name="Ouro" price="29,90" %}
         </div>
-        <a href="{% url 'plans' %}">
+        <a href="{% url 'subscription:plans' %}">
             <button class="view-detailed-plans-btn flex-row flex-center">
                 Ver planos detalhados
                 <img src="{% static 'imgs/icons/golden-btn-arrow.svg' %}" alt="">

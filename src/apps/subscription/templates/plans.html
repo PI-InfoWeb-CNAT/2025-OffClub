@@ -6,12 +6,35 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/plans.css' %}">
+<link rel="stylesheet" href="{% static 'css/subscription.css' %}">
 <script src="https://js.stripe.com/v3/"></script>
 {% endblock head %}
 
 {% block main %}
-<main class="container">
-    <h1>Planos &raquo; Planos Disponíveis</h1>
+<main class="container plans-container">
+    <header class="plans-header">
+        <h1>Planos &raquo; Planos Disponíveis</h1>
+        {% if active_subscription %}
+        <div class="subscription-alert subscription-alert--active" role="status" aria-live="polite">
+            <div class="subscription-alert__content">
+                <h2>Você já possui um plano ativo</h2>
+                <p>
+                    Plano atual: <strong>{{ active_subscription.plan.title|default:"Plano atual" }}</strong>
+                    {% if active_subscription.end_date %}
+                    &bull; Vigente até {{ active_subscription.end_date|date:"d/m/Y" }}
+                    {% else %}
+                    &bull; Vigência indeterminada
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        {% endif %}
+        {% if subscription_error %}
+        <div class="subscription-alert subscription-alert--error" role="alert">
+            <p>{{ subscription_error }}</p>
+        </div>
+        {% endif %}
+    </header>
 
     <div class="plan-cards-container flex-row flex-center">
         {% for plan in plans %}
@@ -63,9 +86,15 @@
                     <p>Valor mensal do plano:</p>
                     <p class="plan-price">R$ {{ plan.price|floatformat:2 }}</p>
                 </div>
-                <form action="{% url 'create_checkout_session' plan.id %}" method="POST">
+                <form action="{% url 'subscription:create_checkout_session' plan.id %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit" class="subscribe-button">ASSINAR</button>
+                    <button type="submit" class="subscribe-button" {% if active_subscription %}disabled{% endif %}>
+                        {% if active_subscription %}
+                        PLANO ATIVO
+                        {% else %}
+                        ASSINAR
+                        {% endif %}
+                    </button>
                 </form>
             </div>
         </section>

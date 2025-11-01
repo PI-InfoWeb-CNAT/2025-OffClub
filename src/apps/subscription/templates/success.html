@@ -1,5 +1,31 @@
-{% extends 'base.html' %} {% block title %}Pagamento Aprovado{% endblock title %} {% block main %}
-Pagamento realizado com sucesso!
-A sua subscrição está ativa. Obrigado por se juntar ao Offclub!
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}Pagamento Aprovado{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/subscription.css' %}">
+{% endblock head %}
+
+{% block main %}
+<main class="container">
+	<section class="subscription-feedback subscription-feedback--success">
+		<div class="subscription-feedback__icon" aria-hidden="true">✔</div>
+		<div class="subscription-feedback__content">
+			<h1>Pagamento realizado com sucesso!</h1>
+			<p>A sua assinatura está ativa. Obrigado por fazer parte do OffClub.</p>
+			{% if active_subscription %}
+			<div class="subscription-feedback__details">
+				<p><strong>Plano:</strong> {{ active_subscription.plan.title|default:"Plano atual" }}</p>
+				{% if active_subscription.end_date %}
+				<p><strong>Válido até:</strong> {{ active_subscription.end_date|date:"d/m/Y" }}</p>
+				{% else %}
+				<p><strong>Vigência:</strong> Indeterminada</p>
+				{% endif %}
+			</div>
+			{% endif %}
+			<a class="subscription-feedback__cta" href="{% url 'subscription:plans' %}">Voltar aos planos</a>
+		</div>
+	</section>
+</main>
 {% endblock main %}
