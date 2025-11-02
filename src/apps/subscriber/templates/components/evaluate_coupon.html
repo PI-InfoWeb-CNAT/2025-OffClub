@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/components/evaluate_coupon.css' %}">
 
 <div id="evaluate-modal">
-    <form method="post" action="{% url 'coupon:evaluate_coupon' coupon.id %}" id="evaluate-form">  
+    <form method="post" action="{% url 'subscriber:evaluate_coupon' coupon.id %}" id="evaluate-form">  
         {% csrf_token %}
         {{ form.non_field_errors }}
         <div id="title">
@@ -50,7 +50,6 @@
             {{ form.message }}
             {{ form.message.errors }}
 
-            <div id="form-errors" style="color: red;"></div>
         </div>
     
         <div class="buttons">

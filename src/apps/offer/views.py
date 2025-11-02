@@ -1,15 +1,14 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .services.offers_service import OfferService
-from .models import Offer
-from django.urls import reverse_lazy #O reverse_lazy() serve para atributos de classe ou variáveis globais que o Django ainda não terminou de carregar no projeto
-from django.utils import timezone
 from django.views.generic import TemplateView, View, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy # O reverse_lazy() serve para atributos de classe ou variáveis 
+                                     # globais que o Django ainda não terminou de carregar no projeto
 from django.utils import timezone
+from .models import Offer
+from .forms.offer_form import OfferForm
 from .services.manage_offer import ManageOffer
-from .models import Offer, OfferForm 
-
+from .services.offers_service import OfferService
 
 class OfferListView(View):
     

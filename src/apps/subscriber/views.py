@@ -17,6 +17,16 @@ from formtools.wizard.views import SessionWizardView
 from apps.users.models import User
 from .models import Subscriber
 from apps.core.models import Address, Phone
+from urllib import request
+from django.shortcuts import render, redirect
+from django.views import View
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
+from .models import Coupon, Evaluation
+from .forms.evaluation_form import EvaluationForm
+from .services.discount import ServiceDiscount
+from .services.evaluation import EvaluationService
 
 
 FORMS = [
@@ -166,7 +176,38 @@ class HistoryView(ListView):
         context['coupons'] = processed_coupons
         
         return context
+            
 
+class EvaluationCreateView(LoginRequiredMixin, CreateView):
+    """
+    Salva no banco de dados o formulário com as respostas
+    da avaliação do cupom preenchido pelo usuário
+    """
 
-class RegistrationDone(TemplateView):
-    template_name = 'register/done.html'
+    model = Evaluation
+    form_class = EvaluationForm
+    template_name = "components/evaluate_coupon.html"
+
+    def form_valid(self, form):
+        coupon_id = self.kwargs.get("coupon_id")
+        coupon = Coupon.objects.get(id=coupon_id)
+        stars = form.cleaned_data.get("stars")
+        message = form.cleaned_data.get("message", "")
+
+        # usuário logado
+        subscriber = self.request.user.subscriber
+
+        # verifica se o assinante já fez uma avaliação
+        if Evaluation.objects.filter(coupon=coupon, coupon__subscriber=subscriber).exists():
+            return JsonResponse({"error": "Você já avaliou este cupom."}, status=400)
+
+        # cria uma nova avaliação
+        EvaluationService.create_evaluation(coupon, stars, message)
+
+        return JsonResponse({"success": "Avaliação registrada com sucesso!"}, status=200)
+
+    def form_invalid(self, form):
+        errors = {field: [str(err) for err in errs] for field, errs in form.errors.items()}
+        if self.request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return JsonResponse({"success": False, "errors": errors})
+        return super().form_invalid(form)

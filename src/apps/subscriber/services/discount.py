@@ -3,6 +3,5 @@ class DiscountService():
     def final_price(price, discount_percentage):
         if discount_percentage > 0:
             final_price = float(price) - (float(price) * float(discount_percentage) /100)
-            return final_price
-        return price
+        return price, final_price
 

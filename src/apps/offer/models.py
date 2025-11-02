@@ -4,7 +4,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from datetime import timedelta
 import uuid
-from django import forms  # <--- precisa importar
 
 class Category(models.Model):
     name = models.CharField("Nome", max_length=50, unique=True)
@@ -112,19 +111,3 @@ class Offer(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["title", "enterprise"], name="uniq_enterprise_title")
         ]
-
-
-# formulário de criar ofertas pelas empresas
-class OfferForm(forms.ModelForm):
-    class Meta:
-        model = Offer
-        fields = [
-            "enterprise", "title", "description", "category",
-            "image", "price", "discount",
-            "start_date", "end_date", "redemption_period",
-            "max_coupons"
-        ]
-        widgets = {
-            "start_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
-            "end_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
-        }
