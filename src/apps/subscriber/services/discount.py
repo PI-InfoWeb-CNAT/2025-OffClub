@@ -1,7 +1,8 @@
-class DiscountService():
+class DiscountService:
     @staticmethod
     def final_price(price, discount_percentage):
-        if discount_percentage > 0:
-            final_price = float(price) - (float(price) * float(discount_percentage) /100)
-        return price, final_price
+        base_price = float(price)
+        discount = float(discount_percentage or 0)
+        final_price = base_price - (base_price * discount / 100)
+        return round(base_price, 2), round(final_price, 2)
 

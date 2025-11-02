@@ -1,31 +1,26 @@
-from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect
-from django.views import View
-from django.views.generic import ListView, TemplateView
-from apps.coupon.models import Coupon
-from .services.discount import DiscountService
-from django.core.files.storage import FileSystemStorage
-from .forms import (
-    PersonalInfoForm,
-    CredentialsForm,
-    ContactForm,
-    ProfilePicForm,
-    LoginForm
-)
-from formtools.wizard.views import SessionWizardView
-from apps.users.models import User
-from .models import Subscriber
-from apps.core.models import Address, Phone
-from urllib import request
-from django.shortcuts import render, redirect
-from django.views import View
-from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
-from .models import Coupon, Evaluation
-from .forms.evaluation_form import EvaluationForm
-from .services.discount import ServiceDiscount
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views import View
+from django.views.generic import TemplateView
+from formtools.wizard.views import SessionWizardView
+
+from apps.core.models import Address, Phone
+from apps.coupon.models import Coupon
+from apps.users.models import User
+
+from .forms import (
+    ContactForm,
+    CredentialsForm,
+    EvaluationForm,
+    LoginForm,
+    PersonalInfoForm,
+    ProfilePicForm,
+)
+from .models import Evaluation, Subscriber
+from .services.discount import DiscountService
 from .services.evaluation import EvaluationService
 
 
@@ -45,46 +40,46 @@ TEMPLATES = {
 
 
 class LoginView(View):
-    """
-    View de login
-    """
+    """Tela de login do assinante."""
+
     def get(self, request):
         form = LoginForm()
-        next_url = request.GET.get('next') or '/'
-        
-        ctx = {
-            'form': form,
-            'next': next_url
-        }
-        
-        return render(request, 'login.html', ctx)
+        next_url = request.GET.get("next") or "/"
+        return render(
+            request,
+            "login.html",
+            {
+                "form": form,
+                "next": next_url,
+            },
+        )
 
     def post(self, request):
         form = LoginForm(request.POST)
-        next_url = request.POST.get('next') or '/'
-        
+        next_url = request.POST.get("next") or "/"
+
         if form.is_valid():
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            
+            email = form.cleaned_data.get("email")
+            password = form.cleaned_data.get("password")
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
                 return HttpResponseRedirect(next_url)
-            else:
-                form.add_error(None, 'Credenciais inválidas')
-        
-        ctx = {
-            'form': form,
-            'next': next_url
-        }
-        
-        return render(request, 'login.html', ctx)
-    
+            form.add_error(None, "Credenciais inválidas")
+
+        return render(
+            request,
+            "login.html",
+            {
+                "form": form,
+                "next": next_url,
+            },
+        )
 
 
 class RegisterWizardView(SessionWizardView):
-    # Serve pro wizard salvar os arquivos temporariamente
+    """Wizard multi-etapas para registro de assinantes."""
+
     file_storage = FileSystemStorage()
     form_list = FORMS
 
@@ -92,122 +87,156 @@ class RegisterWizardView(SessionWizardView):
         return [TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
-        # Junta os dados limpos de todos os forms em um único dict
         data = {}
         for form in form_list:
-            if hasattr(form, 'cleaned_data'):
+            if hasattr(form, "cleaned_data"):
                 data.update(form.cleaned_data)
 
-        # Cria o usuário
         user = User.objects.create(
-            email=data.get('email'),
-            profile_picture=data.get('profile_picture', None),
+            email=data.get("email"),
+            profile_picture=data.get("profile_picture"),
             is_active=True,
             user_role=User.UserRole.SUBSCRIBER,
         )
-        # Salva a senha com hash
-        if data.get('password'):
-            user.set_password(data.get('password'))
+        if data.get("password"):
+            user.set_password(data["password"])
         user.save()
 
-        # Cria o assinante 
         subscriber = Subscriber.objects.create(
             user=user,
-            first_name=data.get('first_name', ''),
-            last_name=data.get('last_name', ''),
-            cpf=data.get('cpf', ''),
+            first_name=data.get("first_name", ""),
+            last_name=data.get("last_name", ""),
+            cpf=data.get("cpf", ""),
+            birth_date=data.get("birth_date"),
         )
 
-        # Cria o endereço se estiver presente 
-        # (Não tenho certeza se é obrigatório)
-        if data.get('cep') or data.get('street_name'):
-            address = Address.objects.create(
+        if data.get("cep") or data.get("street_name"):
+            Address.objects.create(
                 user=user,
-                cep=data.get('cep', ''),
-                city=data.get('city', ''),
-                state=data.get('state', ''),
-                neighborhood=data.get('neighborhood', ''),
-                street_name=data.get('street_name', ''),
-                number=data.get('number', ''),
-                complement=data.get('complement', ''),
+                cep=data.get("cep", ""),
+                city=data.get("city", ""),
+                state=data.get("state", ""),
+                neighborhood=data.get("neighborhood", ""),
+                street_name=data.get("street_name", ""),
+                number=data.get("number", ""),
+                complement=data.get("complement", ""),
             )
-            address.save()
 
-        # Cria o telefone 
-        if data.get('phone_number'):
-            phone = Phone.objects.create(
-                phone_number=data.get('phone_number'),
+        if data.get("phone_number"):
+            Phone.objects.create(
+                phone_number=data.get("phone_number"),
                 phone_type=Phone.PhoneType.MOBILE,
                 user=user,
             )
-            phone.save()
 
         subscriber.save()
-        return redirect('subscriber:registration_done')
+        return redirect("subscriber:registration_done")
 
 
-class HistoryView(ListView):
-    """
-    Exibe o histórico de cupons para o usuário logado.
-    """
-    model = Coupon  
-    template_name = 'subscriber.html'
-    context_object_name = 'coupons'   
+class HistoryView(LoginRequiredMixin, TemplateView):
+    """Dashboard do assinante com histórico de cupons."""
+
+    template_name = "subscriber.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        subscriber = getattr(self.request.user, "subscriber", None)
 
-        all_coupons = context['coupons']
-    
-        processed_coupons = []
-        for coupon in all_coupons:
-            price = coupon.offer.price
-            discount = coupon.offer.discount
+        if subscriber is None:
+            context.update(
+                {
+                    "active_coupons": [],
+                    "used_coupons": [],
+                    "years_group": [],
+                    "form": EvaluationForm(),
+                }
+            )
+            return context
 
-            old_price, final_price = DiscountService.final_price(price, discount)
+        coupons = (
+            Coupon.objects.filter(subscriber=subscriber)
+            .select_related("offer", "offer__enterprise", "offer__enterprise__user")
+            .order_by("-creation_date")
+        )
 
-            coupon_data = {
-                'old_price': old_price,
-                'final_price': final_price,
+        active_coupons = []
+        used_coupons = []
+        years = set()
+
+        for coupon in coupons:
+            old_price, final_price = DiscountService.final_price(
+                coupon.offer.price,
+                coupon.offer.discount,
+            )
+
+            coupon_payload = {
+                "object": coupon,
+                "data": {
+                    "old_price": old_price,
+                    "final_price": final_price,
+                    "used_month": coupon.used_date.month if coupon.used_date else None,
+                },
             }
-  
-            processed_coupons.append({'object': coupon, 'data': coupon_data})
 
-        context['coupons'] = processed_coupons
-        
+            if coupon.used_date:
+                used_coupons.append(coupon_payload)
+                years.add(coupon.used_date.year)
+            else:
+                active_coupons.append(coupon_payload)
+
+        context.update(
+            {
+                "active_coupons": active_coupons,
+                "used_coupons": used_coupons,
+                "years_group": sorted(years, reverse=True),
+                "form": EvaluationForm(),
+            }
+        )
         return context
-            
 
-class EvaluationCreateView(LoginRequiredMixin, CreateView):
-    """
-    Salva no banco de dados o formulário com as respostas
-    da avaliação do cupom preenchido pelo usuário
-    """
 
-    model = Evaluation
-    form_class = EvaluationForm
-    template_name = "components/evaluate_coupon.html"
+class RegistrationDone(TemplateView):
+    """Tela exibida após o cadastro concluído."""
 
-    def form_valid(self, form):
-        coupon_id = self.kwargs.get("coupon_id")
-        coupon = Coupon.objects.get(id=coupon_id)
-        stars = form.cleaned_data.get("stars")
-        message = form.cleaned_data.get("message", "")
+    template_name = "register/done.html"
 
-        # usuário logado
-        subscriber = self.request.user.subscriber
 
-        # verifica se o assinante já fez uma avaliação
-        if Evaluation.objects.filter(coupon=coupon, coupon__subscriber=subscriber).exists():
-            return JsonResponse({"error": "Você já avaliou este cupom."}, status=400)
+class EvaluationCreateView(LoginRequiredMixin, View):
+    """Recebe avaliações de cupons via requisições AJAX."""
 
-        # cria uma nova avaliação
-        EvaluationService.create_evaluation(coupon, stars, message)
+    http_method_names = ["post"]
 
-        return JsonResponse({"success": "Avaliação registrada com sucesso!"}, status=200)
+    def post(self, request, *args, **kwargs):
+        form = EvaluationForm(request.POST)
+        if not form.is_valid():
+            errors = {
+                field: [str(error) for error in error_list]
+                for field, error_list in form.errors.items()
+            }
+            return JsonResponse({"success": False, "errors": errors}, status=400)
 
-    def form_invalid(self, form):
-        errors = {field: [str(err) for err in errs] for field, errs in form.errors.items()}
-        if self.request.headers.get("x-requested-with") == "XMLHttpRequest":
-            return JsonResponse({"success": False, "errors": errors})
-        return super().form_invalid(form)
+        coupon = get_object_or_404(Coupon, id=kwargs.get("coupon_id"))
+        subscriber = getattr(request.user, "subscriber", None)
+
+        if subscriber is None or coupon.subscriber != subscriber:
+            return JsonResponse(
+                {"error": "Esse cupom não pertence ao usuário logado."},
+                status=403,
+            )
+
+        if Evaluation.objects.filter(coupon=coupon).exists():
+            return JsonResponse(
+                {"error": "Você já avaliou este cupom."},
+                status=400,
+            )
+
+        EvaluationService.create_evaluation(
+            coupon=coupon,
+            stars=form.cleaned_data.get("stars"),
+            message=form.cleaned_data.get("message", ""),
+        )
+
+        return JsonResponse(
+            {"success": "Avaliação registrada com sucesso!"},
+            status=200,
+        )

@@ -8,5 +8,6 @@ urlpatterns = [
     path('subscription/', include('apps.subscription.urls')),
     path('subscriber/', include('apps.subscriber.urls')),
     path('enterprise/', include('apps.enterprise.urls')),
-    path('adm_user/', include('apps.admin_user.urls'))
+    path('adm_user/', include('apps.admin_user.urls')),
+    path('offer/', include('apps.offer.urls')),
 ]
