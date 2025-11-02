@@ -6,6 +6,7 @@
 |:-------|:-------|:----------|:------|
 | 16/05/2025 | **1.00** | Versão Inicial  | Fellipe Aleixo |
 | 30/06/2025 | **2.00** | Correção com base nas classes de domínio | Heitor Barboza |
+| 02/11/2025 | **3.00** | Nova correção com base nas classes de domínio e tradução para a língua inglesa | Heitor Barboza |
 | - | - | - | - |
 
 ## Diagrama de Entidade e Relacionamentos
