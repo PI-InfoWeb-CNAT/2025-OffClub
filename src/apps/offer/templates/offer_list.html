@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ofertas da empresa{% endblock %}
+{% block head %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Madimi+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/offer_list.css' %}">
+{% endblock %}
+
+{% block main %}
+  <main class="content">
+      <h1 class="content__title">Minhas ofertas</h1>
+
+      <!-- filtros -->
+      <form class="filters" method="get" action="">
+        <div class="filters__row">
+          <label class="filters__field filters__field--grow">
+            <span class="filters__label">Buscar</span>
+            <input class="filters__input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Procurar cupom...">
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Categoria</span>
+            <select class="filters__select" name="category">
+              <option value="">Todos</option>
+              {% for c in categories %}
+                <option value="{{ c.id }}" {% if request.GET.category == c.id|stringformat:"s" %}selected{% endif %}>{{ c.name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Desc. mín. (%)</span>
+            <input class="filters__input" type="number" min="0" max="100" step="1" name="min_discount" value="{{ request.GET.min_discount }}">
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Início</span>
+            <input class="filters__input" type="date" name="start" value="{{ request.GET.start }}">
+          </label>
+
+          <label class="filters__field">
+            <span class="filters__label">Fim</span>
+            <input class="filters__input" type="date" name="end" value="{{ request.GET.end }}">
+          </label>
+
+          <div class="filters__actions">
+            <button class="btn btn--filter" type="submit">Filtrar</button>
+            <a class="btn btn--create" href="{% url 'offer:manage_create' %}">Nova oferta</a>
+          </div>
+        </div>
+      </form>
+
+    <!-- ofertas ativas -->
+    <section class="section">
+      <h2 class="section__actives">Ativos</h2>
+      <div class="cards">
+        {% for o in page_obj %}
+          {% if o.start_date and o.end_date and o.start_date <= now and now <= o.end_date %}
+            <article class="card">
+              <div class="card__left">
+                <div class="card__merchant">
+                  <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
+                </div>
+                <h3 class="card__title">{{ o.title }}</h3>
+                <div class="card__price">
+                  <span class="card__price-value">R${{ o.price|floatformat:2 }}</span>
+                  {% if o.discount %}<span class="card__price-discount">-{{ o.discount }}%</span>{% endif %}
+                </div>
+              </div>
+              <div class="card__right">
+                <div class="card__expires">
+                  <span class="card__expires-label">Disponível até</span>
+                  <span class="card__expires-date">{{ o.end_date|date:"d/m/Y" }}</span>
+                </div>
+                <div class="card__actions">
+                  <a class="btn btn--review" href="{% url 'offer:manage_edit' o.id %}">Ver avaliações</a> <!-- Ver a url que vai ficar aqui-->
+                  <a class="btn btn--detail" href="{% url 'offer:manage_detail' o.id %}">Detalhes</a>
+                  <a class="btn btn--edit" href="{% url 'offer:manage_edit' o.id %}">Editar</a>
+                  <a class="btn btn--delete" href="{% url 'offer:manage_delete' o.id %}">Excluir</a>
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% empty %}
+          <p class="empty-state">Nenhuma oferta encontrada.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Ofertas inativas -->
+    <section class="section">
+      <h2 class="section__unactives">Inativos</h2>
+      <div class="cards">
+        {% for o in page_obj %}
+          {% if not o.start_date or not o.end_date %}
+            <article class="card card--muted">
+              <div class="card__left">
+                <div class="card__merchant">
+                  <span class="card__merchant-name">{{ o.enterprise.trade_name }}</span>
+                </div>
+                <h3 class="card__title">{{ o.title }}</h3>
+              </div>
+            </article>
+          {% else %}
+            {% if o.start_date > now or now > o.end_date %}
+              <article class="card card--muted">
+                <div class="card__left">
+                  <div class="card__merchant">
+                    {% if object.enterprise.user.profile_picture %}
+                      <img class="card__merchant-photo" src="{{ object.enterprise.user.profile_picture.url }}" alt="{{ object.enterprise.trade_name }}">
+                    {% endif %}
+                    <span class="card__merchant-name">{{ object.enterprise.trade_name }}</span>
+                  </div>
+                  <h3 class="card__title">{{ o.title }}</h3>
+                  <div class="card__price">
+                    <span class="card__price-value">R${{ o.price|floatformat:2 }}</span>
+                    {% if o.discount %}<span class="card__price-discount">-{{ o.discount }}%</span>{% endif %}
+                  </div>
+                </div>
+                <div class="card__right">
+                  <div class="card__expires">
+                    <span class="card__expires-label">Disponível até</span>
+                    <span class="card__expires-date">{{ o.end_date|date:"d/m/Y" }}</span>
+                  </div>
+                  <div class="card__actions">
+                    <a class="btn btn--review" href="{% url 'offer:manage_edit' o.id %}">Ver avaliações</a> <!-- Ver a url que vai ficar aqui-->
+                    <a class="btn btn--detail" href="{% url 'offer:manage_detail' o.id %}">Detalhes</a>
+                    <a class="btn btn--edit" href="{% url 'offer:manage_edit' o.id %}">Editar</a>
+                    <a class="btn btn--delete" href="{% url 'offer:manage_delete' o.id %}">Excluir</a>
+                </div>
+                </div>
+              </article>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+  </div>
+  {% endblock %}

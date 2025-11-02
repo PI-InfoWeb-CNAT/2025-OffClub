@@ -1,0 +1,156 @@
+/* importa seu reset/base */
+@import url("{% static 'css/global.css' %}");
+
+:root{
+  --white:#ffffff;
+  --offwhite:rgba(255,255,255,0.75);
+  --almost-transparent-white:rgba(255,255,255,0.1);
+  --gray:#646464;
+  --background-color:#1C1C1C;
+  --footer-background-color:#080808;
+  --yellow-lighter:#FFEFCC;
+  --brand-yellow:#FFC547;
+  --dark-yellow:#3B3018;
+  --brand-orange:#FF9E3D;
+  --brand-orange-darker:#E28C36;
+  --purple:#6F01FF;
+  --brown:#844200;
+  --brown-darker:#1E0F00;
+  --cyan:#25A7AB;
+  --darker-cyan:#004560;
+  --golden:#8F6200;
+
+  --gradient-yellow: linear-gradient(90deg, var(--brand-yellow) 0%, var(--yellow-lighter) 100%);
+  --gradient-orange: linear-gradient(90deg, var(--brand-orange) 0%, var(--brand-orange-darker) 100%);
+  --gradient-yellow-orange: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-orange-darker) 100%);
+  --gradient-orange-brown: linear-gradient(90deg, var(--brand-orange) 0%, var(--brown) 100%);
+  --gradient-bronze: linear-gradient(90deg, var(--brown) 0%, var(--brown-darker) 100%);
+  --gradient-silver: linear-gradient(90deg, var(--cyan) 0%, var(--darker-cyan) 100%);
+  --gradient-gold: linear-gradient(90deg, var(--brand-yellow) 0%, var(--golden) 100%);
+  --gradient-yellow-dark-orange: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
+
+  --light-grey:#9D9D9D;
+  --medium-grey:#595959;
+  --grey:#323232;
+  --dark-grey:#1C1C1C;
+
+  --dark-green:#0F3820;
+  --medium-green:#5AC191;
+  --light-green:#C0EDD8;
+  --green-details:#2A553D;
+
+  --main-font-family:"Poppins",sans-serif;
+  --text-font-size:14px;
+  --text-font-weight:400;
+  --text-line-height:1.5;
+  --text-color:var(--white);
+
+  --minor-text-font-size:12px;
+  --minor-text-color:var(--offwhite);
+
+  --h1-font-size:24px;
+  --h1-font-weight:600;
+  --h2-font-size:20px;
+  --h2-font-weight:600;
+  --h3-font-size:18px;
+  --h3-font-weight:600;
+
+  --screen-xs:576px; --screen-sm:768px; --screen-md:992px; --screen-lg:1200px; --screen-xl:1400px;
+
+  --border-radius-small:10px;
+  --border-radius:20px;
+}
+
+/*  section  */
+.section {
+  margin: 0 auto;
+  width: 1110px;
+  margin-bottom: 70px;
+  padding: 18px 22px;
+  border-radius: var(--border-radius-small);
+  background: #252525;
+  border: 1px solid var(--brand-yellow);
+  transition: border-color 0.2s ease, transform 0.12s ease;
+}
+
+/* título principal*/
+h1 {
+  color: var(--white);
+  font-family: var(--main-font-family);
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);
+  margin: 50px auto 20px auto; 
+  width: 1110px;               
+  padding: 0 8px;             
+  box-sizing: border-box;     
+}
+
+/* botões */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius: var(--border-radius-small);
+  text-decoration:none;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition: filter .2s ease, background .2s ease, color .2s ease;
+}
+
+.btn--delete {
+  background: #310000; 
+  font-family: "Poppins",sans-serif;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #fff;
+  min-width: 130px;
+}
+
+.btn--cancel {
+  font-family: "Poppins",sans-serif;
+  color: var(--light-grey);
+  font-size: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  min-width: 130px;
+}
+
+.form__actions {
+  display: flex;
+  gap: 8px;
+  margin-left: 650px;
+  padding-top: 50px;
+}
+
+/* card */
+.card__division {
+  display: flex;
+}
+
+.card__left{
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.card__merchant-name{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--offwhite);
+  font-size: 12px;
+}
+
+.card__price{
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #dcdcdc;
+}
+
+.card__price-discount{
+  color: var(--medium-green);
+}

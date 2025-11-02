@@ -1,0 +1,275 @@
+/* importa seu reset/base */
+@import url("{% static 'css/global.css' %}");
+
+:root{
+  /* as variáveis abaixo já vêm do seu arquivo; estão aqui como referência
+     (se já estiverem definidas no global.css, pode manter só lá) */
+  --white:#ffffff;
+  --offwhite:rgba(255,255,255,0.75);
+  --almost-transparent-white:rgba(255,255,255,0.1);
+  --gray:#646464;
+  --background-color:#1C1C1C;
+  --footer-background-color:#080808;
+  --yellow-lighter:#FFEFCC;
+  --brand-yellow:#FFC547;
+  --dark-yellow:#3B3018;
+  --brand-orange:#FF9E3D;
+  --brand-orange-darker:#E28C36;
+  --purple:#6F01FF;
+  --brown:#844200;
+  --brown-darker:#1E0F00;
+  --cyan:#25A7AB;
+  --darker-cyan:#004560;
+  --golden:#8F6200;
+
+  --gradient-yellow: linear-gradient(90deg, var(--brand-yellow) 0%, var(--yellow-lighter) 100%);
+  --gradient-orange: linear-gradient(90deg, var(--brand-orange) 0%, var(--brand-orange-darker) 100%);
+  --gradient-yellow-orange: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-orange-darker) 100%);
+  --gradient-orange-brown: linear-gradient(90deg, var(--brand-orange) 0%, var(--brown) 100%);
+  --gradient-bronze: linear-gradient(90deg, var(--brown) 0%, var(--brown-darker) 100%);
+  --gradient-silver: linear-gradient(90deg, var(--cyan) 0%, var(--darker-cyan) 100%);
+  --gradient-gold: linear-gradient(90deg, var(--brand-yellow) 0%, var(--golden) 100%);
+  --gradient-yellow-dark-orange: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
+
+  --light-grey:#9D9D9D;
+  --medium-grey:#595959;
+  --grey:#323232;
+  --dark-grey:#1C1C1C;
+
+  --dark-green:#0F3820;
+  --medium-green:#5AC191;
+  --light-green:#C0EDD8;
+  --green-details:#2A553D;
+
+  --main-font-family:"Poppins",sans-serif;
+  --text-font-size:14px;
+  --text-font-weight:400;
+  --text-line-height:1.5;
+  --text-color:var(--white);
+
+  --minor-text-font-size:12px;
+  --minor-text-color:var(--offwhite);
+
+  --h1-font-size:24px;
+  --h1-font-weight:600;
+  --h2-font-size:20px;
+  --h2-font-weight:600;
+  --h3-font-size:18px;
+  --h3-font-weight:600;
+
+  --screen-xs:576px; --screen-sm:768px; --screen-md:992px; --screen-lg:1200px; --screen-xl:1400px;
+
+  --border-radius-small:10px;
+  --border-radius:20px;
+}
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+
+body.layout{
+  margin:0;
+  color:var(--text-color);
+  background: var(--background-color);
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:22px;
+  padding:24px;
+  font: var(--text-font-weight) var(--text-font-size)/var(--text-line-height) var(--main-font-family);
+}
+
+/* Contents*/
+.content{
+  background: linear-gradient(180deg, var(--grey) 0%, var(--dark-grey) 100%);
+  border: 1px solid var(--brand-yellow);
+  border-radius: var(--border-radius);
+  padding: 22px;
+  min-height: calc(100vh - 48px);
+}
+.content__header{
+  border-bottom: 1px solid var(--almost-transparent-white);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+.content__title{
+  margin: 0 0 12px 0;
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);
+}
+
+/* filtros */
+.filters__row{ display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end }
+.filters__field{ display:flex; flex-direction:column; gap:6px }
+.filters__field--grow{ flex:1 }
+.filters__label{ font-size: var(--minor-text-font-size); color: var(--minor-text-color) }
+.filters__input,
+.filters__select{
+  background: #131316;        
+  color: var(--text-color);
+  border: 1px solid var(--almost-transparent-white);
+  border-radius: var(--border-radius-small);
+  padding: 10px 12px;
+  min-width: 160px;
+}
+
+/* Botões */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px;
+  border-radius: var(--border-radius-small);
+  text-decoration:none; cursor:pointer;
+  border:1px solid transparent;
+  font-weight: 600;
+}
+.btn--primary{
+  background: var(--gradient-yellow-dark-orange);
+  color: #1a1a1a;
+  border-color: transparent;
+}
+.btn--primary:hover{
+  background: var(--gradient-yellow);
+}
+.btn--secondary{
+  background: var(--grey);
+  color: var(--white);
+  border-color: var(--almost-transparent-white);
+}
+.btn--secondary:hover{ background: #3a3a3a }
+.btn--ghost{
+  background: transparent;
+  color: var(--text-color);
+  border-color: var(--almost-transparent-white);
+}
+.btn--ghost:hover{ background: var(--almost-transparent-white) }
+.btn--danger{
+  background: rgb(173, 28, 28);
+  color: var(--light-green);
+  border-color: rgba(0,0,0,.2);
+}
+.btn--danger:hover{ filter: brightness(1.05) }
+
+/* sections */
+.section{ margin-top: 10px }
+.section__title{
+  margin: 14px 0 10px;
+  color: var(--offwhite);
+  font-size: var(--h2-font-size);
+  font-weight: var(--h2-font-weight);
+}
+.section__title--accent{
+  color: var(--brand-yellow);
+}
+.section__actives {
+  color: var(--brand-yellow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section__actives::after {
+  content: "";
+  flex: 1; 
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2); 
+}
+.section__unactives {
+  color: var(--brand-yellow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section__unactives::after {
+  content: "";
+  flex: 1; 
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2); 
+}
+
+.section__unactives{
+    color: var(--brand-yellow);
+}
+
+/* Cards */
+.cards{ display:flex; flex-direction:column; gap:12px }
+.card{
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+  background: #1f1f1f;
+  border: 1px solid var(--almost-transparent-white);
+  border-radius: var(--border-radius);
+  padding: 14px 16px;
+}
+.card--muted{ opacity: .7 }
+
+.card__left{ display:flex; flex-direction:column; gap:8px }
+.card__merchant{
+  display:flex; align-items:center; gap:8px;
+  color: var(--offwhite);
+  font-size: var(--minor-text-font-size);
+}
+.card__merchant-photo{
+  width:28px; height:28px; border-radius:50%;
+  object-fit:cover; border:1px solid var(--almost-transparent-white);
+  display:inline-block;
+}
+.card__merchant-name{ font-weight:600 }
+
+.card__title{
+  margin:0; font-size: var(--h3-font-size); font-weight: var(--h3-font-weight);
+  color: var(--white);
+}
+.card__price{ display:flex; align-items:baseline; gap:10px }
+.card__price-value{ font-weight:700 }
+.card__price-discount{ color: var(--medium-green); font-weight:700 }
+
+.card__right{ display:flex; align-items:center; gap:12px }
+.card__expires{
+  display:flex; flex-direction:column; align-items:flex-end; min-width:140px
+}
+.card__expires-label{ color: var(--offwhite); font-size: var(--minor-text-font-size) }
+.card__expires-date{ color: var(--white); font-weight:800 }
+
+
+
+
+form {
+    background-color: var(--background-color);
+    padding: 3em;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--brand-yellow);
+}
+label {
+    display: block;
+}
+input[type="text"], input[type="datetime-local"], input[type="number"], textarea, select {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-family: var();
+    border: none;
+    background-color: var(--almost-transparent-white);
+    width: 100%;
+    padding: 0.7em 0.5em;
+    border-radius: var(--border-radius-small);
+    color: var(--gray);
+    font-size: var(--h3-font-size);
+}
+button {
+    color: white;
+    padding: 0.5em 0.8em;
+    font-size: var(--h2-font-size);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--brand-yellow);
+    background-color: var(--background-color);
+}
+p a {
+    display: block;
+}
+form > a {
+    margin-left: 1em;
+}
+form > p {
+    margin: 1em 0;
+}
+h1 {
+    margin-bottom: 2em;
+}
