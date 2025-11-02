@@ -41,7 +41,7 @@ class SeeEvaluationsService:
 
     @staticmethod
     def final_price(price, discount):
-        return round(price * (1 - discount / 100), 2)
+        return round(float(price) * (1 - float(discount) / 100), 2)
     
     @staticmethod
     def get_evaluations(coupon):

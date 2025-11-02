@@ -7,7 +7,7 @@ from .services.see_evaluations import SeeEvaluationsService
 
 class SeeCouponEvaluationsView(DetailView):
     model = Coupon
-    template_name = "enterprise-dashboard/see_evaluations.html"
+    template_name = "enterprise-dashboard/see_avaluations.html"
     context_object_name = "coupon"
 
     # Pega o id do cupom pela URL
@@ -16,11 +16,11 @@ class SeeCouponEvaluationsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        coupon = self.object
+        coupon = self.get_object()
 
         evaluations = SeeEvaluationsService.get_evaluations(coupon)
         stats = SeeEvaluationsService.evaluation_stats(coupon)
-        final_price = SeeEvaluationsService.final_price(coupon.price, coupon.discount)
+        final_price = SeeEvaluationsService.final_price(coupon.offer.price, coupon.offer.discount)
 
         context["evaluations"] = evaluations
         context["stats"] = stats
