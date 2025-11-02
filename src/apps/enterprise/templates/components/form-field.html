@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="field-group">
+    <label for="{{ id }}">{{ label_text }}</label>
+    <input 
+        type="{{ type|default:'text' }}" 
+        id="{{ id }}" 
+        name="{{ name }}" 
+        placeholder="{{ placeholder|default:label_text }}"
+    >
+</div>

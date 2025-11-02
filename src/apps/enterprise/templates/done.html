@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cadastro Concluído{% endblock title %}
+
+{% block head %}
+    {{ block.super }} <link rel="stylesheet" href="{% static 'css/enterprise.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form-steps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/success-register.css' %}">
+{% endblock head %}
+
+{% block main %}
+<main id="enterprise-register-proposal">
+    <h1>Cadastro</h1>
+    <div class="register-container">
+        {% include 'components/steps.html' with current_step=5 %}
+    </div>
+</main>
+
+<div class="modal-overlay" id="successModal">
+    <div class="success-modal">
+        <div class="success1">
+            <h2>Cadastro concluído com sucesso!</h2>
+            <img src="{% static 'imgs/icons/discount-icon.svg' %}" alt="Ícone com porcentagem, representando desconto">
+        </div>
+        <p>Obrigado por nos escolher.</p>
+        <p>Dentro de alguns dias, te retornaremos uma resposta!</p>
+        <a href="{% url 'home' %}" class="btn-home">Voltar à página inicial</a>
+    </div>
+</div>
+{% endblock main %}
+
+{% block scripts %}
+    {{ block.super }} 
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const modal = document.getElementById('successModal');
+            if (modal) {
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 150); 
+            }
+        });
+    </script>
+{% endblock scripts %}
