@@ -19,6 +19,7 @@ INSTALLED_APPS += [
     'apps.subscriber',
     'apps.subscription',
     'apps.users',
+    'apps.admin_user'
 ]
 
 DATABASES = {

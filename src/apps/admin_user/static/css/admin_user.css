@@ -1,0 +1,208 @@
+.top{
+    display: flex;
+}
+.top > a{
+    gap: 5px;
+}
+.top > a > p, .top > a > img{
+    color: var(--light-grey);
+}
+.top > a > p{
+    font-size: 16px;
+    text-decoration: underline;
+}
+.top > h1{
+    width: 246px;
+    margin: 0 auto;
+    margin-top: 1.4em;
+    margin-bottom: 1.2em;
+    font-weight: 500;
+    text-align: center;
+    color: transparent;
+    background-image: linear-gradient(to right, var(--brand-yellow), var(--brand-orange-darker));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+h2{
+    font-size: 30px;
+    font-family: var(--special-font-family);
+    margin-bottom: 20px;
+}
+
+/* SIDEBAR DE FILTRO */
+.filters-sidebar{
+    background-color: var(--dark-grey);
+    padding: 1em;
+    border-radius: var(--border-radius-small);
+    flex-wrap: wrap;
+    width: 340px;
+}
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px; 
+}
+fieldset > legend {
+    color: var(--light-grey);
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    padding: 0;
+}
+fieldset div {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    margin-bottom: 10px; 
+}
+fieldset > div > input[type="checkbox"], fieldset > div > label{
+    color: white;
+}
+fieldset > div > input[type="checkbox"]:hover{
+    cursor: pointer;
+}
+
+fieldset div.date-inputs {
+    display: flex;
+    gap: 10px;
+}
+input:focus{
+    outline: none;
+}
+
+input.date-input-js[type="text"], input.date-input-js[type="date"]{
+    background-color: #3a3a3a;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 136px;
+    color: #eee;
+}
+
+input.date-input-js[type="text"]::placeholder {
+    color: #888;
+    opacity: 1;
+}
+input.date-input-js[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+/* ESTILIZAR CHECKBOX */
+.filters-sidebar input[type="checkbox"] {
+    display: none;
+}
+.filters-sidebar fieldset div {
+    display: flex;
+    align-items: center;
+    gap: 6px;          
+    margin-bottom: 12px; 
+}
+.filters-sidebar fieldset label {
+    position: relative;     
+    padding-left: 25px;  
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 20px;    
+}
+.filters-sidebar fieldset label::before {
+    content: ''; 
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); 
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 6px;  
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.filters-sidebar input[type="checkbox"]:checked + label::before {
+    background-color: #ffffff;
+    border-color: #ffffff;   
+}
+.filters-sidebar fieldset label::after {
+    content: '';
+    position: absolute;
+    left: 5px; 
+    top: 50%; 
+    width: 5px;
+    height: 10px;
+    border-style: solid;
+    border-color: #1a1a1a;
+    border-width: 0 3px 3px 0; 
+    transform: translateY(-60%) rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.filters-sidebar input[type="checkbox"]:checked + label::after {
+    opacity: 1; 
+}
+
+/* CARDS DAS EMPRESAS */
+.enterprise_info{
+    background-color: var(--dark-grey);
+    border-radius: var(--border-radius-small);
+    margin-bottom: 20px;
+    padding: 1em;
+}
+#enterprise_filter_container{
+    gap: 1em;
+}
+.top_container, .bottom_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* SEÇÃO DE BUSCA */
+.search{
+    display: flex;
+}
+.search_bar{
+    justify-content: left;
+    background-color: #373737;
+    width: 684px;
+    height: 48px;
+    padding: 1.2em;
+    border-radius: var(--border-radius);
+}
+.search_bar > button{
+    height: 20px;
+}
+.search_bar > input, .search_bar > input::placeholder{
+    color: var(--light-grey);
+}
+.search > button, .search_bar > button, .search_bar > input{
+    font-family: var(--main-font-family);
+    font-size: var(--h3-font-size);
+    border: none;
+    background: none;
+}
+.search > button{
+    width: 188px;
+    height: 48px;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    background-color: var(--dark-grey);
+    border: 1px solid transparent;
+    background-image: linear-gradient(var(--dark-grey), var(--dark-grey)), var(--gradient-yellow-orange);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+.request_date, .cnpj, .line_of_business{
+    color: var(--light-grey);
+}
+.request_date{
+    text-align: right;
+}
+.line_of_business{
+    padding: 0.2em 2em;
+    align-self: flex-start;
+    border: 1px solid var(--light-grey);
+    border-radius: var(--border-radius-small);
+}
