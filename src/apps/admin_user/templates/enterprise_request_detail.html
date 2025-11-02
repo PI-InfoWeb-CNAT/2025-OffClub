@@ -12,7 +12,7 @@
 
     <div class="detail-modal">
         
-        <a href="{% url 'enterprises_requests' %}" class="close-modal">&times;</a>
+        <a href="{% url 'admin_user:enterprises_requests' %}" class="close-modal"><img src="{% static 'imgs/icons/close.svg' %}" alt="Botão de Fechar"></a>
         
         <section class="modal-top">
             <div class="profile-pic-container">
@@ -28,15 +28,15 @@
                     <p class="field-value">{{ enterprise.corporate_reason }}</p>
                 </div>
                 <hr>
-                <div class="data-field">
+                <div class="data-field trade_name">
                     <p class="field-label">Nome Fantasia</p>
                     <p class="field-value">{{ enterprise.trade_name }}</p>
                 </div>
-                <hr>
             </div>
         </section>
 
         <section class="modal-data">
+            <hr>
             <div class="data-row">
                 <div class="data-field">
                     <span class="field-label">CNPJ</span>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="data-field">
                     <span class="field-label">CEP</span>
-                    <span class="field-value">{{ enterprise.user.addresses.first.cep }}</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.formatted_cep }}</span>
                 </div>
             </div>
             <hr>
@@ -84,7 +84,7 @@
             <div class="data-row">
                 <div class="data-field">
                     <span class="field-label">Telefone</span>
-                    <span class="field-value">{{ enterprise.user.phones.first.phone_number }}</span>
+                    <span class="field-value">{{ enterprise.user.phones.first }}</span>
                 </div>
                 <div class="data-field">
                     <span class="field-label">Email</span>
@@ -107,9 +107,12 @@
             </div>
         </section>
         <section class="modal-actions">
-            <button type="submit" class="review">Solicitar Revisão</button>
-            <button type="submit" class="deny">Recusar</button>
-            <button type="submit" class="approve">Aprovar</button>
+            <form action="{% url 'admin_user:process_enterprise_request' enterprise.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="action" value="review" class="review">Solicitar Revisão</button>
+                <button type="submit" name="action" value="deny" class="deny">Recusar</button>
+                <button type="submit" name="action" value="approve" class="approve">Aprovar</button>
+            </form>
         </section>
         
     </div>

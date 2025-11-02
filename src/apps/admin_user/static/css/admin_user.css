@@ -1,3 +1,8 @@
+#approve-enterprise-registers{
+    max-width: 1240px;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
 .top{
     display: flex;
 }
@@ -37,11 +42,14 @@ h2{
     flex-wrap: wrap;
     width: 340px;
 }
+.filters-sidebar h3{
+    margin-bottom: 23px;
+}
 fieldset {
     border: none;
     padding: 0;
     margin: 0;
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
 }
 fieldset > legend {
     color: var(--light-grey);
@@ -160,30 +168,40 @@ input.date-input-js[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* SEÇÃO DE BUSCA */
-.search{
+.result > form{
     display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
 }
 .search_bar{
     justify-content: left;
+    align-items: center !important;
     background-color: #373737;
     width: 684px;
     height: 48px;
-    padding: 1.2em;
+    padding: 0 1.2em;
     border-radius: var(--border-radius);
 }
 .search_bar > button{
-    height: 20px;
+    height: 28px;
+}
+.search_bar > button > img{
+    vertical-align: middle;
 }
 .search_bar > input, .search_bar > input::placeholder{
     color: var(--light-grey);
 }
-.search > button, .search_bar > button, .search_bar > input{
+.result > form > button, .search_bar > button, .search_bar > input{
     font-family: var(--main-font-family);
     font-size: var(--h3-font-size);
     border: none;
     background: none;
 }
-.search > button{
+.search_bar > input{
+    margin-left: 30px;
+    width: 100%;
+}
+.result > form > button{
     width: 188px;
     height: 48px;
     border-radius: var(--border-radius);
@@ -205,4 +223,19 @@ input.date-input-js[type="date"]::-webkit-calendar-picker-indicator {
     align-self: flex-start;
     border: 1px solid var(--light-grey);
     border-radius: var(--border-radius-small);
+}
+.result > p{
+    font-size: var(--h3-font-size);
+    margin-bottom: 10px;
+}
+.content-container{
+    display: flex;
+    justify-content: space-between;
+}
+.pagination > span{
+    color: var(--white);
+}
+
+.nothing_found{
+    margin-top: 20px;
 }
