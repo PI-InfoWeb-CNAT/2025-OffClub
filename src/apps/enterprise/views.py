@@ -5,9 +5,9 @@ from django.shortcuts import get_object_or_404
 from ..coupon.models import Coupon
 from .services.see_evaluations import SeeEvaluationsService
 
-class SeeCouponEvaluationsView(LoginRequiredMixin, DetailView):
+class SeeCouponEvaluationsView(DetailView):
     model = Coupon
-    template_name = "see_evaluations.html"
+    template_name = "enterprise-dashboard/see_evaluations.html"
     context_object_name = "coupon"
 
     # Pega o id do cupom pela URL
@@ -16,12 +16,14 @@ class SeeCouponEvaluationsView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        coupon = self.get_object()
+        coupon = self.object
 
         evaluations = SeeEvaluationsService.get_evaluations(coupon)
-        stars = SeeEvaluationsService.evaluation_stats(coupon)
+        stats = SeeEvaluationsService.evaluation_stats(coupon)
+        final_price = SeeEvaluationsService.final_price(coupon.price, coupon.discount)
 
         context["evaluations"] = evaluations
-        context["stars"] = stars
+        context["stats"] = stats
+        context["final_price"] = final_price
 
         return context

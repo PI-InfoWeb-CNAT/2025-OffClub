@@ -1,3 +1,8 @@
 from django.urls import path, include
+from .views import SeeCouponEvaluationsView
 
-urlpatterns = []
+app_name = "enterprise"
+
+urlpatterns = [
+    path("dashboard/my_offers/<uuid:coupon_id>/evaluations/", SeeCouponEvaluationsView.as_view(), name="see_evaluations"),
+]

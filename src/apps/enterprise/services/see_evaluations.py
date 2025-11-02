@@ -38,6 +38,10 @@ from apps.subscriber.models import Evaluation
 #         }
 
 class SeeEvaluationsService:
+
+    @staticmethod
+    def final_price(price, discount):
+        return round(price * (1 - discount / 100), 2)
     
     @staticmethod
     def get_evaluations(coupon):
@@ -48,7 +52,7 @@ class SeeEvaluationsService:
     @staticmethod
     def evaluation_stats(coupon):
         evaluations = Evaluation.objects.filter(coupon=coupon)
-        total = evaluations.count
+        total = evaluations.count()
 
         if total == 0:
             return{
