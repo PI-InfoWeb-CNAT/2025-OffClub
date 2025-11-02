@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Aprovar Cadastro das Empresas {% endblock title%}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/admin_user.css' %}">
+{% endblock head%}
+{% block main %}
+<main id="approve-enterprise-registers" class="container">
+    <div class="top">
+        <a href="#" class="flex-center">
+            <img src="{% static 'imgs/icons/return.svg' %}" alt="Ícone de seta">
+            <p>Retornar</p>
+        </a>
+        <h1>Administrador</h1>
+    </div>
+    <h2>ANÁLISE DE REGISTROS DE EMPRESAS</h2>
+    <form action="">
+            <section class="filters-sidebar flex-column">
+                <h3>Filtros</h3>
+                    <fieldset>
+                        <legend>Tipos de negócio</legend> <!-- VER EM RELAÇÃO AO MODEL -->
+                        {% for category in categories %}
+                            <div>
+                                <input type="checkbox" id="{{category.id}}" name="categories" value="{{category.id}}"/>
+                                <label for="{{category.id}}">{{category.name}}</label>
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Categorias</legend>
+                        {% for line_of_business in lines_of_business %}
+                            <div>
+                                <input type="checkbox" id="{{line_of_business.id}}" name="lines_of_business" value="{{line_of_business.id}}"/>
+                                <label for="{{line_of_business.id}}">{{line_of_business.name}}</label>
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Data de submissão</legend>
+                        <div class="date-inputs">
+                            <input type="text" class="date-input-js" id="start_date" name="start_date" placeholder="Início (D/M/Y)"/>
+                            <input type="text" class="date-input-js" id="end_date" name="end_date" placeholder="Fim (D/M/Y)"/>
+                        </div>
+                    </fieldset>
+            </section>
+
+            <div class="result">
+                <div class="search">
+                    <div class="search_bar flex-center">
+                        <button type="submit"><img src="{% static 'imgs/icons/grey-search.svg' %}" alt=""></button>
+                        <input type="text" name="name" placeholder="Procurar empresa...">
+                    </div>
+                    <button type="submit" class="btn-search">Buscar</button>
+                </div>
+                {% if enterprisesCount > 0 %}
+                    <p>
+                        Exibindo
+                        <span>{{ page_obj.start_index }} - {{ page_obj.end_index }}</span>
+                        de {{ enterprisesCount }} resultados da busca
+                    </p>
+                    <div id="enterprise_filter_container flex-center">
+                        {% for enterprise in page_obj.object_list %}
+                            <a href="{% url 'enterprise_request_detail' enterprise.pk %}" class="enterprise_card_link">
+                                {% include 'components/request_card.html' with enterprise=enterprise %}
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="pagination">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&laquo;</a>
+                        {% endif %}
+                        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&raquo;</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="nothing_found">
+                        <img src="{% static 'imgs/not_found.svg' %}" alt="">
+                        <p>Nenhuma empresa encontrada.</p>
+                    </div>
+                {% endif %}
+            </div>
+    </form>
+</main>
+{% block scripts %}
+{{ block.super }} <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const dateInputs = document.querySelectorAll('.date-input-js');
+    dateInputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.type = 'date';
+            try {
+                input.showPicker();
+            } catch (e) {
+            }
+        });
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.type = 'text';
+            }
+        });
+    });
+});
+</script>
+{% endblock scripts %}
+{% endblock main %}

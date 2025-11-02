@@ -8,6 +8,7 @@ urlpatterns = [
     path('offer/', include('apps.offer.urls')),
     path('subscriber/', include('apps.subscriber.urls')),
     path('enterprise/', include('apps.enterprise.urls')),
+    path('adm_user/', include('apps.admin_user.urls'))
 ]
 
 from .settings import base as settings
