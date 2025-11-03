@@ -1,13 +1,5 @@
 from django.contrib.auth import authenticate, login
-<<<<<<< HEAD
 from django.contrib.auth.mixins import LoginRequiredMixin
-=======
-from django.http import HttpResponseRedirect
-from django.views import View
-from django.views.generic import ListView, TemplateView
-from apps.coupon.models import Coupon
-from .services.discount import DiscountService
->>>>>>> remotes/origin/70-painel-da-empresa
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -16,7 +8,6 @@ from django.views.generic import TemplateView
 from formtools.wizard.views import SessionWizardView
 
 from apps.core.models import Address, Phone
-<<<<<<< HEAD
 from apps.coupon.models import Coupon
 from apps.users.models import User
 
@@ -31,8 +22,6 @@ from .forms import (
 from .models import Evaluation, Subscriber
 from .services.discount import DiscountService
 from .services.evaluation import EvaluationService
-=======
->>>>>>> remotes/origin/70-painel-da-empresa
 
 
 FORMS = [
@@ -207,7 +196,6 @@ class HistoryView(LoginRequiredMixin, TemplateView):
 
 
 class RegistrationDone(TemplateView):
-<<<<<<< HEAD
     """Tela exibida após o cadastro concluído."""
 
     template_name = "register/done.html"
@@ -252,6 +240,3 @@ class EvaluationCreateView(LoginRequiredMixin, View):
             {"success": "Avaliação registrada com sucesso!"},
             status=200,
         )
-=======
-    template_name = 'register/done.html'
->>>>>>> remotes/origin/70-painel-da-empresa
