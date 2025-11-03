@@ -2,6 +2,8 @@
     width: 780px;
     padding: 2.8em;
     margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
     background-color: var(--dark-grey);
     border: 1px solid var(--brand-yellow);
     border-radius: var(--border-radius-small);
@@ -39,6 +41,10 @@
 }
 .names-container{
     width: 100%;
+}
+.modal-actions{
+    display: flex;
+    justify-content: center;
 }
 .modal-actions > form > button{
     font-family: var(--main-font-family);
