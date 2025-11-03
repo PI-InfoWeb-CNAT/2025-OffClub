@@ -1,0 +1,25 @@
+main{
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 70vh;
+}
+
+h2{
+    font-size: 16px !important;
+    font-weight: 700;
+    text-align: center;
+
+    padding: 3em 0;
+
+    background-image: var(--gradient-orange);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container-cards{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
