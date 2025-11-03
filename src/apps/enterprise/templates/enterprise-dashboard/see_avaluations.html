@@ -4,39 +4,64 @@
 {% block title %}Ver avaliações{% endblock title %}
 
 {% block head %}
-<link rel="stylesheet" href="#">
+<link rel="stylesheet" href="{% static 'css/enterprise-dashboard/see_avaluations.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/answer-evaluations-card.css' %}">
 {% endblock head %}
 
 {% block main %}
-<main>
+<main class="flex-column">
+    <div class="page-navigation">
+        <div class="last-page">
+            <a href="{% url 'offer:manage_list' %}">
+                <img src="{% static 'imgs/icons/arrow-back.svg' %}" alt="Retornar">
+                <p>Retornar</p>
+            </a>
+        </div>
+
+        <nav class="breadcrumbs">
+            <p><a href="{% url 'offer:manage_list' %}">Painel da Empresa</a>  >  <a href="{% url 'offer:manage_list' %}">Minhas Ofertas</a>  >  Visualizar Avaliações</a></p>
+        </nav>
+    </div>
+
     <section id="general-info">
-        <div>
+        <div id="offer-detail">
             <figure>
-                <img src="{{ coupon.offer.image }}" alt="">
+                <!-- <img src="{{ coupon.offer.image.url }}" alt="Oferta"> -->
+                <img src="{% static 'imgs/default-offer-image.png' %}" alt="Oferta">
             </figure>
 
-            <div id="offer-detail">
+            <div class="flex-column">
                 <h3>{{ coupon.offer.title }}</h3>
 
-                <h4>Valor com desconto</h4>
-                <p>R$ {{ final_price }}</p>
+                <div>
+                    <h4>Valor com desconto</h4>
+                    <p>R$ {{ final_price }}</p>
+                </div>
 
-                <h4>Detalhes</h4>
-                <p>{{ coupon.offer.description }}</p>
+                <div>
+                    <h4>Detalhes</h4>
+                    <p>{{ coupon.offer.description }}</p>
+                </div>
             </div>
         </div>
 
         <div id="evaluations-stats">
             <p id="media">{{ stats.media }}</p>
-            <p id="total">( {{ stats.total }} avaliações)</p>
+            {% if stats.total == 1 %}
+            <p id="total">({{ stats.total }} avaliação)</p>
+            {% else %}
+            <p id="total">({{ stats.total }} avaliações)</p>
+            {% endif %}
 
             <ol class="stars-distribution">
                 {% for star, percentage in stats.percentages.items %}
                     <li>
-                        <span>{{ star }} estrelas</span>
-                            <div class="bar">
-                                <div class="fill"></div>
-                            </div>
+                        {% if star == 1 %}
+                            <span>{{ star }} estrela</span>
+                        {% else %}
+                            <span>{{ star }} estrelas</span>
+                        {% endif %}
+                        <progress value="{{ percentage|stringformat:'s' }}" max="100"></progress>
                         <span>{{ percentage }}%</span>
                     </li>
                 {% endfor %}

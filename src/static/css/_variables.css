@@ -32,6 +32,9 @@
     --gradient-bronze: linear-gradient(90deg, var(--brown) 0%, var(--brown-darker) 100%);
     --gradient-silver: linear-gradient(90deg, var(--cyan) 0%, var(--darker-cyan) 100%);
     --gradient-gold: linear-gradient(90deg, var(--brand-yellow) 0%, var(--golden) 100%);
+    --gradient-yellow-dark-orange: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
+    
+    /* >>> Cinzas <<< */
     --light-grey: #9D9D9D;
     --medium-grey: #595959;
     --grey: #323232;
@@ -42,9 +45,6 @@
     --medium-green: #5AC191;    /* Elementos */
     --light-green: #C0EDD8;     /* Texto */
     --green-details: #2A553D;   /* Detalhes -> botão excluir */
-
-    /* >>> Gradientes <<< */
-    --gradient-yellow-dark-orange: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
 
     /* >>> Fontes <<< */
     --main-font-family: "Poppins", sans-serif;
