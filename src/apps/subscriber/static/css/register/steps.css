@@ -1,13 +1,14 @@
 
 .title-register {
-    font-weight: 900;
-    color: transparent;
-    padding: 2em 0;
+    font-size: 16px !important;
+    font-weight: 700;
+
+    padding: 3em 0;
+
     background-image: var(--gradient-orange);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2em !important;
 }
 
 
@@ -43,3 +44,106 @@
     border: 1px solid var(--white);
 }
 
+
+.active p {
+    color: var(--brand-orange);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+.active .number-wrapper {
+    border: 1px solid var(--brand-orange);
+}
+
+.active .number-wrapper p {
+    color: var(--brand-orange);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+
+.done{
+    font-weight: 700;
+    background-image: var(--gradient-orange);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.done .number-wrapper{
+    border: 1px solid var(--brand-orange-darker);
+}
+
+
+/* FORMULÁRIOS */
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    .form-fields{
+    
+        background-color: var(--background-color);
+        border: 2px solid #373737;
+        border-radius: var(--border-radius);
+    
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    p{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    label{
+        font-size: 13px;
+        color: var(--light-grey);
+    }
+
+    input{
+        height: 45px;
+        background-color: #252525;
+        border-radius: var(--border-radius-small);
+        border: none;
+        padding: 1em;
+
+        color: var(--white);
+        font-family: var(--main-font-family);
+        font-size: var(--text-font-size);
+        font-weight: 300;
+    }
+    
+    input::placeholder{
+        color: var(--white);
+        font-family: var(--main-font-family);
+        font-size: var(--text-font-size);
+        font-weight: 300;
+    }
+
+    input:hover{
+        cursor: pointers;
+    }
+
+    button{
+        background-image: var(--gradient-orange);
+        color: var(--white);
+        border: none;
+
+        border-radius: var(--border-radius-small);
+        padding: 0.5em 5em;
+        margin: 0 auto;
+
+        font-family: var(--main-font-family);
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+
+}

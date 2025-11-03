@@ -7,20 +7,40 @@
     height: 1em;
 }
 
-/*  ===================================================== */
+input[type="file"]{
+    background-color: transparent;
+    display: block;
 
-.step-4 p {
-    color: var(--brand-orange);
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
+    margin-top: 5px;
+    padding: 0;
+    height: fit-content;
 }
 
-.step-4 .number-wrapper {
-    border: 1px solid var(--brand-orange);
+input[type="file"]::file-selector-button{
+    height: 50px;
+    width: 200px;
+
+    background-color: #252525;
+    border: none;
+    border: 1px solid var(--brand-orange-darker);
+    border-radius: var(--border-radius-small);
+
+    color: var(--white);
+    font-family: var(--main-font-family);
+    font-size: var(--text-font-size);
+    font-weight: 300;
+
+    display: block;
+    margin-bottom: 5px;
 }
 
-.step-4 .number-wrapper p {
-    color: var(--brand-orange);
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
+input[type="file"]:hover, input[type="file"]::file-selector-button:hover{
+    cursor: pointer;
+}
+
+input[type="file"]::after {
+  content: attr(value); /* mostra o nome do arquivo */
+  display: block;
+  color: var(--white);
+  margin-top: 5px;
 }
