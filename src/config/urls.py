@@ -17,4 +17,5 @@ urlpatterns = [
         RedirectView.as_view(pattern_name='offer:manage_list', permanent=False),
         name='offer_list'
     ),
+    path('coupon/', include(('apps.coupon.urls'), namespace='coupon')),
 ]

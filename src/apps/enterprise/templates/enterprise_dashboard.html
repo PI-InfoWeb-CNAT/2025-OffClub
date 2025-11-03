@@ -1,0 +1,29 @@
+{% extends 'user_dashboard.html' %}
+{% load static %}
+
+{% block title %} Painel da Empresa {% endblock title %}
+
+{% block title_dashboard %}Painel da Empresa{% endblock title_dashboard %}
+
+{% block cards %}
+
+    {% include 'components/dashboard_card.html' with 
+        title="Cadastrar Oferta"
+        subtitle="Registre uma nova oferta"
+        url="/enterprise_dashboard/"
+    %}
+
+    {% include 'components/dashboard_card.html' with 
+        title="Visualizar Estatísticas"
+        subtitle="Ver público alcançado e ofertas resgatadas"
+        url="/enterprise_dashboard/"
+    %}
+
+    {% include 'components/dashboard_card.html' with 
+        title="Minhas Ofertas"
+        subtitle="Gerenciar ofertas já cadastradas"
+        url="/enterprise_dashboard/"
+    %}
+    
+    
+{% endblock cards %}

@@ -17,5 +17,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('history/', HistoryView.as_view(), name='history'),
     path('registration_done/', RegistrationDone.as_view(), name='registration_done'),
+<<<<<<< HEAD
     path('avaliar_cupom/<uuid:coupon_id>/', EvaluationCreateView.as_view(), name='evaluate_coupon'),
 ]
+=======
+]
+>>>>>>> remotes/origin/70-painel-da-empresa
