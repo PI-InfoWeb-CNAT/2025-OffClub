@@ -166,7 +166,9 @@ input.date-input-js[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     justify-content: space-between;
 }
-
+.bottom_container{
+    align-items: flex-end;
+}
 /* SEÇÃO DE BUSCA */
 .result > form{
     display: flex;
@@ -220,7 +222,6 @@ input.date-input-js[type="date"]::-webkit-calendar-picker-indicator {
 }
 .line_of_business{
     padding: 0.2em 2em;
-    align-self: flex-start;
     border: 1px solid var(--light-grey);
     border-radius: var(--border-radius-small);
 }
