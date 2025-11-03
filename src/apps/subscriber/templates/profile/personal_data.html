@@ -1,15 +1,131 @@
-{% extends "profile/base_profile.html" %}
+{% extends "profile/base_profile.html" %} {% load static %} {% block title %}
+MEU PERFIL {% endblock title %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/profile/base_profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/profile/personal_data.css' %}" />
+{% endblock head %} {% block profile_tab %}
+<div class="personal-data-tab flex-row">
 
-{% load static %}
+    <h1 class="tab-title">MEU PERFIL</h1>
+    
+    <div class="personal-data-content">
+    
+        <div class="profile-section first">
+          <figure class="profile-image-wrapper">
+            <img class="profile-picture" src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'imgs/teste.png' %}{% endif %}" alt="Foto de Perfil" />
+          </figure>
+        
+          <div class="profile-data-wrapper">
+            <div class="profile-section-title flex-row">
+              <h2>Informações Pessoais</h2>
+              <hr />
+            </div>
+        
+            <div class="data-row">
+              <div class="row-item">
+                <span class="data-label">Nome</span>
+                <span class="data-value">{% if subscriber %}{{ subscriber.first_name }}{% else %}-{% endif %}</span>
+              </div>
+              <div class="row-item">
+                <span class="data-label">Sobrenome</span>
+                <span class="data-value">{% if subscriber %}{{ subscriber.last_name }}{% else %}-{% endif %}</span>
+              </div>
+            </div>
+        
+            <div class="data-row">
+              <div class="row-item">
+                <span class="data-label">Email</span>
+                <span class="data-value">{{ user.email }}</span>
+              </div>
+            </div>
+        
+            <div class="data-row">
+              <div class="row-item">
+                <span class="data-label">Telefone</span>
+                <span class="data-value">{% if phone %}{{ phone }}{% else %}-{% endif %}</span>
+              </div>
 
-{% block title %} Dados Pessoais {% endblock title %}
+              <div class="row-item">
+                <span class="data-label">CPF</span>
+                <span class="data-value">{% if subscriber %}{{ subscriber.cpf }}{% else %}-{% endif %}</span>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+        
+        <div class="profile-section second">
+          <div class="profile-section-title">
+            <h2>Plano Atual</h2>
+            <hr />
+          </div>
 
-{% block head %}
-    <link rel="stylesheet" href="{% static 'css/profile/base_profile.css' %}">  
-    <link rel="stylesheet" href="{% static 'css/profile/personal_data.css' %}">
-{% endblock head %}
+          {% if plan_info %}
+          <div class="data-row">
+            <div class="row-item">
+              <span class="data-label">Título</span>
+              <span class="data-value">{{ plan_info.title }}</span>
+            </div>
+            <div class="row-item">
+              <span class="data-label">Valor</span>
+              <span class="data-value">R$ {{ plan_info.price|floatformat:2 }}</span>
+            </div>
+            <div class="row-item">
+              <span class="data-label">Duração</span>
+              <span class="data-value">{{ plan_info.duration }}</span>
+            </div>
+          </div>
 
-{% block profile_tab %}
-    <h1>Dados Pessoais</h1>
+          <div class="data-row">
+            <div class="row-item">
+              <span class="data-label">Data de assinatura</span>
+              <span class="data-value">{{ subscription.start_date|date:'d/m/Y H:i' }}</span>
+            </div>
+            <div class="row-item">
+              <span class="data-label">Data de expiração</span>
+              <span class="data-value">{% if subscription.end_date %}{{ subscription.end_date|date:'d/m/Y H:i' }}{% else %}-{% endif %}</span>
+            </div>
+          </div>
+          {% else %}
+          <p class="empty-state">Você ainda não possui um plano ativo. <a href="{% url 'subscription:plans' %}">Conheça nossos planos.</a></p>
+          {% endif %}
+        </div>
+        
+        <div class="profile-section third">
+          <div class="profile-section-title">
+            <h2>Dados de Localização</h2>
+            <hr />
+          </div>
+        
+          <div class="data-row">
+            <div class="row-item">
+              <span class="data-label">Estado</span>
+              <span class="data-value">{% if address %}{{ address.state }}{% else %}-{% endif %}</span>
+            </div>
+            <div class="row-item">
+              <span class="data-label">Cidade</span>
+              <span class="data-value">{% if address %}{{ address.city }}{% else %}-{% endif %}</span>
+            </div>
+            <div class="row-item">
+              <span class="data-label">Bairro</span>
+              <span class="data-value">{% if address %}{{ address.neighborhood }}{% else %}-{% endif %}</span>
+            </div>
+          </div>
+        
+          <div class="data-row">
+            <div class="row-item">
+              <span class="data-label">Logradouro</span>
+              <span class="data-value">{% if address %}{{ address.street_name }}, {{ address.number }}{% else %}-{% endif %}</span>
+            </div>
+            <div class="row-item">
+              <span class="data-label">CEP</span>
+              <span class="data-value">{% if address %}{{ address.formatted_cep }}{% else %}-{% endif %}</span>
+            </div>
+            <div class="row-item">
+              <span class="data-label">Complemento</span>
+              <span class="data-value">{% if address %}{{ address.complement|default:'-' }}{% else %}-{% endif %}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
 {% endblock profile_tab %}
-
