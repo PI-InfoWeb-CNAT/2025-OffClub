@@ -240,7 +240,8 @@ form {
 label {
     display: block;
 }
-input[type="text"], input[type="datetime-local"], input[type="number"], textarea, select {
+
+input, input[type="datetime-local"], input[type="number"], textarea, select {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -250,7 +251,7 @@ input[type="text"], input[type="datetime-local"], input[type="number"], textarea
     width: 100%;
     padding: 0.7em 0.5em;
     border-radius: var(--border-radius-small);
-    color: var(--gray);
+    color: var(--white);
     font-size: var(--h3-font-size);
 }
 button {
