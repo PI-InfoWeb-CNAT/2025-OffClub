@@ -240,3 +240,55 @@ class EvaluationCreateView(LoginRequiredMixin, View):
             {"success": "Avaliação registrada com sucesso!"},
             status=200,
         )
+
+
+
+
+
+# PERFIL DE USUÁRIO
+
+class ProfileView(View):
+    def get(self, request):
+        subscriber = getattr(request.user, "subscriber", None)
+        address = request.user.addresses.first() if request.user.is_authenticated else None
+        phone = request.user.phones.first() if request.user.is_authenticated else None
+
+        active_subscription = getattr(subscriber, "active_subscription", None) if subscriber else None
+
+        if (not active_subscription or not active_subscription.plan) and request.user.is_authenticated:
+            # Busca a assinatura ativa mais recente vinculada ao usuário.
+            user_subscriptions = request.user.subscriptions.select_related("plan").order_by("-start_date")
+            for subscription in user_subscriptions:
+                if subscription.plan and subscription.is_active:
+                    active_subscription = subscription
+                    break
+
+        plan_info = None
+        if active_subscription and active_subscription.plan and active_subscription.is_active:
+            plan = active_subscription.plan
+            duration_display = "-"
+            duration = plan.duration
+            if duration:
+                total_days = duration.days
+                total_seconds = duration.seconds
+                if total_days > 0 and total_seconds == 0:
+                    duration_display = f"{total_days} dia{'s' if total_days != 1 else ''}"
+                else:
+                    duration_display = str(duration)
+
+            plan_info = {
+                "title": plan.title,
+                "price": plan.price,
+                "duration": duration_display,
+            }
+
+        context = {
+            "subscriber": subscriber,
+            "user": request.user,
+            "address": address,
+            "phone": phone,
+            "subscription": active_subscription,
+            "plan_info": plan_info,
+        }
+        return render(request, "profile/personal_data.html", context)
+    

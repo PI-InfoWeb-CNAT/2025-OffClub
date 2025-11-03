@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Perfil do Usuário {% endblock title %}
+
+{% block main %}
+<main class="container profile-wrapper flex-center">
+    <div class="profile-tab">
+
+        <nav class="profile-lateral-nav">
+            <ul>
+                <li class="flex-row personal-data-nav-item"> <!-- DADOS PESSOAIS -->
+                    <img src="{% static 'imgs/icons/profile_icon.svg' %}" alt="Ícone de perfi">
+                    <a class="profile-nav-a" href="{% url 'subscriber:profile' %}">Meu Perfil</a>
+                </li>
+                <li class="flex-row my-coupons-nav-item"> <!-- MEUS CUPONS -->
+                    <img src="{% static 'imgs/icons/coupon_icon.svg' %}" alt="Ícone de cupons">
+                    <a class="profile-nav-a" href="#">Meus Cupons</a>
+                </li>
+                <li class="flex-row my-plans-nav-item"> <!-- MEUS PLANOS -->
+                    <img src="{% static 'imgs/icons/plans_icon.svg' %}" alt="Ícone de planos">
+                    <a class="profile-nav-a" href="#">Meus Planos</a>
+                </li>
+                <li class="flex-row edit-profile-nav-item"> <!-- EDITAR PERFIL -->
+                    <img src="{% static 'imgs/icons/edit_icon.svg' %}" alt="Ícone de editar perfil">
+                    <a class="profile-nav-a" href="#">Editar Perfil</a>
+                </li>
+                <li class="flex-row config-nav-item"> <!-- CONFIGURAÇÕES -->
+                    <img src="{% static 'imgs/icons/config_icon.svg' %}" alt="Ícone de engrenagem">
+                    <a class="profile-nav-a" href="#">Configurações</a>
+                </li>
+                <li class="flex-row logout-nav-item"> <!-- SAIR DA CONTA -->
+                    <img src="{% static 'imgs/icons/logout_icon.svg' %}" alt="Ícone de sair">
+                    <a class="profile-nav-a profile-logout" href="{% url 'subscriber:logout' %}">Sair</a>
+                </li>
+            </ul>
+        </nav>
+        {% block profile_tab %} {% endblock profile_tab %}
+    </div>
+</main>
+{% endblock main %}
+
+
