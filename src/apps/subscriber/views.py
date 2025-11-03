@@ -240,3 +240,14 @@ class EvaluationCreateView(LoginRequiredMixin, View):
             {"success": "Avaliação registrada com sucesso!"},
             status=200,
         )
+
+
+
+
+
+# PERFIL DE USUÁRIO
+
+class ProfileView(View):
+    def get(self, request):
+        return render(request, "profile/personal_data.html")
+    

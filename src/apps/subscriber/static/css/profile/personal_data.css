@@ -1,0 +1,13 @@
+.personal-data-nav-item {
+    background-color: rgba(239, 119, 0, 0.1); 
+    border-left: 4px solid var(--brand-orange);
+}
+
+.personal-data-nav-item a {
+    color: var(--brand-yellow);
+}
+
+.personal-data-nav-item img {
+    filter: invert(62%) sepia(83%) saturate(447%) hue-rotate(11deg) brightness(160%) contrast(90%);
+}
+

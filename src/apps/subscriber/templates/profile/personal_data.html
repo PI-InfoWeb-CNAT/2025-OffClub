@@ -1,0 +1,15 @@
+{% extends "profile/base_profile.html" %}
+
+{% load static %}
+
+{% block title %} Dados Pessoais {% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/profile/base_profile.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/profile/personal_data.css' %}">
+{% endblock head %}
+
+{% block profile_tab %}
+    <h1>Dados Pessoais</h1>
+{% endblock profile_tab %}
+
