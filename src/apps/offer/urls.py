@@ -26,7 +26,8 @@ urlpatterns = [
         name="manage_detail_json",
     ),
     path("manage/create/", ManageOfferCreateView.as_view(), name="manage_create"),
-    path("manage/<uuid:pk>/edit/", ManageOfferUpdateView.as_view(), name="manage_edit"),
+    path("manage/<uuid:pk>/edit/",
+         ManageOfferUpdateView.as_view(), name="manage_edit"),
     path(
         "manage/<uuid:pk>/delete/",
         ManageOfferDeleteView.as_view(),
@@ -34,7 +35,8 @@ urlpatterns = [
     ),
     path(
         "list/",
-        RedirectView.as_view(pattern_name="offer:manage_list", permanent=False),
+        RedirectView.as_view(
+            pattern_name="offer:manage_list", permanent=False),
         name="offer_list",
     ),
 ]

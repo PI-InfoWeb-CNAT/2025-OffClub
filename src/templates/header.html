@@ -27,14 +27,14 @@
             <figure class="profile-button-wrapper flex-center">
                 <a href="{% url 'subscriber:profile' %}">
                     {% if request.user.is_authenticated %}
-                    {% if request.user.profile_picture %}
-                    <img class="profile-image" style="width: 38px; height: 38px; border-radius: 50%;" src="{{ request.user.profile_picture.url }}" alt="Usuário">
-                    {% else %}
-                    {# Se não tiver, mostra a imagem padrão #}
-                    <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
-                    {% endif %}
-                    {% else %}
-                    <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
+                        {% if request.user.profile_picture %}
+                            <img class="profile-image" style="width: 38px; height: 38px; border-radius: 50%;" src="{{ request.user.profile_picture.url }}" alt="Usuário">
+                        {% else %}
+                        {# Se não tiver, mostra a imagem padrão #}
+                            <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
+                        {% endif %}
+                        {% else %}
+                            <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
                     {% endif %}
                 </a>
                 <div class="profile-options">
