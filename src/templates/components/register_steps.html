@@ -1,0 +1,16 @@
+{% load static %}
+<div class="steps-counter">
+    <ol class="steps-list">
+        {% for step in steps %}
+            {% with idx=step.index %}
+            <li class="{% if idx < current_step_index %}past{% elif idx == current_step_index %}active{% endif %}">
+                <div class="circle-container">
+                    <img src="{% static 'imgs/icons/check.svg' %}" alt="Etapa concluída">
+                    <p class="step-stage">{{ idx }}</p>
+                </div>
+                <p class="step-name">{{ step.label }}</p>
+            </li>
+            {% endwith %}
+        {% endfor %}
+    </ol>
+</div>

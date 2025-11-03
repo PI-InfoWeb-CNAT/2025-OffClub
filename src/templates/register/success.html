@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ wizard_title }}{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/enterprise.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form-steps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/success-register.css' %}">
+{% endblock head %}
+
+{% block main %}
+<main id="registration-flow">
+    <h1>{{ wizard_title }}</h1>
+    <div class="register-container">
+        {% if steps_metadata %}
+            {% include 'components/register_steps.html' with steps=steps_metadata current_step_index=current_step_index %}
+        {% endif %}
+    </div>
+</main>
+
+<div class="modal-overlay" id="successModal">
+    <div class="success-modal">
+        <div class="success1">
+            <h2>{{ success_title }}</h2>
+            {% if success_icon %}
+                <img src="{% static success_icon %}" alt="Confirmação de cadastro">
+            {% endif %}
+        </div>
+        {% for message in success_messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+        {% if cta_url and cta_label %}
+            <a href="{{ cta_url }}" class="btn-home">{{ cta_label }}</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock main %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('successModal');
+    if (!modal) {
+        return;
+    }
+
+    requestAnimationFrame(() => {
+        modal.classList.add('show');
+    });
+});
+</script>
+{% endblock scripts %}
