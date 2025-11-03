@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Ver avaliações{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="#">
+{% endblock head %}
+
+{% block main %}
+<main>
+    <section id="general-info">
+        <div>
+            <figure>
+                <img src="{{ coupon.offer.image }}" alt="">
+            </figure>
+
+            <div id="offer-detail">
+                <h3>{{ coupon.offer.title }}</h3>
+
+                <h4>Valor com desconto</h4>
+                <p>R$ {{ final_price }}</p>
+
+                <h4>Detalhes</h4>
+                <p>{{ coupon.offer.description }}</p>
+            </div>
+        </div>
+
+        <div id="evaluations-stats">
+            <p id="media">{{ stats.media }}</p>
+            <p id="total">( {{ stats.total }} avaliações)</p>
+
+            <ol class="stars-distribution">
+                {% for star, percentage in stats.percentages.items %}
+                    <li>
+                        <span>{{ star }} estrelas</span>
+                            <div class="bar">
+                                <div class="fill"></div>
+                            </div>
+                        <span>{{ percentage }}%</span>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </section>
+
+    <section id="evaluations-list">
+        {% for e in evaluations %}
+            {% include 'components/answer-evaluations-card.html' with evaluation=e %}
+        {% empty %}
+            <p>Ainda não há avaliações</p>
+        {% endfor %}
+    
+    </section>
+</main>
+{% endblock main %}

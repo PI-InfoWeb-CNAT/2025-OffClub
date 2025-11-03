@@ -107,10 +107,10 @@ class RegisterWizardView(SessionWizardView):
 class RegisterDoneView(TemplateView):
     template_name = 'done.html'
     
-    
-class SeeCouponEvaluationsView(LoginRequiredMixin, DetailView):
+
+class SeeCouponEvaluationsView(DetailView):
     model = Coupon
-    template_name = "see_evaluations.html"
+    template_name = "enterprise-dashboard/see_avaluations.html"
     context_object_name = "coupon"
 
     # Pega o id do cupom pela URL
@@ -122,9 +122,11 @@ class SeeCouponEvaluationsView(LoginRequiredMixin, DetailView):
         coupon = self.get_object()
 
         evaluations = SeeEvaluationsService.get_evaluations(coupon)
-        stars = SeeEvaluationsService.evaluation_stats(coupon)
+        stats = SeeEvaluationsService.evaluation_stats(coupon)
+        final_price = SeeEvaluationsService.final_price(coupon.offer.price, coupon.offer.discount)
 
         context["evaluations"] = evaluations
-        context["stars"] = stars
+        context["stats"] = stats
+        context["final_price"] = final_price
 
         return context
