@@ -1,0 +1,57 @@
+h1{
+    margin-bottom: 1em;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+p{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label{
+    font-size: 13px;
+    color: var(--light-grey);
+    /* display: none; */
+}
+
+input{
+    height: 45px;
+    background-color: #252525;
+    border-radius: var(--border-radius-small);
+    border: none;
+    padding: 1em;
+
+    color: var(--white);
+    font-family: var(--main-font-family);
+    font-size: var(--text-font-size);
+    font-weight: 300;
+}
+
+button{
+    background-image: var(--gradient-orange);
+    color: var(--white);
+    border: none;
+
+    border-radius: var(--border-radius-small);
+    padding: 0.5em 5em;
+    margin: 0 auto;
+
+    font-family: var(--main-font-family);
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.register-link{
+    display: block;
+
+    a{
+        color: var(--brand-orange);
+    }
+}
