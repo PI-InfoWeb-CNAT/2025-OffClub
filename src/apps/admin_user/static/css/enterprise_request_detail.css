@@ -1,39 +1,46 @@
 .detail-modal{
-    width: 804px;
-    padding: 1.8em;
+    width: 780px;
+    padding: 2.8em;
     margin: 0 auto;
     background-color: var(--dark-grey);
     border: 1px solid var(--brand-yellow);
     border-radius: var(--border-radius-small);
+    position: relative;
 }
 .detail-modal > a{
+    position: absolute;
+    top: 1.4em;
+    right: 40px;
     color: #595959;
 }
 .modal-top{
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 20px;
 }
 .field-value{
     color: var(--white);
-    margin-bottom: 20px;
+    font-size: var(--h3-font-size);
 }
 .field-label{
     color: var(--light-grey);
     font-size: var(--text-font-size);
 }
-.data-field{
+.data-field:not(.trade_name){
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 .data-row{
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 80%; 
 }
 .names-container{
     width: 100%;
 }
-.modal-actions > button{
+.modal-actions > form > button{
     font-family: var(--main-font-family);
     font-size: 16px;
     width: 188px;
