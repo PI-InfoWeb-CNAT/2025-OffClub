@@ -10,9 +10,18 @@
 
 {% block main %}
 <main class="flex-column">
-    <nav>
-        
-    </nav>
+    <div class="page-navigation">
+        <div class="last-page">
+            <a href="{% url 'offer:manage_list' %}">
+                <img src="{% static 'imgs/icons/arrow-back.svg' %}" alt="Retornar">
+                <p>Retornar</p>
+            </a>
+        </div>
+
+        <nav class="breadcrumbs">
+            <p><a href="{% url 'offer:manage_list' %}">Painel da Empresa</a>  >  <a href="{% url 'offer:manage_list' %}">Minhas Ofertas</a>  >  Visualizar Avaliações</a></p>
+        </nav>
+    </div>
 
     <section id="general-info">
         <div id="offer-detail">

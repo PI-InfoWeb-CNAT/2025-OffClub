@@ -71,3 +71,41 @@ button {
 button:disabled {
     cursor: not-allowed;
 }
+
+/* >> Navegação de páginas (botão de retornar + migalhas de pão) */
+.page-navigation{
+    display: flex;
+    width: 100%;
+    
+    a{
+        cursor: pointer;
+    }
+    p{
+        font-size: var(--larger-text-font-size);
+    }
+    
+    .last-page a{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 7px;
+        
+        p{
+            color: var(--light-grey);
+            text-decoration: underline;
+        }
+    }
+    
+    .breadcrumbs{
+        margin: 0 auto;
+        
+        a, p{
+            background: var(--gradient-yellow-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+    }
+}
