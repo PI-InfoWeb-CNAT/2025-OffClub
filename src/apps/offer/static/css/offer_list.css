@@ -1,0 +1,320 @@
+/* importa seu reset/base */
+@import url("{% static 'css/global.css' %}");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  /* === cores, fontes e variáveis principais === */
+  --white:#ffffff;
+  --offwhite:rgba(255,255,255,0.75);
+  --almost-transparent-white:rgba(255,255,255,0.1);
+  --gray:#646464;
+  --background-color:#1C1C1C;
+  --yellow-lighter:#FFEFCC;
+  --brand-yellow:#FFC547;
+  --brand-orange:#FF9E3D;
+  --brand-orange-darker:#E28C36;
+  --medium-green:#5AC191;
+  --main-font-family:"Poppins",sans-serif;
+  --text-font-size:14px;
+  --text-font-weight:400;
+  --text-line-height:1.5;
+  --text-color:var(--white);
+  --border-radius-small:10px;
+  --border-radius:20px;
+}
+
+
+
+/* ===== conteúdo principal ===== */
+.content {
+  background: var(--background-color);
+  border: 1px solid rgba(255,197,71,0.35);
+  box-shadow: 0 0 0 1px rgba(255,197,71,0.12) inset;
+  border-radius: var(--border-radius);
+  padding: 22px;
+  width: 1250px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  
+}
+
+.content__header {
+  border-bottom: 1px solid var(--almost-transparent-white);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.content__title {
+  margin: 0 0 12px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* ===== filtros ===== */
+.filters {
+  margin-bottom: 10px;
+}
+.filters__row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:flex-end;
+}
+.filters__field {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.filters__field--grow {
+  flex:1 1 260px;
+  min-width: 220px;
+}
+.filters__label {
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  color: var(--offwhite);
+}
+
+.filters__input,
+.filters__select {
+  font-family: "Montserrat", sans-serif;
+  background: #252525;
+  color: var(--text-color);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 130px;
+  outline: none;
+}
+
+.filters input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+/*  botões  */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius: var(--border-radius-small);
+  text-decoration:none;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition: filter .2s ease, background .2s ease, color .2s ease;
+}
+.btn--filter {
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
+  color: #1a1a1a;
+  min-width: 130px;
+  font-family: "Montserrat", sans-serif;
+}
+.btn--filter:hover {
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange));
+}
+.btn--detail {
+  background: #222;
+  color: #9D9D9D ;
+  border: 2px solid rgba(255,255,255,0.12);
+}
+.btn--review {
+  background: transparent;
+  color: #9D9D9D ;
+  border-color: rgba(255,255,255,0.12);
+}
+.btn--edit {
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-orange-darker));
+  color: #1a1a1a;
+}
+.btn--create {
+  font-family: "Montserrat", sans-serif;
+  color: #9D9D9D ;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 130px;
+}
+.btn--delete {
+  background: #310000; 
+  font-family: "Poppins",sans-serif;
+  color: #fff;
+}
+
+/*  seções  */
+.section {
+  margin-top: 16px;
+}
+.section__actives,
+.section__unactives {
+  color: var(--brand-yellow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 10px;
+}
+.section__actives::after,
+.section__unactives::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+/*  cards (layout horizontal)  */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+
+  width: 100%;
+  padding: 18px 22px;
+  border-radius: 16px;
+
+  background: #252525;
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: border-color 0.2s ease, transform 0.12s ease;
+}
+
+.card:hover {
+  border-color: var(--brand-yellow);
+  transform: translateY(-1px);
+}
+
+.card--muted {
+  opacity: 0.85;
+}
+
+/* lado esquerdo e direito */
+.card__left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.card__right {
+  align-items: center;
+  font-size: 15px;
+  font-family: "Poppins",sans-serif;
+}
+
+/* informações da empresa*/
+.card__merchant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--offwhite);
+  font-size: 12px;
+}
+
+.card__merchant::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #df5b5b;
+  border-radius: 50%;
+  margin-right: 4px;
+  box-shadow: 0 0 0 2px rgba(223,91,91,0.15);
+}
+
+.card__merchant-badge {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #ddd;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+}
+
+/* título e preço */
+.card__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #dcdcdc;
+}
+
+.card__price-value {
+  font-weight: 700;
+}
+
+.card__price-discount {
+  color: var(--medium-green);
+  font-weight: 700;
+}
+
+/* data e botões */
+.card__expires {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 160px;
+}
+
+.card__expires-label {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 4px;
+}
+
+.card__expires-date {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.card__actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 15px;
+}
+
+.card__actions .btn {
+  padding: 9px 14px;
+  border-radius: var(--border-radius-small);
+  font-size: 15px;
+  line-height: 1;
+}
+
+/*  paginação (bolinhas)  */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.pagination a,
+.pagination span {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #1d1d1d;
+  color: #cfcfcf;
+  text-decoration: none;
+}
+
+.pagination span {
+  background: rgba(255,197,71,0.15);
+  color: #f6c35a;
+  border-color: rgba(255,197,71,0.45);
+}

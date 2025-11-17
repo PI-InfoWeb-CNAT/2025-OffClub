@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="dashboard-card">
+    <figure class="discount-icon">
+        <img src="{% static 'imgs/icons/discount.svg' %}" alt="Símbolo de desconto">
+    </figure>
+
+    <div class="text">
+        <p class="title">{{ title }}</p>
+        <p class="subtitle">{{ subtitle }}</p>
+    </div>
+
+    <a href="{{ url }}" class="arrow-icon">
+        <img src="{% static 'imgs/icons/arrow-diagonal.svg' %}" alt="Seta">
+    </a>
+</div>

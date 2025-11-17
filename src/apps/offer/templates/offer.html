@@ -64,7 +64,7 @@
             <div id="offer_search_container">
                 <div id="filter_container">
                     <h2>Filtros</h2>
-                    <form action="{% url 'offer_list' %}" method="get">
+                    <form action="{% url 'offer:offer_list' %}" method="get">
                         <div class="search">
                             <input type="text" name="name" placeholder="Procurar cupom...">
                             <button type="submit"><img src="{% static 'imgs/search.svg' %}" alt=""></button>

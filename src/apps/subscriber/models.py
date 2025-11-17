@@ -1,5 +1,8 @@
 from django.db import models
 from apps.core.services.validators import ValidatorService
+from django.core.validators import MinValueValidator, MaxValueValidator
+from apps.coupon.models import Coupon
+import uuid
 
 class Subscriber(models.Model):
     _cpf_validator = ValidatorService.is_valid_cpf
@@ -49,3 +52,22 @@ class Subscriber(models.Model):
         
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    
+class Evaluation(models.Model):
+    id = models.UUIDField("ID", primary_key=True, default=uuid.uuid4, editable=False)
+    stars = models.IntegerField("Estrelas", null=False,validators=[MaxValueValidator(5), MinValueValidator(1)])
+    message = models.CharField("Mensagem", max_length=300)
+    coupon = models.ForeignKey(
+        Coupon, 
+        related_name="evaluations",
+        verbose_name="Cupom",
+        on_delete=models.CASCADE
+        )
+    
+    def __str__(self):
+        return f"{self.coupon} - {self.stars} estrelas"
+
+    class Meta:
+        verbose_name = "Avaliação de Cupom"
+        verbose_name_plural = "Avaliações de Cupons"
+        ordering = ["coupon", "-stars"]

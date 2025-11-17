@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Informações da Empresa {% endblock title%}
+
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/enterprise_request_detail.css' %}">
+{% endblock head%}
+
+{% block main %}
+<main class="detail-overlay" id="detailOverlay">
+
+    <div class="detail-modal">
+        
+        <a href="{% url 'admin_user:enterprises_requests' %}" class="close-modal"><img src="{% static 'imgs/icons/close.svg' %}" alt="Botão de Fechar"></a>
+        
+        <section class="modal-top">
+            <div class="profile-pic-container">
+                {% if enterprise.user.profile_picture %}
+                    <img src="{{ enterprise.user.profile_picture.url }}" alt="Foto da empresa">
+                {% else %}
+                    <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Sem foto">
+                {% endif %}
+            </div>
+            <div class="names-container">
+                <div class="data-field">
+                    <p class="field-label">Razão Social</p>
+                    <p class="field-value">{{ enterprise.corporate_reason }}</p>
+                </div>
+                <hr>
+                <div class="data-field trade_name">
+                    <p class="field-label">Nome Fantasia</p>
+                    <p class="field-value">{{ enterprise.trade_name }}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="modal-data">
+            <hr>
+            <div class="data-row">
+                <div class="data-field">
+                    <span class="field-label">CNPJ</span>
+                    <span class="field-value">{{ enterprise.formatted_cnpj }}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="data-row">
+                <div class="data-field">
+                    <span class="field-label">Cidade</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.city }}</span>
+                </div>
+                <div class="data-field">
+                    <span class="field-label">UF</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.state }}</span>
+                </div>
+                <div class="data-field">
+                    <span class="field-label">CEP</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.formatted_cep }}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="data-row">
+                <div class="data-field">
+                    <span class="field-label">Logradouro</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.street_name }}</span>
+                </div>
+                <div class="data-field">
+                    <span class="field-label">Número</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.number }}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="data-row">
+                <div class="data-field">
+                    <span class="field-label">Bairro</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.neighborhood }}</span>
+                </div>
+                <div class="data-field">
+                    <span class="field-label">Complemento</span>
+                    <span class="field-value">{{ enterprise.user.addresses.first.complement }}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="data-row">
+                <div class="data-field">
+                    <span class="field-label">Telefone</span>
+                    <span class="field-value">{{ enterprise.user.phones.first }}</span>
+                </div>
+                <div class="data-field">
+                    <span class="field-label">Email</span>
+                    <span class="field-value">{{ enterprise.user.email }}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="data-row">
+                <div class="data-field">
+                    <span class="field-label">Descrição</span>
+                    <span class="field-value">{{ enterprise.description|default:"Nenhuma descrição fornecida." }}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="data-row">
+                <div class="data-field">
+                    <span class="field-label">Ramo da Empresa</span>
+                    <span class="field-value">{{ enterprise.line_of_business.name }}</span>
+                </div>
+            </div>
+        </section>
+        <section class="modal-actions">
+            <form action="{% url 'admin_user:process_enterprise_request' enterprise.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="action" value="review" class="review">Solicitar Revisão</button>
+                <button type="submit" name="action" value="deny" class="deny">Recusar</button>
+                <button type="submit" name="action" value="approve" class="approve">Aprovar</button>
+            </form>
+        </section>
+    </div>
+</main>
+{% endblock main %}

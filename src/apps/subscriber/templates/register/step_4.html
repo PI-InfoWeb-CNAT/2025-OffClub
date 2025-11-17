@@ -15,28 +15,28 @@
         <p>Cadastro de Usuário</p>
     </div>
     <div class="steps flex-row">
-        <div class="step flex-row step-1 active">
+        <div class="step flex-row step-1 done">
             <div class="number-wrapper">
                 <img src="{% static 'imgs/check.svg' %}" alt="">
             </div>
             <p>Foto de Perfil</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
-        <div class="step flex-row  step-2">
+        <div class="step flex-row step-2 done">
             <div class="number-wrapper">
                 <img src="{% static 'imgs/check.svg' %}" alt="">
             </div>
             <p>Credenciais</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
-        <div class="step flex-row step-3">
+        <div class="step flex-row step-3 done">
             <div class="number-wrapper">
                 <img src="{% static 'imgs/check.svg' %}" alt="">
             </div>
             <p>Contato</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
-        <div class="step flex-row step-4">
+        <div class="step flex-row step-4 active">
             <div class="number-wrapper">
                 <p>4</p>
             </div>
@@ -46,15 +46,18 @@
     
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ wizard.management_form }}
+        <div class="form-fields">
+            {{ wizard.management_form }}
         
-        {% if wizard.form.errors %}
-            <div class="alert alert-danger">
-                Por favor, corrija os erros abaixo.
-            </div>
-        {% endif %}
+            {% if wizard.form.errors %}
+                <div class="alert alert-danger">
+                    Por favor, corrija os erros abaixo.
+                </div>
+            {% endif %}
 
-        {{ wizard.form.as_p }}
+            {{ wizard.form.as_p }}
+        </div>
+        
 
         <button type="submit">Próximo</button>
     </form>

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ wizard_title }}{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/enterprise.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form-steps.css' %}">
+{% endblock head %}
+
+{% block main %}
+<main id="registration-flow">
+    <h1>{{ wizard_title }}</h1>
+    <div class="register-container">
+        {% if steps_metadata %}
+            {% include 'components/register_steps.html' with steps=steps_metadata current_step_index=current_step_index %}
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ wizard.management_form }}
+            {{ form.media }}
+
+            {% if form.non_field_errors %}
+            <div class="form-errors">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="form-step">
+                {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field }}
+                {% endfor %}
+                {% for row in field_rows %}
+                    {% if row|length > 1 %}
+                        <div class="content-fields-container {% if row|length == 2 %}dual{% elif row|length == 3 %}triple{% endif %}">
+                            {% for field_name in row %}
+                                {% include 'register/includes/field.html' with field=form[field_name] %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {% include 'register/includes/field.html' with field=form[row.0] %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="next">{{ submit_label }}</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock main %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const dropZone = document.querySelector('[data-drop-zone]');
+    if (!dropZone) {
+        return;
+    }
+
+    const fileInput = dropZone.querySelector('.file-upload-input');
+    if (!fileInput) {
+        return;
+    }
+
+    const placeholder = dropZone.querySelector('[data-placeholder]');
+    const previewContent = dropZone.querySelector('[data-preview]');
+    const previewImage = dropZone.querySelector('[data-preview-img]');
+    const fileNameDisplay = dropZone.querySelector('[data-file-name]');
+    const uploadTrigger = dropZone.querySelector('[data-upload-label]');
+
+    const openFileDialog = () => fileInput.click();
+
+    dropZone.addEventListener('click', (event) => {
+        const trigger = event.target.closest('[data-upload-label]');
+        if (trigger) {
+            event.preventDefault();
+            event.stopPropagation();
+            openFileDialog();
+            return;
+        }
+        if (event.target === fileInput) {
+            return;
+        }
+        openFileDialog();
+    });
+
+    if (uploadTrigger) {
+        uploadTrigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            openFileDialog();
+        });
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            dropZone.classList.add('dragging');
+        });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            dropZone.classList.remove('dragging');
+        });
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+        const files = event.dataTransfer?.files;
+        if (files && files.length > 0) {
+            fileInput.files = files;
+            fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    });
+
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files && fileInput.files[0];
+        if (!file) {
+            resetPreview();
+            return;
+        }
+        if (!file.type.startsWith('image/')) {
+            alert('Por favor, selecione um arquivo de imagem.');
+            fileInput.value = '';
+            resetPreview();
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            if (previewImage) {
+                previewImage.src = event.target?.result || '#';
+            }
+        };
+        reader.readAsDataURL(file);
+
+        if (fileNameDisplay) {
+            fileNameDisplay.textContent = file.name;
+        }
+        togglePreview(true);
+    });
+
+    function togglePreview(showPreview) {
+        if (!placeholder || !previewContent) {
+            return;
+        }
+        if (showPreview) {
+            placeholder.classList.add('hidden');
+            previewContent.classList.remove('hidden');
+        } else {
+            placeholder.classList.remove('hidden');
+            previewContent.classList.add('hidden');
+        }
+    }
+
+    function resetPreview() {
+        togglePreview(false);
+        if (previewImage) {
+            previewImage.src = '#';
+        }
+        if (fileNameDisplay) {
+            fileNameDisplay.textContent = '';
+        }
+    }
+});
+</script>
+{% endblock scripts %}

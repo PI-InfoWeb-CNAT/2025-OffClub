@@ -1,0 +1,75 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.85); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.success-modal {
+    background-color: var(--background-color); 
+    border: 1px solid var(--brand-yellow);
+    border-radius: 8px;
+    padding: 30px 40px;
+    text-align: center;
+    color: #ffffff;
+    width: 680px; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+.modal-overlay.show .success-modal {
+    transform: scale(1);
+}
+.success-modal > .success1 > h2{
+    font-size: 1.4rem;
+    color: transparent;
+    background-image: var(--gradient-yellow-orange);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.success1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+.success-modal p {
+    font-size: 1rem;
+}
+.success-modal p:last-of-type {
+    margin-bottom: 20px;
+}
+
+.success-modal .btn-home {
+    color: var(--white);
+    background-color: #422D00; 
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    border: 1px solid transparent;
+    background-image: linear-gradient(#422D00, #422D00), var(--gradient-yellow-orange);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: light;
+    font-size: 0.9rem;
+}
+
+.success-modal .btn-home:hover {
+    background-image: 
+        linear-gradient(#946604, #946604), 
+        var(--gradient-yellow-orange);
+}

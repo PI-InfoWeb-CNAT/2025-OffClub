@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
 
     id = models.UUIDField("ID", primary_key=True, default=uuid.uuid4, editable=False)
-    profile_picture = models.ImageField("Foto de Perfil", upload_to='profile_pics/', blank=True, null=True)
+    profile_picture = models.ImageField("Foto de Perfil", upload_to='uploads/profile_pics/', blank=True, null=True)
     user_role = models.CharField("Papel do Usuário", max_length=20, choices=UserRole.choices, default=UserRole.SUBSCRIBER)
     email = models.EmailField("E-mail", unique=True, validators=[_email_validator], blank=False, null=False)
     date_joined = models.DateTimeField("Data de Registro", auto_now_add=True)

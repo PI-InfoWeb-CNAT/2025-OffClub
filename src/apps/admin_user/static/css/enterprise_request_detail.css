@@ -1,0 +1,89 @@
+.detail-modal{
+    width: 780px;
+    padding: 2.8em;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    background-color: var(--dark-grey);
+    border: 1px solid var(--brand-yellow);
+    border-radius: var(--border-radius-small);
+    position: relative;
+}
+.detail-modal > a{
+    position: absolute;
+    top: 1.4em;
+    right: 40px;
+    color: #595959;
+}
+.modal-top{
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+.field-value{
+    color: var(--white);
+    font-size: var(--h3-font-size);
+}
+.field-label{
+    color: var(--light-grey);
+    font-size: var(--text-font-size);
+}
+.data-field:not(.trade_name){
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.data-row{
+    display: flex;
+    justify-content: space-between;
+    width: 80%; 
+}
+.names-container{
+    width: 100%;
+}
+.modal-actions{
+    display: flex;
+    justify-content: center;
+}
+.modal-actions > form > button{
+    font-family: var(--main-font-family);
+    font-size: 16px;
+    width: 188px;
+    height: 48px;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    border: 1px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+button.review{
+    background-color: #422D00;
+    background-image: linear-gradient(#422D00, #422D00), var(--gradient-yellow-orange);
+}
+button.deny{
+    background-color: #310000;
+    background-image: linear-gradient(#310000, #310000), var(--gradient-yellow-orange);
+}
+button.approve{
+    background-color: #002815;
+    background-image: linear-gradient(#002815, #002815), var(--gradient-yellow-orange);
+}
+hr{
+    opacity: 15%;
+    margin-bottom: 20px;
+}
+.profile-pic-container {
+    width: 180px;
+    height: 180px;
+    min-height: 180px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: var(--border-radius-small);
+    background-color: #333;
+}
+.profile-pic-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+}

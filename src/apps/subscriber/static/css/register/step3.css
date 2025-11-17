@@ -6,21 +6,3 @@
     width: 1em;
     height: 1em;
 }
-
-/*  ===================================================== */
-
-.step-3 p {
-    color: var(--brand-orange);
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-}
-
-.step-3 .number-wrapper {
-    border: 1px solid var(--brand-orange);
-}
-
-.step-3 .number-wrapper p {
-    color: var(--brand-orange);
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-}

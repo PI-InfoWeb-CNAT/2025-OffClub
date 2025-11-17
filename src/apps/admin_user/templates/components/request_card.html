@@ -1,0 +1,19 @@
+{% load static %}
+
+<section class="enterprise_info">
+    <div class="top_container">
+        <h3 class="name">{{enterprise.trade_name}}</h3>
+        <div class="request_date_container">
+            <p class="request_date">Solicitado em</p>
+            <p class="info">{{enterprise.user.date_joined|date:"d/m/Y, H:i:s"}}</p>
+        </div>
+    </div>
+
+    <div class="bottom_container">
+        <div class="cnpj_container">
+            <p class="cnpj">CNPJ</p>
+            <p class="info">{{enterprise.formatted_cnpj}}</p>
+        </div>
+        <p class="line_of_business">{{enterprise.line_of_business}}</p>
+    </div>
+</section>

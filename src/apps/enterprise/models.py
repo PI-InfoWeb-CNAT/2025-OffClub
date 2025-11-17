@@ -47,6 +47,16 @@ class Enterprise(models.Model):
         blank=True
     )
     
+    @property
+    def formatted_cnpj(self):
+        """
+        Formata o CNPJ de 12345678000195 para 12.345.678/0001-95
+        """
+        cnpj = self.cnpj
+        if cnpj and len(cnpj) == 14:
+            return f"{cnpj[:2]}.{cnpj[2:5]}.{cnpj[5:8]}/{cnpj[8:12]}-{cnpj[12:14]}"
+        return cnpj
+
     def save(self, *args, **kwargs):
         """Garante que o CNPJ seja salvo apenas com dígitos."""
         if self.cnpj:

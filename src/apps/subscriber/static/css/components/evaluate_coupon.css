@@ -1,0 +1,150 @@
+/* Fundo escuro ao abrir */
+#evaluate-modal{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Ativo */
+#evaluate-modal.show{
+    display: flex;
+}
+
+/* Caixa do modal */
+#evaluate-modal form{
+    background: var(--background-color);
+    width: 500px;
+    padding: 35px 40px;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+    animation: fadeIn 0.3s ease;
+}
+
+#title{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+    h4{
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 2px;
+    }
+
+    p{
+        font-weight: 300;
+    }
+}
+
+#context  p{
+    margin-bottom: 4px;
+}
+
+#stars-container {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+#context span{
+    background-color: var(--medium-gray);
+    border-radius: var(--border-radius-small);
+    padding: 18px;
+}
+
+#stars-container span svg {
+    color: var(--gray);
+    transition: color 0.2s ease;
+}
+
+#stars-container span.active svg{
+    color: var(--brand-yellow);
+} 
+
+#id_message{
+    width: 100%;
+    color: white;
+    background-color: var(--medium-gray);
+    border-radius: var(--border-radius-small);
+    border: none;
+
+    resize: none;      /* impede o usuário de redimensionar */
+    overflow-y: auto;
+    
+    font-family: var(--main-font-family);
+    font-size: var(--text-font-size);
+    
+    padding: 10px 18px;
+}
+
+/* Barra lateral do text area */
+#id_message::-webkit-scrollbar {
+    width: 8px; 
+}
+#id_message::-webkit-scrollbar-track{
+    background: none;
+}
+#id_message::-webkit-scrollbar-button{
+    display: none;                   /* esconder botões da barra */
+}
+#id_message::-webkit-scrollbar-thumb{
+    background-color: var(--gray);   /*parte que arrasta */
+    border-radius: 6px;
+}
+
+#id_message::placeholder{
+    color: var(--gray);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    
+    button {
+        width: 180px;
+        padding: 8px 0;
+        
+        border: 1px solid var(--brand-yellow);
+        border-radius: var(--border-radius);
+        
+        font-family: var(--main-font-family);
+        font-size: var(--larger-text-font-size);
+
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        background-color: var(--medium-gray);
+        color: var(--white);
+    }
+}
+
+#cancell:hover{
+    background-color: var(--dark-red);
+}
+
+#submit{
+    background: var(--dark-green);
+}
+
+
+/* Animação */
+@keyframes fadeIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

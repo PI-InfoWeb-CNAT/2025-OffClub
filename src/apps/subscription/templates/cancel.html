@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}Pagamento Cancelado{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/subscription.css' %}">
+{% endblock head %}
+
 {% block main %}
-<main class="container" style="text-align: center; padding: 4rem 0;">
-    <h1>Pagamento cancelado.</h1>
-    <p>A sua transação foi cancelada. Pode tentar novamente a qualquer momento a partir da página de planos.</p>
+<main class="container">
+    <section class="subscription-feedback subscription-feedback--warning">
+        <div class="subscription-feedback__icon" aria-hidden="true">!</div>
+        <div class="subscription-feedback__content">
+            <h1>Pagamento cancelado</h1>
+            <p>A transação foi interrompida. Você pode tentar novamente quando quiser a partir da página de planos.</p>
+            <a class="subscription-feedback__cta" href="{% url 'subscription:plans' %}">Voltar aos planos</a>
+        </div>
+    </section>
 </main>
 {% endblock main %}

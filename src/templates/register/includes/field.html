@@ -1,0 +1,45 @@
+{% load static %}
+{% with widget_type=field.field.widget.input_type|default_if_none:'' %}
+    {% if widget_type == 'file' %}
+        {% with input_id=field.id_for_label %}
+        <div class="field-group image-container flex-center">
+            <label for="{{ input_id }}">{{ field.label }}</label>
+            <div class="content" data-drop-zone>
+                {{ field }}
+                <div data-placeholder class="{% if field.value %}hidden{% endif %}">
+                    <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Escolha uma foto de perfil">
+                    <p>Arraste e solte a foto aqui</p>
+                    <p class="flex-center">
+                        ou
+                        <button type="button" class="upload-trigger" data-upload-label>faça upload</button>
+                    </p>
+                </div>
+                <div data-preview class="hidden">
+                    <img data-preview-img src="#" alt="Pré-visualização da imagem">
+                    <p data-file-name></p>
+                </div>
+            </div>
+            {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        </div>
+        {% endwith %}
+    {% elif widget_type == 'radio' %}
+        <div class="field-group radio-group">
+            <label>{{ field.label }}</label>
+            {% if field.help_text %}<small class="help-text">{{ field.help_text }}</small>{% endif %}
+            {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+            <div class="radio-flex-container">
+                {% for choice in field %}
+                    {{ choice.tag }}
+                    <label for="{{ choice.id_for_label }}" class="radio-tag-label">{{ choice.choice_label }}</label>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="field-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<small class="help-text">{{ field.help_text }}</small>{% endif %}
+            {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
