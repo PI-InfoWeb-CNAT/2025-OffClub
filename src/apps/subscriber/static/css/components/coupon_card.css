@@ -1,11 +1,11 @@
 .coupon_card{
     background-color: #252525;
-    display: inline-block;
+    display: flex;
     padding: 1.5em 1.8em 0 1.8em;
     box-sizing: border-box;
-    width: 15em;
-    height: 23em;
-    border-radius: 4%;
+    width: 765px;
+    height: 114px;
+    border-radius: var(--border-radius-small);
     margin: 1%;
 }
 .coupon_card p.general {
@@ -38,7 +38,6 @@
     position: relative;
 }
 .coupon_card_offer > span {
-    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
@@ -59,7 +58,6 @@
     color: var(--white);
 }
 .coupon_card_coupon > p {
-    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
@@ -93,7 +91,6 @@
     margin: 0.45em 0;
 }
 .currency {
-    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
@@ -101,7 +98,6 @@
     font-size: 1em;
 }
 .promotion_price {
-    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;

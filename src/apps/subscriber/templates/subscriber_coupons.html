@@ -6,31 +6,35 @@
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/subscriber.css' %}">
     <link rel="stylesheet" href="{% static 'css/components/coupon_card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile/base_profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/profile/personal_data.css' %}" />
 {% endblock head %}
 
-{% block consumption_history %}
-<div class="consumption_history_tab flex-row">
+{% block profile_tab %}
+<div class="personal-data-tab flex-row">
 
     <h1 class="tab-title">MEUS CUPONS</h1>
 
+    {% if active_coupons or used_coupons %}
     <form action="">
         <div class="filters-group">
             <div class="month-filter">
-                <label class="filter-name"></label>
-                <select>
-                    <option></option>
+                <label class="filter-name">Mês</label>
+                <select name="month">
+                    <option value="" disabled selected hidden>Mês</option>
                 </select>
             </div>
             <div class="year-filter">
-                <label class="filter-name"></label>
+                <label class="filter-name">Ano</label>
                 <select>
+                    <option value="" disabled selected hidden>Ano</option>
                     {% for year in years_group %}
                         <option value="{{year}}">{{year}}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="ordenation-filter">
-                <label class="filter-name"></label>
+                <label class="filter-name">Ordenar por</label>
                 <select>
                     <option value="recent">Mais recente</option>
                     <option value="old">Mais antigo</option>
@@ -38,20 +42,37 @@
             </div>
         </div>
     </form>
+    {% endif %}
 
-    <div class="active-coupons">
-        <div class="section-title">
-            <h2>Ativos</h2>
-            <hr />
+    <div class="coupons-history">
+        <div class="active-coupons">
+            <div class="profile-section-title flex-row">
+                <h2>Ativos</h2>
+                <hr />
+            </div>
+            {% if active_coupons %}
+                {% for coupon in active_coupons %}
+                    {% include 'components/coupon_card.html' with coupon=coupon end_date=coupon.object.expiration_date offer_title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price%}
+                {% endfor %}
+            {% else %}
+                <p>Não há cupons ativos vinculados a sua conta!</p>
+            {% endif %}
         </div>
-    </div>
-
-    <div class="used-coupons">
-        <div class="section-title">
-            <h2>Inativos</h2>
-            <hr />
+    
+        <div class="used-coupons">
+            <div class="profile-section-title flex-row">
+                <h2>Inativos</h2>
+                <hr />
+            </div>
+            {% if used_coupons %}
+                {% for coupon in used_coupons %}
+                    {% include 'components/coupon_card.html' with coupon=coupon end_date=coupon.object.used_date offer_title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                {% endfor %}
+            {% else %}
+                <p>Não há cupons inativos vinculados a sua conta!</p>
+            {% endif %}
         </div>
     </div>
 </div>
 <script src="{% static 'js/subscriber.js' %}"></script>
-{% endblock consumption_history %}
+{% endblock profile_tab %}

@@ -1,26 +1,39 @@
 {% load static %}
 
 <div class="{{ class }} coupon_card">
-    <div class="coupon_card_enterprise">
-        <img src="{{ enterprise_image }}" alt="">
-        <p>{{ enterprise_name }}</p>
+    <div class="top-container">
+        <div class="coupon_card_enterprise">
+            <img src="{{ enterprise_image }}" alt="{{enterprise_name}}">
+            <p>{{ enterprise_name }}</p>
+        </div>
+        <div class="final-date">
+            <p class="deadline">Disponível até</p>
+            <span>{{ end_date|date:"d/m/Y" }}</span>
+        </div>
     </div>
-    <div class="price">
-        <p class="currency">R$</p>
-        <p class="promotion_price">{{ final_price|floatformat:2 }}</p>
-        <p class="old_price">{{ old_price|floatformat:2 }}</p>
-    </div>
-    <div class="coupon_card_coupon">
-        <p class="general">Disponível até {{ end_date }}</p>
-    </div>
-
-    {% for dic in used_coupons %}
-        {% with coupon=dic.object %}
-            <div class="coupon-card">
-                <button class="evaluate_button open_modal" data-coupon-id="{{ coupon.object.id }}">Avaliar</button>
-                
-                {% include 'components/evaluate_coupon.html' with coupon=coupon %}
+    <div class="bottom-container">
+        <div class="offer-details">
+            <div class="offer-name">
+                <p class="name">{{offer_title }}</p>
             </div>
-        {% endwith %}
-    {% endfor %}
+            <div class="price">
+                <p class="currency">R$</p>
+                <p class="promotion_price">{{ final_price|floatformat:2 }}</p>
+                <p class="old_price">{{ old_price|floatformat:2 }}</p>
+            </div>
+        </div>
+    
+        <div class="buttons-wrapper">
+            {% if coupon.object.used_date %}
+                    <div class="coupon-card">
+                        <button class="evaluate_button open_modal" data-coupon-id="{{ coupon.object.id }}">Avaliar</button>
+                        
+                        {% include 'components/evaluate_coupon.html' with coupon=coupon %}
+                    </div>
+            {% endif %}
+            <div class="coupon-details">
+                <button class="detail_button open_modal" data-coupon-id="{{ coupon.object.id }}">Detalhes</button>
+            </div>
+        </div>
+    </div>
 </div>

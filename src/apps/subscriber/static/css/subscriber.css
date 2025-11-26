@@ -1,141 +1,37 @@
-@import url('../../../../static/css/_variables.css');
-@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-#historico {
-  margin: 5em 0;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* >>> Títulos <<< */
-.container h1, .container section h2{
-  font-family: "Madimi One", sans-serif
-}
-.container h1{
-  font-size: 32px;
-  margin-bottom: 21px;
-}
-.container h2{
-  font-size: 30px;
-  vertical-align: middle;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;             
-  padding: 0.5rem 1rem;               
-  background: linear-gradient(to bottom, #f0b33e, #c68616);
-  isolation: isolate;                 
-  font-size: 2rem;
-  border-radius: 0.25rem;
-  margin-bottom: 19px;
-}
-.container h2 span{
-  color: black;
-  vertical-align: auto;                   
-  mix-blend-mode: destination-out;   
-  -webkit-font-smoothing: antialiased;
-}
-.month-section > h3{
-  font-size: 24px;
-}
-
-/* >>> Ver Mais <<< */
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.divider .line {
-  width: 493px;
-  height: 1px;
-  border: none;
-  opacity: 0.7;
-}
-.divider .before{
-    background: linear-gradient(to left, #FEB342, #986B27);
-}
-.divider .after{
-    background: linear-gradient(to right, #FEB342, #986B27);
-}
-.divider button p {
-  color: #FEB342;
-  font-weight: 300;
-  font-size: 21px;
-}
-.divider button{
-  display: flex;
-  justify-content: center;
-  gap: 0.9em;
-  border: none;
-  background-color: transparent;
-}
-
-.coupons .coupon_card:nth-child(n+5) {
-    display: none;
-}
-
-.coupons.expanded .coupon_card {
-    display: inline-block; 
-}
-.extra-coupons-wrapper {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.7s ease-in-out;
-}
-.read-more img {
-    transition: transform 0.7s ease;
-}
-.read-more.expanded img {
-    transform: rotate(180deg);
-}
-/* >>> Containers para englobar os cupons <<< */
-.coupons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start; 
-  gap: 1rem;
-  max-width: 100%;
-  margin-bottom: 24px;
-  overflow: hidden; 
-  transition: max-height 0.7s ease-in-out; 
-}
-/* >>> Filtro para cupons usados, por ano <<< */
-.adjust{
+.filters-group{
   display: flex;
   justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 2em;
+}
+.filters-group > div{
+  display: flex;
+  flex-direction: column;
+}
+.filters-group > div > label{
+  color: var(--light-grey);
+}
+select{
+  color: var(--light-grey);
+  background-color: #333333 ;
+  width: 190px;
+  height: 35px;
+  border-radius: var(--border-radius-small);
+  outline: none;
+  padding: 0.6em;
+  display: flex;
   align-items: center;
-  margin-bottom: 19px
 }
-.adjust h2 {
-  margin: 0;
-}
-.used-coupons select{
-  background: none;
-  border: 2px solid #FEB342;
-  border-radius: 5px;
-  color: #FEB342;
-  width: 114px;
-  height: 44px;
-  font-size: 28px;
-  font-weight: 600;
-  text-align: center;
-  margin-left: 10px;
-}
-.used-coupons select option{
-  background-color: #1C1C1C;
-  font-weight: 600;
-}
-.coupon button, .used-coupons select, .used-coupons select option{
+select, select option{
   font-family: var(--main-font-family);
 }
-
-/* >>> Ajustes no display dos cupons usados por mês <<< */
-.used-coupons > .coupons{
-  display: inline;
+.coupon_card_enterprise img{
+  width: 20px;
+  border-radius: 50%;
+}
+span{
+  color: var(--white);
+}
+p.deadline{
+  color: var(--light-grey);
 }
