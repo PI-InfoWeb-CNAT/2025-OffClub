@@ -136,7 +136,7 @@ class RegisterWizardView(SessionWizardView):
 class HistoryView(LoginRequiredMixin, TemplateView):
     """Dashboard do assinante com histórico de cupons."""
 
-    template_name = "subscriber.html"
+    template_name = "subscriber_coupons.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

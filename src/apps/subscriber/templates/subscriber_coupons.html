@@ -1,0 +1,57 @@
+{% extends "profile/base_profile.html" %}
+{% load static %}
+
+{% block title %} Histórico de Consumo {% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/subscriber.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/coupon_card.css' %}">
+{% endblock head %}
+
+{% block consumption_history %}
+<div class="consumption_history_tab flex-row">
+
+    <h1 class="tab-title">MEUS CUPONS</h1>
+
+    <form action="">
+        <div class="filters-group">
+            <div class="month-filter">
+                <label class="filter-name"></label>
+                <select>
+                    <option></option>
+                </select>
+            </div>
+            <div class="year-filter">
+                <label class="filter-name"></label>
+                <select>
+                    {% for year in years_group %}
+                        <option value="{{year}}">{{year}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="ordenation-filter">
+                <label class="filter-name"></label>
+                <select>
+                    <option value="recent">Mais recente</option>
+                    <option value="old">Mais antigo</option>
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <div class="active-coupons">
+        <div class="section-title">
+            <h2>Ativos</h2>
+            <hr />
+        </div>
+    </div>
+
+    <div class="used-coupons">
+        <div class="section-title">
+            <h2>Inativos</h2>
+            <hr />
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/subscriber.js' %}"></script>
+{% endblock consumption_history %}
