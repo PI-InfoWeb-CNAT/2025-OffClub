@@ -32,7 +32,7 @@
                     </div>
             {% endif %}
             <div class="coupon-details">
-                <button class="detail_button open_modal" data-coupon-id="{{ coupon.object.id }}">Detalhes</button>
+                <button class="detail_button open_modal" data-coupon-id="{{ coupon.object.id }}"><a href="{% url 'offer:manage_detail' coupon.object.offer.id %}">Detalhes</a></button>
             </div>
         </div>
     </div>

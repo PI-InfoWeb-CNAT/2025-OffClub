@@ -20,14 +20,26 @@
         <div class="filters-group">
             <div class="month-filter">
                 <label class="filter-name">Mês</label>
-                <select name="month">
-                    <option value="" disabled selected hidden>Mês</option>
+                <select name="month" id="filter-month">
+                    <option value="all" selected>Todos</option> 
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
                 </select>
             </div>
             <div class="year-filter">
                 <label class="filter-name">Ano</label>
-                <select>
-                    <option value="" disabled selected hidden>Ano</option>
+                <select id="filter-year">
+                    <option value="all" selected>Todos</option>
                     {% for year in years_group %}
                         <option value="{{year}}">{{year}}</option>
                     {% endfor %}
@@ -35,7 +47,7 @@
             </div>
             <div class="ordenation-filter">
                 <label class="filter-name">Ordenar por</label>
-                <select>
+                <select id="filter-order">
                     <option value="recent">Mais recente</option>
                     <option value="old">Mais antigo</option>
                 </select>
@@ -50,13 +62,20 @@
                 <h2>Ativos</h2>
                 <hr />
             </div>
+            <div id="container-active" class="coupons-list-wrapper">
             {% if active_coupons %}
                 {% for coupon in active_coupons %}
+                    <div class="coupon-item" 
+                             data-timestamp="{{ coupon.object.expiration_date|date:'U' }}"
+                             data-type="active">
                     {% include 'components/coupon_card.html' with coupon=coupon end_date=coupon.object.expiration_date offer_title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price%}
+                    </div>
                 {% endfor %}
+                <p id="no-filter-results" style="display: none; text-align: left; color: #fff;">Nenhum cupom encontrado neste período.</p>
             {% else %}
                 <p>Não há cupons ativos vinculados a sua conta!</p>
             {% endif %}
+            </div>
         </div>
     
         <div class="used-coupons">
@@ -64,15 +83,25 @@
                 <h2>Inativos</h2>
                 <hr />
             </div>
+            <div id="container-used" class="coupons-list-wrapper">
             {% if used_coupons %}
                 {% for coupon in used_coupons %}
+                <div class="coupon-item" 
+                             data-month="{{ coupon.object.used_date|date:'n' }}" 
+                             data-year="{{ coupon.object.used_date|date:'Y' }}"
+                             data-timestamp="{{ coupon.object.used_date|date:'U' }}">
                     {% include 'components/coupon_card.html' with coupon=coupon end_date=coupon.object.used_date offer_title=coupon.object.offer.title discount=coupon.object.offer.discount offer_image=coupon.object.offer.image.url enterprise_name=coupon.object.offer.enterprise.trade_name enterprise_image=coupon.object.offer.enterprise.user.profile_picture.url old_price=coupon.data.old_price final_price=coupon.data.final_price %}
+                </div>
                 {% endfor %}
+                <p id="no-filter-results" style="display: none; text-align: left; color: #fff;">Nenhum cupom encontrado neste período.</p>
             {% else %}
                 <p>Não há cupons inativos vinculados a sua conta!</p>
             {% endif %}
+            </div>
         </div>
     </div>
 </div>
-<script src="{% static 'js/subscriber.js' %}"></script>
 {% endblock profile_tab %}
+{% block scripts %}
+    <script src="{% static 'js/subscriber.js' %}"></script>
+{% endblock scripts%}

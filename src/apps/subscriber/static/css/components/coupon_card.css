@@ -1,12 +1,58 @@
 .coupon_card{
     background-color: #252525;
     display: flex;
-    padding: 1.5em 1.8em 0 1.8em;
+    flex-direction: column;
+    padding: 0.9em 1.1em;
     box-sizing: border-box;
     width: 765px;
-    height: 114px;
+    height: 125px;
     border-radius: var(--border-radius-small);
     margin: 1%;
+}
+.coupon_card > div{
+    display: flex;
+    justify-content: space-between;
+}
+.top-container{
+    height: 50px;
+    align-items: flex-start;
+}
+.bottom-container{
+    align-items: center;
+}
+.bottom-container > .buttons-wrapper{
+    gap: 10px
+}
+.buttons-wrapper{
+    display: flex;
+}
+.final-date{
+    text-align: right;
+}
+p.name{
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+}
+.buttons-wrapper > div {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.buttons-wrapper button {
+    border: 1px solid var(--light-grey);
+    color: var(--light-grey);
+    border-radius: var(--border-radius-small);
+    background-color: transparent;
+    font-size: var(--text-font-size);
+    padding: 0.2em 0.8em;
+    font-family: var(--main-font-family);
+    vertical-align: baseline;
+}
+.buttons-wrapper button a{
+    color: var(--light-grey);
+}
+.final-date > span{
+    font-size: var(--h3-font-size);
 }
 .coupon_card p.general {
     font-size: var(--text-font-size);
@@ -17,7 +63,8 @@
 .coupon_card_enterprise {
     display: flex;
     align-items: center;
-    margin-bottom: 5%;
+    gap: 5px;
+    width: 110px;
 }
 .coupon_card_enterprise > * {
     color: var(--white);
@@ -86,29 +133,28 @@
 }
 .price {
     display: flex; 
-    gap: 0.4em; 
+    gap: 0.2em; 
     align-items: baseline; 
-    margin: 0.45em 0;
 }
 .currency {
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
     color: var(--brand-yellow); 
-    font-size: 1em;
+    font-size: 14px;
 }
 .promotion_price {
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
     color: var(--brand-yellow); 
-    font-size: 1.5em;
+    font-size: 18px;
 }
 .old_price {
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
     color: var(--offwhite); 
-    font-size: 1em; 
+    font-size: 14px; 
     text-decoration: line-through;
 }

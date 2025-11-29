@@ -11,11 +11,15 @@
 .filters-group > div > label{
   color: var(--light-grey);
 }
+.active-coupons{
+  margin-bottom: 20px;
+}
 select{
   color: var(--light-grey);
   background-color: #333333 ;
   width: 190px;
   height: 35px;
+  border: none;
   border-radius: var(--border-radius-small);
   outline: none;
   padding: 0.6em;

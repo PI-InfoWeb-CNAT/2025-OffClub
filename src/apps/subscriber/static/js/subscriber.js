@@ -1,44 +1,71 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const activeCouponsSection = document.querySelector('.active-coupons');
-    if (!activeCouponsSection) return;
+    const filterMonth = document.getElementById('filter-month');
+    const filterYear = document.getElementById('filter-year');
+    const filterOrder = document.getElementById('filter-order');
+    
+    const containerUsed = document.getElementById('container-used');
+    const containerActive = document.getElementById('container-active');
 
-    const readMoreButton = activeCouponsSection.querySelector('.read-more');
-    const extraCouponsWrapper = activeCouponsSection.querySelector('.extra-coupons-wrapper');
+    function applyFilters() {
+        const selectedMonth = filterMonth.value;
+        const selectedYear = filterYear.value;
+        const noResultsMsg = document.getElementById('no-filter-results');
 
-    if (readMoreButton && extraCouponsWrapper) {
-        readMoreButton.addEventListener('click', function() {
-            this.classList.toggle('expanded');
-            const buttonText = this.querySelector('p');
+        const usedItems = containerUsed.querySelectorAll('.coupon-item');
+        
+        let visibleCount = 0; 
 
-            if (this.classList.contains('expanded')) {
-                extraCouponsWrapper.style.maxHeight = extraCouponsWrapper.scrollHeight + 'px';
-                buttonText.textContent = 'Ver menos';
+        usedItems.forEach(item => {
+            const itemMonth = item.getAttribute('data-month');
+            const itemYear = item.getAttribute('data-year');
+
+            let matchMonth = (selectedMonth === 'all') || (selectedMonth === itemMonth);
+            let matchYear = (selectedYear === 'all') || (selectedYear === itemYear);
+
+            if (matchMonth && matchYear) {
+                item.style.display = ''; 
+                visibleCount++; 
             } else {
-                extraCouponsWrapper.style.maxHeight = '0px';
-                buttonText.textContent = 'Ver mais';
+                item.style.display = 'none'; 
             }
         });
-    }
-    const usedCouponsSection = document.querySelector('.used-coupons');
-    if (usedCouponsSection) {
-        const yearSelect = document.getElementById('year');
-        const monthSections = document.querySelectorAll('.month-section');
 
-        if (yearSelect && monthSections.length > 0){
-            function filterCoupons(){
-                const selectedYear = yearSelect.value;
-                monthSections.forEach(section => {
-                    const sectionYear = section.dataset.year;
-                    if (sectionYear == selectedYear){
-                        section.style.display = 'block';
-                    }
-                    else{
-                        section.style.display = 'none';
-                    }
-                })        
-            }
-            yearSelect.addEventListener('change', filterCoupons);
-            filterCoupons();
+        if (visibleCount === 0) {
+            if(noResultsMsg) noResultsMsg.style.display = 'block';
+        } else {
+            if(noResultsMsg) noResultsMsg.style.display = 'none';
         }
+    }
+
+    function applySort() {
+        const order = filterOrder.value; 
+        const sortContainer = (container) => {
+            if (!container) return;
+
+            const items = Array.from(container.querySelectorAll('.coupon-item'));
+
+            items.sort((a, b) => {
+                const timeA = parseInt(a.getAttribute('data-timestamp')) || 0;
+                const timeB = parseInt(b.getAttribute('data-timestamp')) || 0;
+
+                if (order === 'recent') {
+                    return timeB - timeA; 
+                } else {
+                    return timeA - timeB; 
+                }
+            });
+            items.forEach(item => container.appendChild(item));
+        };
+        sortContainer(containerUsed);
+        sortContainer(containerActive);
+    }
+    if(filterMonth) {
+        filterMonth.addEventListener('change', applyFilters);
+    }
+    if(filterYear) {
+        filterYear.addEventListener('change', applyFilters);
+    }
+    if(filterOrder) {
+        filterOrder.addEventListener('change', applySort);
     }
 });
