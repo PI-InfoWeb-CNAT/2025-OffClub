@@ -17,7 +17,7 @@ class PersonalInfoForm(forms.ModelForm):
         }
         
 class CredentialsForm(forms.ModelForm):
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirme a Senha'}))
+    password2 = forms.CharField(label="Confirme a Senha", widget=forms.PasswordInput(attrs={'placeholder': 'Confirme a Senha'}))
     
     class Meta:
         model = User
@@ -59,6 +59,7 @@ class ProfilePicForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
+        label="E-mail",
         widget=forms.EmailInput(
             attrs={
                 'placeholder': 'E-mail'
@@ -66,6 +67,7 @@ class LoginForm(forms.Form):
             )
         )
     password = forms.CharField(
+        label="Senha",
         widget=forms.PasswordInput(
             attrs={
                 'placeholder': 'Senha'

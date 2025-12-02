@@ -51,6 +51,11 @@ p.name{
 .buttons-wrapper button a{
     color: var(--light-grey);
 }
+.evaluate_button:disabled{
+    cursor: default;
+    opacity: 0.8;
+}
+
 .final-date > span{
     font-size: var(--h3-font-size);
 }

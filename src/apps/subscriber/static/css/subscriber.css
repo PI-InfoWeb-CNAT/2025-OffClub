@@ -39,3 +39,6 @@ span{
 p.deadline{
   color: var(--light-grey);
 }
+.next-arrow img{
+  transform: rotate(-180deg);
+}

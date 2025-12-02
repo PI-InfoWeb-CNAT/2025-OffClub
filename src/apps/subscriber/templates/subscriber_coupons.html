@@ -15,41 +15,41 @@
 
     <h1 class="tab-title">MEUS CUPONS</h1>
 
-    {% if active_coupons or used_coupons %}
-    <form action="">
+    {% if active_coupons or used_coupons or selected_month != 'all' %}
+    <form action="" method="GET" id="filter-form">
         <div class="filters-group">
             <div class="month-filter">
                 <label class="filter-name">Mês</label>
-                <select name="month" id="filter-month">
-                    <option value="all" selected>Todos</option> 
-                    <option value="1">Janeiro</option>
-                    <option value="2">Fevereiro</option>
-                    <option value="3">Março</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Maio</option>
-                    <option value="6">Junho</option>
-                    <option value="7">Julho</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Setembro</option>
-                    <option value="10">Outubro</option>
-                    <option value="11">Novembro</option>
-                    <option value="12">Dezembro</option>
+                <select name="month" id="filter-month" onchange="this.form.submit()">
+                    <option value="all" {% if selected_month == 'all' %}selected{% endif %}>Todos</option> 
+                    <option value="1" {% if selected_month == 1 %}selected{% endif %}>Janeiro</option>
+                    <option value="2" {% if selected_month == 2 %}selected{% endif %}>Fevereiro</option>
+                    <option value="3" {% if selected_month == 3 %}selected{% endif %}>Março</option>
+                    <option value="4" {% if selected_month == 4 %}selected{% endif %}>Abril</option>
+                    <option value="5" {% if selected_month == 5 %}selected{% endif %}>Maio</option>
+                    <option value="6" {% if selected_month == 6 %}selected{% endif %}>Junho</option>
+                    <option value="7" {% if selected_month == 7 %}selected{% endif %}>Julho</option>
+                    <option value="8" {% if selected_month == 8 %}selected{% endif %}>Agosto</option>
+                    <option value="9" {% if selected_month == 9 %}selected{% endif %}>Setembro</option>
+                    <option value="10" {% if selected_month == 10 %}selected{% endif %}>Outubro</option>
+                    <option value="11" {% if selected_month == 11 %}selected{% endif %}>Novembro</option>
+                    <option value="12" {% if selected_month == 12 %}selected{% endif %}>Dezembro</option>
                 </select>
             </div>
             <div class="year-filter">
                 <label class="filter-name">Ano</label>
-                <select id="filter-year">
-                    <option value="all" selected>Todos</option>
+                <select name="year" id="filter-year" onchange="this.form.submit()">
+                    <option value="all" {% if selected_year == 'all' %}selected{% endif %}>Todos</option>
                     {% for year in years_group %}
-                        <option value="{{year}}">{{year}}</option>
+                        <option value="{{year}}" {% if selected_year == year %}selected{% endif %}>{{year}}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="ordenation-filter">
                 <label class="filter-name">Ordenar por</label>
-                <select id="filter-order">
-                    <option value="recent">Mais recente</option>
-                    <option value="old">Mais antigo</option>
+                <select name="order" id="filter-order" onchange="this.form.submit()">
+                    <option value="recent" {% if selected_order == 'recent' %}selected{% endif %}>Mais recente</option>
+                    <option value="old" {% if selected_order == 'old' %}selected{% endif %}>Mais antigo</option>
                 </select>
             </div>
         </div>
@@ -99,6 +99,29 @@
             {% endif %}
             </div>
         </div>
+
+        {% if max_pages > 1 %}
+        <div class="pagination-container flex-row">
+            {% if has_previous %}
+                <a href="?page={{ previous_page }}&{{ request.GET.urlencode | cut:'page' }}" class="page-btn arrow"><img src="{% static 'imgs/icons/back_arrow.svg' %}" alt=""></a>
+            {% endif %}
+            {% for num in page_range %}
+                {% if num == current_page %}
+                    <span class="page-btn active">{{ num }}</span>
+                {% else %}
+                    {% if num <= 3 or num > max_pages|add:"-2" or num == current_page|add:"-1" or num == current_page|add:"1" %}
+                        <a href="?page={{ num }}&{{ request.GET.urlencode | cut:'page' }}" class="page-btn">{{ num }}</a>
+                    {% elif num == 4 or num == max_pages|add:"-2" %}
+                        <span class="page-dots">...</span>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+    
+            {% if has_next %}
+                <a href="?page={{ next_page }}&{{ request.GET.urlencode | cut:'page' }}" class="page-btn next-arrow"><img src="{% static 'imgs/icons/back_arrow.svg' %}" alt=""></a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock profile_tab %}

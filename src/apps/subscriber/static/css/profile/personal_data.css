@@ -79,6 +79,14 @@
     margin-left: 1em;
 }
 
+.empty-state a{
+    color: var(--brand-yellow);
+    text-decoration: underline;
+}
+
+.empty-state a:hover{
+    color: #ffd478;
+}
 
 /* Imagem + informações */
 .profile-section.first {

@@ -58,6 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
         formErrorsContainer.innerHTML = "";
     }
 
+    // window.addEventListener("pageshow", function (event) {
+    //     if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+    //         if (modal.classList.contains("show")) {
+    //             closeModal();
+    //         }
+    //     }
+    // });
+
     // Envio do formulário via AJAX
     form.addEventListener("submit", function (event) {
         event.preventDefault(); // previne envio padrão
@@ -93,3 +101,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+// Consertar o "return" do detalhe de cupom para o histórico
+// window.addEventListener("pageshow", function (event) {
+//     const modal = document.getElementById("evaluate-modal");
+
+//     if (modal && modal.classList.contains("show")) {
+//         modal.classList.remove("show");
+//         const hiddenStars = document.getElementById("id_stars");
+//         const hiddenCoupon = document.getElementById("id_coupon_id");
+//         if (hiddenStars) hiddenStars.value = "";
+//         if (hiddenCoupon) hiddenCoupon.value = "";
+//         const starsContainer = document.getElementById("stars-container");
+//         if (starsContainer) {
+//             const stars = starsContainer.querySelectorAll("span");
+//             stars.forEach(star => star.classList.remove("active"));
+//         }
+//     }
+// });
