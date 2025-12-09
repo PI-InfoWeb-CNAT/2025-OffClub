@@ -1,5 +1,5 @@
 /* Fundo escuro ao abrir */
-#evaluate-modal{
+#review-modal{
     display: none;
     position: fixed;
     inset: 0;
@@ -11,12 +11,12 @@
 }
 
 /* Ativo */
-#evaluate-modal.show{
+#review-modal.show{
     display: flex;
 }
 
 /* Caixa do modal */
-#evaluate-modal form{
+#review-modal form{
     background: var(--background-color);
     width: 500px;
     padding: 35px 40px;

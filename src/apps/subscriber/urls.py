@@ -18,6 +18,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('history/', HistoryView.as_view(), name='history'),
     path('registration_done/', RegistrationDone.as_view(), name='registration_done'),
-    path('avaliar_cupom/<uuid:coupon_id>/', ReviewCreateView.as_view(), name='evaluate_coupon'),
+    path('avaliar_cupom/<uuid:coupon_id>/', ReviewCreateView.as_view(), name='review_coupon'),
     path('profile/', ProfileView.as_view(), name='profile')
 ]
