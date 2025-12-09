@@ -4,7 +4,7 @@
     flex-direction: column;
     padding: 0.9em 1.1em;
     box-sizing: border-box;
-    width: 765px;
+    width: 100%;
     height: 125px;
     border-radius: var(--border-radius-small);
     margin: 1%;

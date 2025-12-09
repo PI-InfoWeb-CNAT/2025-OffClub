@@ -169,40 +169,24 @@ class HistoryView(LoginRequiredMixin, TemplateView):
         years = set()
 
         for coupon in coupons:
-            # --- LÓGICA DE POPULAR O FILTRO DE ANOS ---
-            # Adicionamos ao set ANTES de filtrar, para que o dropdown mostre todos os anos disponíveis
-            # independentemente do filtro atual.
             if coupon.used_date:
                 years.add(coupon.used_date.year)
-
-            # --- LÓGICA DE FILTRAGEM (PYTHON) ---
-            # Se tiver filtro de Mês ou Ano, verificamos se o cupom atende.
-            # Se não atender, usamos 'continue' para pular este item do loop.
             
             is_filtered = False
-            
-            # Se estamos filtrando por data, Cupons Ativos (sem data de uso) geralmente são ocultados
-            # ou você pode decidir mostrá-los sempre. Aqui assumo que filtro de data = histórico.
             has_date_filter = (req_month and req_month != 'all') or (req_year and req_year != 'all')
 
             if coupon.used_date:
-                # Validação do Mês
                 if req_month and req_month != 'all' and coupon.used_date.month != int(req_month):
                     is_filtered = True
                 
-                # Validação do Ano
                 if req_year and req_year != 'all' and coupon.used_date.year != int(req_year):
                     is_filtered = True
             else:
-                # Cupom Ativo: Se o usuário filtrou por uma data específica (ex: Janeiro/2023),
-                # ocultamos os ativos pois eles não pertencem a essa data passada.
                 if has_date_filter:
                     is_filtered = True
 
             if is_filtered:
-                continue # Pula para o próximo cupom, não adiciona na lista visual
-
-            # --- FIM DA FILTRAGEM, SEGUE SEU CÓDIGO ORIGINAL ---
+                continue
 
             old_price, final_price = DiscountService.final_price(
                 coupon.offer.price,
@@ -220,30 +204,24 @@ class HistoryView(LoginRequiredMixin, TemplateView):
 
             if coupon.used_date:
                 used_coupons.append(coupon_payload)
-                # Nota: years.add movido para o topo do loop
             else:
                 active_coupons.append(coupon_payload)
 
-        items_per_page = 2  # Quantos itens por seção
+        items_per_page = 1 
         
         paginator_active = Paginator(active_coupons, items_per_page)
         paginator_used = Paginator(used_coupons, items_per_page)
 
         page_number = self.request.GET.get('page', 1)
-
-        # 1. Pega a página dos ATIVOS (ou lista vazia se não existir)
         try:
             active_page_obj = paginator_active.page(page_number)
         except (EmptyPage, PageNotAnInteger):
             active_page_obj = [] 
 
-        # 2. Pega a página dos USADOS (ou lista vazia se não existir)
         try:
             used_page_obj = paginator_used.page(page_number)
         except (EmptyPage, PageNotAnInteger):
             used_page_obj = []
-
-        # 3. Dados manuais para a barra de paginação (ISTO SUBSTITUI O master_page_obj)
         max_pages = max(paginator_active.num_pages, paginator_used.num_pages)
         
         try:
@@ -255,8 +233,6 @@ class HistoryView(LoginRequiredMixin, TemplateView):
             {
                 "active_coupons": active_page_obj,
                 "used_coupons": used_page_obj,
-                
-                # Dados manuais que o template vai usar
                 "current_page": current_page,
                 "max_pages": max_pages,
                 "page_range": range(1, max_pages + 1), 

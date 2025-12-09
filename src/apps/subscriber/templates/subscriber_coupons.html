@@ -73,7 +73,7 @@
                 {% endfor %}
                 <p id="no-filter-results" style="display: none; text-align: left; color: #fff;">Nenhum cupom encontrado neste período.</p>
             {% else %}
-                <p>Não há cupons ativos vinculados a sua conta!</p>
+                <p>Não há cupons ativos vinculados à sua conta!</p>
             {% endif %}
             </div>
         </div>
@@ -95,22 +95,26 @@
                 {% endfor %}
                 <p id="no-filter-results" style="display: none; text-align: left; color: #fff;">Nenhum cupom encontrado neste período.</p>
             {% else %}
-                <p>Não há cupons inativos vinculados a sua conta!</p>
+                <p>Não há cupons inativos vinculados à sua conta!</p>
             {% endif %}
             </div>
         </div>
 
         {% if max_pages > 1 %}
-        <div class="pagination-container flex-row">
+        <div class="pagination-container">
             {% if has_previous %}
                 <a href="?page={{ previous_page }}&{{ request.GET.urlencode | cut:'page' }}" class="page-btn arrow"><img src="{% static 'imgs/icons/back_arrow.svg' %}" alt=""></a>
             {% endif %}
             {% for num in page_range %}
                 {% if num == current_page %}
-                    <span class="page-btn active">{{ num }}</span>
+                    <div class="circle-container active">
+                        <span class="page-btn">{{ num }}</span>
+                    </div>
                 {% else %}
                     {% if num <= 3 or num > max_pages|add:"-2" or num == current_page|add:"-1" or num == current_page|add:"1" %}
-                        <a href="?page={{ num }}&{{ request.GET.urlencode | cut:'page' }}" class="page-btn">{{ num }}</a>
+                        <div class="circle-container">
+                            <a href="?page={{ num }}&{{ request.GET.urlencode | cut:'page' }}" class="page-btn previous-or-next">{{ num }}</a>
+                        </div>
                     {% elif num == 4 or num == max_pages|add:"-2" %}
                         <span class="page-dots">...</span>
                     {% endif %}
