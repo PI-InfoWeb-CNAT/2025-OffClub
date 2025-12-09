@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subscriber, Evaluation
+from .models import Subscriber, Review
 
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
@@ -12,8 +12,8 @@ class SubscriberAdmin(admin.ModelAdmin):
         return obj.user.email
 
 
-@admin.register(Evaluation)
-class EvaluationAdmin(admin.ModelAdmin):
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
     list_display = (
         'coupon',
         'stars',

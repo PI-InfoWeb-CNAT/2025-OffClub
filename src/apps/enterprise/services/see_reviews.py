@@ -1,11 +1,11 @@
 from django.db.models import Avg, Count
-from apps.subscriber.models import Evaluation
+from apps.subscriber.models import Review
 
-# class SeeEvaluationsService():
+# class SeeReviewsService():
 
-#     def evaluation_stats(coupon_id): 
-#         evaluations = Evaluation.objects.filter(coupon_id=coupon_id)
-#         total = evaluations.count()
+#     def review_stats(coupon_id): 
+#         reviews = Review.objects.filter(coupon_id=coupon_id)
+#         total = reviews.count()
 
 #         if total == 0:
 #             return {
@@ -15,11 +15,11 @@ from apps.subscriber.models import Evaluation
 #             }
 
 #         # Média das estrelas
-#         media = evaluations.aggregate(avg_stars=Avg("stars"))["avg_stars"]
+#         media = reviews.aggregate(avg_stars=Avg("stars"))["avg_stars"]
 
 #         # Contagem por quantidade de estrelas
 #         count_by_stars = (
-#             evaluations.values("stars")             # agrupa os resultados pela quant de estrelas, retornando uma lista de dicionários
+#             reviews.values("stars")             # agrupa os resultados pela quant de estrelas, retornando uma lista de dicionários
 #             .annotate(count=Count("stars"))         # quantas avaliações tem para cada quant de estrelas
 #             .order_by("-stars")
 #         )
@@ -37,22 +37,22 @@ from apps.subscriber.models import Evaluation
 #             "percentages": percentages
 #         }
 
-class SeeEvaluationsService:
+class SeeReviewsService:
 
     @staticmethod
     def final_price(price, discount):
         return round(float(price) * (1 - float(discount) / 100), 2)
     
     @staticmethod
-    def get_evaluations(coupon):
+    def get_reviews(coupon):
         """Pega todas as avaliações e ordena pela quantidade de estrela"""
 
-        return Evaluation.objects.filter(coupon=coupon).order_by("-stars")
+        return Review.objects.filter(coupon=coupon).order_by("-stars")
     
     @staticmethod
-    def evaluation_stats(coupon):
-        evaluations = Evaluation.objects.filter(coupon=coupon)
-        total = evaluations.count()
+    def review_stats(coupon):
+        reviews = Review.objects.filter(coupon=coupon)
+        total = reviews.count()
 
         if total == 0:
             return{
@@ -63,11 +63,11 @@ class SeeEvaluationsService:
             }
         
         # Média das avaliações
-        media = evaluations.aggregate(media=Avg("stars"))["media"]
+        media = reviews.aggregate(media=Avg("stars"))["media"]
 
         # Quantidade de avaliações por estrelas
         quantity_by_stars = (
-            evaluations.values("stars")          # agrupa os resultados pela quant de estrelas, retornando uma lista de dicionários
+            reviews.values("stars")          # agrupa os resultados pela quant de estrelas, retornando uma lista de dicionários
             .annotate(count=Count("stars"))      # quantas avaliações tem para cada quant de estrelas
             .order_by("-stars")
         )

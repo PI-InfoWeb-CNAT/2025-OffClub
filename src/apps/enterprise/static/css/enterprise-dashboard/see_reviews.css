@@ -44,7 +44,7 @@ main{
     }
 }
 
-#evaluations-stats{
+#reviews-stats{
     width: auto;
     text-align: center;
     color: var(--white);
@@ -111,7 +111,7 @@ main{
 }
 
 
-#evaluations-list{
+#reviews-list{
     display: flex;
     gap: 30px;
     flex-wrap: wrap;

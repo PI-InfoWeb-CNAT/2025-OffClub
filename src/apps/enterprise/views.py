@@ -9,7 +9,7 @@ from django.views.generic import ListView, TemplateView, DetailView
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
 
-from apps.enterprise.services.see_evaluations import SeeEvaluationsService
+from apps.enterprise.services.see_reviews import SeeReviewsService
 from .forms import (
     EnterpriseInfoForm,
     CredentialsForm,
@@ -135,7 +135,7 @@ class RegisterDoneView(TemplateView):
     template_name = 'done.html'
     
 
-class SeeCouponEvaluationsView(DetailView):
+class SeeCouponReviewsView(DetailView):
     model = Coupon
     template_name = "enterprise-dashboard/see_avaluations.html"
     context_object_name = "coupon"
@@ -148,11 +148,11 @@ class SeeCouponEvaluationsView(DetailView):
         context = super().get_context_data(**kwargs)
         coupon = self.get_object()
 
-        evaluations = SeeEvaluationsService.get_evaluations(coupon)
-        stats = SeeEvaluationsService.evaluation_stats(coupon)
-        final_price = SeeEvaluationsService.final_price(coupon.offer.price, coupon.offer.discount)
+        reviews = SeeReviewsService.get_reviews(coupon)
+        stats = SeeReviewsService.review_stats(coupon)
+        final_price = SeeReviewsService.final_price(coupon.offer.price, coupon.offer.discount)
 
-        context["evaluations"] = evaluations
+        context["reviews"] = reviews
         context["stats"] = stats
         context["final_price"] = final_price
 

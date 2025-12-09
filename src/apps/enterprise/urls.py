@@ -8,6 +8,6 @@ urlpatterns = [
     path("register/", RegisterWizardView.as_view(FORMS), name="enterprise_register"),
     path("register/success/", RegisterDoneView.as_view(), name="register_done"),
     path('dashboard/', EnterpriseDashboardView.as_view(), name='enterprise_dashboard'),
-    path("dashboard/my_offers/<str:coupon_id>/evaluations/", SeeCouponEvaluationsView.as_view(), name="see_evaluations"),
+    path("dashboard/my_offers/<str:coupon_id>/reviews/", SeeCouponReviewsView.as_view(), name="see_reviews"),
 ]
 
