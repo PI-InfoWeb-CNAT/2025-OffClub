@@ -44,14 +44,14 @@ class SeeReviewsService:
         return round(float(price) * (1 - float(discount) / 100), 2)
     
     @staticmethod
-    def get_reviews(coupon):
+    def get_reviews(offer):
         """Pega todas as avaliações e ordena pela quantidade de estrela"""
 
-        return Review.objects.filter(coupon=coupon).order_by("-stars")
+        return Review.objects.filter(coupon__offer=offer).order_by("-stars")
     
     @staticmethod
-    def review_stats(coupon):
-        reviews = Review.objects.filter(coupon=coupon)
+    def review_stats(offer):
+        reviews = Review.objects.filter(coupon__offer=offer)
         total = reviews.count()
 
         if total == 0:
@@ -63,11 +63,11 @@ class SeeReviewsService:
             }
         
         # Média das avaliações
-        media = reviews.aggregate(media=Avg("stars"))["media"]
+        media = round(reviews.aggregate(media=Avg("stars"))["media"], 1)
 
         # Quantidade de avaliações por estrelas
         quantity_by_stars = (
-            reviews.values("stars")          # agrupa os resultados pela quant de estrelas, retornando uma lista de dicionários
+            reviews.values("stars")              # agrupa os resultados pela quant de estrelas, retornando uma lista de dicionários
             .annotate(count=Count("stars"))      # quantas avaliações tem para cada quant de estrelas
             .order_by("-stars")
         )

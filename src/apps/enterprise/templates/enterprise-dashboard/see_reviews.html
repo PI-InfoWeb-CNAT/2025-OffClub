@@ -19,28 +19,28 @@
         </div>
 
         <nav class="breadcrumbs">
-            <p><a href="{% url 'offer:manage_list' %}">Painel da Empresa</a>  >  <a href="{% url 'offer:manage_list' %}">Minhas Ofertas</a>  >  Visualizar Avaliações</a></p>
+            <p><a href="{% url 'enterprise:enterprise_dashboard' %}">Painel da Empresa</a>  >  <a href="{% url 'offer:manage_list' %}">Minhas Ofertas</a>  >  Visualizar Avaliações</a></p>
         </nav>
     </div>
 
     <section id="general-info">
         <div id="offer-detail">
             <figure>
-                <!-- <img src="{{ coupon.offer.image.url }}" alt="Oferta"> -->
+                <!-- <img src="{{ offer.image.url }}" alt="Oferta"> -->
                 <img src="{% static 'imgs/default-offer-image.png' %}" alt="Oferta">
             </figure>
 
             <div class="flex-column">
-                <h3>{{ coupon.offer.title }}</h3>
+                <h3>{{ offer.title }}</h3>
 
                 <div>
                     <h4>Valor com desconto</h4>
-                    <p>R$ {{ final_price }}</p>
+                    <p>R$ {{ final_price|floatformat:2 }}</p>
                 </div>
 
                 <div>
                     <h4>Detalhes</h4>
-                    <p>{{ coupon.offer.description }}</p>
+                    <p>{{ offer.description }}</p>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
     </section>
 
     <section id="review-list">
-        {% for e in review %}
+        {% for e in reviews %}
             {% include 'components/answer-review-card.html' with review=e %}
         {% empty %}
             <p>Ainda não há avaliações</p>

@@ -20,7 +20,7 @@ from .forms import (
 from formtools.wizard.views import SessionWizardView
 from apps.users.models import User
 from .models import Enterprise, LineOfBusiness
-from apps.coupon.models import Coupon
+from apps.offer.models import Offer
 from apps.core.models import Address, Phone
 
 
@@ -135,22 +135,22 @@ class RegisterDoneView(TemplateView):
     template_name = 'done.html'
     
 
-class SeeCouponReviewsView(DetailView):
-    model = Coupon
-    template_name = "enterprise-dashboard/see_avaluations.html"
-    context_object_name = "coupon"
+class SeeOfferReviewsView(DetailView):
+    model = Offer
+    template_name = "enterprise-dashboard/see_reviews.html"
+    context_object_name = "offer"
 
-    # Pega o id do cupom pela URL
+    # Pega o id da oferta pela URL
     def get_object(self):
-        return get_object_or_404(Coupon, id=self.kwargs.get("coupon_id"))
+        return get_object_or_404(Offer, id=self.kwargs.get("offer_id"))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        coupon = self.get_object()
+        offer = self.get_object()
 
-        reviews = SeeReviewsService.get_reviews(coupon)
-        stats = SeeReviewsService.review_stats(coupon)
-        final_price = SeeReviewsService.final_price(coupon.offer.price, coupon.offer.discount)
+        reviews = SeeReviewsService.get_reviews(offer)
+        stats = SeeReviewsService.review_stats(offer)
+        final_price = SeeReviewsService.final_price(offer.price, offer.discount)
 
         context["reviews"] = reviews
         context["stats"] = stats

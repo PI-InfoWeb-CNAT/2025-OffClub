@@ -38,3 +38,9 @@
         font-size: 12px;
     }
 }
+
+@media (max-width: 1000px){
+    .review-card{
+        min-width: 100%;
+    }
+}
