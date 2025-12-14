@@ -41,12 +41,6 @@ class OfferDetailJsonView(View):
         return JsonResponse(offer.to_dict())
 
 class RedeemCouponView(LoginRequiredMixin, View):
-    """
-    POST /offer/<offer_id>/redeem/
-    Cria cupom associando Subscriber (do user logado) + Offer.
-    Retorna JSON para o modal atualizar interface.
-    """
-
     def post(self, request, *args, **kwargs):
         offer_id = kwargs.get("offer_id")
         subscriber = get_object_or_404(Subscriber, user=request.user)
@@ -62,14 +56,12 @@ class RedeemCouponView(LoginRequiredMixin, View):
                         status=400,
                     )
 
-                # estoque
                 if offer.generated_coupons >= offer.max_coupons:
                     return JsonResponse(
                         {"ok": False, "error": "Oferta esgotada."},
                         status=400,
                     )
 
-                # idempotência: não cria duplicado para mesmo subscriber+offer
                 coupon, created = Coupon.objects.get_or_create(
                     subscriber=subscriber,
                     offer=offer,
@@ -81,9 +73,8 @@ class RedeemCouponView(LoginRequiredMixin, View):
                         generated_coupons=F("generated_coupons") + 1
                     )
 
-                # recalc restante (considera o que acabou de acontecer)
-                # se não criou, o remaining permanece igual ao atual
-                remaining = offer.max_coupons - (offer.generated_coupons + (1 if created else 0))
+                offer.refresh_from_db(fields=["generated_coupons", "max_coupons"])
+                remaining = offer.max_coupons - offer.generated_coupons
 
                 return JsonResponse(
                     {
@@ -92,17 +83,40 @@ class RedeemCouponView(LoginRequiredMixin, View):
                         "coupon_id": str(coupon.id),
                         "remaining_coupons": remaining,
                         "max_coupons": offer.max_coupons,
-                    }
+                    },
+                    status=200,
                 )
 
         except Offer.DoesNotExist:
             return JsonResponse({"ok": False, "error": "Oferta não encontrada."}, status=404)
+
         except IntegrityError:
-            # corrida rara no get_or_create
-            coupon = Coupon.objects.get(subscriber=subscriber, offer_id=offer_id)
-            remaining = Offer.objects.get(pk=offer_id).max_coupons - Offer.objects.get(pk=offer_id).generated_coupons
+            coupon = Coupon.objects.filter(
+                subscriber=subscriber,
+                offer_id=offer_id
+            ).first()
+
+            if not coupon:
+                return JsonResponse(
+                    {"ok": False, "error": "Falha ao criar cupom. Tente novamente."},
+                    status=409,
+                )
+
+            offer = Offer.objects.filter(pk=offer_id).only("max_coupons", "generated_coupons").first()
+            if not offer:
+                return JsonResponse({"ok": False, "error": "Oferta não encontrada."}, status=404)
+
+            remaining = offer.max_coupons - offer.generated_coupons
+
             return JsonResponse(
-                {"ok": True, "created": False, "coupon_id": str(coupon.id), "remaining_coupons": remaining}
+                {
+                    "ok": True,
+                    "created": False,
+                    "coupon_id": str(coupon.id),
+                    "remaining_coupons": remaining,
+                    "max_coupons": offer.max_coupons,
+                },
+                status=200,
             )
     
 

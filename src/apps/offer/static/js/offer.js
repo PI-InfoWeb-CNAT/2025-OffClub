@@ -17,8 +17,8 @@ function getCookie(name) {
   return cookieValue;
 }
 
-/* Ajuste se sua URL de login não for essa */
-const LOGIN_URL_FALLBACK = "/subscriber/login/";
+/* Página que abre depois do resgate do cupom*/
+const LOGIN_URL_FALLBACK = "/coupon";
 
 /* =========================
    Slider bubble
