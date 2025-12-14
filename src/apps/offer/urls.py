@@ -3,6 +3,7 @@ from .views import (
     OfferListView,
     OfferDetailJsonView,
     ManageOfferListView,
+    RedeemCouponView,
     ManageOfferDetailView,
     ManageOfferDetailJsonView,
     ManageOfferCreateView,
@@ -16,6 +17,7 @@ app_name = "offer"
 urlpatterns = [
     path("", OfferListView.as_view(), name="list"),
     path("json/<uuid:offer_id>/", OfferDetailJsonView.as_view(), name="detail_json"),
+    path("<uuid:offer_id>/redeem/", RedeemCouponView.as_view(), name="redeem"),
     path("manage/", ManageOfferListView.as_view(), name="manage_list"),
     path(
         "manage/<uuid:offer_id>/", ManageOfferDetailView.as_view(), name="manage_detail"

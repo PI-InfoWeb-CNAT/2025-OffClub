@@ -33,7 +33,11 @@
 
                     </div>
         
-                    <button id="redeem-button">
+                    <button
+                        id="redeem-button"
+                        type="button"
+                        data-offer-id="{{ offer.id }}"
+                        data-redeem-url="{% url 'offer:redeem' offer.id %}">
                         RESGATAR
                     </button>
                 </div>
@@ -112,10 +116,12 @@
             </div>
             
             <a href="#">
-                <button id="ascess-coupons-button" class="yellow-border">
-                    Acessar meus cupons
-                    <img src="{% static 'imgs/icons/yellow-orange-arrow.svg' %}" alt="Seta">
-                </button>
+                <a href="{% url 'coupon:my_coupons' %}">
+                    <button id="ascess-coupons-button" class="yellow-border" style="display:none;">
+                        Acessar meus cupons
+                        <img src="{% static 'imgs/icons/yellow-orange-arrow.svg' %}" alt="Seta">
+                    </button>
+                </a>
             </a>
         </section>
     </article>
