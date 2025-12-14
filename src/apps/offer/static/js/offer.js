@@ -18,7 +18,7 @@ function getCookie(name) {
 }
 
 /* Ajuste se sua URL de login não for essa */
-const LOGIN_URL_FALLBACK = "/accounts/login/";
+const LOGIN_URL_FALLBACK = "/subscriber/login/";
 
 /* =========================
    Slider bubble
