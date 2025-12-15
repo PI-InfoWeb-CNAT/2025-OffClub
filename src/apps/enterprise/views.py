@@ -160,10 +160,10 @@ class SeeOfferReviewsView(DetailView):
 
 
 class EnterpriseDashboardView(View):
-    template_name = 'enterprise_dashboard.html'
+    template_name = 'enterprise-dashboard/enterprise_dashboard.html'
     
     def get(self, request):
-        return render(request, 'enterprise_dashboard.html')
+        return render(request, 'enterprise-dashboard/enterprise_dashboard.html')
 
 
 # class EnterpriseSignUpView(CreateView):
