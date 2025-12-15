@@ -14,14 +14,14 @@ from apps.users.models import User
 from .forms import (
     ContactForm,
     CredentialsForm,
-    EvaluationForm,
+    ReviewForm,
     LoginForm,
     PersonalInfoForm,
     ProfilePicForm,
 )
-from .models import Evaluation, Subscriber
+from .models import Review, Subscriber
 from .services.discount import DiscountService
-from .services.evaluation import EvaluationService
+from .services.review import ReviewService
 
 
 FORMS = [
@@ -148,7 +148,7 @@ class HistoryView(LoginRequiredMixin, TemplateView):
                     "active_coupons": [],
                     "used_coupons": [],
                     "years_group": [],
-                    "form": EvaluationForm(),
+                    "form": ReviewForm(),
                 }
             )
             return context
@@ -189,7 +189,7 @@ class HistoryView(LoginRequiredMixin, TemplateView):
                 "active_coupons": active_coupons,
                 "used_coupons": used_coupons,
                 "years_group": sorted(years, reverse=True),
-                "form": EvaluationForm(),
+                "form": ReviewForm(),
             }
         )
         return context
@@ -201,13 +201,13 @@ class RegistrationDone(TemplateView):
     template_name = "register/done.html"
 
 
-class EvaluationCreateView(LoginRequiredMixin, View):
+class ReviewCreateView(LoginRequiredMixin, View):
     """Recebe avaliações de cupons via requisições AJAX."""
 
     http_method_names = ["post"]
 
     def post(self, request, *args, **kwargs):
-        form = EvaluationForm(request.POST)
+        form = ReviewForm(request.POST)
         if not form.is_valid():
             errors = {
                 field: [str(error) for error in error_list]
@@ -224,13 +224,13 @@ class EvaluationCreateView(LoginRequiredMixin, View):
                 status=403,
             )
 
-        if Evaluation.objects.filter(coupon=coupon).exists():
+        if Review.objects.filter(coupon=coupon).exists():
             return JsonResponse(
                 {"error": "Você já avaliou este cupom."},
                 status=400,
             )
 
-        EvaluationService.create_evaluation(
+        ReviewService.create_review(
             coupon=coupon,
             stars=form.cleaned_data.get("stars"),
             message=form.cleaned_data.get("message", ""),
