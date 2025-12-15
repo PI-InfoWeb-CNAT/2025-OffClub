@@ -34,10 +34,10 @@ FORMS = [
 ]
 
 TEMPLATES = {
-    "info": "register/step_1.html",
-    "login": "register/step_2.html",
-    "contact": "register/step_3.html",
-    "pfp": "register/step_4.html",
+    "info": "register/step1.html",
+    "login": "register/step2.html",
+    "contact": "register/step3.html",
+    "pfp": "register/step4.html",
 }
 
 class RegisterWizardView(SessionWizardView):

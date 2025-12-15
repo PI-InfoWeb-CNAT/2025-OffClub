@@ -94,7 +94,9 @@ form{
         border-radius: var(--border-radius);
         padding: 2em;
         gap: 30px;
-    
+    }
+
+    .form-fields:not(#pfp){
         display: grid;
         grid-template-columns: repeat(12, 1fr);
     }

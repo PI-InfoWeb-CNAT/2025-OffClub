@@ -12,7 +12,7 @@
     {% endblock %}
 
 {% block main %}
-<main class="container cadastro-container">
+<main class="container register-container">
     <div class="title-register container flex-center">
         <p>Cadastro de Empresa</p>
     </div>
@@ -48,7 +48,7 @@
     
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-fields flex-center">
+        <div class="form-fields flex-center" id="pfp">
             {{ wizard.management_form }}
             {% for field in wizard.form %}
                 {% if field.name == 'profile_picture' %} 

@@ -2,28 +2,29 @@
 
 {% load static %}
 
-{% block title %}Registro - Passo 2{% endblock %}
+{% block title %}Registro - Passo 1{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/register/steps.css' %}">
-    <link rel="stylesheet" href="{% static 'css/register/step2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/step1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/form-steps.css' %}">
     <link rel="stylesheet" href="{% static 'css/register/enterprise.css' %}">
-{% endblock %}
+    {% endblock %}
 
 {% block main %}
-<main class="container cadastro-container">
+<main class="container register-container">
     <div class="title-register container flex-center">
         <p>Cadastro de Empresa</p>
     </div>
     <div class="steps flex-row">
-        <div class="step flex-row step-1 done">
+        <div class="step flex-row step-1 active">
             <div class="number-wrapper">
-                <img src="{% static 'imgs/check.svg' %}" alt="">
+                <p>1</p>
             </div>
             <p>Dados da empresa</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
-        <div class="step flex-row  step-2 active">
+        <div class="step flex-row step-2">
             <div class="number-wrapper">
                 <p>2</p>
             </div>
@@ -49,14 +50,20 @@
         {% csrf_token %}
         <div class="form-fields">
             {{ wizard.management_form }}
+            
             {% for field in wizard.form %}
-                <div class="field-wrapper {{ field.field.widget.attrs.class }}"> 
+                <div class="field-wrapper"> 
+                    
                     {% if field.label %}
                         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {% endif %}
+        
                     {{ field }}
+        
                     {% if field.errors %}
-                        <div class="error-msg">{{ field.errors }}</div>
+                        <div class="text-danger" style="font-size: 0.8rem; color: #ff6b6b;">
+                            {{ field.errors }}
+                        </div>
                     {% endif %}
                 </div>
             {% endfor %}

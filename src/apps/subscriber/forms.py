@@ -10,8 +10,8 @@ class PersonalInfoForm(forms.ModelForm):
         model = Subscriber
         fields = ['first_name', 'last_name', 'cpf', 'birth_date']
         widgets = {
-            'first_name': forms.TextInput(attrs={'placeholder': 'Nome'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Sobrenome'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Nome', 'class': 'half-width'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Sobrenome', 'class': 'half-width'}),
             'cpf': forms.TextInput(attrs={'placeholder': 'CPF', 'class': 'half-width'}),
             'birth_date': forms.DateInput(attrs={'placeholder': 'Data de Nascimento', 'type': 'date', 'class': 'half-width'}),
         }
