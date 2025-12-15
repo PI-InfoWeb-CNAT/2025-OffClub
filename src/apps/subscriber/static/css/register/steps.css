@@ -92,17 +92,29 @@ form{
         background-color: var(--background-color);
         border: 2px solid #373737;
         border-radius: var(--border-radius);
-    
         padding: 2em;
-        display: flex;
-        flex-direction: column;
         gap: 30px;
+    
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
     }
 
-    p{
+    p, .field-wrapper{
         display: flex;
         flex-direction: column;
         gap: 5px;
+    }
+
+    .field-wrapper {
+        grid-column: span 12;
+    }
+    
+    .field-wrapper.half-width {
+        grid-column: span 6; 
+    }
+    
+    .field-wrapper.third-width {
+        grid-column: span 4;
     }
 
     label{
