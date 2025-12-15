@@ -80,7 +80,7 @@
 
 
 /* FORMULÁRIOS */
-form{
+.register-container form{
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -164,4 +164,9 @@ form{
     }
 
 
+}
+
+/* ERRO */
+.errorlist li{
+    color: var(--white);
 }
