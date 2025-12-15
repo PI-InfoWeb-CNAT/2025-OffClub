@@ -1,8 +1,8 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/components/evaluate_coupon.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/review_coupon.css' %}">
 
-<div id="evaluate-modal">
-    <form method="post" action="{% url 'subscriber:evaluate_coupon' coupon.id %}" id="evaluate-form">  
+<div id="review-modal">
+    <form method="post" action="{% url 'subscriber:review_coupon' coupon.id %}" id="review-form">  
         {% csrf_token %}
         {{ form.non_field_errors }}
         <div id="title">
@@ -60,4 +60,4 @@
 </div>
 
 
-<script src="{% static 'js/components/evaluate_coupon.js' %}"></script>
+<script src="{% static 'js/components/review_coupon.js' %}"></script>

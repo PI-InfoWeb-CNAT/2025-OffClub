@@ -74,12 +74,12 @@ class LoginForm(forms.Form):
     )
     
     
-from .models import Evaluation
+from .models import Review
 
 
-class EvaluationForm(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     class Meta: 
-        model = Evaluation
+        model = Review
         fields = ["stars", "message"]
         widgets = {
             "stars": forms.HiddenInput(),   # o valor vai vir do JS

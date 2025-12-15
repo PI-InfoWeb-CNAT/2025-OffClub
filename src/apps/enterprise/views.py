@@ -9,7 +9,7 @@ from django.views.generic import ListView, TemplateView, DetailView
 from django.core.files.storage import FileSystemStorage
 from django.db import transaction
 
-from apps.enterprise.services.see_evaluations import SeeEvaluationsService
+from apps.enterprise.services.see_reviews import SeeReviewsService
 from .forms import (
     EnterpriseInfoForm,
     CredentialsForm,
@@ -20,7 +20,7 @@ from .forms import (
 from formtools.wizard.views import SessionWizardView
 from apps.users.models import User
 from .models import Enterprise, LineOfBusiness
-from apps.coupon.models import Coupon
+from apps.offer.models import Offer
 from apps.core.models import Address, Phone
 
 
@@ -135,24 +135,24 @@ class RegisterDoneView(TemplateView):
     template_name = 'done.html'
     
 
-class SeeCouponEvaluationsView(DetailView):
-    model = Coupon
-    template_name = "enterprise-dashboard/see_avaluations.html"
-    context_object_name = "coupon"
+class SeeOfferReviewsView(DetailView):
+    model = Offer
+    template_name = "enterprise-dashboard/see_reviews.html"
+    context_object_name = "offer"
 
-    # Pega o id do cupom pela URL
+    # Pega o id da oferta pela URL
     def get_object(self):
-        return get_object_or_404(Coupon, id=self.kwargs.get("coupon_id"))
+        return get_object_or_404(Offer, id=self.kwargs.get("offer_id"))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        coupon = self.get_object()
+        offer = self.get_object()
 
-        evaluations = SeeEvaluationsService.get_evaluations(coupon)
-        stats = SeeEvaluationsService.evaluation_stats(coupon)
-        final_price = SeeEvaluationsService.final_price(coupon.offer.price, coupon.offer.discount)
+        reviews = SeeReviewsService.get_reviews(offer)
+        stats = SeeReviewsService.review_stats(offer)
+        final_price = SeeReviewsService.final_price(offer.price, offer.discount)
 
-        context["evaluations"] = evaluations
+        context["reviews"] = reviews
         context["stats"] = stats
         context["final_price"] = final_price
 

@@ -1,12 +1,12 @@
-from apps.subscriber.models import Evaluation
+from apps.subscriber.models import Review
 
 
-class EvaluationService:
+class ReviewService:
     @staticmethod
-    def create_evaluation(coupon, stars, message=""):
+    def create_review(coupon, stars, message=""):
         """Cria uma nova avaliação para o cupom informado."""
 
-        return Evaluation.objects.create(
+        return Review.objects.create(
             coupon=coupon,
             stars=stars,
             message=message,
