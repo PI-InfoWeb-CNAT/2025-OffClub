@@ -83,10 +83,7 @@ li.active .step-stage, li.active .step-name{
 }
 
 /* PASSO 4 DO FORM - IMAGEM */
-.image-container{
-    width: 100%;
-}
-.image-container > .content{
+.form-fields > .custom-file-upload {
     text-align: center;
     background-color: #252525; 
     cursor: pointer;
@@ -96,6 +93,7 @@ li.active .step-stage, li.active .step-name{
     border-radius: 10px;
     overflow: hidden;
     width: 360px;
+    height: 230px;
     --dash-color: #595959;
     --dash-size: 20px;      
     --space-size: 20px;     
@@ -141,45 +139,31 @@ li.active .step-stage, li.active .step-name{
         1.4px 100%; 
     background-repeat: no-repeat;
 }
-.image-container > .content > #placeholder-content > .flex-center{
-    gap: 5px;
-}
-.image-container #file-upload{
+input[type="file"]{
     display: none;
 }
-.image-container label{
+.highlight{
     color: var(--brand-yellow);
     text-decoration: underline;
-    cursor: pointer;
 }
-.image-container label:hover{
-    opacity: 0.8;
+.main-text{
+    font-size: var(--larger-text-font-size);
+    color: var(--light-grey);
 }
-#preview-content {
+.upload-options{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
+    justify-content: center;
+    font-size: var(--text-font-size);
+    gap: 5px;
 }
-#preview-image {
-    height: 180px; 
-    width: 100%;   
-    object-fit: cover; 
-    border-radius: 8px; 
-    border: 1px solid #444; 
-}
-
-#file-name-display {
-    font-size: 0.9rem;
+textarea{
     color: var(--white);
-    font-weight: 500;
-    word-break: break-all; 
-    padding: 0 10px;
-}
-.hidden {
-    display: none !important;
-}
-.image-container .content.dragging {
-    background-color: #333;
+    background-color: var(--medium-gray);
+    border-radius: var(--border-radius-small);
+    resize: none;
+    border: none;
+    width: 100%;
+    height: 120px;
+    padding: 20px;
+    font-family: var(--main-font-family);
 }

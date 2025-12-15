@@ -1,11 +1,11 @@
 
-.title-register {
-    font-size: 16px !important;
-    font-weight: 700;
+.title-register > p {
+    font-size: var(--h3-font-size);
+    font-weight: 600;
 
     padding: 3em 0;
 
-    background-image: var(--gradient-orange);
+    background-image: var(--gradient-yellow-dark-orange);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -26,11 +26,15 @@
 }
 
 .step {
-    gap: 1.25em;
+    gap: 1.15em;
     align-items: center;
     padding: 0.5em 0;
     flex: 1;
     padding-left: 2em;
+}
+
+.step p{
+    font-size: var(--larger-text-font-size);
 }
 
 .number-wrapper {
@@ -42,21 +46,22 @@
     align-items: center;
     justify-content: center;
     border: 1px solid var(--white);
+    font-family: var(--special-font-family);
 }
 
 
 .active p {
-    color: var(--brand-orange);
+    color: var(--brand-orange-darker);
     font-family: "Poppins", sans-serif;
     font-weight: 600;
 }
 
 .active .number-wrapper {
-    border: 1px solid var(--brand-orange);
+    border: 1px solid var(--brand-orange-darker);
 }
 
 .active .number-wrapper p {
-    color: var(--brand-orange);
+    color: var(--brand-orange-darker);
     font-family: "Poppins", sans-serif;
     font-weight: 600;
 }
@@ -64,7 +69,7 @@
 
 .done{
     font-weight: 700;
-    background-image: var(--gradient-orange);
+    background-color: var(--white);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -101,7 +106,7 @@ form{
     }
 
     label{
-        font-size: 13px;
+        font-size: var(--text-font-size);
         color: var(--light-grey);
     }
 
@@ -130,7 +135,7 @@ form{
     }
 
     button{
-        background-image: var(--gradient-orange);
+        background-image: linear-gradient(to right, var(--brand-orange-darker), #A15D18);
         color: var(--white);
         border: none;
 
