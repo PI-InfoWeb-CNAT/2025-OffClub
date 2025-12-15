@@ -62,10 +62,15 @@ class RedeemCouponView(LoginRequiredMixin, View):
                         status=400,
                     )
 
+                expiration_date = timezone.now() + offer.redemption_period
+
                 coupon, created = Coupon.objects.get_or_create(
                     subscriber=subscriber,
                     offer=offer,
-                    defaults={"code": uuid.uuid4().hex[:10].upper()},
+                    defaults={
+                        "code": uuid.uuid4().hex[:10].upper(),
+                        "expiration_date": expiration_date,
+                    },
                 )
 
                 if created:
@@ -90,33 +95,11 @@ class RedeemCouponView(LoginRequiredMixin, View):
         except Offer.DoesNotExist:
             return JsonResponse({"ok": False, "error": "Oferta não encontrada."}, status=404)
 
-        except IntegrityError:
-            coupon = Coupon.objects.filter(
-                subscriber=subscriber,
-                offer_id=offer_id
-            ).first()
-
-            if not coupon:
-                return JsonResponse(
-                    {"ok": False, "error": "Falha ao criar cupom. Tente novamente."},
-                    status=409,
-                )
-
-            offer = Offer.objects.filter(pk=offer_id).only("max_coupons", "generated_coupons").first()
-            if not offer:
-                return JsonResponse({"ok": False, "error": "Oferta não encontrada."}, status=404)
-
-            remaining = offer.max_coupons - offer.generated_coupons
-
+        except IntegrityError as e:
+            print("INTEGRITY ERROR:", repr(e))
             return JsonResponse(
-                {
-                    "ok": True,
-                    "created": False,
-                    "coupon_id": str(coupon.id),
-                    "remaining_coupons": remaining,
-                    "max_coupons": offer.max_coupons,
-                },
-                status=200,
+                {"ok": False, "error": "Falha ao criar cupom. Tente novamente."},
+                status=409,
             )
     
 

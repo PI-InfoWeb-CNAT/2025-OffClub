@@ -34,12 +34,13 @@
                     </div>
         
                     <button
-                        id="redeem-button"
                         type="button"
-                        data-offer-id="{{ offer.id }}"
-                        data-redeem-url="{% url 'offer:redeem' offer.id %}">
+                        id="redeem-button"
+                        class="redeem-button"
+                        data-action="redeem">
                         RESGATAR
                     </button>
+
                 </div>
         
                 <div class="offer-content">          
