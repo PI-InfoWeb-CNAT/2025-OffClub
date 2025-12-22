@@ -41,7 +41,7 @@ label{
     display: block;
     font-size: 14px;
 }
-label:not(#upload, .radio-tag-label, .toggle-label){
+label:not(#upload, #id_info-line_of_business > div > label, .toggle-label){
     margin-bottom: 8px;
 }
 input, textarea{
@@ -84,20 +84,19 @@ button.next{
 }
 
 /* ORGANIZAÇÃO DO DISPLAY DOS CAMPOS DE FORMULÁRIO */
-.radio-flex-container {
+#id_info-line_of_business {
     display: flex;
     flex-wrap: wrap; 
     align-items: center;
-    gap: 15px;      
-    margin-top: 10px; 
+    gap: 15px;       
     background-color: #252525;
     border-radius: 10px;
     padding: 10px;
 }
-.radio-flex-container input[type="radio"] {
+#id_info-line_of_business input[type="radio"] {
     display: none;
 }
-label.radio-tag-label {
+#id_info-line_of_business > div > label {
     display: block;
     padding: 10px 20px;
     background-color: #252525; 
@@ -107,12 +106,12 @@ label.radio-tag-label {
     cursor: pointer;
     transition: all 0.2s ease-in-out; 
 }
-.radio-tag-label:hover {
+#id_info-line_of_business > div > label:hover {
     border-color: #555;
 }
-.radio-flex-container input[type="radio"]:checked + .radio-tag-label {
-    background-color: #555;
-    border-color: #555
+#id_info-line_of_business > div > label:has(input:checked) {
+    background-color: #555; 
+    border-color: #555;
 }
 .content-fields-container{
     display: flex;

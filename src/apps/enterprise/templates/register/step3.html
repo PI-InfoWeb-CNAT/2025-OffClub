@@ -2,35 +2,36 @@
 
 {% load static %}
 
-{% block title %}Registro - Passo 2{% endblock %}
+{% block title %}Registro - Passo 3{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/register/steps.css' %}">
-    <link rel="stylesheet" href="{% static 'css/register/step2.css' %}">
-    <link rel="stylesheet" href="{% static 'css/register/form-register.css' %}">
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/register/step3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/form-steps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/enterprise.css' %}">
+    {% endblock %}
 
 {% block main %}
 <main class="container register-container">
     <div class="title-register container flex-center">
-        <p>Cadastro de Usuário</p>
+        <p>Cadastro de Empresa</p>
     </div>
     <div class="steps flex-row">
         <div class="step flex-row step-1 done">
             <div class="number-wrapper">
                 <img src="{% static 'imgs/check.svg' %}" alt="">
             </div>
-            <p>Informações Pessoais</p>
+            <p>Dados da empresa</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
-        <div class="step flex-row  step-2 active">
+        <div class="step flex-row step-2 done">
             <div class="number-wrapper">
-                <p>2</p>
+                <img src="{% static 'imgs/check.svg' %}" alt="">
             </div>
             <p>Login</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
-        <div class="step flex-row step-3">
+        <div class="step flex-row step-3 active">
             <div class="number-wrapper">
                 <p>3</p>
             </div>
