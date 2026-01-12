@@ -360,4 +360,27 @@ class MyPlansView(LoginRequiredMixin, View):
             "past_subscriptions": past_subscriptions,
         }
         return render(request, "profile/my_plans.html", context)
+
+
+class MyCouponsView(LoginRequiredMixin, View):
+    def get(self, request):
+        subscriber = getattr(request.user, "subscriber", None)
+        
+        active_coupons = []
+        used_coupons = []
+        
+        if subscriber:
+            all_coupons = subscriber.coupons.select_related("offer", "offer__enterprise").order_by("-creation_date")
+            
+            for coupon in all_coupons:
+                if coupon.is_active:
+                    active_coupons.append(coupon)
+                else:
+                    used_coupons.append(coupon)
+        
+        context = {
+            "active_coupons": active_coupons,
+            "used_coupons": used_coupons,
+        }
+        return render(request, "profile/my_coupons.html", context)
     

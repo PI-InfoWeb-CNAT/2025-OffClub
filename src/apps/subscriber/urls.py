@@ -8,6 +8,7 @@ from .views import (
     ProfileView,
     EditProfileView,
     MyPlansView,
+    MyCouponsView,
 )
 from django.contrib.auth.views import LogoutView
 
@@ -24,4 +25,5 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit/', EditProfileView.as_view(), name='edit_profile'),
     path('profile/plans/', MyPlansView.as_view(), name='my_plans'),
+    path('profile/coupons/', MyCouponsView.as_view(), name='my_coupons'),
 ]

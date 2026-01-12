@@ -1,0 +1,93 @@
+{% extends "profile/base_profile.html" %}
+{% load static %}
+
+{% block title %}Meus Cupons{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profile/base_profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/profile/my_coupons.css' %}" />
+{% endblock head %}
+
+{% block profile_tab %}
+<div class="personal-data-tab">
+    <h1 class="tab-title">MEUS CUPONS</h1>
+    
+    <div class="personal-data-content">
+        
+        <!-- Cupons Ativos -->
+        <div class="profile-section">
+            <div class="profile-section-title">
+                <h2>Cupons Ativos</h2>
+                <hr />
+            </div>
+
+            {% if active_coupons %}
+            <div class="coupons-grid">
+                {% for coupon in active_coupons %}
+                <div class="coupon-card active">
+                    <div class="coupon-image">
+                        {% if coupon.offer.image %}
+                        <img src="{{ coupon.offer.image.url }}" alt="{{ coupon.offer.title }}">
+                        {% else %}
+                        <img src="{% static 'imgs/default-offer-image.png' %}" alt="{{ coupon.offer.title }}">
+                        {% endif %}
+                        <span class="coupon-discount">-{{ coupon.offer.discount }}%</span>
+                    </div>
+                    <div class="coupon-info">
+                        <span class="coupon-enterprise">{{ coupon.offer.enterprise.trade_name }}</span>
+                        <h3 class="coupon-title">{{ coupon.offer.title }}</h3>
+                        <div class="coupon-code-wrapper">
+                            <span class="coupon-code-label">Código:</span>
+                            <span class="coupon-code">{{ coupon.code }}</span>
+                        </div>
+                        <div class="coupon-dates">
+                            <span class="coupon-expiration">Válido até {{ coupon.expiration_date|date:'d/m/Y' }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state-box">
+                <p class="empty-state">Você não possui cupons ativos no momento.</p>
+                <a href="{% url 'home' %}" class="btn-primary">Explorar Ofertas</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Cupons Usados / Expirados -->
+        <div class="profile-section">
+            <div class="profile-section-title">
+                <h2>Histórico de Cupons</h2>
+                <hr />
+            </div>
+
+            {% if used_coupons %}
+            <div class="coupons-list">
+                {% for coupon in used_coupons %}
+                <div class="coupon-card-mini {% if coupon.used_date %}used{% else %}expired{% endif %}">
+                    <div class="coupon-card-mini-info">
+                        <span class="coupon-enterprise">{{ coupon.offer.enterprise.trade_name }}</span>
+                        <span class="coupon-title">{{ coupon.offer.title }}</span>
+                        <span class="coupon-code">{{ coupon.code }}</span>
+                    </div>
+                    <div class="coupon-card-mini-status">
+                        {% if coupon.used_date %}
+                        <span class="coupon-status used">Usado</span>
+                        <span class="coupon-date">{{ coupon.used_date|date:'d/m/Y' }}</span>
+                        {% else %}
+                        <span class="coupon-status expired">Expirado</span>
+                        <span class="coupon-date">{{ coupon.expiration_date|date:'d/m/Y' }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="empty-state">Nenhum cupom no histórico.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock profile_tab %}
