@@ -8,6 +8,7 @@
 | 26/05/2025 | 2.0 | Versão com detalhamentos iniciais | Amanda Lara, Clara Teodósio, Heitor Barboza e Lucas Cássio  |
 | 30/06/2025 | 3.0 | Atualização da imagem do diagrama de casos de uso  | Heitor Barboza e Lucas Cássio |
 | 02/11/2025 | 4.0 | Atualização na listagem dos detalhamentos e da imagem do diagrama de casos de uso  | Heitor Barboza |
+| 12/01/2026 | 5.0 | Atualização da imagem do diagrama de casos de uso  | Clara Teodósio |
 | - | - | - | - |
 
 ## 1. Diagrama de Casos de Uso
