@@ -1,0 +1,149 @@
+{% extends "profile/base_profile.html" %}
+{% load static %}
+
+{% block title %}Editar Perfil{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profile/base_profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/profile/edit_profile.css' %}" />
+{% endblock head %}
+
+{% block profile_tab %}
+<div class="personal-data-tab flex-row">
+    <h1 class="tab-title">EDITAR PERFIL</h1>
+    
+    <div class="personal-data-content">
+        <form method="post" enctype="multipart/form-data" class="edit-profile-form">
+            {% csrf_token %}
+            
+             {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="profile-section first">
+                 <!-- Profile Picture Section -->
+                <div class="profile-image-wrapper">
+                    <label for="id_profile_picture" class="profile-picture-label">
+                        <img class="profile-picture" src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'imgs/teste.png' %}{% endif %}" alt="Foto de Perfil" id="profile-preview"/>
+                    </label>
+                    <label for="id_profile_picture" class="file-upload-label">Alterar Foto</label>
+                    <div class="hidden-input">{{ form.profile_picture }}</div>
+                    {% if form.profile_picture.errors %}
+                        <div class="error">{{ form.profile_picture.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="profile-data-wrapper">
+                    <div class="profile-section-title flex-row">
+                        <h2>Informações Pessoais</h2>
+                        <hr />
+                    </div>
+
+                    <div class="data-row">
+                        <div class="row-item">
+                            <label for="{{ form.first_name.id_for_label }}">Nome</label>
+                            {{ form.first_name }}
+                             {% if form.first_name.errors %}
+                                <div class="error">{{ form.first_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="row-item">
+                            <label for="{{ form.last_name.id_for_label }}">Sobrenome</label>
+                            {{ form.last_name }}
+                             {% if form.last_name.errors %}
+                                <div class="error">{{ form.last_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="data-row">
+                        <div class="row-item">
+                             <label for="{{ form.birth_date.id_for_label }}">Data de Nascimento</label>
+                             {{ form.birth_date }}
+                              {% if form.birth_date.errors %}
+                                <div class="error">{{ form.birth_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                         <div class="row-item">
+                              <label for="{{ form.phone_number.id_for_label }}">Telefone</label>
+                              {{ form.phone_number }}
+                               {% if form.phone_number.errors %}
+                                <div class="error">{{ form.phone_number.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section second">
+                 <div class="profile-section-title">
+                    <h2>Dados de Localização</h2>
+                    <hr />
+                </div>
+                
+                 <div class="data-row">
+                     <div class="row-item">
+                        <label for="{{ form.cep.id_for_label }}">CEP</label>
+                        {{ form.cep }}
+                    </div>
+                     <div class="row-item">
+                        <label for="{{ form.state.id_for_label }}">UF</label>
+                        {{ form.state }}
+                    </div>
+                     <div class="row-item">
+                        <label for="{{ form.city.id_for_label }}">Cidade</label>
+                        {{ form.city }}
+                    </div>
+                 </div>
+
+                 <div class="data-row">
+                    <div class="row-item">
+                        <label for="{{ form.neighborhood.id_for_label }}">Bairro</label>
+                        {{ form.neighborhood }}
+                    </div>
+                     <div class="row-item">
+                        <label for="{{ form.street_name.id_for_label }}">Logradouro</label>
+                        {{ form.street_name }}
+                    </div>
+                 </div>
+
+                  <div class="data-row">
+                    <div class="row-item">
+                        <label for="{{ form.number.id_for_label }}">Número</label>
+                        {{ form.number }}
+                    </div>
+                     <div class="row-item">
+                        <label for="{{ form.complement.id_for_label }}">Complemento</label>
+                        {{ form.complement }}
+                    </div>
+                 </div>
+            </div>
+
+            <button type="submit" class="save-btn">Salvar Alterações</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const fileInput = document.getElementById('id_profile_picture');
+    const previewImg = document.getElementById('profile-preview');
+
+    if(fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+</script>
+{% endblock profile_tab %}
+

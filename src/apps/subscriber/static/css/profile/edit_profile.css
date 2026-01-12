@@ -1,0 +1,230 @@
+
+.edit-profile-nav-item {
+    background-color: rgba(239, 119, 0, 0.1); 
+    border-left: 4px solid var(--brand-orange);
+}
+
+.edit-profile-nav-item a {
+    color: var(--brand-yellow);
+}
+
+.edit-profile-nav-item img {
+    filter: invert(62%) sepia(83%) saturate(447%) hue-rotate(11deg) brightness(160%) contrast(90%);
+}
+
+.tab-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1em;
+}
+
+.personal-data-tab {
+    padding: 3em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.personal-data-content {
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+}
+
+.profile-section-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.profile-section-title h2 {
+    min-width: fit-content;
+    font-size: 1em;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to right, var(--brand-yellow), var(--brand-orange-darker));
+    font-weight: 600;
+}
+
+.profile-section-title hr {
+    width: 100%;       
+    height: 1px;         
+    background: var(--gray);     
+    border: none;
+    margin-left: 1em;
+}
+
+/* Form Layout Styles */
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.data-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5em;
+    gap: 1.5em;
+}
+
+.row-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.row-item label {
+    color: var(--gray);
+    font-size: 0.9em;
+    margin-bottom: 0.4em;
+}
+
+.row-item input,
+.row-item select {
+    background-color: transparent;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    padding: 0.6em 0.8em;
+    color: var(--white);
+    font-size: 0.95em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.row-item input:focus,
+.row-item select:focus {
+    outline: none;
+    border-color: var(--brand-orange);
+}
+
+.row-item input::placeholder {
+    color: var(--gray);
+}
+
+/* Specific Section Styles */
+.profile-section.first {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    gap: 2em;
+}
+
+.profile-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8em;
+    flex-shrink: 0;
+}
+
+.profile-picture {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.profile-data-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.profile-section.second {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Save Button */
+.save-btn {
+    background-color: var(--brand-orange);
+    color: var(--white);
+    border: none;
+    padding: 0.8em 2em;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 1em;
+    transition: background-color 0.2s;
+    margin-top: 0.5em;
+}
+
+.save-btn:hover {
+    background-color: var(--brand-orange-darker);
+}
+
+/* Error Messages */
+.error {
+    color: #ff4d4d;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+}
+
+.messages {
+    list-style: none;
+    padding: 1rem;
+    background-color: rgba(6, 95, 70, 0.2);
+    color: #34d399;
+    border-radius: 8px;
+    border: 1px solid #059669;
+    margin: 0;
+}
+
+/* File Input Customization */
+.hidden-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.profile-picture-label {
+    cursor: pointer;
+    display: block;
+    position: relative;
+}
+
+.profile-picture-label:hover .profile-picture {
+    opacity: 0.8;
+}
+
+.profile-picture-label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.profile-picture-label:hover::after {
+    opacity: 1;
+}
+
+.file-upload-label {
+    cursor: pointer;
+    color: var(--brand-yellow);
+    font-size: 0.9em;
+    text-decoration: underline;
+    text-align: center;
+    transition: color 0.2s;
+}
+
+.file-upload-label:hover {
+    color: var(--brand-orange);
+}

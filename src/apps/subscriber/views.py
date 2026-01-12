@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
@@ -14,6 +15,7 @@ from apps.users.models import User
 from .forms import (
     ContactForm,
     CredentialsForm,
+    EditProfileForm,
     EvaluationForm,
     LoginForm,
     PersonalInfoForm,
@@ -291,4 +293,27 @@ class ProfileView(View):
             "plan_info": plan_info,
         }
         return render(request, "profile/personal_data.html", context)
+
+
+class EditProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        subscriber = getattr(request.user, "subscriber", None)
+        if not subscriber:
+             return redirect("subscriber:register") 
+
+        form = EditProfileForm(instance=subscriber, user=request.user)
+        return render(request, "profile/edit_profile.html", {"form": form})
+
+    def post(self, request):
+        subscriber = getattr(request.user, "subscriber", None)
+        if not subscriber:
+             return redirect("subscriber:register")
+
+        form = EditProfileForm(request.POST, request.FILES, instance=subscriber, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Perfil atualizado com sucesso!")
+            return redirect("subscriber:edit_profile")
+        
+        return render(request, "profile/edit_profile.html", {"form": form})
     

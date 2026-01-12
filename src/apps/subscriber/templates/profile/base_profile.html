@@ -23,7 +23,7 @@
                 </li>
                 <li class="flex-row edit-profile-nav-item"> <!-- EDITAR PERFIL -->
                     <img src="{% static 'imgs/icons/edit_icon.svg' %}" alt="Ícone de editar perfil">
-                    <a class="profile-nav-a" href="#">Editar Perfil</a>
+                    <a class="profile-nav-a" href="{% url 'subscriber:edit_profile' %}">Editar Perfil</a>
                 </li>
                 <li class="flex-row config-nav-item"> <!-- CONFIGURAÇÕES -->
                     <img src="{% static 'imgs/icons/config_icon.svg' %}" alt="Ícone de engrenagem">
