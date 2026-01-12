@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Oferta{% endblock %}
+{% block title %}Ofertas{% endblock %}
 {% block head %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,64 +63,92 @@
             <h2>Buscar ofertas</h2>
             <div id="offer_search_container">
                 <div id="filter_container">
-                    <h2>Filtros</h2>
-                    <form action="{% url 'offer:offer_list' %}" method="get">
+                    <div class="filter-header">
+                        <h2>Filtros</h2>
+                        <button type="button" id="clear-filters" class="clear-filters-btn">Limpar</button>
+                    </div>
+                    <form id="filter-form">
                         <div class="search">
-                            <input type="text" name="name" placeholder="Procurar cupom...">
-                            <button type="submit"><img src="{% static 'imgs/search.svg' %}" alt=""></button>
+                            <input type="text" name="name" id="search-name" placeholder="Buscar oferta...">
+                            <button type="button" id="search-btn" class="search-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
                         </div>
+                        
                         <fieldset>
                             <legend>Desconto mínimo</legend>
                             <div class="slider-wrap">
-                                <output class="slider_bubble"></output>
-                                <input type="range" min="0" max="100" class="slider" value="50" id="min_discount" name="min_discount">
+                                <output class="slider_bubble">0%</output>
+                                <input type="range" min="0" max="100" class="slider" value="0" id="min_discount" name="min_discount">
                             </div>
                         </fieldset>
+                        
                         <fieldset>
-                            <legend>Data limite</legend>
-                            <div>
-                                <input type="date" id="start_date" name="start_date" placeholder="Data inicial"/>
-                                <input type="date" id="end_date" name="end_date" placeholder="Data final"/>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Categorias</legend>
-                            {% for category in categories %}
-                                <div>
-                                    <input type="checkbox" id="{{category.name}}" name="categories" value="{{category.id}}"/>
-                                    <label for="{{category.name}}">{{category.name}}</label>
+                            <legend>Período de validade</legend>
+                            <div class="date-inputs">
+                                <div class="date-field">
+                                    <label for="start_date">De:</label>
+                                    <input type="date" id="start_date" name="start_date"/>
                                 </div>
-                            {% endfor %}
+                                <div class="date-field">
+                                    <label for="end_date">Até:</label>
+                                    <input type="date" id="end_date" name="end_date"/>
+                                </div>
+                            </div>
                         </fieldset>
+                        
+                        <fieldset class="categories-fieldset">
+                            <legend>Categorias</legend>
+                            <div class="categories-list">
+                                {% for category in categories %}
+                                <label class="category-checkbox">
+                                    <input type="checkbox" name="categories" value="{{category.id}}"/>
+                                    <span class="checkmark"></span>
+                                    <span class="category-name">{{category.name}}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </fieldset>
+                        
+                        <button type="button" id="apply-filters" class="apply-filters-btn">Aplicar Filtros</button>
                     </form>
                 </div>
                 <div class="result">
-                    {% if offersCount > 0 %}
-                        <p>
-                            Exibindo
-                            <span>{{ page_obj.start_index }} - {{ page_obj.end_index }}</span>
-                            de {{ offersCount }} resultados
-                        </p>
-                        <div id="offer_filter_container">
+                    <p id="results-count">
+                        {% if offersCount > 0 %}
+                        Exibindo <span>{{ page_obj.start_index }} - {{ page_obj.end_index }}</span> de {{ offersCount }} resultados
+                        {% else %}
+                        Nenhum resultado encontrado
+                        {% endif %}
+                    </p>
+                    <div class="loading-indicator" id="loading-indicator">
+                        <div class="spinner"></div>
+                        <span>Carregando ofertas...</span>
+                    </div>
+                    <div id="offer_filter_container">
+                        {% if offersCount > 0 %}
                             {% for offer in page_obj.object_list %}
                                 {% include 'components/offer_card.html' with offer=offer data_id=offer.id %}
                             {% endfor %}
-                        </div>
-                        <div class="pagination">
-                            {% if page_obj.has_previous %}
-                                <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&laquo;</a>
-                            {% endif %}
-                            <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
-                            {% if page_obj.has_next %}
-                                <a href="?page={{ page_obj.next_page_number }}&{{ request.GET.urlencode | cut:'page' }}">&raquo;</a>
-                            {% endif %}
-                        </div>
-                    {% else %}
-                        <div class="nothing_found">
-                            <img src="{% static 'imgs/not_found.svg' %}" alt="">
-                            <p>Nenhuma oferta encontrada.</p>
-                        </div>
-                    {% endif %}
+                        {% else %}
+                            <div class="nothing_found">
+                                <img src="{% static 'imgs/not_found.svg' %}" alt="">
+                                <p>Nenhuma oferta encontrada.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="pagination" id="pagination-container">
+                        {% if page_obj.has_previous %}
+                            <button class="pagination-btn" data-page="{{ page_obj.previous_page_number }}">&laquo; Anterior</button>
+                        {% endif %}
+                        <span class="pagination-info">Página <span id="current-page">{{ page_obj.number }}</span> de <span id="total-pages">{{ page_obj.paginator.num_pages }}</span></span>
+                        {% if page_obj.has_next %}
+                            <button class="pagination-btn" data-page="{{ page_obj.next_page_number }}">Próxima &raquo;</button>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </section>
@@ -147,4 +175,5 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{% static 'js/swiper.js' %}"></script>
 <script src="{% static 'js/offer.js' %}"></script>
+<script src="{% static 'js/offer_filter.js' %}"></script>
 {% endblock %}

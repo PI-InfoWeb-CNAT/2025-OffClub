@@ -69,9 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const offer = await response.json();
             const modal = document.getElementById('offer-modal');
 
-            const staticImageUrl = modal.querySelector('.tag-category img').src;
+            // Imagem padrão para ofertas sem imagem
+            const defaultOfferImage = '/static/imgs/default-offer-image.png';
+            const defaultEnterpriseImage = '/static/imgs/empty_enterprise.svg';
 
-            modal.querySelector('.offer-image img').src = offer.image_url || staticImageUrl.replace('icons/discount.svg', 'offer_detail/offer-image.png');
+            modal.querySelector('.offer-image img').src = offer.image_url || defaultOfferImage;
             const priceInfo = modal.querySelector('.price-info');
             priceInfo.children[1].textContent = `R$ ${offer.price}`;
             priceInfo.children[3].textContent = `-${offer.discount}% (R$ ${offer.discount_value})`;
@@ -79,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             redeemButton.dataset.offerId = offer.id;
 
             modal.querySelector('.offer-content h2').textContent = offer.title;
-            modal.querySelector('.shop-info .enterprise-image').src = offer.enterprise.logo_url || staticImageUrl.replace('icons/discount.svg', 'offer_detail/default_store.png');
+            modal.querySelector('.shop-info .enterprise-image').src = offer.enterprise.logo_url || defaultEnterpriseImage;
             modal.querySelector('.shop-info p').textContent = offer.enterprise.trade_name;
             
             modal.querySelector('.units p').textContent = `${offer.remaining_coupons} / ${offer.max_coupons}`;

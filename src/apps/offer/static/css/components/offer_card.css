@@ -20,11 +20,14 @@
 
 .offer-card {
     background-color: #252525;
-    display: inline-block;
-    padding: 0.5em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em 1.2em;
     box-sizing: border-box;
     border-radius: var(--border-radius-small);
-    max-width: fit-content;
+    width: 280px;
+    min-width: 280px;
 }
 
 .offer-card:hover {
@@ -54,14 +57,16 @@
 
 .offer-image-wrapper {
     position: relative;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .offer-image {
     border-radius: var(--border-radius-small);
-    height: 8em;
-    width: 12em;
+    height: 160px;
+    width: 100%;
     object-fit: cover;
+    background-color: #1a1a1a;
 }
 
 .offer-discount-badge {
@@ -74,6 +79,20 @@
     font-size: 1.1em;
     padding: 0.5em 1em;
     border-radius: 0.5em;
+}
+
+.offer-title {
+    font-weight: 600;
+    font-size: 1em;
+    color: var(--white);
+    margin: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2.6em;
 }
 
 .offer-title a {
@@ -108,9 +127,13 @@
     text-decoration: line-through;
 }
 
+.offer-card-footer {
+    margin-top: auto;
+}
+
 .offer-date {
     font-weight: 300;
-    margin: 3% 0 12% 0;
+    margin: 0;
     color: var(--offwhite);
-    font-size: var(--text-font-size);
+    font-size: 0.85em;
 }

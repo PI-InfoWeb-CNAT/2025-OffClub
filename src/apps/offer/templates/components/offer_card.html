@@ -11,7 +11,11 @@
 
     <div class="offer-card-offer">
         <div class="offer-image-wrapper">
+            {% if offer.image %}
             <img src="{{ offer.image.url }}" alt="Imagem de {{ offer.title }}" class="offer-image">
+            {% else %}
+            <img src="{% static 'imgs/default-offer-image.png' %}" alt="Imagem de {{ offer.title }}" class="offer-image">
+            {% endif %}
             <span class="offer-discount-badge">{{ offer.discount }}%</span>
         </div>
         <h3 class="offer-title">{{ offer.title }}</h3>

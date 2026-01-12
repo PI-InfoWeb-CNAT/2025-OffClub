@@ -1,0 +1,11 @@
+{% load static %}
+{% if offersCount > 0 %}
+    {% for offer in page_obj.object_list %}
+        {% include 'components/offer_card.html' with offer=offer data_id=offer.id %}
+    {% endfor %}
+{% else %}
+    <div class="nothing_found">
+        <img src="{% static 'imgs/not_found.svg' %}" alt="">
+        <p>Nenhuma oferta encontrada.</p>
+    </div>
+{% endif %}

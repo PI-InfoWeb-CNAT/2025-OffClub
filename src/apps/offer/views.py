@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, View, CreateView, UpdateView, Del
 from django.urls import reverse_lazy # O reverse_lazy() serve para atributos de classe ou variáveis 
                                      # globais que o Django ainda não terminou de carregar no projeto
 from django.utils import timezone
+from django.template.loader import render_to_string
 from .models import Offer
 from .forms.offer_form import OfferForm
 from .services.manage_offer import ManageOffer
@@ -27,6 +28,34 @@ class OfferListView(View):
         return render(request, 'offer.html', context)
 
 
+class OfferFilterAjaxView(View):
+    """View para filtrar ofertas via AJAX sem recarregar a página"""
+    
+    def get(self, request, *args, **kwargs):
+        name = request.GET.get('name', '')
+        min_discount = request.GET.get('min_discount', '')
+        start_date = request.GET.get('start_date', '')
+        end_date = request.GET.get('end_date', '')
+        page_num = request.GET.get('page', 1)
+        categories = request.GET.getlist('categories')
+
+        context = OfferService.list_filter_offer(
+            name, min_discount, start_date, end_date, page_num, categories
+        )
+        
+        # Renderiza apenas o HTML das ofertas
+        offers_html = render_to_string('components/offers_results.html', context, request=request)
+        
+        return JsonResponse({
+            'html': offers_html,
+            'count': context['offersCount'],
+            'has_next': context['page_obj'].has_next(),
+            'has_previous': context['page_obj'].has_previous(),
+            'current_page': context['page_obj'].number,
+            'total_pages': context['page_obj'].paginator.num_pages,
+        })
+
+
 class OfferDetailJsonView(View): 
     def get(self, request, *args, **kwargs):
         offer_id = kwargs.get('offer_id')
@@ -34,14 +63,6 @@ class OfferDetailJsonView(View):
         
         return JsonResponse(offer.to_dict())
     
-
-class ManageOfferListView(TemplateView):
-    template_name = "offer_list.html" 
-
-    def get_context_data(self, **kwargs):
-        from django.utils import timezone
-from django.views.generic import TemplateView
-from .services.manage_offer import ManageOffer
 
 class ManageOfferListView(TemplateView):
     template_name = "offer_list.html"

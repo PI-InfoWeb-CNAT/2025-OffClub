@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (
     OfferListView,
     OfferDetailJsonView,
+    OfferFilterAjaxView,
     ManageOfferListView,
     ManageOfferDetailView,
     ManageOfferDetailJsonView,
@@ -16,6 +17,7 @@ app_name = "offer"
 urlpatterns = [
     path("", OfferListView.as_view(), name="list"),
     path("json/<uuid:offer_id>/", OfferDetailJsonView.as_view(), name="detail_json"),
+    path("filter/", OfferFilterAjaxView.as_view(), name="filter_ajax"),
     path("manage/", ManageOfferListView.as_view(), name="manage_list"),
     path(
         "manage/<uuid:offer_id>/", ManageOfferDetailView.as_view(), name="manage_detail"
