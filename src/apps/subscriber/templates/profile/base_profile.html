@@ -25,10 +25,6 @@
                     <img src="{% static 'imgs/icons/edit_icon.svg' %}" alt="Ícone de editar perfil">
                     <a class="profile-nav-a" href="{% url 'subscriber:edit_profile' %}">Editar Perfil</a>
                 </li>
-                <li class="flex-row config-nav-item"> <!-- CONFIGURAÇÕES -->
-                    <img src="{% static 'imgs/icons/config_icon.svg' %}" alt="Ícone de engrenagem">
-                    <a class="profile-nav-a" href="#">Configurações</a>
-                </li>
                 <li class="flex-row logout-nav-item"> <!-- SAIR DA CONTA -->
                     <img src="{% static 'imgs/icons/logout_icon.svg' %}" alt="Ícone de sair">
                     <a class="profile-nav-a profile-logout" href="{% url 'subscriber:logout' %}">Sair</a>
