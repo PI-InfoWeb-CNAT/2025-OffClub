@@ -1,0 +1,203 @@
+/* Destaque do item de navegação */
+.my-plans-nav-item {
+    background-color: rgba(239, 119, 0, 0.1); 
+    border-left: 4px solid var(--brand-orange);
+}
+
+.my-plans-nav-item a {
+    color: var(--brand-yellow);
+}
+
+.my-plans-nav-item img {
+    filter: invert(62%) sepia(83%) saturate(447%) hue-rotate(11deg) brightness(160%) contrast(90%);
+}
+
+/* Layout da Tab */
+.tab-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1em;
+}
+
+.personal-data-tab {
+    padding: 3em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.personal-data-content {
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+}
+
+/* Títulos das seções */
+.profile-section-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.profile-section-title h2 {
+    min-width: fit-content;
+    font-size: 1em;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to right, var(--brand-yellow), var(--brand-orange-darker));
+    font-weight: 600;
+}
+
+.profile-section-title hr {
+    width: 100%;       
+    height: 1px;         
+    background: var(--gray);     
+    border: none;
+    margin-left: 1em;
+}
+
+/* Data rows */
+.data-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+    gap: 2em;
+}
+
+.row-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.data-label {
+    color: var(--gray);
+    font-size: 0.85em;
+    margin-bottom: 0.2em;
+}
+
+.data-value {
+    color: var(--white);
+    font-size: 1em;
+}
+
+/* Cards de Plano */
+.plan-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.5em;
+    margin-bottom: 1em;
+    border: 1px solid transparent;
+}
+
+.plan-card.active {
+    border-color: var(--brand-orange);
+}
+
+.plan-card.past {
+    opacity: 0.7;
+    border-color: var(--gray);
+}
+
+.plan-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+    padding-bottom: 0.8em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.plan-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.plan-status {
+    padding: 0.3em 0.8em;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.plan-status.active {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.plan-status.expired {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.plan-card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Features/Benefícios */
+.plan-features {
+    margin-top: 0.5em;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.features-list li {
+    background-color: rgba(239, 119, 0, 0.15);
+    color: var(--brand-yellow);
+    padding: 0.3em 0.8em;
+    border-radius: 15px;
+    font-size: 0.85em;
+}
+
+/* Estado vazio */
+.empty-state {
+    color: var(--gray);
+    font-size: 1em;
+}
+
+.empty-state-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 2em;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px dashed var(--gray);
+}
+
+/* Botão primário */
+.btn-primary {
+    background-color: var(--brand-orange);
+    color: var(--white);
+    padding: 0.8em 1.5em;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-orange-darker);
+}
+
+/* Histórico */
+.subscriptions-history {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}

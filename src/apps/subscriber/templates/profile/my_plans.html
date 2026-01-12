@@ -1,0 +1,108 @@
+{% extends "profile/base_profile.html" %}
+{% load static %}
+
+{% block title %}Meus Planos{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profile/base_profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/profile/my_plans.css' %}" />
+{% endblock head %}
+
+{% block profile_tab %}
+<div class="personal-data-tab">
+    <h1 class="tab-title">MEUS PLANOS</h1>
+    
+    <div class="personal-data-content">
+        
+        <!-- Plano Atual -->
+        <div class="profile-section">
+            <div class="profile-section-title">
+                <h2>Plano Atual</h2>
+                <hr />
+            </div>
+
+            {% if active_subscription and active_subscription.plan %}
+            <div class="plan-card active">
+                <div class="plan-card-header">
+                    <span class="plan-title">{{ active_subscription.plan.title }}</span>
+                    <span class="plan-status active">Ativo</span>
+                </div>
+                <div class="plan-card-body">
+                    <div class="data-row">
+                        <div class="row-item">
+                            <span class="data-label">Valor</span>
+                            <span class="data-value">R$ {{ active_subscription.plan.price|floatformat:2 }}</span>
+                        </div>
+                        <div class="row-item">
+                            <span class="data-label">Duração</span>
+                            <span class="data-value">{{ plan_duration }}</span>
+                        </div>
+                    </div>
+                    <div class="data-row">
+                        <div class="row-item">
+                            <span class="data-label">Data de Assinatura</span>
+                            <span class="data-value">{{ active_subscription.start_date|date:'d/m/Y' }}</span>
+                        </div>
+                        <div class="row-item">
+                            <span class="data-label">Data de Expiração</span>
+                            <span class="data-value">{% if active_subscription.end_date %}{{ active_subscription.end_date|date:'d/m/Y' }}{% else %}-{% endif %}</span>
+                        </div>
+                    </div>
+                    {% if active_subscription.plan.features.all %}
+                    <div class="plan-features">
+                        <span class="data-label">Benefícios inclusos:</span>
+                        <ul class="features-list">
+                            {% for feature in active_subscription.plan.features.all %}
+                            <li>{{ feature.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="empty-state-box">
+                <p class="empty-state">Você ainda não possui um plano ativo.</p>
+                <a href="{% url 'subscription:plans' %}" class="btn-primary">Conhecer Planos</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Histórico de Planos -->
+        <div class="profile-section">
+            <div class="profile-section-title">
+                <h2>Histórico de Assinaturas</h2>
+                <hr />
+            </div>
+
+            {% if past_subscriptions %}
+            <div class="subscriptions-history">
+                {% for sub in past_subscriptions %}
+                <div class="plan-card past">
+                    <div class="plan-card-header">
+                        <span class="plan-title">{{ sub.plan.title }}</span>
+                        <span class="plan-status expired">Expirado</span>
+                    </div>
+                    <div class="plan-card-body">
+                        <div class="data-row">
+                            <div class="row-item">
+                                <span class="data-label">Período</span>
+                                <span class="data-value">{{ sub.start_date|date:'d/m/Y' }} - {% if sub.end_date %}{{ sub.end_date|date:'d/m/Y' }}{% else %}-{% endif %}</span>
+                            </div>
+                            <div class="row-item">
+                                <span class="data-label">Valor pago</span>
+                                <span class="data-value">R$ {{ sub.plan.price|floatformat:2 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="empty-state">Nenhuma assinatura anterior encontrada.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock profile_tab %}

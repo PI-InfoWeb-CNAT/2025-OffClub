@@ -7,6 +7,7 @@ from .views import (
     RegistrationDone,
     ProfileView,
     EditProfileView,
+    MyPlansView,
 )
 from django.contrib.auth.views import LogoutView
 
@@ -22,4 +23,5 @@ urlpatterns = [
     path('avaliar_cupom/<uuid:coupon_id>/', EvaluationCreateView.as_view(), name='evaluate_coupon'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit/', EditProfileView.as_view(), name='edit_profile'),
+    path('profile/plans/', MyPlansView.as_view(), name='my_plans'),
 ]

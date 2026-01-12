@@ -316,4 +316,48 @@ class EditProfileView(LoginRequiredMixin, View):
             return redirect("subscriber:edit_profile")
         
         return render(request, "profile/edit_profile.html", {"form": form})
+
+
+class MyPlansView(LoginRequiredMixin, View):
+    def get(self, request):
+        user = request.user
+        subscriber = getattr(user, "subscriber", None)
+        
+        # Busca a assinatura ativa
+        active_subscription = None
+        if subscriber:
+            active_subscription = getattr(subscriber, "active_subscription", None)
+        
+        if not active_subscription and user.is_authenticated:
+            user_subscriptions = user.subscriptions.select_related("plan").order_by("-start_date")
+            for subscription in user_subscriptions:
+                if subscription.plan and subscription.is_active:
+                    active_subscription = subscription
+                    break
+        
+        # Calcula duração do plano ativo
+        plan_duration = "-"
+        if active_subscription and active_subscription.plan:
+            duration = active_subscription.plan.duration
+            if duration:
+                total_days = duration.days
+                if total_days > 0:
+                    plan_duration = f"{total_days} dia{'s' if total_days != 1 else ''}"
+                else:
+                    plan_duration = str(duration)
+        
+        # Busca histórico de assinaturas anteriores (expiradas)
+        past_subscriptions = []
+        if user.is_authenticated:
+            all_subscriptions = user.subscriptions.select_related("plan").order_by("-start_date")
+            for sub in all_subscriptions:
+                if sub.plan and not sub.is_active:
+                    past_subscriptions.append(sub)
+        
+        context = {
+            "active_subscription": active_subscription,
+            "plan_duration": plan_duration,
+            "past_subscriptions": past_subscriptions,
+        }
+        return render(request, "profile/my_plans.html", context)
     
