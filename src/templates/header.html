@@ -68,49 +68,10 @@
     <div class="bottom-header container">
         <ul class="nav-list">
             <li class="nav-item">
-                <a href="#">Offclub</a>
-                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
-                <div class="dropdown-nav nav-offclub">
-                    <ul class="dropdown-nav-list">
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Sobre</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Onde estamos</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Nossa história</a>
-                        </li>
-                    </ul>
-                </div>
+                <a href="{% url 'about' %}">Offclub</a>
             </li>
             <li class="nav-item">
-                <a href="#">Ofertas</a>
-                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
-                <div class="dropdown-nav nav-offclub">
-                    <ul class="dropdown-nav-list">
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="{% url 'offer:offer_list' %}">Explorar ofertas</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Explorar empresas</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="#">Parceiros</a>
-                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
-                <div class="dropdown-nav nav-offclub">
-                    <ul class="dropdown-nav-list">
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Nossos parceiros</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Seja parceiro</a>
-                        </li>
-                    </ul>
-                </div>
+                <a href="{% url 'offer:list' %}">Ofertas</a>
             </li>
             <li class="nav-item">
                 <a href="#">Planos</a>
@@ -121,24 +82,13 @@
                             <a class="dropdown-nav-link" href="{% url 'subscription:plans' %}">Nossos planos</a>
                         </li>
                         <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Minhas assinaturas</a>
+                            <a class="dropdown-nav-link" href="{% url 'subscriber:my_plans' %}">Minhas assinaturas</a>
                         </li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#">Cupons</a>
-                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
-                <div class="dropdown-nav nav-offclub">
-                    <ul class="dropdown-nav-list">
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Meus cupons</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Histórico de consumo</a>
-                        </li>
-                    </ul>
-                </div>
+                <a href="{% url 'subscriber:my_coupons' %}">Cupons</a>
             </li>
             <li class="nav-item">
                 <a href="#">Contato</a>
