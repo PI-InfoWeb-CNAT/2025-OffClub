@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Registro - Passo 4{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/register/steps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/step4.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/form-steps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/enterprise.css' %}">
+    {% endblock %}
+
+{% block main %}
+<main class="container register-container">
+    <div class="title-register container flex-center">
+        <p>Cadastro de Empresa</p>
+    </div>
+    <div class="steps flex-row">
+        <div class="step flex-row step-1 done">
+            <div class="number-wrapper">
+                <img src="{% static 'imgs/check.svg' %}" alt="">
+            </div>
+            <p>Dados da empresa</p>
+        </div>
+        <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
+        <div class="step flex-row step-2 done">
+            <div class="number-wrapper">
+                <img src="{% static 'imgs/check.svg' %}" alt="">
+            </div>
+            <p>Login</p>
+        </div>
+        <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
+        <div class="step flex-row step-3 done">
+            <div class="number-wrapper">
+                <img src="{% static 'imgs/check.svg' %}" alt="">
+            </div>
+            <p>Contato</p>
+        </div>
+        <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
+        <div class="step flex-row step-4 active">
+            <div class="number-wrapper">
+                <p>4</p>
+            </div>
+            <p>Foto de Perfil</p>
+        </div>
+    </div>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-fields flex-center" id="pfp">
+            {{ wizard.management_form }}
+            {% for field in wizard.form %}
+                {% if field.name == 'profile_picture' %} 
+                    <div class="custom-file-upload">
+                        {{ field }}
+                        <label for="{{ field.id_for_label }}" class="dropzone-label">
+                            <div class="icon-container">
+                                <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Escolha sua foto de perfil">
+                            </div>
+                            <p class="main-text">Arraste e solte a foto aqui</p>
+                            <div class="upload-options">
+                                <span class="sub-text">ou</span>
+                                <span class="highlight">faça upload</span>
+                            </div>
+                        </label>
+                        {% if field.errors %}
+                            <div class="field-error">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                {% else %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+        <button type="submit">Solicitar cadastro</button>
+    </form>
+</main>
+{% endblock %}

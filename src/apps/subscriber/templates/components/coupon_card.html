@@ -11,10 +11,30 @@
             <span>{{ end_date|date:"d/m/Y" }}</span>
         </div>
     </div>
-    <div class="bottom-container">
-        <div class="offer-details">
-            <div class="offer-name">
-                <p class="name">{{offer_title }}</p>
+    <div class="coupon_card_offer">
+        <img src="{{ offer_image }}" alt="" class="offer_image">
+        <span>{{ discount }}%</span>
+        <h3><a href="{{ link }}">{{ title }}</a></h3>
+    </div>
+    <div class="price">
+        <p class="currency">R$</p>
+        <p class="promotion_price">{{ final_price|floatformat:2 }}</p>
+        <p class="old_price">{{ old_price|floatformat:2 }}</p>
+    </div>
+    <div class="coupon_card_coupon">
+        {% if used_date %}
+            <p class="general">Usado em {{ used_date }}</p>
+        {% else %}
+            <p class="general">Regatar até {{ end_date }}</p>
+        {% endif %}
+    </div>
+
+    {% for dic in used_coupons %}
+        {% with coupon=dic.object %}
+            <div class="coupon-card">
+                <button class="review_button open_modal" data-coupon-id="{{ coupon.object.id }}">Avaliar</button>
+                
+                {% include 'components/review_coupon.html' with coupon=coupon %}
             </div>
             <div class="price">
                 <p class="currency">R$</p>

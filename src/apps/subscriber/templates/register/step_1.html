@@ -6,7 +6,8 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/register/steps.css' %}">
-    <link rel="stylesheet" href="{% static 'css/register/step_1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/step1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/form-register.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -26,7 +27,7 @@
             <div class="number-wrapper">
                 <p>2</p>
             </div>
-            <p>Credenciais</p>
+            <p>Login</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
         <div class="step flex-row step-3">
@@ -48,16 +49,19 @@
         {% csrf_token %}
         <div class="form-fields">
             {{ wizard.management_form }}
-            
-            {% if wizard.form.errors %}
-            <div class="alert alert-danger">
-                Por favor, corrija os erros abaixo.
-            </div>
-            {% endif %}
-            
-            {{ wizard.form.as_p }}
+            {% for field in wizard.form %}
+                <div class="field-wrapper {{ field.field.widget.attrs.class }}">
+                    {% if field.label %}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% endif %}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-msg">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
-
+        
         <button type="submit">Próximo</button>
     </form>
 </main>

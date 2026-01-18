@@ -77,7 +77,7 @@
                   <span class="card__expires-date">{{ o.end_date|date:"d/m/Y" }}</span>
                 </div>
                 <div class="card__actions">
-                  <a class="btn btn--review" href="{% url 'enterprise:see_evaluations' o.id %}">Ver avaliações</a>
+                  <a class="btn btn--review" href="{% url 'enterprise:see_reviews' o.id %}">Ver avaliações</a>
                   <a class="btn btn--detail" href="{% url 'offer:manage_detail' o.id %}">Detalhes</a>
                   <a class="btn btn--edit" href="{% url 'offer:manage_edit' o.id %}">Editar</a>
                   <a class="btn btn--delete" href="{% url 'offer:manage_delete' o.id %}">Excluir</a>

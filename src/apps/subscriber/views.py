@@ -14,14 +14,14 @@ from apps.users.models import User
 from .forms import (
     ContactForm,
     CredentialsForm,
-    EvaluationForm,
+    ReviewForm,
     LoginForm,
     PersonalInfoForm,
     ProfilePicForm,
 )
-from .models import Evaluation, Subscriber
+from .models import Review, Subscriber
 from .services.discount import DiscountService
-from .services.evaluation import EvaluationService
+from .services.review import ReviewService
 
 
 FORMS = [
@@ -143,12 +143,14 @@ class HistoryView(LoginRequiredMixin, TemplateView):
         subscriber = getattr(self.request.user, "subscriber", None)
 
         if subscriber is None:
-            context.update({
-                "active_coupons": [],
-                "used_coupons": [],
-                "years_group": [],
-                "form": EvaluationForm(),
-            })
+            context.update(
+                {
+                    "active_coupons": [],
+                    "used_coupons": [],
+                    "years_group": [],
+                    "form": ReviewForm(),
+                }
+            )
             return context
         
         req_month = self.request.GET.get('month', 'all')
@@ -200,45 +202,14 @@ class HistoryView(LoginRequiredMixin, TemplateView):
                 },
             })
 
-        items_per_page = 4
-        page_number = self.request.GET.get('page', 1)
-        
-        paginator_active = Paginator(active_coupons, items_per_page)
-        paginator_used = Paginator(used_coupons, items_per_page)
-
-        try:
-            active_page_obj = paginator_active.page(page_number)
-        except (EmptyPage, PageNotAnInteger):
-            active_page_obj = [] 
-
-        try:
-            used_page_obj = paginator_used.page(page_number)
-        except (EmptyPage, PageNotAnInteger):
-            used_page_obj = []
-
-        max_pages = max(paginator_active.num_pages, paginator_used.num_pages, 1)
-        
-        try:
-            current_page = int(page_number)
-        except ValueError:
-            current_page = 1
-
-        context.update({
-            "active_coupons": active_page_obj,
-            "used_coupons": used_page_obj,
-            "current_page": current_page,
-            "max_pages": max_pages,
-            "page_range": range(1, max_pages + 1), 
-            "has_next": current_page < max_pages,
-            "has_previous": current_page > 1,
-            "next_page": current_page + 1,
-            "previous_page": current_page - 1,
-            "years_group": sorted(years, reverse=True),
-            "form": EvaluationForm(),
-            "selected_month": int(req_month) if req_month != 'all' else 'all',
-            "selected_year": int(req_year) if req_year != 'all' else 'all',
-            "selected_order": req_order,
-        })
+        context.update(
+            {
+                "active_coupons": active_coupons,
+                "used_coupons": used_coupons,
+                "years_group": sorted(years, reverse=True),
+                "form": ReviewForm(),
+            }
+        )
         return context
 
 
@@ -248,13 +219,13 @@ class RegistrationDone(TemplateView):
     template_name = "register/done.html"
 
 
-class EvaluationCreateView(LoginRequiredMixin, View):
+class ReviewCreateView(LoginRequiredMixin, View):
     """Recebe avaliações de cupons via requisições AJAX."""
 
     http_method_names = ["post"]
 
     def post(self, request, *args, **kwargs):
-        form = EvaluationForm(request.POST)
+        form = ReviewForm(request.POST)
         if not form.is_valid():
             errors = {
                 field: [str(error) for error in error_list]
@@ -271,13 +242,13 @@ class EvaluationCreateView(LoginRequiredMixin, View):
                 status=403,
             )
 
-        if Evaluation.objects.filter(coupon=coupon).exists():
+        if Review.objects.filter(coupon=coupon).exists():
             return JsonResponse(
                 {"error": "Você já avaliou este cupom."},
                 status=400,
             )
 
-        EvaluationService.create_evaluation(
+        ReviewService.create_review(
             coupon=coupon,
             stars=form.cleaned_data.get("stars"),
             message=form.cleaned_data.get("message", ""),

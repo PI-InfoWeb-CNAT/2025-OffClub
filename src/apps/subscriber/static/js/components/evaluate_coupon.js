@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const modal = document.getElementById("evaluate-modal");
+    const modal = document.getElementById("review-modal");
     const starsContainer = document.getElementById("stars-container");
     const hiddenStarsInput = document.getElementById("id_stars");
     const hiddenCouponInput = document.getElementById("id_coupon_id");
     const cancelarBtn = document.getElementById("cancell");
-    const form = document.getElementById("evaluate-form");
+    const form = document.getElementById("review-form");
     const formErrorsContainer = document.getElementById("form-errors");
 
     let selectedStars = 0;

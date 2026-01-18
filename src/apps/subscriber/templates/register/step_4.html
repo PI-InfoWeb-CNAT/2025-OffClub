@@ -7,10 +7,12 @@
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/register/steps.css' %}">
     <link rel="stylesheet" href="{% static 'css/register/step4.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/form-register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register/form-steps.css' %}">
 {% endblock %}
 
 {% block main %}
-<main class="container cadastro-container">
+<main class="container register-container">
     <div class="title-register container flex-center">
         <p>Cadastro de Usuário</p>
     </div>
@@ -19,14 +21,14 @@
             <div class="number-wrapper">
                 <img src="{% static 'imgs/check.svg' %}" alt="">
             </div>
-            <p>Foto de Perfil</p>
+            <p>Informações Pessoais</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
         <div class="step flex-row step-2 done">
             <div class="number-wrapper">
                 <img src="{% static 'imgs/check.svg' %}" alt="">
             </div>
-            <p>Credenciais</p>
+            <p>Login</p>
         </div>
         <img src="{% static 'imgs/steps_divider.svg' %}" alt="">
         <div class="step flex-row step-3 done">
@@ -46,20 +48,40 @@
     
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-fields">
+        <div class="form-fields flex-center" id="pfp">
             {{ wizard.management_form }}
-        
-            {% if wizard.form.errors %}
-                <div class="alert alert-danger">
-                    Por favor, corrija os erros abaixo.
-                </div>
-            {% endif %}
+            {% for field in wizard.form %}
+                {% if field.name == 'profile_picture' %} 
+                    <div class="custom-file-upload">
+                        {{ field }}
+                        <label for="{{ field.id_for_label }}" class="dropzone-label">
+                            <div class="icon-container">
+                                <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Escolha sua foto de perfil">
+                            </div>
+                            <p class="main-text">Arraste e solte a foto aqui</p>
+                            <div class="upload-options">
+                                <span class="sub-text">ou</span>
+                                <span class="highlight">faça upload</span>
+                            </div>
+                        </label>
+                        {% if field.errors %}
+                            <div class="field-error">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
 
-            {{ wizard.form.as_p }}
+                {% else %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
         </div>
-        
-
-        <button type="submit">Próximo</button>
+        <button type="submit">Solicitar cadastro</button>
     </form>
 </main>
 {% endblock %}
