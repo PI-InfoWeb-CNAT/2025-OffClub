@@ -9,6 +9,7 @@
 | 30/06/2025 | 3.0 | Atualização da imagem do diagrama de casos de uso  | Heitor Barboza e Lucas Cássio |
 | 02/11/2025 | 4.0 | Atualização na listagem dos detalhamentos e da imagem do diagrama de casos de uso  | Heitor Barboza |
 | 12/01/2026 | 5.0 | Atualização da imagem do diagrama de casos de uso  | Clara Teodósio |
+| 12/01/2026 | 6.0 | Inclusão do diagrama de atividades do CDU-015  | Heitor Barboza |
 | - | - | - | - |
 
 ## 1. Diagrama de Casos de Uso
@@ -27,3 +28,7 @@
 8. [CDU-015 - Resgatar cupons](detalhamentos/cdu_015.md)
 9. [CDU-017 - Visualizar avaliação dos clientes](detalhamentos/cdu_017.md)
 10. [CDU-023 - Aprovar cadastro de empresas](detalhamentos/cdu_023.md)
+
+## 3. Diagrama de atividades
+### CDU-015 - Resgatar cupons
+![Diagrama de Atividades - CDU-015](detalhamentos/imagens_detalhamentos/resgatar_cupons_atividades.png)
