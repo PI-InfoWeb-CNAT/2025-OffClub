@@ -23,6 +23,11 @@ class Coupon(models.Model):
             return False
         return timezone.now() <= self.expiration_date
 
+    @property
+    def days_left(self):        
+        delta = self.expiration_date - timezone.now()
+        return max(delta.days, 0)
+
     def __str__(self):
         return f"{self.offer.title} - {self.subscriber.first_name}"
 

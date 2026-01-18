@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detalhar cupom{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/coupon.css' %}">
+{% endblock head %}
+
+
+{% block main %}
+    <article id="transparent-bg">
+        <section id="offer-modal">
+            <div class="offer-modal-content">
+                <div class="offer-card">           
+                    <div class="offer-image">
+                        {% if offer.image %}
+                            <img src="{{ offer.image.url }}" alt="Imagem da oferta {{ offer.title }}">
+                        {% else %}
+                            <img src="{% static 'imgs/offer_detail/offer-image.png' %}" alt="">
+                        {% endif %} 
+                    </div>
+         
+                    <div class="price-info">
+                        <h3>Valor padrão</h3>
+                        <p>R$ {{ offer.price }}</p>
+        
+                        <h3>Desconto</h3>
+                        <p>-{{ offer.discount }}% (R$ {{ offer.discount_value|floatformat:2 }})</p>
+        
+                        <h3>Valor após desconto</h3>
+                        <p id="final-value">R$ {{ offer.final_price|floatformat:2 }}</p>
+
+                    </div>
+                </div>
+        
+                <div class="offer-content">          
+                    <h2>{{ offer.title}}</h2>
+                    
+                    <div class="shop-info">
+                        {% if offer.enterprise.user.profile_picture %}
+                        <img class="enterprise-image" src="{{ offer.enterprise.user.profile_picture.url }}" alt="Foto da loja">
+                        {% else %}
+                        <img class="enterprise-image" src="{% static 'imgs/offer_detail/default_store.png' %}" alt="Loja sem imagem">
+                        {% endif %}
+
+                        <p>{{ offer.enterprise.trade_name }}</p>
+                        <div class="yellow-border">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                            </svg>
+                            <p>5.0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="coupon-code">
+                        <h3>Código do cupom</h3>
+                        <p>{{ coupon.code }}</p>
+                    </div>
+                    
+                    <div class="status">
+                        <h3>Status</h3>
+                        {% if coupon.is_active %}
+                            <p class="yellow-border">Ativo</p>
+                        {% else %}
+                            <p class="inactive-border" disabled>Inativo</p>
+                        {% endif %}
+                    </div>
+        
+                    <div class="details">
+                        <h3>Detalhes</h3>
+                        <p>{{ offer.description }}</p>
+                    </div>
+                    
+                    <div class="categories">
+                        <div class="tag-category">
+                            <img src="{% static 'imgs/icons/discount.svg' %}" alt="Desconto">
+                            <p>{{ offer.category.name }}</p>
+                        </div>
+                    </div>
+        
+                    <div class="offer-info">
+                        <div>
+                            <h3>Disponível para uso de</h3>
+                            <p>{{ coupon.creation_date|date:"d/m/Y" }} a {{ coupon.expiration_date|date:"d/m/Y" }}</p>
+                        </div>
+        
+                        <div>
+                            {% if coupon.is_active %}
+                            <h3>Utilize o cupom em até</h3>
+                            <p>{{ coupon.days_left }} dias</p>
+                            {% else %}
+                            <h3>Data de uso</h3>
+                            <p>{{ coupon.used_date|date:"d/m/Y \à\s H:i" }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                </div>
+    
+                <a class="exit-button"
+                    href="{% url 'offer:manage_list' %}"
+                    onclick="if (history.length > 1) { history.back(); return false; }"
+                    aria-label="Voltar para a página anterior">
+                    <img src="{% static 'imgs/ep_arrow-up-bold.svg' %}" alt="Voltar" />
+                </a>
+            </div>
+            
+        </section>
+    </article>
+
+{% endblock main %}
+
+{% block scripts %}
+    <script src="{% static 'js/offerDetail.js' %}"></script>
+{% endblock scripts %}

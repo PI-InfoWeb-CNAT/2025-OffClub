@@ -143,76 +143,69 @@ class HistoryView(LoginRequiredMixin, TemplateView):
         subscriber = getattr(self.request.user, "subscriber", None)
 
         if subscriber is None:
-            context.update(
-                {
-                    "active_coupons": [],
-                    "used_coupons": [],
-                    "years_group": [],
-                    "form": EvaluationForm(),
-                }
-            )
+            context.update({
+                "active_coupons": [],
+                "used_coupons": [],
+                "years_group": [],
+                "form": EvaluationForm(),
+            })
             return context
         
-        req_month = self.request.GET.get('month')
-        req_year = self.request.GET.get('year')
+        req_month = self.request.GET.get('month', 'all')
+        req_year = self.request.GET.get('year', 'all')
         req_order = self.request.GET.get('order', 'recent')
         ordering = "creation_date" if req_order == 'old' else "-creation_date"
-
         coupons = (
             Coupon.objects.filter(subscriber=subscriber)
             .select_related("offer", "offer__enterprise", "offer__enterprise__user")
             .order_by(ordering)
         )
 
+        years_created = coupons.values_list('creation_date__year', flat=True)
+        years_used = coupons.exclude(used_date__isnull=True).values_list('used_date__year', flat=True)
+        years = set(years_created) | set(years_used)
+
+        active_qs = coupons.filter(used_date__isnull=True)
+        used_qs = coupons.filter(used_date__isnull=False)
+
+        if req_month != 'all':
+            active_qs = active_qs.filter(creation_date__month=req_month)
+            used_qs = used_qs.filter(used_date__month=req_month)
+
+        if req_year != 'all':
+            active_qs = active_qs.filter(creation_date__year=req_year)
+            used_qs = used_qs.filter(used_date__year=req_year)
+
         active_coupons = []
-        used_coupons = []
-        years = set()
-
-        for coupon in coupons:
-            if coupon.used_date:
-                years.add(coupon.used_date.year)
-            
-            is_filtered = False
-            has_date_filter = (req_month and req_month != 'all') or (req_year and req_year != 'all')
-
-            if coupon.used_date:
-                if req_month and req_month != 'all' and coupon.used_date.month != int(req_month):
-                    is_filtered = True
-                
-                if req_year and req_year != 'all' and coupon.used_date.year != int(req_year):
-                    is_filtered = True
-            else:
-                if has_date_filter:
-                    is_filtered = True
-
-            if is_filtered:
-                continue
-
-            old_price, final_price = DiscountService.final_price(
-                coupon.offer.price,
-                coupon.offer.discount,
-            )
-
-            coupon_payload = {
+        for coupon in active_qs:
+            old_price, final_price = DiscountService.final_price(coupon.offer.price, coupon.offer.discount)
+            active_coupons.append({
                 "object": coupon,
                 "data": {
                     "old_price": old_price,
                     "final_price": final_price,
-                    "used_month": coupon.used_date.month if coupon.used_date else None,
+                    "used_month": None,
                 },
-            }
+            })
 
-            if coupon.used_date:
-                used_coupons.append(coupon_payload)
-            else:
-                active_coupons.append(coupon_payload)
+        used_coupons = []
+        for coupon in used_qs:
+            old_price, final_price = DiscountService.final_price(coupon.offer.price, coupon.offer.discount)
+            used_coupons.append({
+                "object": coupon,
+                "data": {
+                    "old_price": old_price,
+                    "final_price": final_price,
+                    "used_month": coupon.used_date.month,
+                },
+            })
 
-        items_per_page = 1 
+        items_per_page = 4
+        page_number = self.request.GET.get('page', 1)
         
         paginator_active = Paginator(active_coupons, items_per_page)
         paginator_used = Paginator(used_coupons, items_per_page)
 
-        page_number = self.request.GET.get('page', 1)
         try:
             active_page_obj = paginator_active.page(page_number)
         except (EmptyPage, PageNotAnInteger):
@@ -222,31 +215,30 @@ class HistoryView(LoginRequiredMixin, TemplateView):
             used_page_obj = paginator_used.page(page_number)
         except (EmptyPage, PageNotAnInteger):
             used_page_obj = []
-        max_pages = max(paginator_active.num_pages, paginator_used.num_pages)
+
+        max_pages = max(paginator_active.num_pages, paginator_used.num_pages, 1)
         
         try:
             current_page = int(page_number)
         except ValueError:
             current_page = 1
 
-        context.update(
-            {
-                "active_coupons": active_page_obj,
-                "used_coupons": used_page_obj,
-                "current_page": current_page,
-                "max_pages": max_pages,
-                "page_range": range(1, max_pages + 1), 
-                "has_next": current_page < max_pages,
-                "has_previous": current_page > 1,
-                "next_page": current_page + 1,
-                "previous_page": current_page - 1,
-                "years_group": sorted(years, reverse=True),
-                "form": EvaluationForm(),
-                "selected_month": int(req_month) if req_month and req_month != 'all' else 'all',
-                "selected_year": int(req_year) if req_year and req_year != 'all' else 'all',
-                "selected_order": req_order,
-            }
-        )
+        context.update({
+            "active_coupons": active_page_obj,
+            "used_coupons": used_page_obj,
+            "current_page": current_page,
+            "max_pages": max_pages,
+            "page_range": range(1, max_pages + 1), 
+            "has_next": current_page < max_pages,
+            "has_previous": current_page > 1,
+            "next_page": current_page + 1,
+            "previous_page": current_page - 1,
+            "years_group": sorted(years, reverse=True),
+            "form": EvaluationForm(),
+            "selected_month": int(req_month) if req_month != 'all' else 'all',
+            "selected_year": int(req_year) if req_year != 'all' else 'all',
+            "selected_order": req_order,
+        })
         return context
 
 
