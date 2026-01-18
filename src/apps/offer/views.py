@@ -1,4 +1,8 @@
 from django.http import JsonResponse
+import uuid
+from django.db import transaction, IntegrityError
+from django.db.models import F
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView, View, CreateView, UpdateView, DeleteView
@@ -9,6 +13,8 @@ from .models import Offer
 from .forms.offer_form import OfferForm
 from .services.manage_offer import ManageOffer
 from .services.offers_service import OfferService
+from apps.coupon.models import Coupon
+from apps.subscriber.models import Subscriber
 
 class OfferListView(View):
     
@@ -33,6 +39,68 @@ class OfferDetailJsonView(View):
         offer = get_object_or_404(Offer, pk=offer_id)
         
         return JsonResponse(offer.to_dict())
+
+class RedeemCouponView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        offer_id = kwargs.get("offer_id")
+        subscriber = get_object_or_404(Subscriber, user=request.user)
+
+        try:
+            with transaction.atomic():
+                offer = Offer.objects.select_for_update().get(pk=offer_id)
+
+                now = timezone.now()
+                if not (offer.start_date <= now <= offer.end_date):
+                    return JsonResponse(
+                        {"ok": False, "error": "Oferta indisponível no momento."},
+                        status=400,
+                    )
+
+                if offer.generated_coupons >= offer.max_coupons:
+                    return JsonResponse(
+                        {"ok": False, "error": "Oferta esgotada."},
+                        status=400,
+                    )
+
+                expiration_date = timezone.now() + offer.redemption_period
+
+                coupon, created = Coupon.objects.get_or_create(
+                    subscriber=subscriber,
+                    offer=offer,
+                    defaults={
+                        "code": uuid.uuid4().hex[:10].upper(),
+                        "expiration_date": expiration_date,
+                    },
+                )
+
+                if created:
+                    Offer.objects.filter(pk=offer.pk).update(
+                        generated_coupons=F("generated_coupons") + 1
+                    )
+
+                offer.refresh_from_db(fields=["generated_coupons", "max_coupons"])
+                remaining = offer.max_coupons - offer.generated_coupons
+
+                return JsonResponse(
+                    {
+                        "ok": True,
+                        "created": created,
+                        "coupon_id": str(coupon.id),
+                        "remaining_coupons": remaining,
+                        "max_coupons": offer.max_coupons,
+                    },
+                    status=200,
+                )
+
+        except Offer.DoesNotExist:
+            return JsonResponse({"ok": False, "error": "Oferta não encontrada."}, status=404)
+
+        except IntegrityError as e:
+            print("INTEGRITY ERROR:", repr(e))
+            return JsonResponse(
+                {"ok": False, "error": "Falha ao criar cupom. Tente novamente."},
+                status=409,
+            )
     
 
 class ManageOfferListView(TemplateView):

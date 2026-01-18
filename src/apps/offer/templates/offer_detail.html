@@ -33,9 +33,14 @@
 
                     </div>
         
-                    <button id="redeem-button">
+                    <button
+                        type="button"
+                        id="redeem-button"
+                        class="redeem-button"
+                        data-action="redeem">
                         RESGATAR
                     </button>
+
                 </div>
         
                 <div class="offer-content">          
@@ -112,10 +117,12 @@
             </div>
             
             <a href="#">
-                <button id="ascess-coupons-button" class="yellow-border">
-                    Acessar meus cupons
-                    <img src="{% static 'imgs/icons/yellow-orange-arrow.svg' %}" alt="Seta">
-                </button>
+                <a href="{% url 'coupon:my_coupons' %}">
+                    <button id="ascess-coupons-button" class="yellow-border" style="display:none;">
+                        Acessar meus cupons
+                        <img src="{% static 'imgs/icons/yellow-orange-arrow.svg' %}" alt="Seta">
+                    </button>
+                </a>
             </a>
         </section>
     </article>
@@ -125,7 +132,7 @@
             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
         </svg>
         <div>
-            <p>Cupom resgatado com sucesso!</p>
+            <p>Cupom resgatado com sucesso!!</p>
             <p>Acesse "Meus Cupons" para utilizá-lo</p>
         </div>
         <button id="close-toast">
@@ -138,5 +145,5 @@
 {% endblock main %}
 
 {% block scripts %}
-    <script src="{% static 'js/offerDetail.js' %}"></script>
+    <script src="{% static 'js/offer.js' %}"></script>
 {% endblock scripts %}
