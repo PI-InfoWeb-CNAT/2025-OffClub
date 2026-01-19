@@ -1,0 +1,14 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/components/not_authenticated_message.css' %}">
+</head>
+
+<div class="not-authenticated-container">
+<h2>Você não está autenticado. Por favor, faça login para acessar esta página.</h2>
+<a href="{% url 'subscriber:login' %}">
+    <button>
+        Entrar
+    </button>
+</a>
+</div>
