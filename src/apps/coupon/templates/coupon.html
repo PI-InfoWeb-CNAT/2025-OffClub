@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load offer_extras %}
 
 {% block title %}Detalhar cupom{% endblock title %}
 
@@ -15,7 +16,7 @@
                 <div class="offer-card">           
                     <div class="offer-image">
                         {% if offer.image %}
-                            <img src="{{ offer.image.url }}" alt="Imagem da oferta {{ offer.title }}">
+                            <img src="{{ offer.image|offer_image_url }}" alt="Imagem da oferta {{ offer.title }}">
                         {% else %}
                             <img src="{% static 'imgs/offer_detail/offer-image.png' %}" alt="">
                         {% endif %} 
@@ -39,9 +40,9 @@
                     
                     <div class="shop-info">
                         {% if offer.enterprise.user.profile_picture %}
-                        <img class="enterprise-image" src="{{ offer.enterprise.user.profile_picture.url }}" alt="Foto da loja">
+                        <img class="enterprise-image" src="{{ offer.enterprise.user.profile_picture|offer_image_url }}" alt="Foto da loja">
                         {% else %}
-                        <img class="enterprise-image" src="{% static 'imgs/offer_detail/default_store.png' %}" alt="Loja sem imagem">
+                        <img class="enterprise-image" src="{% static 'imgs/empty_enterprise.svg' %}" alt="Loja sem imagem">
                         {% endif %}
 
                         <p>{{ offer.enterprise.trade_name }}</p>
