@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load offer_extras %}
 {% block title %} Informações da Empresa {% endblock title%}
 
 {% block head %}
@@ -17,7 +18,7 @@
         <section class="modal-top">
             <div class="profile-pic-container">
                 {% if enterprise.user.profile_picture %}
-                    <img src="{{ enterprise.user.profile_picture.url }}" alt="Foto da empresa">
+                    <img src="{{ enterprise.user.profile_picture|offer_image_url }}" alt="Foto da empresa">
                 {% else %}
                     <img src="{% static 'imgs/icons/landscape.svg' %}" alt="Sem foto">
                 {% endif %}

@@ -168,7 +168,7 @@ figure.how-it-works-image-wrapper img:nth-of-type(2) {
 .reviews .swiper-pagination {
     position: relative;
     bottom: auto;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .reviews .swiper-pagination-bullet {
