@@ -58,6 +58,17 @@
                         </ul>
                     </div>
                     {% endif %}
+
+                    <!-- Botão para cancelar assinatura -->
+                    {% if active_subscription.is_active %}
+                    <div class="plan-actions">
+                        <form action="{% url 'subscriber:cancel_plan' %}" method="post" onsubmit="return confirm('Tem certeza que deseja cancelar seu plano?');">
+                            {% csrf_token %}
+                            <input type="hidden" name="subscription_id" value="{{ active_subscription.id }}" />
+                            <button type="submit" class="btn-secondary">Cancelar Plano</button>
+                        </form>
+                    </div>
+                {% endif %}
                 </div>
             </div>
             {% else %}

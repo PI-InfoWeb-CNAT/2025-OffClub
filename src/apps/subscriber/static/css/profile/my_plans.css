@@ -195,6 +195,30 @@
     background-color: var(--brand-orange-darker);
 }
 
+/* Botão secundário (ex: Cancelar) */
+.btn-secondary {
+    background: transparent;
+    color: var(--light-grey, var(--gray));
+    padding: 0.7em 1.2em;
+    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.12);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255,255,255,0.03);
+    color: var(--white);
+    border-color: rgba(255,255,255,0.18);
+}
+
+.plan-actions {
+    margin-top: 1em;
+    display: flex;
+    gap: 0.5em;
+}
+
 /* Histórico */
 .subscriptions-history {
     display: flex;

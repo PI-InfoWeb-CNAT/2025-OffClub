@@ -362,6 +362,49 @@ class MyPlansView(LoginRequiredMixin, View):
         return render(request, "profile/my_plans.html", context)
 
 
+class CancelSubscriptionView(LoginRequiredMixin, View):
+    """Recebe requisições POST para cancelar a assinatura ativa do usuário."""
+
+    http_method_names = ["post"]
+
+    def post(self, request):
+        user = request.user
+        subscriber = getattr(user, "subscriber", None)
+        if not subscriber:
+            messages.error(request, "Assinante não encontrado.")
+            return redirect("subscriber:my_plans")
+
+        subscription_id = request.POST.get("subscription_id")
+        # busca a assinatura que pertença ao usuário
+        try:
+            if subscription_id:
+                subscription = user.subscriptions.get(id=subscription_id)
+            else:
+                # pega a ativa mais recente
+                subscription = None
+                for sub in user.subscriptions.order_by("-start_date"):
+                    if sub.plan and sub.is_active:
+                        subscription = sub
+                        break
+                if not subscription:
+                    raise user.subscriptions.model.DoesNotExist()
+        except Exception:
+            messages.error(request, "Assinatura não encontrada.")
+            return redirect("subscriber:my_plans")
+
+        if not subscription.is_active:
+            messages.info(request, "Essa assinatura já não está ativa.")
+            return redirect("subscriber:my_plans")
+
+        canceled = subscription.cancel()
+        if canceled:
+            messages.success(request, "Assinatura cancelada com sucesso.")
+        else:
+            messages.error(request, "Não foi possível cancelar a assinatura.")
+
+        return redirect("subscriber:my_plans")
+
+
 class MyCouponsView(LoginRequiredMixin, View):
     def get(self, request):
         subscriber = getattr(request.user, "subscriber", None)

@@ -53,6 +53,16 @@ class Subscription(models.Model):
     # Identificador da assinatura no Stripe (gateway de pagamento)
     stripe_subscription_id = models.CharField(max_length=100, blank=True, null=True)
     
+    def cancel(self):
+        """
+        Cancela a assinatura imediatamente definindo a `end_date` para o momento atual.
+        Retorna True se a assinatura foi cancelada; False se já estava inativa.
+        """
+        if not self.is_active:
+            return False
+        self.end_date = timezone.now()
+        self.save(update_fields=["end_date"])
+        return True
 
     def __str__(self):
         return f'{self.user} - {self.plan.title if self.plan else "Sem Plano"}'

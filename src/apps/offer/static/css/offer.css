@@ -227,7 +227,7 @@ main {
 #filter_container {
     background: linear-gradient(180deg, #2a2a2a 0%, #1f1f1f 100%);
     border-radius: 1.2em;
-    width: 280px;
+    width: 320px;
     min-width: 280px;
     padding: 1.5em;
     border: 1px solid #333;

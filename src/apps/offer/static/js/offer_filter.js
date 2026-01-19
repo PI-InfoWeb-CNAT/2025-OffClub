@@ -36,11 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             params.append('min_discount', minDiscount);
         }
         
-        const startDate = formData.get('start_date');
-        const endDate = formData.get('end_date');
-        if (startDate) params.append('start_date', startDate);
-        if (endDate) params.append('end_date', endDate);
-        
+
         const categories = formData.getAll('categories');
         categories.forEach(cat => params.append('categories', cat));
         
@@ -204,9 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         slider.value = 0;
         initSlider();
         
-        document.getElementById('start_date').value = '';
-        document.getElementById('end_date').value = '';
-        
+
         filterForm.querySelectorAll('input[type="checkbox"]').forEach(cb => {
             cb.checked = false;
         });
@@ -223,9 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (searchInput.value.trim()) count++;
         if (parseInt(slider.value) > 0) count++;
-        if (document.getElementById('start_date').value) count++;
-        if (document.getElementById('end_date').value) count++;
-        
+
         const checkedCategories = filterForm.querySelectorAll('input[name="categories"]:checked');
         count += checkedCategories.length;
         
@@ -273,8 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Atualiza botão limpar quando inputs mudam
     searchInput.addEventListener('input', updateClearButton);
     slider.addEventListener('input', updateClearButton);
-    document.getElementById('start_date').addEventListener('change', updateClearButton);
-    document.getElementById('end_date').addEventListener('change', updateClearButton);
 
     filterForm.querySelectorAll('input[name="categories"]').forEach(checkbox => {
         checkbox.addEventListener('change', () => {
@@ -292,17 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
         debounceTimer = setTimeout(fetchOffers, 600);
     });
 
-    document.getElementById('start_date').addEventListener('change', () => {
-        currentPage = 1;
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(fetchOffers, 400);
-    });
-    
-    document.getElementById('end_date').addEventListener('change', () => {
-        currentPage = 1;
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(fetchOffers, 400);
-    });
 
     paginationContainer.querySelectorAll('.pagination-btn').forEach(btn => {
         btn.addEventListener('click', () => {

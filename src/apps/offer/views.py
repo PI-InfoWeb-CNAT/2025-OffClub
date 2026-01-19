@@ -6,6 +6,8 @@ from django.urls import reverse_lazy # O reverse_lazy() serve para atributos de 
                                      # globais que o Django ainda não terminou de carregar no projeto
 from django.utils import timezone
 from django.template.loader import render_to_string
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 from .models import Offer
 from .forms.offer_form import OfferForm
 from .services.manage_offer import ManageOffer
@@ -16,13 +18,11 @@ class OfferListView(View):
     def get(self, request, *args, **kwargs):
         name = request.GET.get('name', '')
         min_discount = request.GET.get('min_discount', '')
-        start_date = request.GET.get('start_date', '')
-        end_date = request.GET.get('end_date', '')
         page_num = request.GET.get('page')
         categories = request.GET.getlist('categories')
 
         context = OfferService.list_filter_offer(
-            name, min_discount, start_date, end_date, page_num, categories
+            name, min_discount, page_num, categories
         )
         
         return render(request, 'offer.html', context)
@@ -34,13 +34,11 @@ class OfferFilterAjaxView(View):
     def get(self, request, *args, **kwargs):
         name = request.GET.get('name', '')
         min_discount = request.GET.get('min_discount', '')
-        start_date = request.GET.get('start_date', '')
-        end_date = request.GET.get('end_date', '')
         page_num = request.GET.get('page', 1)
         categories = request.GET.getlist('categories')
 
         context = OfferService.list_filter_offer(
-            name, min_discount, start_date, end_date, page_num, categories
+            name, min_discount, page_num, categories
         )
         
         # Renderiza apenas o HTML das ofertas
@@ -60,9 +58,61 @@ class OfferDetailJsonView(View):
     def get(self, request, *args, **kwargs):
         offer_id = kwargs.get('offer_id')
         offer = get_object_or_404(Offer, pk=offer_id)
-        
-        return JsonResponse(offer.to_dict())
+        data = offer.to_dict()
+
+        # Indica ao front-end se o usuário já resgatou essa oferta
+        subscriber = getattr(request.user, 'subscriber', None)
+        if subscriber:
+            from apps.coupon.models import Coupon
+            data['already_redeemed'] = Coupon.objects.filter(subscriber=subscriber, offer=offer).exists()
+        else:
+            data['already_redeemed'] = False
+
+        return JsonResponse(data)
     
+
+class RedeemOfferView(LoginRequiredMixin, View):
+    """API para resgatar um cupom de uma oferta via requisição AJAX."""
+
+    http_method_names = ["post"]
+
+    def post(self, request, *args, **kwargs):
+        from apps.coupon.models import Coupon
+
+        subscriber = getattr(request.user, "subscriber", None)
+        if subscriber is None:
+            return JsonResponse({"error": "Usuário precisa ser um assinante."}, status=403)
+
+        offer_id = kwargs.get("offer_id")
+        offer = get_object_or_404(Offer, pk=offer_id)
+
+        if not offer.is_active:
+            return JsonResponse({"error": "Oferta indisponível."}, status=400)
+
+        # Protege contra condições de corrida usando bloqueio transacional
+        with transaction.atomic():
+            offer_locked = Offer.objects.select_for_update().get(pk=offer.pk)
+            remaining = offer_locked.max_coupons - offer_locked.generated_coupons
+
+            if remaining <= 0:
+                return JsonResponse({"error": "Oferta esgotada."}, status=400)
+
+            if Coupon.objects.filter(subscriber=subscriber, offer=offer_locked).exists():
+                return JsonResponse({"error": "Você já resgatou essa oferta."}, status=400)
+
+            coupon = Coupon.objects.create(subscriber=subscriber, offer=offer_locked)
+            offer_locked.generated_coupons += 1
+            offer_locked.save(update_fields=["generated_coupons"])
+
+        return JsonResponse({
+            "success": True,
+            "coupon": {
+                "id": str(coupon.id),
+                "code": coupon.code,
+                "expiration_date": coupon.expiration_date.isoformat(),
+            },
+            "remaining_coupons": offer_locked.max_coupons - offer_locked.generated_coupons,
+        }, status=201)
 
 class ManageOfferListView(TemplateView):
     template_name = "offer_list.html"
