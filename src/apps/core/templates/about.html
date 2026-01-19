@@ -54,9 +54,15 @@
 
     <div class="categories-slider container swiper">
         <div class="container swiper-wrapper">
-            {% for i in "1234567890" %}
+            {% for category in categories %}
                 <div class="swiper-slide">
-                    {% include 'components/category_badge.html' with category_name='Categoria' %}
+                    <a href="{% url 'offer:list' %}?category={{ category.id }}">
+                        {% include 'components/category_badge.html' with category_name=category.name %}
+                    </a>
+                </div>
+            {% empty %}
+                <div class="swiper-slide">
+                    {% include 'components/category_badge.html' with category_name='Geral' %}
                 </div>
             {% endfor %}
         </div>
@@ -121,8 +127,8 @@
 
     <section class="reviews container swiper">
         <div class="flex-row swiper-wrapper">
-            {% for i in "12345" %}
-                {% include 'components/review.html' with rating=5 text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ipsum dolor' author_name='John Doe' author_role='Cliente' %}
+            {% for t in testimonials %}
+                {% include 'components/review.html' with rating=t.rating text=t.text author_name=t.author_name author_role=t.author_role %}
             {% endfor %}
         </div>
 

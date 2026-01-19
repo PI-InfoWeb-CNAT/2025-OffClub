@@ -138,7 +138,7 @@ div.how-it-works-wrapper {
     }
 }
 
-.tab-content:nth-of-type(2) {
+.tab-content:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -146,6 +146,7 @@ div.how-it-works-wrapper {
 
 .sliders {
     gap: 1em;
+    align-items: center;
 }
 
 .sliders .slider-line {
@@ -153,12 +154,13 @@ div.how-it-works-wrapper {
     height: 0.5em;
     background-color: var(--almost-transparent-white);
     border-radius: var(--border-radius);
+    transition: width 0.25s ease, background-color 0.25s ease;
 }
 
-.sliders .slider-line:nth-child(2) {
+.sliders .slider-line.active {
     width: 4em;
     background-color: var(--offwhite);
-}
+} 
 
 figure.how-it-works-image-wrapper {
     position: relative;

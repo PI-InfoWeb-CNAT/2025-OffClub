@@ -24,17 +24,30 @@ Ele espera as seguintes variáveis de contexto:
         <span>{{ price }}</span>
         <span>/MÊS</span>
     </p>
-    <a href="{{ subscribe_url|default:'#' }}">
+    {% if subscribe_url %}
+    <a href="{{ subscribe_url }}">
+    {% else %}
+    <a href="{% url 'subscription:plans' %}">
+    {% endif %}
         <button class="choose-plan-button">Escolher plano</button>
     </a>
     <hr class="home-plan-divider">
     <ul class="home-plan-features">
-        <li>Nome da Vantagem</li>
-        <li>Nome da Vantagem</li>
-        <li>Nome da Vantagem</li>
-        <li>Nome da Vantagem</li>
-        <li>Nome da Vantagem</li>
-        <li>Nome da Vantagem</li>
-        <li>Nome da Vantagem</li>
+        {% if features %}
+            {% for f in features %}
+            <li>
+                <div class="feature-content">
+                    <span class="feature-name">{{ f.name }}</span>
+                    {% if f.description %}
+                    <span class="feature-description">{{ f.description }}</span>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        {% else %}
+            <li>Vantagens exclusivas do plano.</li>
+            <li>Acesso a ofertas locais.</li>
+            <li>Suporte prioritário.</li>
+        {% endif %}
     </ul>
 </div>

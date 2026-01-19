@@ -17,13 +17,13 @@
     <section class="container hero-section">
         <div class="hero-texts flex-column flex-center">
             <h1>Economize e ajude a movimentar a economia local com as nossas ofertas!</h1>
-            <p>Acessso exclusivo a diversos cupons de desconto. Todo mundo ganha!</p>
+            <p>Acesso exclusivo a diversos cupons de desconto de comércios próximos — qualidade e economia para você.</p>
         </div>
         <div class="hero-buttons flex-row">
             <a href="{% url 'about' %}">
                 <button class="hero-button hero-know-more-button">Saiba mais</button>
             </a>
-            <a href="#">
+            <a href="{% url 'subscriber:register' %}">
                 <button class="hero-button hero-register-button">Registrar-se</button>
             </a>
         </div>
@@ -31,9 +31,15 @@
 
     <div class="categories-slider container swiper">
         <div class="container swiper-wrapper">
-            {% for i in "1234567890" %}
+            {% for category in categories %}
                 <div class="swiper-slide">
-                    {% include 'components/category_badge.html' with category_name='Categoria' %}
+                    <a href="{% url 'offer:list' %}?category={{ category.id }}">
+                        {% include 'components/category_badge.html' with category_name=category.name %}
+                    </a>
+                </div>
+            {% empty %}
+                <div class="swiper-slide">
+                    {% include 'components/category_badge.html' with category_name='Geral' %}
                 </div>
             {% endfor %}
         </div>
@@ -45,32 +51,28 @@
                 <h1>COMO FUNCIONA?</h1>
     
                 <div class="tabs flex-row">
-                    <button class="tab-link">1</button>
-                    <button class="tab-link active">2</button>
-                    <button class="tab-link">3</button>
-                    <button class="tab-link">4</button>
+                    <button class="tab-link active" data-target="tab-1" aria-label="Encontre ofertas locais">1</button>
+                    <button class="tab-link" data-target="tab-2" aria-label="Adquira seu cupom">2</button>
+                    <button class="tab-link" data-target="tab-3" aria-label="Resgate no estabelecimento">3</button>
+                    <button class="tab-link" data-target="tab-4" aria-label="Apoie o comércio local">4</button>
                 </div>
     
                 <div class="tab-content" id="tab-1">
-                    <h2>Título do Tópico</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    <h2>Encontre ofertas locais</h2>
+                    <p>Explore cupons organizados por categorias e localização. Filtre por interesses e descubra descontos em restaurantes, serviços e lojas próximas.</p>
                 </div>
                 <div class="tab-content" id="tab-2">
-                    <h2>Título do Tópico</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    <h2>Adquira seu cupom</h2>
+                    <p>Escolha a oferta desejada, confirme a compra com segurança e receba o cupom digital no seu perfil para resgate no estabelecimento.</p>
                 </div>
                 <div class="tab-content" id="tab-3">
-                    <h2>Título do Tópico</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    <h2>Resgate no estabelecimento</h2>
+                    <p>Apresente o cupom no caixa do parceiro e aproveite o desconto. O processo é simples e rápido, sem burocracia para você ou para o comerciante.</p>
                 </div>
                 <div class="tab-content" id="tab-4">
-                    <h2>Título do Tópico</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam</p>
-                </div>
+                    <h2>Ajude o comércio local</h2>
+                    <p>Cada cupom utilizado gera movimento e visibilidade para estabelecimentos da sua região — uma forma concreta de fortalecer a economia local.</p>
+                </div> 
     
                 <div class="sliders flex-row">
                     <div class="slider-line" id="slider-1"></div>
@@ -92,12 +94,11 @@
             <img src="{% static 'imgs/home-plans-title.svg' %}" alt="Título da seção de planos">
         </figure>
         <div class="home-plans-wrapper flex-row">
-            {% include 'components/plan_card.html' with plan_class="copper" plan_name="Bronze" price="9,90" %}
-
-            {% include 'components/plan_card.html' with plan_class="silver" plan_name="Prata" price="19,90" %}
-
-            {% include 'components/plan_card.html' with plan_class="gold" plan_name="Ouro" price="29,90" %}
-        </div>
+            {% for plan in plans %}
+                {% cycle 'copper' 'silver' 'gold' as plan_class silent %}
+                {% include 'components/plan_card.html' with plan_class=plan_class plan_name=plan.title price=plan.price|floatformat:2 features=plan.features.all %}
+            {% endfor %}
+        </div> 
         <a href="{% url 'subscription:plans' %}">
             <button class="view-detailed-plans-btn flex-row flex-center">
                 Ver planos detalhados
@@ -115,22 +116,19 @@
             </figure>
     
             <div class="access-everywhere-content flex-column">
-                <h1>ACESSSE DE QUALQUER LUGAR!</h1>
-                <p>Lorem ipsum <span class="highlight">dolor sit amet</span>, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna <span class="highlight">aliqua</span>. Ut enim ad minim
-                    veniam</p>
-                <p>Tempor incididunt ut labore et dolore magna aliqua. Ut enim <span class="highlight">ad minim</span>
-                    veniam</p>
+                <h1>ACESSE DE QUALQUER LUGAR!</h1>
+                <p>Use o OffClub no celular, tablet ou desktop — todas as funcionalidades estão otimizadas para qualquer dispositivo, com navegação rápida e segura.</p>
+                <p>Receba notificações de novas ofertas, gerencie seus cupons e acompanhe seus resgates com praticidade onde estiver.</p>
             </div>
         </section>
     </div>
 
     <section class="reviews container swiper">
         <div class="flex-row swiper-wrapper">
-            {% for i in "12345" %}
-                {% include 'components/review.html' with rating=5 text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ipsum dolor' author_name='John Doe' author_role='Cliente' %}
+            {% for t in testimonials %}
+                {% include 'components/review.html' with rating=t.rating text=t.text author_name=t.author_name author_role=t.author_role %}
             {% endfor %}
-        </div>
+        </div> 
 
         <div class="reviews-pagination swiper-pagination"></div>
     </section>
@@ -139,6 +137,7 @@
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="{% static 'js/testimonials.js' %}"></script>
 <script src="{% static 'js/badges.js' %}"></script>
+<script src="{% static 'js/testimonials.js' %}"></script>
+<script src="{% static 'js/how_it_works.js' %}"></script>
 {% endblock scripts %}
