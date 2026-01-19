@@ -21,14 +21,16 @@ class OfferListView(View):
     def get(self, request, *args, **kwargs):
         name = request.GET.get('name', '')
         min_discount = request.GET.get('min_discount', '')
-        start_date = request.GET.get('start_date', '')
-        end_date = request.GET.get('end_date', '')
         page_num = request.GET.get('page')
         categories = request.GET.getlist('categories')
 
         context = OfferService.list_filter_offer(
-            name, min_discount, start_date, end_date, page_num, categories
+            name, min_discount, page_num, categories
         )
+        
+        # Se for requisição AJAX, retorna apenas o partial
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return render(request, 'components/offer_results_partial.html', context)
         
         return render(request, 'offer.html', context)
 

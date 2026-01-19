@@ -1,8 +1,9 @@
 {% load static %}
+{% load offer_extras %}
 <div class="{{ class }} offer-card flex-column flex-center" data-offer-id="{{ data_id }}">
     <div class="offer-card-enterprise">
         {% if offer.enterprise.user.profile_picture %}
-        <img src="{{ offer.enterprise.user.profile_picture.url }}" alt="Logo {{ offer.enterprise.trade_name }}">
+        <img src="{{ offer.enterprise.user.profile_picture|offer_image_url }}" alt="Logo {{ offer.enterprise.trade_name }}">
         {% else %}
         <img src="{% static 'imgs/empty_enterprise.svg' %}" alt="">
         {% endif %}
@@ -11,7 +12,11 @@
 
     <div class="offer-card-offer">
         <div class="offer-image-wrapper">
-            <img src="{{ offer.image.url }}" alt="Imagem de {{ offer.title }}" class="offer-image">
+            {% if offer.image %}
+                <img src="{{ offer.image|offer_image_url }}" alt="Imagem de {{ offer.title }}" class="offer-image">
+            {% else %}
+                <img src="{% static 'imgs/default.png' %}" alt="Imagem de {{ offer.title }}" class="offer-image">
+            {% endif %}
             <span class="offer-discount-badge">{{ offer.discount }}%</span>
         </div>
         <h3 class="offer-title">{{ offer.title }}</h3>

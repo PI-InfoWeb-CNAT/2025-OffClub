@@ -41,6 +41,11 @@
     border-radius: 5px;
 }
 
+.profile-lateral-nav ul li img {
+    width: 24px;
+    height: auto;
+}
+
 
 .profile-lateral-nav ul li:hover {
     transition-duration: .2s;

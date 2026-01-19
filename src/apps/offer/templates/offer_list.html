@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load offer_extras %}
 {% block title %}Ofertas da empresa{% endblock %}
 {% block head %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,7 +112,7 @@
                 <div class="card__left">
                   <div class="card__merchant">
                     {% if object.enterprise.user.profile_picture %}
-                      <img class="card__merchant-photo" src="{{ object.enterprise.user.profile_picture.url }}" alt="{{ object.enterprise.trade_name }}">
+                      <img class="card__merchant-photo" src="{{ object.enterprise.user.profile_picture|offer_image_url }}" alt="{{ object.enterprise.trade_name }}">
                     {% endif %}
                     <span class="card__merchant-name">{{ object.enterprise.trade_name }}</span>
                   </div>

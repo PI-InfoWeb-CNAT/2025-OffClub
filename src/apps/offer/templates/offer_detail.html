@@ -50,7 +50,7 @@
                         {% if offer.enterprise.user.profile_picture %}
                         <img class="enterprise-image" src="{{ offer.enterprise.user.profile_picture.url }}" alt="Foto da loja">
                         {% else %}
-                        <img class="enterprise-image" src="{% static 'imgs/offer_detail/default_store.png' %}" alt="Loja sem imagem">
+                        <img class="enterprise-image" src="{% static 'imgs/offer_detail/empty_enterprise.svg' %}" alt="Loja sem imagem">
                         {% endif %}
 
                         <p>{{ offer.enterprise.trade_name }}</p>

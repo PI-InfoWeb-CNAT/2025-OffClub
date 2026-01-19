@@ -1,4 +1,5 @@
 {% load static %}
+{% load offer_extras %}
 
 <header>
     <div class="top-header container">
@@ -28,7 +29,7 @@
                 <a href="{% url 'subscriber:profile' %}">
                     {% if request.user.is_authenticated %}
                         {% if request.user.profile_picture %}
-                            <img class="profile-image" style="width: 38px; height: 38px; border-radius: 50%;" src="{{ request.user.profile_picture.url }}" alt="Usuário">
+                            <img class="profile-image" style="width: 38px; height: 38px; border-radius: 50%;" src="{{ request.user.profile_picture|offer_image_url }}" alt="Usuário">
                         {% else %}
                         {# Se não tiver, mostra a imagem padrão #}
                             <img src="{% static 'imgs/icons/profile.svg' %}" alt="Usuário">
@@ -68,35 +69,10 @@
     <div class="bottom-header container">
         <ul class="nav-list">
             <li class="nav-item">
-                <a href="#">Offclub</a>
-                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
-                <div class="dropdown-nav nav-offclub">
-                    <ul class="dropdown-nav-list">
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Sobre</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Onde estamos</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Nossa história</a>
-                        </li>
-                    </ul>
-                </div>
+                <a href="{% url 'about' %}">Sobre nós</a>
             </li>
             <li class="nav-item">
-                <a href="#">Ofertas</a>
-                <img class="arrow" src="{% static 'imgs/icons/arrow-down.svg' %}" alt="Seta para baixo">
-                <div class="dropdown-nav nav-offclub">
-                    <ul class="dropdown-nav-list">
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="{% url 'offer:offer_list' %}">Explorar ofertas</a>
-                        </li>
-                        <li class="dropdown-nav-item">
-                            <a class="dropdown-nav-link" href="#">Explorar empresas</a>
-                        </li>
-                    </ul>
-                </div>
+                <a href="{% url 'offer:list' %}">Ofertas</a>
             </li>
             <li class="nav-item">
                 <a href="#">Parceiros</a>
