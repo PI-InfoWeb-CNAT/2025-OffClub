@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from datetime import timedelta
 import uuid
+from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField("Nome", max_length=50, unique=True)
@@ -65,10 +66,39 @@ class Offer(models.Model):
 
     def to_dict(self):
         remaining_coupons = self.max_coupons - self.generated_coupons
+
+        image_url = None
+        if getattr(self, 'image', None):
+            name = getattr(self.image, 'name', '') or ''
+            idx = name.find('static/')
+            if idx != -1:
+                tail = name[idx + len('static/'):]
+                image_url = settings.STATIC_URL.rstrip('/') + '/' + tail.lstrip('/')
+            else:
+                try:
+                    image_url = self.image.url
+                except Exception:
+                    image_url = None
+
+        # resolve enterprise logo URL similarly to image_url
+        logo_url = None
+        prof = getattr(self.enterprise.user, 'profile_picture', None)
+        if prof:
+            prof_name = getattr(prof, 'name', '') or ''
+            idxp = prof_name.find('static/')
+            if idxp != -1:
+                tailp = prof_name[idxp + len('static/'):]
+                logo_url = settings.STATIC_URL.rstrip('/') + '/' + tailp.lstrip('/')
+            else:
+                try:
+                    logo_url = prof.url
+                except Exception:
+                    logo_url = None
+
         return {
             "id": str(self.id),
             "title": self.title,
-            "image_url": self.image.url if self.image else None,
+            "image_url": image_url,
             "description": self.description,
             "discount": self.discount,
             "price": f"{self.price:.2f}".replace(".", ","),
@@ -81,11 +111,7 @@ class Offer(models.Model):
             "max_coupons": self.max_coupons,
             "enterprise": {
                 "trade_name": self.enterprise.trade_name,
-                "logo_url": (
-                    self.enterprise.user.profile_picture.url
-                    if getattr(self.enterprise.user, "profile_picture", None)
-                    else None
-                ),
+                "logo_url": logo_url,
             },
             "category": {"name": self.category.name if self.category else "Sem Categoria"},
         }

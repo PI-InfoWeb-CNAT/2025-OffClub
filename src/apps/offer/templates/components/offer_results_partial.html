@@ -1,0 +1,27 @@
+{% load static %}
+{% if offersCount > 0 %}
+    <p class="results-count">
+        Exibindo
+        <span>{{ page_obj.start_index }} - {{ page_obj.end_index }}</span>
+        de {{ offersCount }} resultados
+    </p>
+    <div id="offer_filter_container">
+        {% for offer in page_obj.object_list %}
+            {% include 'components/offer_card.html' with offer=offer data_id=offer.id %}
+        {% endfor %}
+    </div>
+    <div class="pagination" data-current="{{ page_obj.number }}" data-total="{{ page_obj.paginator.num_pages }}">
+        {% if page_obj.has_previous %}
+            <button class="pagination-btn" data-page="{{ page_obj.previous_page_number }}">&laquo;</button>
+        {% endif %}
+        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <button class="pagination-btn" data-page="{{ page_obj.next_page_number }}">&raquo;</button>
+        {% endif %}
+    </div>
+{% else %}
+    <div class="nothing_found">
+        <img src="{% static 'imgs/not_found.svg' %}" alt="">
+        <p>Nenhuma oferta encontrada.</p>
+    </div>
+{% endif %}

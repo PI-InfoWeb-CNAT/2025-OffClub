@@ -46,6 +46,160 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
+   AJAX Filter System
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filterForm = document.getElementById("offer-filter-form");
+  const resultsContainer = document.getElementById("offer-results");
+  const loadingSpinner = document.getElementById("loading-spinner");
+  const clearFiltersBtn = document.getElementById("clear-filters-btn");
+  
+  if (!filterForm || !resultsContainer) return;
+  
+  let debounceTimer = null;
+  let currentPage = 1;
+  
+  // Função para mostrar/esconder loading
+  function setLoading(isLoading) {
+    if (loadingSpinner) {
+      loadingSpinner.style.display = isLoading ? "flex" : "none";
+    }
+    resultsContainer.classList.toggle("loading", isLoading);
+  }
+  
+  // Função para buscar ofertas via AJAX
+  async function fetchOffers(page = 1) {
+    const formData = new FormData(filterForm);
+    const params = new URLSearchParams();
+    
+    // Adiciona os parâmetros do formulário
+    for (const [key, value] of formData.entries()) {
+      if (value) params.append(key, value);
+    }
+    
+    // Adiciona página
+    params.append("page", page);
+    currentPage = page;
+    
+    const url = `${filterForm.action}?${params.toString()}`;
+    
+    setLoading(true);
+    
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      });
+      
+      if (!response.ok) throw new Error("Erro ao carregar ofertas");
+      
+      const html = await response.text();
+      
+      // Atualiza o container de resultados
+      resultsContainer.innerHTML = html;
+      
+      // Reativa os event listeners para paginação
+      attachPaginationListeners();
+      
+      // Atualiza URL sem recarregar a página
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.pushState({ page }, "", newUrl);
+      
+    } catch (error) {
+      console.error("Erro ao filtrar ofertas:", error);
+      resultsContainer.innerHTML = `
+        <div class="nothing_found">
+          <p>Erro ao carregar ofertas. Tente novamente.</p>
+        </div>
+      `;
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+  // Função para adicionar listeners na paginação dinâmica
+  function attachPaginationListeners() {
+    const paginationBtns = resultsContainer.querySelectorAll(".pagination-btn");
+    paginationBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const page = btn.dataset.page;
+        if (page) fetchOffers(parseInt(page));
+      });
+    });
+  }
+  
+  // Debounce para input de texto
+  function debounce(func, delay = 400) {
+    return function (...args) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
+  
+  // Event listener para mudanças no formulário
+  const debouncedFetch = debounce(() => fetchOffers(1));
+  
+  // Input de texto (com debounce)
+  const nameInput = filterForm.querySelector("#filter-name");
+  if (nameInput) {
+    nameInput.addEventListener("input", debouncedFetch);
+  }
+  
+  // Slider de desconto (com debounce)
+  const discountSlider = filterForm.querySelector("#min_discount");
+  if (discountSlider) {
+    discountSlider.addEventListener("change", () => fetchOffers(1));
+  }
+  
+  // Checkboxes de categorias (imediato)
+  const categoryCheckboxes = filterForm.querySelectorAll('input[name="categories"]');
+  categoryCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", () => fetchOffers(1));
+  });
+  
+  // Botão de submit do formulário
+  filterForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    fetchOffers(1);
+  });
+  
+  // Botão de limpar filtros
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener("click", () => {
+      // Reseta o formulário
+      filterForm.reset();
+      
+      // Reseta o slider para 0
+      if (discountSlider) {
+        discountSlider.value = 0;
+        // Atualiza o bubble
+        const bubble = filterForm.querySelector(".slider_bubble");
+        if (bubble) {
+          bubble.innerHTML = "0%";
+          bubble.style.left = "calc(0% + 8px)";
+        }
+      }
+      
+      // Busca sem filtros
+      fetchOffers(1);
+    });
+  }
+  
+  // Suporte ao botão voltar do navegador
+  window.addEventListener("popstate", (e) => {
+    if (e.state && e.state.page) {
+      fetchOffers(e.state.page);
+    }
+  });
+  
+  // Inicializa listeners de paginação
+  attachPaginationListeners();
+});
+
+/* =========================
    Swipers
 ========================= */
 
@@ -163,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
         enterpriseImg.src =
           offer.enterprise?.logo_url ||
           (staticImageUrl
-            ? staticImageUrl.replace("icons/discount.svg", "offer_detail/default_store.png")
+            ? staticImageUrl.replace("icons/discount.svg", "empty_enterprise.svg")
             : enterpriseImg.src);
       }
       const enterpriseName = modal.querySelector(".shop-info p");
