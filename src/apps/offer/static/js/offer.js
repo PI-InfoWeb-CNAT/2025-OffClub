@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById('offer-modal');
 
             // Imagem padrão para ofertas sem imagem
-            const defaultOfferImage = '/static/imgs/default-offer-image.png';
-            const defaultEnterpriseImage = '/static/imgs/empty_enterprise.svg';
+            const defaultOfferImage = '/imgs/default-offer-image.png';
+            const defaultEnterpriseImage = '/imgs/empty_enterprise.svg';
 
             modal.querySelector('.offer-image img').src = offer.image_url || defaultOfferImage;
             const priceInfo = modal.querySelector('.price-info');
