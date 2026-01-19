@@ -13,6 +13,12 @@ from apps.subscription.models import Feature, SubscriptionPlan
 from apps.offer.models import Category, Offer
 from apps.enterprise.models import Enterprise, LineOfBusiness
 from apps.users.models import User
+from apps.subscriber.models import Subscriber, Review
+from apps.coupon.models import Coupon
+from apps.subscription.models import Subscription
+from validate_docbr import CPF
+import random
+from datetime import date
 
 # ========================================
 # DADOS DE FEATURES E PLANOS
@@ -396,6 +402,7 @@ for ent in enterprises_data:
         print(f'  ✓ Empresa criada: {enterprise.trade_name}')
 
 # Inserir Ofertas
+offers_created = []
 for offer_data in offers_data:
     enterprise = enterprises_objs[offer_data['enterprise_index']]
     category = categories_objs.get(offer_data['category'])
@@ -413,7 +420,89 @@ for offer_data in offers_data:
             'max_coupons': offer_data['max_coupons'],
         }
     )
+    offers_created.append(offer)
     if created:
         print(f'  ✓ Oferta criada: {offer.title} ({enterprise.trade_name})')
+
+# Criar superusuário de demonstração (caso não exista)
+admin_email = 'admin@offclub.test'
+admin_defaults = {
+    'is_staff': True,
+    'is_superuser': True,
+    'is_active': True,
+    'user_role': 'Admin'
+}
+admin_user, admin_created = User.objects.get_or_create(email=admin_email, defaults=admin_defaults)
+if admin_created:
+    admin_user.set_password('adminpass')
+    admin_user.save()
+    print(f'  ✓ Superusuário criado: {admin_user.email}')
+
+# Criar assinantes de demonstração
+cpf_gen = CPF()
+subscriber_seed = [
+    {'email': 'alice@example.com', 'first_name': 'Alice', 'last_name': 'Santos', 'password': 'senha123', 'birth_date': date(1990,5,20)},
+    {'email': 'bruno@example.com', 'first_name': 'Bruno', 'last_name': 'Oliveira', 'password': 'senha123', 'birth_date': date(1985,8,12)},
+    {'email': 'carla@example.com', 'first_name': 'Carla', 'last_name': 'Souza', 'password': 'senha123', 'birth_date': date(1992,3,5)},
+]
+subscribers_objs = []
+for s in subscriber_seed:
+    user, user_created = User.objects.get_or_create(email=s['email'], defaults={'is_active': True, 'user_role': 'Subscriber'})
+    if user_created:
+        user.set_password(s['password'])
+        user.save()
+        print(f'  ✓ Usuário criado: {user.email}')
+
+    cpf_value = cpf_gen.generate()
+    subscriber, sub_created = Subscriber.objects.get_or_create(
+        user=user,
+        defaults={
+            'first_name': s['first_name'],
+            'last_name': s['last_name'],
+            'cpf': cpf_value,
+            'birth_date': s['birth_date'],
+        }
+    )
+    subscribers_objs.append(subscriber)
+    if sub_created:
+        print(f'  ✓ Assinante criado: {subscriber}')
+
+# Criar assinaturas para alguns assinantes
+plans_list = list(SubscriptionPlan.objects.all())
+for i, subscriber in enumerate(subscribers_objs):
+    if not plans_list:
+        break
+    plan = plans_list[i % len(plans_list)]
+    subscription, subc_created = Subscription.objects.get_or_create(
+        user=subscriber.user,
+        plan=plan,
+        defaults={'start_date': timezone.now(), 'end_date': timezone.now() + plan.duration}
+    )
+    if subc_created:
+        print(f'  ✓ Assinatura criada para {subscriber}: {plan.title}')
+    # marcar como ativa
+    subscriber.active_subscription = subscription
+    subscriber.save()
+
+# Criar cupons e avaliações de demonstração
+review_messages = [
+    'Excelente oferta, o processo de resgate foi rápido e a qualidade do serviço excelente.',
+    'Muito satisfeito com a economia e o atendimento do estabelecimento.',
+    'Recomendo! Cupom válido e uso simples no local.',
+]
+
+for idx, offer in enumerate(offers_created):
+    sub = subscribers_objs[idx % len(subscribers_objs)]
+    coupon, coupon_created = Coupon.objects.get_or_create(subscriber=sub, offer=offer)
+    if coupon_created:
+        # Atualiza contador gerado
+        offer.generated_coupons = (offer.generated_coupons or 0) + 1
+        offer.save(update_fields=['generated_coupons'])
+        print(f'  ✓ Cupom criado: {coupon.code} para {sub} -> {offer.title}')
+
+    # Criar avaliações para alguns cupons (a cada 3 ofertas)
+    if idx % 3 == 0 and coupon_created:
+        review = Review.objects.create(coupon=coupon, stars=random.randint(4,5), message=review_messages[idx % len(review_messages)])
+        print(f'  ✓ Avaliação criada: {review.stars} estrelas para cupom {coupon.code}')
 
 print('\n✅ Seed concluído com sucesso!')
