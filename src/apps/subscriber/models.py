@@ -53,13 +53,13 @@ class Subscriber(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
-class Evaluation(models.Model):
+class Review(models.Model):
     id = models.UUIDField("ID", primary_key=True, default=uuid.uuid4, editable=False)
     stars = models.IntegerField("Estrelas", null=False,validators=[MaxValueValidator(5), MinValueValidator(1)])
     message = models.CharField("Mensagem", max_length=300)
     coupon = models.ForeignKey(
         Coupon, 
-        related_name="evaluations",
+        related_name="Reviews",
         verbose_name="Cupom",
         on_delete=models.CASCADE
         )

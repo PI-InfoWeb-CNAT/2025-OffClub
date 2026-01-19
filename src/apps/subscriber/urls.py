@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    EvaluationCreateView,
+    ReviewCreateView,
     HistoryView,
     LoginView,
     RegisterWizardView,
@@ -21,9 +21,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('history/', HistoryView.as_view(), name='history'),
     path('registration_done/', RegistrationDone.as_view(), name='registration_done'),
-    path('avaliar_cupom/<uuid:coupon_id>/', EvaluationCreateView.as_view(), name='evaluate_coupon'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit/', EditProfileView.as_view(), name='edit_profile'),
     path('profile/plans/', MyPlansView.as_view(), name='my_plans'),
     path('profile/coupons/', MyCouponsView.as_view(), name='my_coupons'),
+    path('avaliar_cupom/<uuid:coupon_id>/', ReviewCreateView.as_view(), name='review_coupon'),
 ]

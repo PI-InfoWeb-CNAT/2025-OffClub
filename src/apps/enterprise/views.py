@@ -7,9 +7,8 @@ from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
 from django.core.files.storage import FileSystemStorage
-from django.db import transaction
 
-from apps.enterprise.services.see_evaluations import SeeEvaluationsService
+from apps.enterprise.services.see_reviews import SeeReviewsService
 from .forms import (
     EnterpriseInfoForm,
     CredentialsForm,
@@ -20,7 +19,7 @@ from .forms import (
 from formtools.wizard.views import SessionWizardView
 from apps.users.models import User
 from .models import Enterprise, LineOfBusiness
-from apps.coupon.models import Coupon
+from apps.offer.models import Offer
 from apps.core.models import Address, Phone
 
 
@@ -34,125 +33,97 @@ FORMS = [
     ("pfp", ProfilePicForm),
 ]
 
-TEMPLATE = {
-    "general_form": "enterprise.html"
+TEMPLATES = {
+    "info": "register/step1.html",
+    "login": "register/step2.html",
+    "contact": "register/step3.html",
+    "pfp": "register/step4.html",
 }
 
 class RegisterWizardView(SessionWizardView):
     # Serve pro wizard salvar os arquivos temporariamente
-    label_suffix = ""
     file_storage = FileSystemStorage()
     form_list = FORMS
 
     def get_template_names(self):
-        return ['enterprise.html']
-
-    def render_done(self, form, **kwargs):
-        """Skip revalidation so we can land on done even with invalid steps."""
-        final_forms = {}
-        for form_key in self.get_form_list():
-            form_obj = self.get_form(
-                step=form_key,
-                data=self.storage.get_step_data(form_key),
-                files=self.storage.get_step_files(form_key),
-            )
-            form_obj.is_valid()
-            final_forms[form_key] = form_obj
-
-        done_response = self.done(list(final_forms.values()), form_dict=final_forms, **kwargs)
-        self.storage.reset()
-        return done_response
+        return [TEMPLATES[self.steps.current]]
 
     def done(self, form_list, **kwargs):
         data = {}
         for form in form_list:
-            if hasattr(form, 'cleaned_data'):
+            if hasattr(form, "cleaned_data"):
                 data.update(form.cleaned_data)
 
-        try:
-            with transaction.atomic():
-                # Cria o usuário
-                user = User.objects.create(
-                    email=data.get('email'),
-                    profile_picture=data.get('profile_picture', None),
-                    is_active=False,
-                    user_role=User.UserRole.ENTERPRISE,
-                )
+        user = User.objects.create(
+            email=data.get("email"),
+            profile_picture=data.get("profile_picture"),
+            is_active=False,
+            user_role=User.UserRole.ENTERPRISE,
+        )
+        if data.get("password"):
+            user.set_password(data["password"])
+        user.save()
 
-                # Salva a senha com hash, caso exista
-                if data.get('password'):
-                    user.set_password(data.get('password'))
-                    user.save()
+        enterprise = Enterprise.objects.create(
+            user=user,
+            corporate_reason=data.get("corporate_reason", ""),
+            trade_name=data.get("trade_name", ""),
+            description=data.get("description", ""),
+            cnpj=data.get("cnpj", ""),
+            line_of_business=data.get("line_of_business")
+        )
 
-                # Cria a empresa
-                enterprise = Enterprise.objects.create(
-                    user=user,
-                    corporate_reason=data.get('corporate_reason', ''),
-                    trade_name=data.get('trade_name', ''),
-                    cnpj=data.get('cnpj', ''),
-                    line_of_business=data.get('line_of_business', ''),
-                    description=data.get('description', ''),
-                )
+        if data.get("cep") or data.get("street_name"):
+            Address.objects.create(
+                user=user,
+                cep=data.get("cep", ""),
+                city=data.get("city", ""),
+                state=data.get("state", ""),
+                neighborhood=data.get("neighborhood", ""),
+                street_name=data.get("street_name", ""),
+                number=data.get("number", ""),
+                complement=data.get("complement", ""),
+            )
 
-                # Cria o endereço, se necessário
-                if data.get('cep') or data.get('street_name'):
-                    Address.objects.create(
-                        user=user,
-                        cep=data.get('cep', ''),
-                        city=data.get('city', ''),
-                        state=data.get('state', ''),
-                        neighborhood=data.get('neighborhood', ''),
-                        street_name=data.get('street_name', ''),
-                        number=data.get('number', ''),
-                        complement=data.get('complement', ''),
-                    )
+        if data.get("phone_number"):
+            Phone.objects.create(
+                phone_number=data.get("phone_number"),
+                phone_type=Phone.PhoneType.MOBILE,
+                user=user,
+            )
+        
+        if data.get("phone_number2"):
+            Phone.objects.create(
+                phone_number=data.get("phone_number2"),
+                phone_type=Phone.PhoneType.OTHER,
+                user=user,
+            )
 
-                # Cria os telefones, se fornecidos
-                if data.get('phone_number'):
-                    Phone.objects.create(
-                        phone_number=data.get('phone_number'),
-                        phone_type=Phone.PhoneType.MOBILE,
-                        user=user,
-                    )
-
-                if data.get('phone_number2'):
-                    Phone.objects.create(
-                        phone_number=data.get('phone_number2'),
-                        phone_type=Phone.PhoneType.OTHER,
-                        user=user,
-                    )
-
-                enterprise.save()
-
-        except Exception:
-            # Garante o redirecionamento mesmo que a persistência falhe
-            logger.exception("Enterprise registration data could not be fully persisted.")
-
-        return redirect('enterprise:register_done')
-
+        enterprise.save()
+        return redirect("enterprise:registration_done")
 
 class RegisterDoneView(TemplateView):
-    template_name = 'done.html'
+    template_name = 'register/done.html'
     
 
-class SeeCouponEvaluationsView(DetailView):
-    model = Coupon
-    template_name = "enterprise-dashboard/see_avaluations.html"
-    context_object_name = "coupon"
+class SeeOfferReviewsView(DetailView):
+    model = Offer
+    template_name = "enterprise-dashboard/see_reviews.html"
+    context_object_name = "offer"
 
-    # Pega o id do cupom pela URL
+    # Pega o id da oferta pela URL
     def get_object(self):
-        return get_object_or_404(Coupon, id=self.kwargs.get("coupon_id"))
+        return get_object_or_404(Offer, id=self.kwargs.get("offer_id"))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        coupon = self.get_object()
+        offer = self.get_object()
 
-        evaluations = SeeEvaluationsService.get_evaluations(coupon)
-        stats = SeeEvaluationsService.evaluation_stats(coupon)
-        final_price = SeeEvaluationsService.final_price(coupon.offer.price, coupon.offer.discount)
+        reviews = SeeReviewsService.get_reviews(offer)
+        stats = SeeReviewsService.review_stats(offer)
+        final_price = SeeReviewsService.final_price(offer.price, offer.discount)
 
-        context["evaluations"] = evaluations
+        context["reviews"] = reviews
         context["stats"] = stats
         context["final_price"] = final_price
 
@@ -160,27 +131,7 @@ class SeeCouponEvaluationsView(DetailView):
 
 
 class EnterpriseDashboardView(View):
-    template_name = 'enterprise_dashboard.html'
+    template_name = 'enterprise-dashboard/enterprise_dashboard.html'
     
     def get(self, request):
-        return render(request, 'enterprise_dashboard.html')
-
-
-# class EnterpriseSignUpView(CreateView):
-#     """
-#     Renderiza e processa o formulário de registro para novas empresas.
-#     """
-#     form_class = EnterpriseSignUpForm
-#     template_name = 'registration/signup_form.html'
-    
-#     sucess_url = reverse_lazy('enterprise_signup_done')
-    
-#     def get_context_data(self, **kwargs):
-#         kwargs['user_type'] = 'enterprise'
-#         return super().get_context_data(**kwargs)
-    
-# def enterprise_signup_done(request):
-#     """
-#     Página de sucesso exibida após o registro bem sucedido.
-#     """
-#     return render(request, 'registration/signup_done.html')
+        return render(request, 'enterprise-dashboard/enterprise_dashboard.html')

@@ -26,9 +26,9 @@
     {% for dic in used_coupons %}
         {% with coupon=dic.object %}
             <div class="coupon-card">
-                <button class="evaluate_button open_modal" data-coupon-id="{{ coupon.object.id }}">Avaliar</button>
+                <button class="review_button open_modal" data-coupon-id="{{ coupon.object.id }}">Avaliar</button>
                 
-                {% include 'components/evaluate_coupon.html' with coupon=coupon %}
+                {% include 'components/review_coupon.html' with coupon=coupon %}
             </div>
         {% endwith %}
     {% endfor %}

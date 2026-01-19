@@ -25,14 +25,14 @@ class EnterpriseInfoForm(forms.ModelForm):
 class CredentialsForm(forms.ModelForm):
     password2 = forms.CharField(
         label="Confirme a Senha",
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirme a Senha'}))
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirme a Senha', 'class': 'half-width'}))
     
     class Meta:
         model = User
         fields = ['email', 'password']
         widgets = {
             'email': forms.EmailInput(attrs={'placeholder': 'E-mail'}),
-            'password': forms.PasswordInput(attrs={'placeholder': 'Senha'}),
+            'password': forms.PasswordInput(attrs={'placeholder': 'Senha', 'class': 'half-width'}),
         }
         
     def clean_password2(self):
@@ -44,17 +44,17 @@ class CredentialsForm(forms.ModelForm):
 
 class ContactForm(forms.Form):
     #Campos para o modelo Phone
-    phone_number = forms.CharField(label="Telefone 1", max_length=15, help_text="(XX) XXXXX-XXXX")
-    phone_number2 = forms.CharField(label="Telefone 2", max_length=15, required=False)
+    phone_number = forms.CharField(label="Telefone 1", max_length=15, help_text="(XX) XXXXX-XXXX", widget=forms.TextInput(attrs={'placeholder': 'Telefone 1', 'class': 'half-width'}))
+    phone_number2 = forms.CharField(label="Telefone 2", max_length=15, required=False, widget=forms.TextInput(attrs={'placeholder': 'Telefone 2', 'class': 'half-width'}))
 
     # Campos para o modelo Address
-    cep = forms.CharField(label="CEP", max_length=9)
-    city = forms.CharField(label="Cidade", max_length=75)
-    state = forms.CharField(label="UF", max_length=2)
-    street_name = forms.CharField(label="Logradouro", max_length=75)
-    number = forms.CharField(label="Número", max_length=10)
-    complement = forms.CharField(label="Complemento", max_length=75, required=False)
-    neighborhood = forms.CharField(label="Bairro", max_length=75)
+    cep = forms.CharField(label="CEP", max_length=9, widget=forms.TextInput(attrs={'placeholder': 'CEP', 'class': 'third-width'}))
+    city = forms.CharField(label="Cidade", max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Cidade', 'class': 'third-width'}))
+    state = forms.CharField(label="UF", max_length=2, widget=forms.TextInput(attrs={'placeholder': 'UF',  'class': 'third-width'}))
+    street_name = forms.CharField(label="Logradouro", max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Logradouro', 'class': 'half-width'}))
+    number = forms.CharField(label="Número", max_length=10, widget=forms.TextInput(attrs={'placeholder': 'Número', 'class': 'half-width'}))
+    complement = forms.CharField(label="Complemento", max_length=75, required=False, widget=forms.TextInput(attrs={'placeholder': 'Complemento', 'class': 'half-width'}))
+    neighborhood = forms.CharField(label="Bairro", max_length=75, widget=forms.TextInput(attrs={'placeholder': 'Bairro', 'class': 'half-width'}))
     
 
 class ProfilePicForm(forms.ModelForm):
