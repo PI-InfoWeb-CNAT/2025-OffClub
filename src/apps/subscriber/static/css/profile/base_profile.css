@@ -1,7 +1,7 @@
 
 .profile-tab {
     border: 1px solid var(--brand-yellow);
-    height: 80vh;
+    margin-bottom: 80vh;
     width: 80%;
     margin-top: 5em;
     margin-bottom: 5em;

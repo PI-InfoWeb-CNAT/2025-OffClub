@@ -1,50 +1,95 @@
-# Projeto Integrador InfoWeb - IFRN
-# Projeto OffClub
+# Projeto OffClub 
 
-Este projeto tem como objetivo ser uma aplicação  modelo (_blueprint_) para a disicplina de Análise e Projeto Orientado a Objeto.
+**OffClub** é um projeto modelo (blueprint) para a disciplina de Análise e Projeto Orientado a Objetos — uma plataforma de ofertas e cupons desenvolvida em **Django** para fins educacionais e de demonstração.
 
-Atualmente o projeto não possui uma implementação como modelo de projeto do Microsoft Visual Studio que está aberto a receber contribuições de código que representem as especificação aqui presente.
+---
 
-Todo material está publicado sob licença [GPL-3.0](https://www.gnu.org/licenses/quick-guide-gplv3.pt-br.html).
+## Visão Geral
 
-## Equipe de Trabalho
+- Linguagem: **Python (Django)**
+- Estrutura do projeto: código-fonte em `src/`
+- Banco de dados padrão: **SQLite** (`src/db.sqlite3`) para desenvolvimento
+- Licença: **GPL-3.0**
 
-- Fellipe Aleixo (orientador) - fellipe@ifrn.edu.br
-- Clara Teodósio - clara.teodosio@escolar.ifrn.edu.br
-- Lucas Cássio - lucas.cassio@escolar.ifrn.edu.br
-- Ermesson Andrade - ermesson.a@escolar.ifrn.edu.br
-- Amanda Lara - lara.amanda@escolar.ifrn.edu.br
-- Heitor Barboza - franca.heitor@escolar.ifrn.edu.br
+---
 
-## Canal de Comunicação
+## Contato / Equipe
 
-Para o desenvolvimento do projeto a equipe se comunicará através do **Discord**.
+- **Fellipe Aleixo** (orientador) - fellipe@ifrn.edu.br
+- **Clara Teodósio** - clara.teodosio@escolar.ifrn.edu.br
+- **Lucas Cássio** - lucas.cassio@escolar.ifrn.edu.br
+- **Ermesson Andrade** - ermesson.a@escolar.ifrn.edu.br
+- **Amanda Lara** - lara.amanda@escolar.ifrn.edu.br
+- **Heitor Barboza** - franca.heitor@escolar.ifrn.edu.br
 
-**Informações do servidor Discord**:
-- LINK de acesso direto: https://discord.gg/929jPg67vD
-- Código: 929jPg67vD
+Canal de comunicação: **Discord** — https://discord.gg/929jPg67vD
 
-## Dias e Horários da Reuniões da Equipe
+---
 
-### Reunião Presencial
+## Setup (Windows PowerShell)
 
-| DIA | HORÁRIO |
-| --- | ------- |
-| ??? | ??? |
+1. Clone o repositório:
 
-### Reuniões Online
+```powershell
+git clone <repo-url>
+cd 2025-OffClub/src
+```
 
-| DIA | HORÁRIO |
-| --- | ------- |
-| ??? | ??? |
+2. Crie e ative um ambiente virtual:
 
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
 
-### Artefatos do Projeto
-* [Reuniões da equipe](./reunioes/Reunioes.md)
-* [Documento de visão](./docs/Visao_OffClub.md)
-* [Modelo de Casos de Uso](./docs/casos_de_uso/modelo_de_cdu.md)
-* [Modelo de Entidades e Relacionamento](./docs/er/modelo_er.md)
-* [Modelo de Domínio](./docs/modelos_de_dominio/modelo_dominio.md)
-* [Mapa do site](https://www.figma.com/board/vEwdHDyp7MIktbrJIxaFMm/Mapa-do-site-Offclub?node-id=0-1&t=ewSuifi2DYR5T6vo-1)
+3. Instale dependências:
+
+```powershell
+pip install -r requirements.txt
+```
+
+4. Rode migrações e crie o superusuário (ou use script):
+
+```powershell
+python manage.py migrate
+python manage.py createsuperuser
+# ou
+python ..\scripts\create_superuser.py
+```
+
+5. (Opcional) Popule dados de exemplo:
+
+```powershell
+python ..\scripts\seed_data.py
+```
+
+6. Inicie o servidor de desenvolvimento:
+
+```powershell
+python manage.py runserver
+```
+
+> Acesse em: http://127.0.0.1:8000
+
+---
+
+## Estrutura de alto nível
+
+- `src/` – Código-fonte do projeto Django
+  - `apps/` – Aplicações Django (cada domínio do sistema)
+  - `config/` – Configurações do Django (base/dev/prod)
+  - `scripts/` – Scripts utilitários (setup, seed, create_superuser)
+  - `static/` e `templates/` – Recursos e templates globais
+  - `manage.py` – CLI do Django
+- `docs/` – Documentação do projeto (visão, casos de uso, modelo de domínio)
+
+---
+
+## Artefatos
+
+- Visão do projeto: `docs/Visao_OffClub.md`
+- Casos de uso: `docs/casos_de_uso/`
+- Modelo ER e domínio: `docs/er/`, `docs/modelos_de_dominio/`
+- [Mapa do site](https://www.figma.com/board/vEwdHDyp7MIktbrJIxaFMm/Mapa-do-site-Offclub?node-id=0-1&t=ewSuifi2DYR5T6vo-1)
 * [Protótipo](https://www.figma.com/design/gKuAlxfR0AhlUVnhSf7Dfr/OffClub---Prot%C3%B3tipo---Designs?node-id=12-2&t=CWYd28mcVz5GG3T8-1)
 
